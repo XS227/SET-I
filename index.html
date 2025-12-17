@@ -1,27 +1,204 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mega Repo | Home</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>LiveMesh — Domain to Live Website</title>
+  <meta name="description" content="LiveMesh automates domain onboarding, GitHub hosting, VPS deploy, SSL, and AI-driven website updates for B2B customers."/>
+  <link rel="stylesheet" href="assets/styles.css"/>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Mega Repo</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="scope.html">Scope</a>
-      <a href="market.html">Market</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="LiveMesh home">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <div class="brand-title">
+          <strong>LiveMesh</strong>
+          <span>Designed. Engineered. Intelligent.</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a class="pill" data-nav href="index.html"><span data-i18n="nav_product">Produkt</span></a>
+        <a class="pill" data-nav href="scope.html"><span data-i18n="nav_scope">Scope</span></a>
+        <a class="pill" data-nav href="market.html"><span data-i18n="nav_market">Marked</span></a>
+        <a class="pill" data-nav href="contact.html"><span data-i18n="nav_contact">Kontakt</span></a>
+
+        <div class="lang" title="Switch language">
+          <button id="langBtn" type="button" aria-label="Switch language">
+            <img id="langFlag" class="flag" alt="English"/>
+            <small>NO / EN</small>
+          </button>
+        </div>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section>
-      <h2>Project Overview</h2>
-      <p>This site outlines the scope, market fit, and contact details for the Mega Repo project.</p>
+
+  <main class="container top-space">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">
+            <span class="kicker-dot" aria-hidden="true"></span>
+            <span data-i18n="kicker">B2B • Domene-til-live nettside på minutter</span>
+          </div>
+
+          <h1 data-i18n="h1">LiveMesh gjør domenet ditt til en levende nettside</h1>
+          <p class="lead" data-i18n="h1_sub">
+            Koble domenet. Fyll inn firmainfo. La AI generere, oppdatere og publisere nettsiden automatisk – med kontroll, logging og raske deploys.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="contact.html">
+              <span data-i18n="cta_access">Be om early access</span>
+              <small>→</small>
+            </a>
+            <a class="btn" href="scope.html">
+              <span data-i18n="cta_scope">Se scope</span>
+              <small>↗</small>
+            </a>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="feature-grid" aria-label="Highlights">
+            <div class="feature">
+              <div class="icon" aria-hidden="true">
+                <!-- lightning -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 data-i18n="f1t">Du eier domenet. Vi tar resten.</h3>
+              <p data-i18n="f1b">Hosting, repo, CI/CD, SSL og drift i én automatisert flyt.</p>
+            </div>
+
+            <div class="feature">
+              <div class="icon" aria-hidden="true">
+                <!-- shield -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M9.5 12l1.7 1.7 3.8-3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 data-i18n="f2t">Oppdater med AI – med kontroll.</h3>
+              <p data-i18n="f2b">Endringer kan gå via PR/preview før publisering (trygt og profesjonelt).</p>
+            </div>
+
+            <div class="feature">
+              <div class="icon" aria-hidden="true">
+                <!-- layers -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3l9 5-9 5-9-5 9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M3 12l9 5 9-5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M3 16.5l9 5 9-5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 data-i18n="f3t">Skalerbar B2B-modell.</h3>
+              <p data-i18n="f3b">Multi-tenant dashboard, logging, moduler og standardisert onboarding.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card">
+          <h3 class="m0" data-i18n="hero_card_title">Kjernen i plattformen</h3>
+          <p class="lead mt8" data-i18n="hero_card_body">
+            Vi hoster GitHub + VPS + deploy. Kunden eier kun domenet, og bruker sin egen GPT-konto til å lage og vedlikeholde nettsiden.
+          </p>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <strong data-i18n="m1">Sekund-raske deploys</strong>
+              <span data-i18n="m1s">Atomic deploy + rollback og status i dashboard.</span>
+            </div>
+            <div class="metric">
+              <strong data-i18n="m2">BYO-AI</strong>
+              <span data-i18n="m2s">Kunden kobler sin GPT/AI for innhold og oppdateringer.</span>
+            </div>
+            <div class="metric">
+              <strong data-i18n="m3">Moduler</strong>
+              <span data-i18n="m3s">Vipps, analytics, skjema, chat og mer – på minutter.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
+
+    <section class="section tight">
+      <div class="split">
+        <div>
+          <h2 class="m0" data-i18n="partners_title">Tidligere samarbeid / miljø</h2>
+          <p class="lead mt8" data-i18n="partners_sub">Bytt ut navnene med dine faktiske samarbeidspartnere når du ønsker.</p>
+        </div>
+        <div class="note">
+          <strong>Tip</strong>
+          <div class="mt8">
+            Her kan du senere bytte chips med ekte logo-SVG-er (vi kan lage dem i flat stil, optimalisert for mørk bakgrunn).
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker mt14" aria-label="Partner logos scrolling">
+        <div class="ticker-track">
+          <span class="logo-chip"><span class="logo-dot"></span> FjOlsenbanden.no</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Partner Studio</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Tech Network</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Nordic B2B</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Design Lab</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Cloud Ops</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Analytics</span>
+          <span class="logo-chip"><span class="logo-dot"></span> Payments</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="m0" data-i18n="build_title">MVP → lansering</h2>
+      <div class="split mt14">
+        <div class="feature">
+          <div class="icon" aria-hidden="true">
+            <!-- rocket -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M14 10l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M13 3c4 1 7 4 8 8-2 6-8 10-15 10-1 0-2-.1-3-.3.2-1 .6-2.6 1.9-3.9C7 15 9 15 9 15s0-2 2.2-4.1C12.4 9.6 13 8 13 8s0-2 0-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 data-i18n="build_left_title">MVP (nå)</h3>
+          <p data-i18n="build_left_body">Onboarding (domene/DNS), repo fra template, CI/CD til VPS, SSL, status og rollback.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon" aria-hidden="true">
+            <!-- wand -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M15 3l6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M3 21l12-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M7 17l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M14 10l-2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 data-i18n="build_right_title">V1 (lansering)</h3>
+          <p data-i18n="build_right_body">AI PR-flow, modul-system (Vipps m.m.), multi-tenant admin og skalerbar drift.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="hr"></div>
+      <div class="split">
+        <div>
+          <strong>LiveMesh</strong>
+          <div class="mt8"><small data-i18n="footer_note">LiveMesh er et produktkonsept under utvikling. Innhold og spesifikasjoner kan oppdateres.</small></div>
+        </div>
+        <div style="text-align:right">
+          <small>© <span id="y"></span> LiveMesh</small>
+        </div>
+      </div>
+      <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+    </footer>
   </main>
+
   <script src="assets/app.js"></script>
 </body>
 </html>
