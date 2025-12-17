@@ -1,0 +1,715 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SETAEI — Designed. Engineered. Intelligent.</title>
+  <meta name="description" content="SETAEI (Khabat Setaei) — Premium personal creative & intelligence lab. AI, product engineering, brand systems, SEO and automation." />
+  <meta name="robots" content="index, follow" />  <meta property="og:title" content="SETAEI — Designed. Engineered. Intelligent." />
+  <meta property="og:description" content="Premium personal creative & intelligence lab. AI • Product • Brand systems." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://setaei.com/" />  <style>
+    :root{
+      /* Replace these with your brandbook colors (paste hex codes here) */
+      --bg:#ffffff;
+      --bg-soft:#f6f7f8;
+      --text:#0b1220;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --primary:#0b1220;
+      --accent:#0f766e;
+      --accent-2:#2563eb;
+      --chip:#f1f5f9;
+
+      --radius:22px;
+      --shadow: 0 1px 0 rgba(0,0,0,.05);
+      --max: 1180px;
+      --pad: 30px; /* more air */
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
+    .stack{display:grid; gap:14px}
+    .muted{color:var(--muted)}
+    .small{font-size:12px;color:var(--muted)}
+    .kicker{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:600}
+
+    header{
+      position:sticky; top:0; z-index:60;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .mark{width:36px;height:36px;border-radius:14px;background:var(--text)}
+    .name{font-weight:800; letter-spacing:.16em; font-size:13px}
+    .tag{font-size:12px;color:var(--muted)}
+    nav{display:flex; gap:18px; align-items:center}
+    nav a{font-size:14px;color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    .actions{display:flex; gap:10px; align-items:center}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px; border-radius:999px;
+      border:1px solid var(--border);
+      background:transparent; font-size:14px;
+      transition:transform .12s ease, border-color .12s ease;
+      user-select:none;
+      position:relative;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:#cbd5e1}
+    .btn.primary{background:var(--primary); color:#fff; border-color:var(--primary)}
+    .btn.soft{background:var(--bg-soft)}
+    .btn[data-magnetic="true"]{ will-change: transform; }
+
+    .flag{
+      width:40px; height:40px; border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--bg); display:inline-flex; align-items:center; justify-content:center;
+      font-size:18px; user-select:none;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .flag:hover{transform:translateY(-1px); border-color:#cbd5e1}
+
+    /* HERO */
+    .hero{padding:78px 0 56px; position:relative; overflow:hidden;}
+    .hero-grid{display:grid; gap:26px; grid-template-columns: 1.15fr .85fr; align-items:start; position:relative}
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--border);
+      padding:7px 11px; border-radius:999px; font-size:12px; color:#111827;
+      position:relative; overflow:hidden;
+    }
+    .chip::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.65) 45%, rgba(255,255,255,0) 70%);
+      transform: translateX(-120%);
+      opacity:.35;
+    }
+    .chip:hover::after{ animation: shine .9s ease; }
+    @keyframes shine{ 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+
+    h1{
+      font-size:56px; line-height:1.02;
+      letter-spacing:-.02em;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-weight: 500;
+      margin-top:14px;
+    }
+    .sub{margin-top:14px; font-size:18px; color:var(--muted); max-width:60ch}
+    .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px}
+
+    /* Animated background blobs */
+    .hero::before,
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-25%;
+      background:
+        radial-gradient(closest-side, rgba(37,99,235,.55), rgba(37,99,235,0) 70%),
+        radial-gradient(closest-side, rgba(15,118,110,.40), rgba(15,118,110,0) 72%),
+        radial-gradient(closest-side, rgba(2,6,23,.18), rgba(2,6,23,0) 75%);
+      filter: blur(44px);
+      transform: translate3d(0,0,0);
+      pointer-events:none;
+      opacity:.92;
+    }
+    .hero::before{ animation: blobMove1 16s ease-in-out infinite; mix-blend-mode:multiply; }
+    .hero::after{ animation: blobMove2 22s ease-in-out infinite; opacity:.68; mix-blend-mode:screen; }
+
+    @keyframes blobMove1{
+      0%{ transform: translate(-8%, -6%) scale(1.05) rotate(0deg); }
+      35%{ transform: translate(10%, -2%) scale(1.2) rotate(8deg); }
+      70%{ transform: translate(2%, 8%) scale(1.08) rotate(-6deg); }
+      100%{ transform: translate(-8%, -6%) scale(1.05) rotate(0deg); }
+    }
+    @keyframes blobMove2{
+      0%{ transform: translate(12%, 10%) scale(1.08) rotate(0deg); }
+      40%{ transform: translate(-4%, 12%) scale(1.25) rotate(-10deg); }
+      75%{ transform: translate(6%, -6%) scale(1.12) rotate(6deg); }
+      100%{ transform: translate(12%, 10%) scale(1.08) rotate(0deg); }
+    }
+
+    section{padding:82px 0; border-top:1px solid var(--border)}
+    section.alt{background:var(--bg-soft)}
+    h2{font-size:30px; letter-spacing:-.01em}
+    .lead{margin-top:10px; color:var(--muted); max-width:82ch}
+
+    .grid{display:grid; gap:18px; margin-top:22px}
+    .grid-3{grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))}
+    .grid-2{grid-template-columns:repeat(auto-fit, minmax(320px, 1fr))}
+
+    .card{
+      background:#fff; border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px;
+      box-shadow:var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      transform: translateZ(0);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color:#cbd5e1;
+      box-shadow: 0 12px 34px rgba(2,6,23,.10);
+    }
+    .card-title{display:flex; align-items:center; gap:10px; font-weight:800}
+    .icon{
+      width:34px; height:34px; border-radius:14px;
+      background:rgba(15,118,110,.10);
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid rgba(15,118,110,.18);
+      flex:0 0 auto;
+    }
+    .icon svg{width:18px;height:18px}
+    .card p{margin-top:8px; color:var(--muted); font-size:14px}
+
+    /* Prevent easy copy while still allowing click */
+    .protect{user-select:none}
+    .protect a{user-select:none}
+
+    /* Partner marquee */
+    .marquee{
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:var(--radius);
+      padding:16px 0;
+    }
+    .track{
+      display:flex; gap:28px; align-items:center;
+      width:max-content;
+      animation: scroll 22s linear infinite;
+      padding-left:28px;
+    }
+    .marquee:hover .track{ animation-play-state: paused; }
+    .logo-pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:13px;
+      color:#111827;
+      background:var(--bg);
+      white-space:nowrap;
+    }
+    @keyframes scroll{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity:0;
+      transform: translateY(16px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.is-in{ opacity:1; transform: translateY(0); }
+
+    footer{padding:56px 0; border-top:1px solid var(--border); color:var(--muted); font-size:14px}
+    .foot{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between}
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:40px}
+      nav{display:none}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .hero::before,.hero::after{ animation:none; }
+      .track{ animation:none; }
+      .reveal{ opacity:1; transform:none; transition:none; }
+      .btn,.card,.flag{ transition:none; }
+    }
+  </style>  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Khabat Setaei",
+    "alternateName":"SETAEI",
+    "url":"https://setaei.com",
+    "jobTitle":"AI & Blockchain Engineer",
+    "sameAs":[
+      "https://github.com/XS227",
+      "https://medium.com/@khabat.setaei"
+    ]
+  }
+  </script></head><body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="SETAEI home">
+      <span class="mark" aria-hidden="true"></span>
+      <span>
+        <div class="name">SETAEI</div>
+        <div class="tag" data-i18n="nav.tag">AI • Product • Brand Systems</div>
+      </span>
+    </a><nav aria-label="Main navigation">
+  <a href="#lab" data-i18n="nav.lab">Lab</a>
+  <a href="#services" data-i18n="nav.services">Services</a>
+  <a href="#work" data-i18n="nav.work">Work</a>
+  <a href="#resume" data-i18n="nav.resume">Resume</a>
+  <a href="#testimonials" data-i18n="nav.testimonials">Testimonials</a>
+  <a href="contact.html" data-i18n="nav.contact">Contact</a>
+</nav>
+
+<div class="actions">
+  <button id="langToggle" class="flag" type="button" aria-label="Switch language">🇳🇴</button>
+  <a class="btn primary" href="contact.html" data-i18n="nav.cta">Contact Me</a>
+</div>
+
+  </div>
+</header><main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="chips">
+          <span class="chip" data-i18n="hero.chip1">AI & Blockchain Engineer</span>
+          <span class="chip" data-i18n="hero.chip2">Product strategist</span>
+          <span class="chip" data-i18n="hero.chip3">IT Marketing</span>
+          <span class="chip" data-i18n="hero.chip4">Automation & SEO</span>
+        </div><h1 data-i18n="hero.h1">Designed. Engineered. Intelligent.</h1>
+    <p class="sub" data-i18n="hero.sub">
+      SETAEI is a premium personal creative & intelligence lab — building modern digital presence,
+      AI-enabled systems, and scalable platforms with engineering discipline and measurable outcomes.
+    </p>
+
+    <div class="cta">
+      <a class="btn primary" href="contact.html" data-i18n="hero.cta1">Book a 20‑min Call</a>
+      <a class="btn" href="#services" data-i18n="hero.cta2">See Services</a>
+      <a class="btn soft" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+
+    <div class="small" style="margin-top:14px" data-i18n="hero.note">Remote · Norway · Limited partnerships</div>
+  </div>
+
+  <aside class="stack">
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l1.2 5.4L19 9l-5.8 1.6L12 16l-1.2-5.4L5 9l5.8-1.6L12 2z"></path>
+          </svg>
+        </span>
+        <span data-i18n="aside.title">Entry Offers</span>
+      </div>
+      <p data-i18n="aside.p">Fast, premium starting points that lead to bigger outcomes.</p>
+      <div class="grid" style="margin-top:14px">
+        <div class="card" style="padding:16px">
+          <div style="font-weight:800" data-i18n="aside.o1t">AI Opportunity Audit</div>
+          <div class="small" data-i18n="aside.o1d">Find automation wins and quick prototypes.</div>
+        </div>
+        <div class="card" style="padding:16px">
+          <div style="font-weight:800" data-i18n="aside.o2t">Digital System Review</div>
+          <div class="small" data-i18n="aside.o2d">Brand + website + SEO rebuilt as a system.</div>
+        </div>
+      </div>
+      <div class="cta" style="margin-top:14px">
+        <a class="btn primary" href="contact.html" data-i18n="aside.apply">Apply</a>
+        <a class="btn" href="#work" data-i18n="aside.work">See work</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true" style="background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.18)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+          </svg>
+        </span>
+        <span data-i18n="photo.title">Portrait</span>
+      </div>
+      <p class="small" data-i18n="photo.note">Upload an image as <strong>assets/khabat.jpg</strong> to show it here.</p>
+      <div style="margin-top:12px">
+        <img src="assets/khabat.jpg" alt="Khabat Setaei portrait" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;small muted&quot;>Image not found: assets/khabat.jpg</div>';">
+      </div>
+    </div>
+  </aside>
+</div>
+
+  </section>  <section id="lab" class="alt">
+    <div class="container">
+      <div class="kicker" data-i18n="lab.k">Lab</div>
+      <h2 data-i18n="lab.h">Where experiments become systems</h2>
+      <p class="lead" data-i18n="lab.p">I package strategy into repeatable frameworks and ship prototypes quickly — then turn what works into durable systems.</p><div class="grid grid-3">
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h16"></path></svg>
+        </span>
+        <span data-i18n="lab.c1t">Frameworks</span>
+      </div>
+      <p data-i18n="lab.c1d">Brief → system map → execution plan. Clear, documented, reusable.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+        </span>
+        <span data-i18n="lab.c2t">AI Experiments</span>
+      </div>
+      <p data-i18n="lab.c2d">POCs for RAG, agents, automations — validated before large investment.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h7l3 8 4-16 2 8h2"></path></svg>
+        </span>
+        <span data-i18n="lab.c3t">Systems</span>
+      </div>
+      <p data-i18n="lab.c3d">Brand + growth + delivery pipelines that compound over time.</p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="services">
+    <div class="container">
+      <div class="kicker" data-i18n="srv.k">Services</div>
+      <h2 data-i18n="srv.h">High-value delivery across strategy, build and growth</h2>
+      <p class="lead" data-i18n="srv.p">You can start small, but the goal is always a scalable system.</p><div class="grid grid-3">
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M8 2h8v6H8z"></path><path d="M6 8h12v10a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8z"></path></svg></span><span data-i18n="srv.c1t">AI & Automation</span></div><p data-i18n="srv.c1d">AI strategy, internal tools, automation flows, and measurable process wins.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v12l-7 4-7-4V6l7-4z"></path><path d="M12 22V12"></path><path d="M19 6l-7 6-7-6"></path></svg></span><span data-i18n="srv.c2t">Product & Platform</span></div><p data-i18n="srv.c2d">MVPs, architecture, scalable web apps, API integrations and payments.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"></path><path d="M12 3v18"></path><path d="M7 7h10v10H7z"></path></svg></span><span data-i18n="srv.c3t">Brand, Web & SEO</span></div><p data-i18n="srv.c3d">Brand foundation, conversion-focused website, SEO + AI content ops.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path></svg></span><span data-i18n="srv.c4t">Brand Identity</span></div><p data-i18n="srv.c4d">Minimal identity systems, typography, and brandbook-aligned assets.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M20 8v6"></path><path d="M23 11h-6"></path></svg></span><span data-i18n="srv.c5t">Online Profile</span></div><p data-i18n="srv.c5d">Personal profile sites that convert, with references and premium positioning.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12a10 10 0 1 1-6-9.2"></path><path d="M22 4v6h-6"></path></svg></span><span data-i18n="srv.c6t">Workshops</span></div><p data-i18n="srv.c6d">AI literacy, workflow training, and practical systems for teams.</p></div>
+  </div>
+</div>
+
+  </section>  <section id="work" class="alt">
+    <div class="container">
+      <div class="kicker" data-i18n="work.k">Work</div>
+      <h2 data-i18n="work.h">Selected projects</h2>
+      <p class="lead" data-i18n="work.p">A mix of shipped work, ongoing builds, and experiments.</p><div class="grid grid-3">
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"></path><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></span><span data-i18n="work.c1t">Ongoing: FjOlsenbanden.no</span></div><p data-i18n="work.c1d">Website and growth system build (branding + SEO + automation).</p><p class="small" style="margin-top:10px"><a href="https://fjolsenbanden.no" target="_blank" rel="noopener">fjolsenbanden.no</a></p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5-9 5-9-5 9-5z"></path><path d="M3 7v10l9 5 9-5V7"></path></svg></span><span data-i18n="work.c2t">Portfolio & reference platform</span></div><p data-i18n="work.c2d">Premium positioning site that compounds: SEO, proof, and pipeline.</p></div>
+    <div class="card"><div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span><span data-i18n="work.c3t">SEO & conversion delivery</span></div><p data-i18n="work.c3d">SEO execution with reporting and measurable traction for webshops.</p></div>
+  </div>
+
+  <div style="margin-top:28px">
+    <div class="kicker" data-i18n="work.partnersK">Partners</div>
+    <p class="lead" data-i18n="work.partnersP">A rotating selection of previous collaborations (replace placeholders with real logos).</p>
+
+    <div class="marquee" style="margin-top:14px" aria-label="Partner logos marquee">
+      <div class="track">
+        <span class="logo-pill">Telenor</span>
+        <span class="logo-pill">Apple</span>
+        <span class="logo-pill">Google Earth</span>
+        <span class="logo-pill">MegaCandy</span>
+        <span class="logo-pill">NaturalForce</span>
+        <span class="logo-pill">Partner 6</span>
+        <span class="logo-pill">Partner 7</span>
+
+        <span class="logo-pill">Telenor</span>
+        <span class="logo-pill">Apple</span>
+        <span class="logo-pill">Google Earth</span>
+        <span class="logo-pill">MegaCandy</span>
+        <span class="logo-pill">NaturalForce</span>
+        <span class="logo-pill">Partner 6</span>
+        <span class="logo-pill">Partner 7</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="resume">
+    <div class="container">
+      <div class="kicker" data-i18n="res.k">Resume</div>
+      <h2 data-i18n="res.h">Education & experience</h2>
+      <p class="lead" data-i18n="res.p">Highlights you can expand as you add references.</p><div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10l-10-5L2 10l10 5 10-5z"></path><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"></path></svg></span>
+        <span data-i18n="res.edu">Education</span>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card" style="padding:16px"><div style="font-weight:800" data-i18n="res.e1t">M.Sc. Computer Engineering (AI & Robotics)</div><div class="small" data-i18n="res.e1d">Thesis: Hybrid SEM + ANN (AI & robotics).</div></div>
+        <div class="card" style="padding:16px"><div style="font-weight:800" data-i18n="res.e2t">B.Sc. Computer Engineering</div><div class="small" data-i18n="res.e2d">Software engineering and systems.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="icon" aria-hidden="true" style="background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.18)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8V6a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2"></path><path d="M4 8h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"></path><path d="M9 12h6"></path></svg></span>
+        <span data-i18n="res.exp">Experience</span>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card" style="padding:16px"><div style="font-weight:800" data-i18n="res.x1t">Founder & CTO</div><div class="small" data-i18n="res.x1d">Multilingual portal + integrations and payments.</div></div>
+        <div class="card" style="padding:16px"><div style="font-weight:800" data-i18n="res.x2t">AI & Blockchain Consultant</div><div class="small" data-i18n="res.x2d">Token products, audits, and growth execution.</div></div>
+        <div class="card" style="padding:16px"><div style="font-weight:800" data-i18n="res.x3t">Front‑end & Product Engineer</div><div class="small" data-i18n="res.x3d">UI development and product strategy.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="testimonials" class="alt">
+    <div class="container">
+      <div class="kicker" data-i18n="t.k">Testimonials</div>
+      <h2 data-i18n="t.h">What others say</h2>
+      <p class="lead" data-i18n="t.p">Keep these visible — they sell for you.</p><div class="grid grid-3">
+    <div class="card"><div style="font-weight:800">Alexander Boccio</div><div class="small">megacandy.no</div><p data-i18n="t.q1">“We used Setaei for SEO and were very satisfied… Highly recommended.”</p></div>
+    <div class="card"><div style="font-weight:800">Soheil Seyedi</div><div class="small" data-i18n="t.role2">Entrepreneur</div><p data-i18n="t.q2">“Fast delivery, strong understanding of needs, and always goes the extra mile.”</p></div>
+    <div class="card"><div style="font-weight:800">Anne‑Mette Røsting</div><div class="small">naturalforce.no</div><p data-i18n="t.q3">“Creative, well‑crafted solutions, high service, and on‑time delivery.”</p></div>
+  </div>
+
+  <div class="cta" style="margin-top:20px"><a class="btn" href="contact.html" data-i18n="t.add">Add a testimonial</a></div>
+</div>
+
+  </section>  <section id="engage">
+    <div class="container">
+      <div class="kicker" data-i18n="e.k">Engage</div>
+      <h2 data-i18n="e.h">Work with me</h2>
+      <p class="lead" data-i18n="e.p">Premium work, clear communication, and fast iteration.</p><div class="grid grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg></span><span data-i18n="e.entry">Best entry point</span></div>
+      <p data-i18n="e.entryp">Start with an audit or a strategy session. I will map the shortest path to results.</p>
+      <div class="cta"><a class="btn primary" href="contact.html" data-i18n="e.cta1">Contact</a><a class="btn soft" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+
+    <div class="card protect">
+      <div class="card-title"><span class="icon" aria-hidden="true" style="background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.18)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12a10 10 0 1 1-6-9.2"></path><path d="M22 4v6h-6"></path></svg></span><span data-i18n="e.direct">Direct</span></div>
+      <p class="small" data-i18n="e.directp">Protected display (click to call/email). Not copy-friendly.</p>
+      <div class="stack" style="margin-top:14px">
+        <div><div class="small" data-i18n="e.email">Email</div><a id="emailLink" class="btn" href="#" aria-label="Email SETAEI"><span id="emailText">••••••••••••</span></a></div>
+        <div><div class="small" data-i18n="e.phone">Phone</div><a id="phoneLink" class="btn" href="#" aria-label="Call SETAEI"><span id="phoneText">••••••••••••</span></a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  </section>
+</main><footer>
+  <div class="container foot">
+    <div>
+      <div style="font-weight:800;letter-spacing:.16em;color:var(--text)">SETAEI</div>
+      <div class="muted" data-i18n="foot.tag">Designed. Engineered. Intelligent.</div>
+      <div class="small" style="margin-top:10px">© <span id="year"></span> SETAEI. All rights reserved.</div>
+    </div>
+    <div class="protect">
+      <div style="font-weight:700;color:var(--text)" data-i18n="foot.contact">Contact</div>
+      <div class="small"><a href="contact.html" data-i18n="foot.contactPage">Contact page</a></div>
+      <div class="small"><a id="emailLink2" href="#"><span id="emailText2">••••••••••••</span></a></div>
+      <div class="small"><a id="phoneLink2" href="#"><span id="phoneText2">••••••••••••</span></a></div>
+    </div>
+    <div>
+      <div style="font-weight:700;color:var(--text)" data-i18n="foot.social">Social</div>
+      <div class="small"><a href="https://github.com/XS227" target="_blank" rel="noopener">GitHub</a></div>
+      <div class="small"><a href="https://medium.com/@khabat.setaei" target="_blank" rel="noopener">Medium</a></div>
+    </div>
+  </div>
+</footer><script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Protected contact rendering (still callable/clickable)
+  (function(){
+    const email = ["khabat","setaei","com"]; // khabat@setaei.com
+    const phone = ["+47","4122","7175"];     // +47 4122 7175
+
+    const emailStr = email[0] + "@" + email[1] + "." + email[2];
+    const phoneStr = phone[0] + " " + phone[1] + " " + phone[2];
+    const phoneDial = "+4741227175";
+
+    function set(idLink, idText, href, txt){
+      const a = document.getElementById(idLink);
+      const t = document.getElementById(idText);
+      if(a && t){ a.setAttribute("href", href); t.textContent = txt; }
+    }
+    set("emailLink","emailText","mailto:" + emailStr, emailStr);
+    set("phoneLink","phoneText","tel:" + phoneDial, phoneStr);
+    set("emailLink2","emailText2","mailto:" + emailStr, emailStr);
+    set("phoneLink2","phoneText2","tel:" + phoneDial, phoneStr);
+
+    // best-effort anti-copy
+    ["emailText","phoneText","emailText2","phoneText2"].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){
+        el.addEventListener("copy", (e)=>{ e.preventDefault(); });
+        el.addEventListener("contextmenu", (e)=>{ e.preventDefault(); });
+      }
+    });
+  })();
+
+  // Language toggle (EN / NO) with the OTHER-language flag on the button
+  const dict = {
+    en: {
+      "nav.tag":"AI • Product • Brand Systems",
+      "nav.lab":"Lab","nav.services":"Services","nav.work":"Work","nav.resume":"Resume","nav.testimonials":"Testimonials","nav.contact":"Contact","nav.cta":"Contact Me",
+      "hero.chip1":"AI & Blockchain Engineer","hero.chip2":"Product strategist","hero.chip3":"IT Marketing","hero.chip4":"Automation & SEO",
+      "hero.h1":"Designed. Engineered. Intelligent.",
+      "hero.sub":"SETAEI is a premium personal creative & intelligence lab — building modern digital presence, AI-enabled systems, and scalable platforms with engineering discipline and measurable outcomes.",
+      "hero.cta1":"Book a 20‑min Call","hero.cta2":"See Services","hero.note":"Remote · Norway · Limited partnerships",
+      "aside.title":"Entry Offers","aside.p":"Fast, premium starting points that lead to bigger outcomes.",
+      "aside.o1t":"AI Opportunity Audit","aside.o1d":"Find automation wins and quick prototypes.",
+      "aside.o2t":"Digital System Review","aside.o2d":"Brand + website + SEO rebuilt as a system.",
+      "aside.apply":"Apply","aside.work":"See work",
+      "photo.title":"Portrait","photo.note":"Upload an image as <strong>assets/khabat.jpg</strong> to show it here.",
+      "lab.k":"Lab","lab.h":"Where experiments become systems","lab.p":"I package strategy into repeatable frameworks and ship prototypes quickly — then turn what works into durable systems.",
+      "lab.c1t":"Frameworks","lab.c1d":"Brief → system map → execution plan. Clear, documented, reusable.",
+      "lab.c2t":"AI Experiments","lab.c2d":"POCs for RAG, agents, automations — validated before large investment.",
+      "lab.c3t":"Systems","lab.c3d":"Brand + growth + delivery pipelines that compound over time.",
+      "srv.k":"Services","srv.h":"High-value delivery across strategy, build and growth","srv.p":"You can start small, but the goal is always a scalable system.",
+      "srv.c1t":"AI & Automation","srv.c1d":"AI strategy, internal tools, automation flows, and measurable process wins.",
+      "srv.c2t":"Product & Platform","srv.c2d":"MVPs, architecture, scalable web apps, API integrations and payments.",
+      "srv.c3t":"Brand, Web & SEO","srv.c3d":"Brand foundation, conversion-focused website, SEO + AI content ops.",
+      "srv.c4t":"Brand Identity","srv.c4d":"Minimal identity systems, typography, and brandbook-aligned assets.",
+      "srv.c5t":"Online Profile","srv.c5d":"Personal profile sites that convert, with references and premium positioning.",
+      "srv.c6t":"Workshops","srv.c6d":"AI literacy, workflow training, and practical systems for teams.",
+      "work.k":"Work","work.h":"Selected projects","work.p":"A mix of shipped work, ongoing builds, and experiments.",
+      "work.c1t":"Ongoing: FjOlsenbanden.no","work.c1d":"Website and growth system build (branding + SEO + automation).",
+      "work.c2t":"Portfolio & reference platform","work.c2d":"Premium positioning site that compounds: SEO, proof, and pipeline.",
+      "work.c3t":"SEO & conversion delivery","work.c3d":"SEO execution with reporting and measurable traction for webshops.",
+      "work.partnersK":"Partners","work.partnersP":"A rotating selection of previous collaborations (replace placeholders with real logos).",
+      "res.k":"Resume","res.h":"Education & experience","res.p":"Highlights you can expand as you add references.",
+      "res.edu":"Education","res.e1t":"M.Sc. Computer Engineering (AI & Robotics)","res.e1d":"Thesis: Hybrid SEM + ANN (AI & robotics).",
+      "res.e2t":"B.Sc. Computer Engineering","res.e2d":"Software engineering and systems.",
+      "res.exp":"Experience","res.x1t":"Founder & CTO","res.x1d":"Multilingual portal + integrations and payments.",
+      "res.x2t":"AI & Blockchain Consultant","res.x2d":"Token products, audits, and growth execution.",
+      "res.x3t":"Front‑end & Product Engineer","res.x3d":"UI development and product strategy.",
+      "t.k":"Testimonials","t.h":"What others say","t.p":"Keep these visible — they sell for you.",
+      "t.q1":"“We used Setaei for SEO and were very satisfied… Highly recommended.”",
+      "t.role2":"Entrepreneur",
+      "t.q2":"“Fast delivery, strong understanding of needs, and always goes the extra mile.”",
+      "t.q3":"“Creative, well‑crafted solutions, high service, and on‑time delivery.”",
+      "t.add":"Add a testimonial",
+      "e.k":"Engage","e.h":"Work with me","e.p":"Premium work, clear communication, and fast iteration.",
+      "e.entry":"Best entry point","e.entryp":"Start with an audit or a strategy session. I will map the shortest path to results.",
+      "e.cta1":"Contact",
+      "e.direct":"Direct","e.directp":"Protected display (click to call/email). Not copy-friendly.",
+      "e.email":"Email","e.phone":"Phone",
+      "foot.tag":"Designed. Engineered. Intelligent.",
+      "foot.contact":"Contact","foot.contactPage":"Contact page","foot.social":"Social"
+    },
+    no: {
+      "nav.tag":"AI • Produkt • Brand Systems",
+      "nav.lab":"Lab","nav.services":"Tjenester","nav.work":"Prosjekter","nav.resume":"CV","nav.testimonials":"Anbefalinger","nav.contact":"Kontakt","nav.cta":"Kontakt meg",
+      "hero.chip1":"AI- og blockchain-ingeniør","hero.chip2":"Produktstrateg","hero.chip3":"IT-markedsføring","hero.chip4":"Automatisering & SEO",
+      "hero.h1":"Designed. Engineered. Intelligent.",
+      "hero.sub":"SETAEI er et premium personal creative & intelligence lab — jeg bygger moderne digital profil, AI-drevne systemer og skalerbare plattformer med ingeniørdisiplin og målbare resultater.",
+      "hero.cta1":"Book 20‑min samtale","hero.cta2":"Se tjenester","hero.note":"Remote · Norge · Begrensede partnerskap",
+      "aside.title":"Startpakker","aside.p":"Raske premium-starter som leder til større resultater.",
+      "aside.o1t":"AI Opportunity Audit","aside.o1d":"Finn automatiseringsgevinster og raske prototyper.",
+      "aside.o2t":"Digital System Review","aside.o2d":"Brand + nettside + SEO bygget som et system.",
+      "aside.apply":"Søk","aside.work":"Se arbeid",
+      "photo.title":"Bilde","photo.note":"Last opp et bilde som <strong>assets/khabat.jpg</strong> for å vise det her.",
+      "lab.k":"Lab","lab.h":"Der eksperimenter blir til systemer","lab.p":"Jeg pakker strategi inn i repeterbare rammeverk, leverer prototyper raskt og gjør det som virker til solide systemer.",
+      "lab.c1t":"Rammeverk","lab.c1d":"Brief → systemkart → plan. Tydelig, dokumentert, gjenbrukbart.",
+      "lab.c2t":"AI-eksperimenter","lab.c2d":"POC for RAG, agenter og automasjoner — validert før større investering.",
+      "lab.c3t":"Systemer","lab.c3d":"Brand + vekst + leveranse som pipeline som øker over tid.",
+      "srv.k":"Tjenester","srv.h":"Høyverdi-leveranser innen strategi, bygg og vekst","srv.p":"Du kan starte lite, men målet er alltid et skalerbart system.",
+      "srv.c1t":"AI & automatisering","srv.c1d":"AI-strategi, interne verktøy, automasjonsflyt og målbare forbedringer.",
+      "srv.c2t":"Produkt & plattform","srv.c2d":"MVP, arkitektur, skalerbare webapper, API-integrasjoner og betaling.",
+      "srv.c3t":"Brand, web & SEO","srv.c3d":"Brand foundation, nettside som konverterer, SEO + AI content ops.",
+      "srv.c4t":"Visuell identitet","srv.c4d":"Minimal identitet, typografi og assets i tråd med brandbook.",
+      "srv.c5t":"Online profil","srv.c5d":"Profilside som selger, med referanser og premium-posisjonering.",
+      "srv.c6t":"Workshops","srv.c6d":"AI-forståelse, arbeidsflyt og praktiske systemer for team.",
+      "work.k":"Prosjekter","work.h":"Utvalgte prosjekter","work.p":"En miks av levert arbeid, pågående bygg og eksperimenter.",
+      "work.c1t":"Pågående: FjOlsenbanden.no","work.c1d":"Nettside og vekstsystem (branding + SEO + automatisering).",
+      "work.c2t":"Portefølje- og referanseplattform","work.c2d":"Premium posisjonering som bygger pipeline over tid: SEO, proof og struktur.",
+      "work.c3t":"SEO & konvertering","work.c3d":"SEO-leveranser med rapportering og målbar traction for nettbutikker.",
+      "work.partnersK":"Samarbeid","work.partnersP":"Rullerende utvalg av samarbeid (bytt placeholders til ekte logoer).",
+      "res.k":"CV","res.h":"Utdanning & erfaring","res.p":"Høydepunkter du kan utvide når du bygger flere referanser.",
+      "res.edu":"Utdanning","res.e1t":"M.Sc. Computer Engineering (AI & Robotics)","res.e1d":"Oppgave: Hybrid SEM + ANN (AI og robotikk).",
+      "res.e2t":"B.Sc. Computer Engineering","res.e2d":"Software engineering og systemer.",
+      "res.exp":"Erfaring","res.x1t":"Founder & CTO","res.x1d":"Flerspråklig portal + integrasjoner og betaling.",
+      "res.x2t":"AI- og blockchain-konsulent","res.x2d":"Token-produkter, audits og vekst-leveranser.",
+      "res.x3t":"Front‑end & produktingeniør","res.x3d":"UI-utvikling og produktstrategi.",
+      "t.k":"Anbefalinger","t.h":"Hva andre sier","t.p":"Hold disse synlige — de selger for deg.",
+      "t.q1":"“Vi brukte Setaei til SEO og var veldig fornøyd… Anbefales.”",
+      "t.role2":"Gründer",
+      "t.q2":"“Rask leveranse, forstår behov, og går alltid ekstra.”",
+      "t.q3":"“Kreative og godt gjennomførte løsninger, høy service og levering til tid.”",
+      "t.add":"Legg til anbefaling",
+      "e.k":"Samarbeid","e.h":"Jobb med meg","e.p":"Premium leveranse, tydelig kommunikasjon og rask iterasjon.",
+      "e.entry":"Beste startpunkt","e.entryp":"Start med en audit eller strategi-samtale. Jeg kartlegger korteste vei til resultater.",
+      "e.cta1":"Kontakt",
+      "e.direct":"Direkte","e.directp":"Skjermet visning (klikk for å ringe/epost). Ikke copy-vennlig.",
+      "e.email":"E‑post","e.phone":"Telefon",
+      "foot.tag":"Designed. Engineered. Intelligent.",
+      "foot.contact":"Kontakt","foot.contactPage":"Kontaktside","foot.social":"Sosialt"
+    }
+  };
+
+  function setLang(lang){
+    document.documentElement.lang = (lang === "no") ? "no" : "en";
+    document.querySelectorAll("[data-i18n]").forEach(n=>{
+      const key = n.getAttribute("data-i18n");
+      if(dict[lang] && dict[lang][key] !== undefined){ n.innerHTML = dict[lang][key]; }
+    });
+    localStorage.setItem("setaei_lang", lang);
+
+    // show the OTHER language flag
+    const btn = document.getElementById("langToggle");
+    btn.textContent = (lang === "en") ? "🇳🇴" : "🇬🇧";
+    btn.setAttribute("aria-label", (lang === "en") ? "Bytt til norsk" : "Switch to English");
+  }
+
+  const initial = localStorage.getItem("setaei_lang") || "en";
+  setLang(initial);
+  document.getElementById("langToggle").addEventListener("click", ()=>{
+    const current = localStorage.getItem("setaei_lang") || "en";
+    setLang(current === "en" ? "no" : "en");
+  });
+
+  // Motion layer: reveal on scroll + magnetic buttons + subtle card tilt
+  (function(){
+    const toReveal = Array.from(document.querySelectorAll("section .container > .kicker, section h2, section .lead, .card, .marquee, footer .foot > div, .hero-grid > div, .hero-grid aside"));
+    toReveal.forEach(el=>el.classList.add("reveal"));
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    toReveal.forEach(el=>io.observe(el));
+
+    // Magnetic buttons (desktop)
+    const magnets = Array.from(document.querySelectorAll(".btn.primary, .btn.soft"));
+    magnets.forEach(b=>b.setAttribute("data-magnetic","true"));
+
+    function magnetMove(e){
+      const btn = e.currentTarget;
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width/2);
+      const y = e.clientY - (r.top + r.height/2);
+      btn.style.transform = `translate(${x*0.08}px, ${y*0.12}px)`;
+    }
+    function magnetReset(e){ e.currentTarget.style.transform = ""; }
+
+    const finePointer = window.matchMedia && window.matchMedia("(pointer:fine)").matches;
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(finePointer && !reduced){
+      magnets.forEach(btn=>{ btn.addEventListener("mousemove", magnetMove); btn.addEventListener("mouseleave", magnetReset); });
+    }
+
+    // Optional subtle tilt for cards (desktop)
+    const cards = Array.from(document.querySelectorAll(".card"));
+    function tilt(e){
+      const el = e.currentTarget;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = `translateY(-2px) rotateX(${(-y*3).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg)`;
+    }
+    function untilt(e){ e.currentTarget.style.transform = ""; }
+
+    if(finePointer && !reduced){
+      cards.forEach(c=>{ c.addEventListener("mousemove", tilt); c.addEventListener("mouseleave", untilt); });
+    }
+  })();
+</script></body>
+</html>
