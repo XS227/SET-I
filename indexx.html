@@ -102,6 +102,12 @@
     .links a:hover{color:#fff}
 
     .right{display:flex;gap:10px;align-items:center}
+    @media (min-width: 981px){
+      #menuBtn{display:none}
+    }
+    @media (max-width: 980px){
+      #menuBtn{display:inline-flex}
+    }
     .pill{
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
       padding:10px 14px;border-radius:999px;
@@ -399,11 +405,12 @@
           <span id="brandSub">Designed. Engineered. Intelligent.</span>
         </div>
       </a><nav class="links" aria-label="Primary">
-    <a href="#tjenester" data-nav>AI & Web</a>
-    <a href="#seo" data-nav>SEO</a>
-    <a href="#prosjekter" data-nav>Prosjekter</a>
-    <a href="#cv" data-nav>CV</a>
-    <a href="#kontakt" data-nav>Kontakt</a>
+    <a href="#ai" data-nav id="nav1">AI & Web</a>
+    <a href="#seo" data-nav id="nav2">SEO</a>
+    <a href="#prosjekter" data-nav id="nav3">Prosjekter</a>
+    <a href="#cv" data-nav id="nav4">CV</a>
+    <a href="#kontakt" data-nav id="nav5">Kontakt</a>
+    <a href="#reviews" data-nav id="nav6">Anbefalinger</a>
   </nav>
 
   <div class="right">
@@ -411,7 +418,7 @@
       <span class="flag" id="langFlag" aria-hidden="true"></span>
       <span id="langLabel" style="font-size:13px; color:rgba(255,255,255,.90)">NO</span>
     </button>
-    <button class="pill" id="menuBtn" type="button">MENU</button>
+    <button class="pill" id="menuBtn" type="button"></button>
     <button class="pill cta" id="contactBtn" type="button">Kontakt meg</button>
   </div>
 </div>
@@ -422,11 +429,12 @@
     </button>
     <div class="sheet">
       <div class="menuBig">
-        <a href="#tjenester" data-close>AI & Web</a>
-        <a href="#seo" data-close>SEO</a>
-        <a href="#prosjekter" data-close>Prosjekter</a>
-        <a href="#cv" data-close>CV</a>
-        <a href="#kontakt" data-close>Kontakt</a>
+        <a href="#ai" data-close data-nav id="nav1b">AI & Web</a>
+        <a href="#seo" data-close data-nav id="nav2b">SEO</a>
+        <a href="#prosjekter" data-close data-nav id="nav3b">Prosjekter</a>
+        <a href="#cv" data-close data-nav id="nav4b">CV</a>
+        <a href="#kontakt" data-close data-nav id="nav5b">Kontakt</a>
+        <a href="#reviews" data-close data-nav id="nav6b">Anbefalinger</a>
       </div>
       <aside class="menuSide">
         <div class="card">
@@ -451,7 +459,7 @@
       </aside>
     </div>
   </div>  <main id="top">
-    <section class="split" aria-label="Split hero">
+    <section class="split" aria-label="Split hero" id="ai">
       <div class="left">
         <div class="fx" aria-hidden="true">
           <div class="blob b1"></div>
@@ -476,8 +484,8 @@
         </p>
 
         <div class="row" data-reveal>
-          <button class="btnD" id="bookBtn" type="button">Book 20-min samtale</button>
-          <a class="btnG" href="#tjenester">Se tjenester</a>
+          <button class="btnD" id="bookBtn" type="button"><span id="bookBtnTxt">Book 20-min samtale</span></button>
+          <a class="btnG" href="#tjenester"><span id="servicesBtnTxt">Se tjenester</span></a>
           <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
         </div>
 
@@ -702,10 +710,39 @@
   </div>
 </section>
 
+<section id="reviews" class="block">
+  <div class="container">
+    <h2 class="h2" data-reveal id="tTitle">Anbefalinger</h2>
+    <p class="p" data-reveal id="tSub">Et utvalg tilbakemeldinger fra samarbeid.</p>
+
+    <div class="twoCol" style="margin-top:18px">
+      <div class="boxD" data-reveal>
+        <h3>Alexander Buccio</h3>
+        <p class="p" style="margin:0">Struktur, tempo og kvalitet. Leverer både design og engineering på nivå.</p>
+      </div>
+      <div class="boxD" data-reveal>
+        <h3>Suheil Seyed</h3>
+        <p class="p" style="margin:0">Skarp på strategi og gjennomføring. Kommunikasjon og resultatfokus var solid.</p>
+      </div>
+    </div>
+
+    <div class="twoCol" style="margin-top:18px">
+      <div class="boxD" data-reveal>
+        <h3>Anne-Mette Røtting</h3>
+        <p class="p" style="margin:0">Profesjonelt, effektivt og premium. Opplevde høy kvalitet i både prosess og leveranse.</p>
+      </div>
+      <div class="boxD" data-reveal>
+        <h3>Mer kommer</h3>
+        <p class="p" style="margin:0">Denne seksjonen kan fylles med flere referanser etter hvert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="kontakt" class="block">
   <div class="container">
-    <h2 class="h2" data-reveal>Kontakt</h2>
-    <p class="p" data-reveal>Send en kort melding, så svarer jeg raskt. (Kontaktinfo er skjult i UI, men handlingene fungerer.)</p>
+    <h2 class="h2" data-reveal id="cTitle">Kontakt</h2>
+    <p class="p" data-reveal id="cSub">Send en kort melding, så svarer jeg raskt.</p>
 
     <div class="twoCol" style="margin-top:18px">
       <div class="boxD" data-reveal>
@@ -729,16 +766,6 @@
             <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener" style="border-color:rgba(230,242,242,.22)">WhatsApp</a>
           </div>
         </form>
-      </div>
-
-      <div class="boxD" data-reveal>
-        <h3>Direkte</h3>
-        <p class="p" style="margin:0">Velg kanalen du foretrekker:</p>
-        <div class="row" style="margin-top:14px">
-          <button class="btnD" id="emailBtn2" type="button">Send e-post</button>
-          <button class="btnG" id="callBtn2" type="button">Ring</button>
-          <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
       </div>
     </div>
   </div>
@@ -810,11 +837,38 @@
     });
 
     // ---------------- Overlay menu ----------------
+    const menuBtn = document.getElementById('menuBtn');
     const overlay = document.getElementById('overlay');
-    const openMenu = ()=>{ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
-    const closeMenu = ()=>{ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
 
-    document.getElementById('menuBtn')?.addEventListener('click', (e)=>{ e.preventDefault(); openMenu(); });
+    function menuLabel(){
+      const lang = (localStorage.getItem('setaei_lang') || 'no').toLowerCase();
+      const d = copy[lang] || copy.no;
+      return d.menuBtn;
+    }
+    function closeLabel(){
+      const lang = (localStorage.getItem('setaei_lang') || 'no').toLowerCase();
+      const d = copy[lang] || copy.no;
+      return d.closeBtn;
+    }
+
+    const openMenu = ()=>{
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      if(menuBtn) menuBtn.textContent = closeLabel();
+    };
+
+    const closeMenu = ()=>{
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      if(menuBtn) menuBtn.textContent = menuLabel();
+    };
+
+    document.getElementById('menuBtn')?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      if(overlay?.classList.contains('open')) closeMenu(); else openMenu();
+    });
     document.getElementById('closeOverlay')?.addEventListener('click', (e)=>{ e.preventDefault(); closeMenu(); });
     overlay?.addEventListener('click', (e)=>{ if(e.target === overlay) closeMenu(); });
     document.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click', closeMenu));
@@ -830,12 +884,20 @@
       no:{
         htmlLang:'no',
         brandSub:'Designed. Engineered. Intelligent.',
+        nav1:'AI & Web', nav2:'SEO', nav3:'Prosjekter', nav4:'CV', nav5:'Kontakt', nav6:'Anbefalinger',
+        menuBtn:'MENY', closeBtn:'LUKK',
         chip1:'AI-automatisering', chip2:'Webutvikling', chip3:'Brand systems', chip4:'SEO',
         heroSub:'Premium AI, web og brand systems for norske bedrifter. Bygg en digital motor som skalerer — med strategi, design og engineering i én leveranse.',
         heroMeta:'Remote · Norge · Premium fra dag 1',
+        bookBtn:'Book 20-min samtale',
+        servicesBtn:'Se tjenester',
         panelK:'STARTPAKKER',
         panelH:'Raske leveranser som åpner større B2B-prosjekter',
         panelP:'Velg en start som gir klare funn, plan og neste steg. Deretter bygger vi systemet.',
+        tTitle:'Anbefalinger',
+        tSub:'Et utvalg tilbakemeldinger fra samarbeid.',
+        cTitle:'Kontakt',
+        cSub:'Send en kort melding, så svarer jeg raskt.',
         s1t:'AI Opportunity Audit', s1d:'Finn automatiseringsgevinster, raske prototyper og ROI-hypoteser.',
         s2t:'Digital System Review', s2d:'Brand + nettside + SEO som én sammenhengende motor.',
         s3t:'SEO Sprint', s3d:'Teknisk SEO + innholdsplan + 10 søkeord med tydelig struktur.',
@@ -845,12 +907,20 @@
       en:{
         htmlLang:'en',
         brandSub:'Designed. Engineered. Intelligent.',
+        nav1:'AI & Web', nav2:'SEO', nav3:'Projects', nav4:'CV', nav5:'Contact', nav6:'Reviews',
+        menuBtn:'MENU', closeBtn:'CLOSE',
         chip1:'AI Automation', chip2:'Web Development', chip3:'Brand Systems', chip4:'SEO',
         heroSub:'Premium AI, web and brand systems for Norwegian businesses. Build a scalable digital engine — strategy, design, and engineering in one delivery.',
         heroMeta:'Remote · Norway · Premium from day 1',
+        bookBtn:'Book a 20-min call',
+        servicesBtn:'View services',
         panelK:'START PACKS',
         panelH:'Fast deliveries that unlock larger B2B projects',
         panelP:'Choose a starting point with clear findings, plan and next steps. Then we build the system.',
+        tTitle:'Reviews',
+        tSub:'Selected feedback from collaborations.',
+        cTitle:'Contact',
+        cSub:"Send a short message and I’ll respond quickly.",
         s1t:'AI Opportunity Audit', s1d:'Find automation wins, rapid prototypes and ROI hypotheses.',
         s2t:'Digital System Review', s2d:'Brand + website + SEO as one connected engine.',
         s3t:'SEO Sprint', s3d:'Technical SEO + content plan + 10 keywords with structure.',
@@ -865,10 +935,19 @@
       const d = copy[lang] || copy.no;
       document.documentElement.lang = d.htmlLang;
 
+      safeText('nav1', d.nav1); safeText('nav2', d.nav2); safeText('nav3', d.nav3);
+      safeText('nav4', d.nav4); safeText('nav5', d.nav5); safeText('nav6', d.nav6);
+      safeText('nav1b', d.nav1); safeText('nav2b', d.nav2); safeText('nav3b', d.nav3);
+      safeText('nav4b', d.nav4); safeText('nav5b', d.nav5); safeText('nav6b', d.nav6);
+
       safeText('brandSub', d.brandSub);
       safeText('chip1', d.chip1); safeText('chip2', d.chip2); safeText('chip3', d.chip3); safeText('chip4', d.chip4);
       safeText('heroSub', d.heroSub); safeText('heroMeta', d.heroMeta);
+      safeText('bookBtnTxt', d.bookBtn);
+      safeText('servicesBtnTxt', d.servicesBtn);
       safeText('panelK', d.panelK); safeText('panelH', d.panelH); safeText('panelP', d.panelP);
+      safeText('tTitle', d.tTitle); safeText('tSub', d.tSub);
+      safeText('cTitle', d.cTitle); safeText('cSub', d.cSub);
       safeText('s1t', d.s1t); safeText('s1d', d.s1d);
       safeText('s2t', d.s2t); safeText('s2d', d.s2d);
       safeText('s3t', d.s3t); safeText('s3d', d.s3d);
@@ -878,6 +957,7 @@
       const showFlag = (lang === 'no') ? 'en' : 'no';
       if(langFlag) langFlag.className = `flag ${showFlag}`;
       if(langLabel) langLabel.textContent = lang.toUpperCase();
+      if(menuBtn) menuBtn.textContent = overlay?.classList.contains('open') ? closeLabel() : menuLabel();
 
       try{ localStorage.setItem(LS_KEY, lang); }catch(_){ /* ignore */ }
     }
@@ -893,6 +973,7 @@
     }
 
     setLang(getInitLang());
+    if(menuBtn) menuBtn.textContent = menuLabel();
 
     // Ensure click always fires (some mobile browsers need explicit pointer events)
     if(langBtn){
