@@ -198,7 +198,7 @@
       font-weight:520;
       font-size:clamp(44px, 6.2vw, 86px);
       letter-spacing:-.035em;
-      line-height:.94;
+      line-height:1.02;
       margin:0 0 14px;
       text-shadow:0 20px 55px rgba(0,0,0,.35);
     }
@@ -326,6 +326,55 @@
     /* Responsive */
     @media (max-width: 980px){
       .links{display:none}
+      .split{grid-template-columns:1fr}
+      .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
+      .sheet{grid-template-columns:1fr; padding-top:88px}
+      .menuSide{border-left:none;padding-left:0}
+      .twoCol{grid-template-columns:1fr}
+      .panelWrap{padding:46px 0 54px}
+      .hero{padding:46px 0 54px}
+    }
+
+    /* Mobile header + spacing corrections */
+    @media (max-width: 540px){
+      .container{padding:0 16px}
+      .nav{height:66px}
+      .brand{min-width:0}
+      .brand b{font-size:11px}
+      .brand span{font-size:11px}
+      .right{gap:8px}
+      .pill{padding:9px 12px;font-size:12px}
+      #contactBtn{display:none}
+      .chips{gap:6px}
+      .chip{font-size:11px;padding:7px 9px}
+      .headline{font-size:clamp(40px, 12vw, 60px)}
+      .sub{font-size:15px}
+      .row{gap:8px}
+      .btnD,.btnG{padding:11px 14px}
+    }
+      .nav{height:66px}
+      .brand{min-width:0}
+      .brand b{font-size:11px}
+      .brand span{font-size:11px}
+      .right{gap:8px}
+      .pill{padding:9px 12px;font-size:12px}
+      #contactBtn{display:none} /* reduce clutter; contact stays in menu + contact section */
+      .chips{gap:6px}
+      .chip{font-size:11px;padding:7px 9px}
+      .headline{
+      font-family:var(--serif);
+      font-weight:520;
+      font-size:clamp(44px, 6.2vw, 86px);
+      letter-spacing:-.035em;
+      line-height:1.02;align-items:flex-start}
+      .row .btnD,.row .btnG{width:100%;text-align:center}
+      .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
+      .panelWrap{padding:24px 0 40px}
+      .panel{border-radius:22px}
+      .sheet{grid-template-columns:1fr; padding-top:88px}
+      .menuSide{border-left:none;padding-left:0}
+      .twoCol{grid-template-columns:1fr}
+    }
       .split{grid-template-columns:1fr}
       .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
       .sheet{grid-template-columns:1fr; padding-top:88px}
@@ -531,9 +580,67 @@
   </div>
 </section>
 
+<section id="ai" class="block">
+  <div class="container">
+    <h2 class="h2" data-reveal>AI-automatisering for bedrift som faktisk skaper effekt</h2>
+    <p class="p" data-reveal>
+      Når du leter etter <strong>AI automatisering bedrift</strong>, er det lett å ende opp med demoer og verktøy uten drift.
+      Jeg bygger AI-løsninger som er integrert i prosessene dine: lead-håndtering, kundeservice, intern kunnskapsbase, rapportering og operativ automatisering.
+    </p>
+    <div class="twoCol" style="margin-top:18px">
+      <div class="boxD" data-reveal>
+        <h3>Typiske leveranser</h3>
+        <ul>
+          <li>AI-agenter for support, salg og intern assistanse</li>
+          <li>Automatiserte arbeidsflyter med logging og kontroll</li>
+          <li>Datagrunnlag, måling og sikker implementasjon</li>
+        </ul>
+      </div>
+      <div class="boxD" data-reveal>
+        <h3>Format</h3>
+        <ul>
+          <li><strong>AI workshop for bedrift</strong> (mål, scope, risiko, ROI)</li>
+          <li>POC → produksjon (iterativt og målbart)</li>
+          <li>Retainer for kontinuerlig forbedring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ai" class="block">
+  <div class="container">
+    <h2 class="h2" data-reveal>AI-automatisering for bedrift som faktisk skaper effekt</h2>
+    <p class="p" data-reveal>
+      Når du leter etter <strong>AI automatisering bedrift</strong>, er det lett å ende opp med demoer og verktøy uten drift.
+      Jeg bygger AI-løsninger som er integrert i prosessene dine: lead-håndtering, kundeservice, intern kunnskapsbase, rapportering og operativ automatisering.
+    </p>
+    <div class="twoCol" style="margin-top:18px">
+      <div class="boxD" data-reveal>
+        <h3>Typiske leveranser</h3>
+        <ul>
+          <li>AI-agenter for support, salg og intern assistanse</li>
+          <li>Automatiserte arbeidsflyter med logging og kontroll</li>
+          <li>Datagrunnlag, måling og sikker implementasjon</li>
+        </ul>
+      </div>
+      <div class="boxD" data-reveal>
+        <h3>Format</h3>
+        <ul>
+          <li><strong>AI workshop for bedrift</strong> (mål, scope, risiko, ROI)</li>
+          <li>POC → produksjon (iterativt og målbart)</li>
+          <li>Retainer for kontinuerlig forbedring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="seo" class="block">
   <div class="container">
     <h2 class="h2" data-reveal>SEO, AI og digital synlighet for norske bedrifter</h2>
+    <p class="p" data-reveal style="margin-top:10px; color:rgba(255,255,255,.86)"><strong>Bygg systemer som rangerer. Design som konverterer. Engineering som skalerer.</strong></p>
+    <p class="p" data-reveal style="margin-top:10px; color:rgba(255,255,255,.86)"><strong>Bygg systemer som rangerer. Design som konverterer. Engineering som skalerer.</strong></p>
     <p class="p" data-reveal>
       SETAEI jobber strategisk med SEO i Norge for bedrifter som vil tiltrekke seg riktige kunder – ikke bare trafikk.
       Jeg kombinerer teknisk SEO, AI-drevet innholdsstrategi og konverteringsoptimalisering for å bygge digitale systemer som gir målbar effekt over tid.
@@ -598,11 +705,41 @@
 <section id="kontakt" class="block">
   <div class="container">
     <h2 class="h2" data-reveal>Kontakt</h2>
-    <p class="p" data-reveal>Kontaktinfo er skjult i UI, men handlingene fungerer.</p>
-    <div class="row" style="margin-top:16px" data-reveal>
-      <button class="btnD" id="emailBtn2" type="button">Send e-post</button>
-      <button class="btnG" id="callBtn2" type="button">Ring</button>
-      <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
+    <p class="p" data-reveal>Send en kort melding, så svarer jeg raskt. (Kontaktinfo er skjult i UI, men handlingene fungerer.)</p>
+
+    <div class="twoCol" style="margin-top:18px">
+      <div class="boxD" data-reveal>
+        <h3>Send melding</h3>
+        <form action="https://formsubmit.co/khabat@setaei.com" method="POST" style="margin-top:12px">
+          <input type="hidden" name="_subject" value="New lead — SETAEI" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
+          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">Navn</label>
+          <input name="name" required placeholder="Ditt navn" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none" />
+
+          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">E-post</label>
+          <input name="email" type="email" required placeholder="din@epost.no" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none" />
+
+          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">Melding</label>
+          <textarea name="message" required rows="5" placeholder="Hva vil du bygge, forbedre eller automatisere?" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none; resize:vertical"></textarea>
+
+          <div class="row" style="margin-top:12px">
+            <button class="btnD" type="submit" style="background:rgba(37,99,235,.20); border-color:rgba(37,99,235,.40)">Send</button>
+            <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener" style="border-color:rgba(230,242,242,.22)">WhatsApp</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="boxD" data-reveal>
+        <h3>Direkte</h3>
+        <p class="p" style="margin:0">Velg kanalen du foretrekker:</p>
+        <div class="row" style="margin-top:14px">
+          <button class="btnD" id="emailBtn2" type="button">Send e-post</button>
+          <button class="btnG" id="callBtn2" type="button">Ring</button>
+          <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -692,7 +829,7 @@
     const copy = {
       no:{
         htmlLang:'no',
-        brandSub:'AI · Web · Brand Systems',
+        brandSub:'Designed. Engineered. Intelligent.',
         chip1:'AI-automatisering', chip2:'Webutvikling', chip3:'Brand systems', chip4:'SEO',
         heroSub:'Premium AI, web og brand systems for norske bedrifter. Bygg en digital motor som skalerer — med strategi, design og engineering i én leveranse.',
         heroMeta:'Remote · Norge · Premium fra dag 1',
@@ -707,7 +844,7 @@
       },
       en:{
         htmlLang:'en',
-        brandSub:'AI · Web · Brand Systems',
+        brandSub:'Designed. Engineered. Intelligent.',
         chip1:'AI Automation', chip2:'Web Development', chip3:'Brand Systems', chip4:'SEO',
         heroSub:'Premium AI, web and brand systems for Norwegian businesses. Build a scalable digital engine — strategy, design, and engineering in one delivery.',
         heroMeta:'Remote · Norway · Premium from day 1',
