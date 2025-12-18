@@ -23,33 +23,40 @@
   }
   </script>  <style>
     :root{
-      /* --- BASE --- */
-      --dark0:#0B1020;     /* lifted (less black) */
-      --dark1:#0F172A;
-      --dark2:#131B33;
-      --light0:#F8FAFF;
+      /* === SETAEI OFFICIAL BRAND PALETTE === */
+      --brand-core:#0E3A3F;      /* Graphite Teal */
+      --brand-dark:#111827;      /* Deep Graphite */
+      --brand-light:#E6F2F2;     /* Soft Off-White */
+      --brand-silver:#BFC5CC;    /* Silver Grey */
+      --brand-accent:#2563EB;    /* Electric Blue */
+
+      /* Semantic mapping */
+      --dark0:var(--brand-core);
+      --dark1:#0B2F33;
+      --dark2:var(--brand-dark);
+      --light0:#F7FBFB;
       --light1:#FFFFFF;
 
-      --textD:rgba(255,255,255,.94);
-      --mutedD:rgba(255,255,255,.74);
+      --textD:var(--brand-light);
+      --mutedD:var(--brand-silver);
       --textL:#0B1220;
       --mutedL:#475569;
 
-      --strokeD:rgba(255,255,255,.14);
-      --strokeL:rgba(2,6,23,.10);
+      --strokeD:rgba(230,242,242,.22);
+      --strokeL:rgba(17,24,39,.10);
 
-      --shadowD: 0 22px 70px rgba(0,0,0,.28);
-      --shadowL: 0 24px 90px rgba(2,6,23,.12);
+      --shadowD:0 24px 80px rgba(0,0,0,.30);
+      --shadowL:0 26px 90px rgba(17,24,39,.12);
 
       --radius:22px;
       --max:1240px;
       --pad:24px;
 
-      /* --- BRAND POWER PALETTE (set by JS “numerology” engine) --- */
-      --p1:#7CFFB2; /* primary */
-      --p2:#57C7FF; /* secondary */
-      --p3:#B86BFF; /* tertiary */
-      --p4:#FFD166; /* warm accent */
+      /* Locked brand accents */
+      --p1:var(--brand-core);
+      --p2:var(--brand-accent);
+      --p3:#3B82F6; /* controlled lighter blue */
+      --p4:#60A5FA; /* soft blue highlight */
 
       --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Cormorant Garamond", Garamond, serif;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
