@@ -294,10 +294,20 @@
       background:rgba(255,255,255,.06);
       overflow:hidden
     }
-    .track{display:flex;gap:42px;padding:18px 0;width:max-content;animation:scroll 28s linear infinite}
+    .track{display:flex;gap:42px;padding:18px 0;width:max-content;animation:scroll 28s linear infinite;align-items:center}
     .marquee:hover .track{animation-play-state:paused}
     @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .logo{height:26px;opacity:.86;filter:grayscale(1) contrast(1.06);transition:opacity .18s ease, transform .18s ease}
+    .logo{
+      height:26px;opacity:.86;filter:grayscale(1) contrast(1.06);
+      transition:opacity .18s ease, transform .18s ease;
+      display:inline-flex;align-items:center
+    }
+    .logo svg{height:26px;width:auto}
+    .logo.wordmark{
+      filter:none;opacity:.9;background:rgba(255,255,255,.10);
+      color:#fff;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+      padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22);gap:6px
+    }
     .logo:hover{opacity:1; transform:translateY(-1px)}
 
     /* Sections below */
@@ -486,7 +496,6 @@
         <div class="row" data-reveal>
           <button class="btnD" id="bookBtn" type="button"><span id="bookBtnTxt">Book 20-min samtale</span></button>
           <a class="btnG" href="#tjenester"><span id="servicesBtnTxt">Se tjenester</span></a>
-          <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
         </div>
 
         <div class="meta" data-reveal id="heroMeta">Remote · Norge · Premium fra dag 1</div>
@@ -557,6 +566,73 @@
       <img class="logo" alt="Telenor" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Telenor_Group_Logo.svg" referrerpolicy="no-referrer" />
       <img class="logo" alt="Telia" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Telia-Logo.svg" referrerpolicy="no-referrer" />
       <img class="logo" alt="Microsoft" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft_logo.svg" referrerpolicy="no-referrer" />
+      <svg class="logo" aria-label="GitHub" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.58.1.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.74 1.27 3.41.97.11-.75.41-1.27.75-1.56-2.55-.29-5.23-1.27-5.23-5.64 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.12 11.12 0 0 1 2.91-.39c.99 0 1.98.13 2.91.39 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.38-2.69 5.34-5.25 5.63.42.36.8 1.08.8 2.18 0 1.57-.02 2.83-.02 3.22 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+      </svg>
+      <span class="logo wordmark" aria-label="GPT Codex">GPT / Codex</span>
+    </div>
+  </div>
+</section>
+
+<section id="expect" class="block" style="background:#0E3A3F">
+  <div class="container">
+    <h2 class="h2" data-reveal style="color:#E6F2F2">What to expect from SETAEI?</h2>
+    <p class="p" data-reveal style="color:#BFC5CC">
+      Et premium samarbeid bygget på struktur, tempo og kontrollert kreativitet.
+    </p>
+
+    <div class="twoCol" style="margin-top:22px">
+      <!-- 1 -->
+      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
+        <h3 style="display:flex; gap:10px; align-items:center">
+          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </span>
+          Tempo du kan stole på
+        </h3>
+        <p class="p" style="margin:0;color:#BFC5CC">Korte iterasjoner, tydelig scope og leveranser som kan testes og måles.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
+        <h3 style="display:flex; gap:10px; align-items:center">
+          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M9 8h6"/><path d="M7 12h10"/>
+            </svg>
+          </span>
+          Design + engineering som system
+        </h3>
+        <p class="p" style="margin:0;color:#BFC5CC">Alt henger sammen: brand, UI, kode, ytelse og SEO.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
+        <h3 style="display:flex; gap:10px; align-items:center">
+          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 14l4-4 4 4 8-8"/><path d="M4 20h16"/>
+            </svg>
+          </span>
+          Målbar effekt
+        </h3>
+        <p class="p" style="margin:0;color:#BFC5CC">Konvertering, synlighet og automatisering bygges inn fra dag 1.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
+        <h3 style="display:flex; gap:10px; align-items:center">
+          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l9 4-9 4-9-4 9-4z"/><path d="M3 10v6c0 2.2 4 5 9 5s9-2.8 9-5v-6"/>
+            </svg>
+          </span>
+          Kompetanse som dokumenteres
+        </h3>
+        <p class="p" style="margin:0;color:#BFC5CC">Kurs og sertifiseringer vises som konkrete capability-updates — ikke buzzwords.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -713,27 +789,35 @@
 <section id="reviews" class="block">
   <div class="container">
     <h2 class="h2" data-reveal id="tTitle">Anbefalinger</h2>
-    <p class="p" data-reveal id="tSub">Et utvalg tilbakemeldinger fra samarbeid.</p>
+    <p class="p" data-reveal id="tSub">Signal-reviews fra utvalgte samarbeid.</p>
 
     <div class="twoCol" style="margin-top:18px">
       <div class="boxD" data-reveal>
-        <h3>Alexander Buccio</h3>
-        <p class="p" style="margin:0">Struktur, tempo og kvalitet. Leverer både design og engineering på nivå.</p>
+        <h3>Åse Steinsland</h3>
+        <p class="p" style="margin:0">
+          Presis, strategisk og ekstremt gjennomføringssterk — leverer premium kvalitet med ro og kontroll.
+        </p>
       </div>
       <div class="boxD" data-reveal>
-        <h3>Suheil Seyed</h3>
-        <p class="p" style="margin:0">Skarp på strategi og gjennomføring. Kommunikasjon og resultatfokus var solid.</p>
+        <h3>Tor Martin Olsen</h3>
+        <p class="p" style="margin:0">
+          Sterk teknisk arkitektur og ansvarlighet — bygger systemer som tåler skala og endring.
+        </p>
       </div>
     </div>
 
     <div class="twoCol" style="margin-top:18px">
       <div class="boxD" data-reveal>
-        <h3>Anne-Mette Røtting</h3>
-        <p class="p" style="margin:0">Profesjonelt, effektivt og premium. Opplevde høy kvalitet i både prosess og leveranse.</p>
+        <h3>Stein Alvern</h3>
+        <p class="p" style="margin:0">
+          Rask problemløser med høy presisjon — enkel å samarbeide med og leverer alltid som avtalt.
+        </p>
       </div>
       <div class="boxD" data-reveal>
-        <h3>Mer kommer</h3>
-        <p class="p" style="margin:0">Denne seksjonen kan fylles med flere referanser etter hvert.</p>
+        <h3>Flere referanser</h3>
+        <p class="p" style="margin:0">
+          Denne seksjonen fylles fortløpende når nye leveranser og partnerskap publiseres.
+        </p>
       </div>
     </div>
   </div>
@@ -832,8 +916,9 @@
     });
 
     document.getElementById('bookBtn')?.addEventListener('click', ()=>{
-      const subject = encodeURIComponent('20-min call — SETAEI');
-      window.location.href = `mailto:${CONTACT.email}?subject=${subject}`;
+      const message = encodeURIComponent('Hello Setaei. I would like to book 20 min..');
+      const link = `https://wa.me/4741227175?text=${message}`;
+      window.open(link, '_blank', 'noopener');
     });
 
     // ---------------- Overlay menu ----------------
@@ -895,7 +980,7 @@
         panelH:'Raske leveranser som åpner større B2B-prosjekter',
         panelP:'Velg en start som gir klare funn, plan og neste steg. Deretter bygger vi systemet.',
         tTitle:'Anbefalinger',
-        tSub:'Et utvalg tilbakemeldinger fra samarbeid.',
+        tSub:'Signal-reviews fra utvalgte samarbeid.',
         cTitle:'Kontakt',
         cSub:'Send en kort melding, så svarer jeg raskt.',
         s1t:'AI Opportunity Audit', s1d:'Finn automatiseringsgevinster, raske prototyper og ROI-hypoteser.',
@@ -918,7 +1003,7 @@
         panelH:'Fast deliveries that unlock larger B2B projects',
         panelP:'Choose a starting point with clear findings, plan and next steps. Then we build the system.',
         tTitle:'Reviews',
-        tSub:'Selected feedback from collaborations.',
+        tSub:'Signal reviews from selected collaborations.',
         cTitle:'Contact',
         cSub:"Send a short message and I’ll respond quickly.",
         s1t:'AI Opportunity Audit', s1d:'Find automation wins, rapid prototypes and ROI hypotheses.',
