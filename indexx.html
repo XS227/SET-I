@@ -1,1109 +1,391 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0B1020" />  <title>SETAEI — Premium AI, Web & Brand Systems i Norge</title>
-  <meta name="description" content="SETAEI: premium AI-automatisering, webutvikling, branding og SEO for norske bedrifter. Designed. Engineered. Intelligent." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://setaei.com/" />  <meta property="og:type" content="website" />
-  <meta property="og:title" content="SETAEI — Designed. Engineered. Intelligent." />
-  <meta property="og:description" content="Premium AI, web og brand systems for norske bedrifter." />
-  <meta property="og:url" content="https://setaei.com/" />
-  <meta property="og:image" content="assets/img/og.jpg" />  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Khabat Setaei",
-    "url":"https://setaei.com/",
-    "jobTitle":"AI & Product Strategist",
-    "worksFor":{"@type":"Organization","name":"SETAEI"},
-    "knowsAbout":["AI automation","SEO","web development","brand systems","product strategy"]
-  }
-  </script>  <style>
-    :root{
-      /* === SETAEI OFFICIAL BRAND PALETTE === */
-      --brand-core:#0E3A3F;      /* Graphite Teal */
-      --brand-dark:#111827;      /* Deep Graphite */
-      --brand-light:#E6F2F2;     /* Soft Off-White */
-      --brand-silver:#BFC5CC;    /* Silver Grey */
-      --brand-accent:#2563EB;    /* Electric Blue */
-
-      /* Semantic mapping */
-      --dark0:var(--brand-core);
-      --dark1:#0B2F33;
-      --dark2:var(--brand-dark);
-      --light0:#F7FBFB;
-      --light1:#FFFFFF;
-
-      --textD:var(--brand-light);
-      --mutedD:var(--brand-silver);
-      --textL:#0B1220;
-      --mutedL:#475569;
-
-      --strokeD:rgba(230,242,242,.22);
-      --strokeL:rgba(17,24,39,.10);
-
-      --shadowD:0 24px 80px rgba(0,0,0,.30);
-      --shadowL:0 26px 90px rgba(17,24,39,.12);
-
-      --radius:22px;
-      --max:1240px;
-      --pad:24px;
-
-      /* Locked brand accents */
-      --p1:var(--brand-core);
-      --p2:var(--brand-accent);
-      --p3:#3B82F6; /* controlled lighter blue */
-      --p4:#60A5FA; /* soft blue highlight */
-
-      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Cormorant Garamond", Garamond, serif;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      overflow-x:hidden;
-      background:
-        radial-gradient(1200px 700px at 10% 0%, color-mix(in srgb, var(--p2) 20%, transparent), transparent 60%),
-        radial-gradient(1000px 700px at 90% 10%, color-mix(in srgb, var(--p3) 16%, transparent), transparent 60%),
-        linear-gradient(180deg, var(--dark0), var(--dark1));
-      color:var(--textD);
-    }
-    a{color:inherit;text-decoration:none}
-    button{font:inherit}
-
-    .container{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-
-    /* ---------- HEADER (higher contrast + click reliability) ---------- */
-    header{
-      position:fixed; inset:0 0 auto 0; z-index:200;
-      padding-top: env(safe-area-inset-top);
-      background:linear-gradient(180deg, rgba(11,16,32,.86), rgba(11,16,32,.52));
-      backdrop-filter: blur(16px);
-      border-bottom:1px solid rgba(255,255,255,.12);
-    }
-    .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .brand{display:flex;align-items:center;gap:12px;min-width:200px}
-    .mark{
-      width:12px;height:12px;border-radius:999px;
-      background:radial-gradient(circle at 30% 30%, var(--p1), var(--p2) 45%, var(--p3));
-      box-shadow:0 0 0 8px rgba(255,255,255,.04), 0 14px 40px rgba(0,0,0,.28);
-    }
-    .brand b{letter-spacing:.18em;font-weight:900;font-size:12px;color:var(--textD)}
-    .brand span{display:block;font-size:11px;color:rgba(255,255,255,.68)}
-
-    .links{display:flex;gap:18px;align-items:center}
-    .links a{font-size:13px;color:rgba(255,255,255,.78)}
-    .links a:hover{color:#fff}
-
-    .right{display:flex;gap:10px;align-items:center}
-    @media (min-width: 981px){
-      #menuBtn{display:none}
-    }
-    @media (max-width: 980px){
-      #menuBtn{display:inline-flex}
-    }
-    .pill{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
-      color:rgba(255,255,255,.94);
-      cursor:pointer; user-select:none; white-space:nowrap;
-      transition:transform .18s ease, background .18s ease, border .18s ease;
-      will-change:transform;
-      position:relative;
-      z-index:210; /* ensures clicks above effects */
-    }
-    .pill:hover{transform:translateY(-1px);background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22)}
-    .cta{
-      background:linear-gradient(135deg,
-        color-mix(in srgb, var(--p1) 22%, transparent),
-        color-mix(in srgb, var(--p2) 18%, transparent),
-        color-mix(in srgb, var(--p3) 18%, transparent)
-      );
-      border-color:rgba(255,255,255,.22)
-    }
-
-    .flag{width:18px;height:12px;border-radius:2px;display:inline-block;background-size:cover;box-shadow:0 8px 22px rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.18)}
-    .flag.no{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="24"><rect width="36" height="24" fill="%23BA0C2F"/><rect x="10" width="5" height="24" fill="%23fff"/><rect y="9" width="36" height="6" fill="%23fff"/><rect x="11" width="3" height="24" fill="%2300205B"/><rect y="10" width="36" height="4" fill="%2300205B"/></svg>');}
-    .flag.en{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="24"><rect width="36" height="24" fill="%23012169"/><path d="M0,0 L36,24 M36,0 L0,24" stroke="%23fff" stroke-width="6"/><path d="M0,0 L36,24 M36,0 L0,24" stroke="%23C8102E" stroke-width="3"/><rect x="15" width="6" height="24" fill="%23fff"/><rect y="9" width="36" height="6" fill="%23fff"/><rect x="16" width="4" height="24" fill="%23C8102E"/><rect y="10" width="36" height="4" fill="%23C8102E"/></svg>');}
-
-    /* ---------- SPLIT LAYOUT: dark left / light right (lighter than before) ---------- */
-    .split{
-      position:relative;
-      min-height:100svh;
-      padding-top: calc(74px + env(safe-area-inset-top));
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      isolation:isolate;
-    }
-    .left{
-      position:relative;
-      color:var(--textD);
-      background:
-        radial-gradient(1200px 700px at 25% 10%, color-mix(in srgb, var(--p2) 20%, transparent), transparent 60%),
-        radial-gradient(900px 600px at 85% 20%, color-mix(in srgb, var(--p3) 16%, transparent), transparent 60%),
-        linear-gradient(180deg, var(--dark0), var(--dark2));
-      overflow:hidden;
-    }
-    .rightPane{
-      position:relative;
-      background:
-        radial-gradient(900px 700px at 10% 0%, color-mix(in srgb, var(--p2) 16%, transparent), transparent 58%),
-        radial-gradient(900px 700px at 92% 22%, color-mix(in srgb, var(--p3) 14%, transparent), transparent 58%),
-        linear-gradient(180deg, var(--light0), var(--light1));
-      color:var(--textL);
-      overflow:hidden;
-      border-left:1px solid rgba(255,255,255,.10);
-    }
-
-    /* Ambient animation layer (non-blocking) */
-    .fx{position:absolute; inset:-40px; pointer-events:none; z-index:0;}
-    .grain{position:absolute; inset:0; opacity:.12; mix-blend-mode:overlay; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity=".35"/></svg>'); background-size:180px 180px;}
-
-    .blob{position:absolute; width:560px; height:560px; filter: blur(24px); opacity:.72; border-radius: 46% 54% 55% 45% / 50% 46% 54% 50%;}
-    .b1{left:-220px; top:-220px; background:
-      radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--p1) 70%, transparent), transparent 62%),
-      radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--p2) 55%, transparent), transparent 60%);
-      animation: float1 14s ease-in-out infinite;
-    }
-    .b2{right:-260px; bottom:-280px; background:
-      radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--p3) 62%, transparent), transparent 60%),
-      radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--p2) 44%, transparent), transparent 62%);
-      animation: float2 18s ease-in-out infinite;
-      opacity:.58;
-    }
-    .b3{left:18%; bottom:-300px; width:680px; height:680px; opacity:.20; background:
-      radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--p4) 55%, transparent), transparent 62%);
-      animation: float3 22s ease-in-out infinite;
-    }
-    @keyframes float1{0%{transform:translate(0,0) scale(1)} 35%{transform:translate(120px,70px) scale(1.12)} 70%{transform:translate(40px,160px) scale(1.03)} 100%{transform:translate(0,0) scale(1)}}
-    @keyframes float2{0%{transform:translate(0,0) scale(1)} 40%{transform:translate(-140px,-50px) scale(1.16)} 75%{transform:translate(-50px,-140px) scale(1.06)} 100%{transform:translate(0,0) scale(1)}}
-    @keyframes float3{0%{transform:translate(0,0) scale(1)} 50%{transform:translate(40px,-80px) scale(1.06)} 100%{transform:translate(0,0) scale(1)}}
-
-    .leftInner,.rightInner{height:100%;display:flex;align-items:flex-end;position:relative;z-index:2}
-    .hero{padding:56px 0 60px}
-
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-    .chip{
-      font-size:12px;padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.10);
-      color:rgba(255,255,255,.92);
-      backdrop-filter: blur(12px);
-    }
-
-    .headline{
-      font-family:var(--serif);
-      font-weight:520;
-      font-size:clamp(44px, 6.2vw, 86px);
-      letter-spacing:-.035em;
-      line-height:1.02;
-      margin:0 0 14px;
-      text-shadow:0 20px 55px rgba(0,0,0,.35);
-    }
-
-    .sub{
-      max-width:62ch;
-      margin:0 0 22px;
-      color:rgba(255,255,255,.82);
-      font-size:16px;
-      line-height:1.7;
-    }
-
-    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .btnD{
-      padding:12px 16px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.20);
-      background:rgba(255,255,255,.12);
-      color:#fff; cursor:pointer;
-      transition:transform .18s ease, background .18s ease, border .18s ease;
-      will-change:transform;
-    }
-    .btnD:hover{transform:translateY(-1px);background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.26)}
-
-    .btnG{
-      padding:12px 16px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(0,0,0,.10);
-      color:#fff; cursor:pointer;
-      transition:transform .18s ease, background .18s ease, border .18s ease;
-    }
-    .btnG:hover{transform:translateY(-1px);background:rgba(0,0,0,.14);border-color:rgba(255,255,255,.24)}
-
-    .meta{margin-top:16px;color:rgba(255,255,255,.70);font-size:12px}
-
-    /* Right panel (make text always readable) */
-    .panelWrap{padding:56px 0 60px}
-    .panel{
-      background:rgba(255,255,255,.86);
-      border:1px solid rgba(2,6,23,.10);
-      border-radius:28px;
-      box-shadow:var(--shadowL);
-      overflow:hidden;
-    }
-    .panelTop{padding:18px 18px 0}
-    .panelTop .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(2,6,23,.60)}
-    .panelTop h1{
-      margin:10px 0 10px;
-      font-family:var(--serif);
-      font-weight:520;
-      letter-spacing:-.02em;
-      line-height:1.05;
-      font-size:clamp(22px, 2.1vw, 34px);
-      color:var(--textL);
-    }
-    .panelTop p{margin:0 0 14px;color:rgba(2,6,23,.68);font-size:14px;line-height:1.65}
-
-    .cards{display:grid;gap:10px;padding:0 18px 18px}
-    .cardL{
-      background:#fff;
-      border:1px solid rgba(2,6,23,.08);
-      border-radius:18px;
-      padding:14px;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .cardL:hover{transform:translateY(-2px); box-shadow:0 18px 50px rgba(2,6,23,.12); border-color:rgba(2,6,23,.12)}
-    .iL{
-      width:42px;height:42px;border-radius:14px;
-      border:1px solid rgba(2,6,23,.10);
-      background:linear-gradient(135deg,
-        color-mix(in srgb, var(--p1) 26%, #fff),
-        color-mix(in srgb, var(--p2) 18%, #fff),
-        color-mix(in srgb, var(--p3) 18%, #fff)
-      );
-      display:grid;place-items:center
-    }
-    .iL svg{width:22px;height:22px;opacity:.95;color:#0B1220}
-    .cardL b{display:block;color:var(--textL);font-size:14px;letter-spacing:-.01em}
-    .cardL span{display:block;margin-top:4px;color:var(--mutedL);font-size:13px;line-height:1.55}
-
-    /* Marquee */
-    .marquee{
-      border-top:1px solid rgba(255,255,255,.12);
-      border-bottom:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-      overflow:hidden
-    }
-    .track{display:flex;gap:42px;padding:18px 0;width:max-content;animation:scroll 28s linear infinite;align-items:center}
-    .marquee:hover .track{animation-play-state:paused}
-    @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .logo{
-      height:26px;opacity:.86;filter:grayscale(1) contrast(1.06);
-      transition:opacity .18s ease, transform .18s ease;
-      display:inline-flex;align-items:center
-    }
-    .logo svg{height:26px;width:auto}
-    .logo.wordmark{
-      filter:none;opacity:.9;background:rgba(255,255,255,.10);
-      color:#fff;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-      padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22);gap:6px
-    }
-    .logo:hover{opacity:1; transform:translateY(-1px)}
-
-    /* Sections below */
-    section{scroll-margin-top:96px}
-    .block{padding:82px 0}
-    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .h2{font-family:var(--serif);font-weight:520;letter-spacing:-.02em;line-height:1.08;font-size:clamp(28px, 3.1vw, 46px);margin:0 0 10px}
-    .p{margin:0;color:rgba(255,255,255,.78);max-width:78ch;line-height:1.7}
-
-    .boxD{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);border-radius:28px;box-shadow:var(--shadowD);padding:18px}
-    .boxD h3{margin:0 0 8px;color:#fff;font-size:16px}
-    .boxD ul{margin:10px 0 0;padding-left:18px;color:rgba(255,255,255,.80)}
-    .boxD li{margin:6px 0}
-
-    /* Overlay menu */
-    .overlay{position:fixed; inset:0; background:rgba(11,16,32,.70); backdrop-filter: blur(18px); z-index:300; display:none;}
-    .overlay.open{display:block}
-    .sheet{position:absolute; inset:0; display:grid; grid-template-columns: 1.2fr .8fr; gap:22px; padding:92px 26px 26px; transform:translateY(10px); opacity:0; animation: sheetIn .32s ease forwards;}
-    @keyframes sheetIn{to{transform:translateY(0); opacity:1}}
-    .menuBig a{display:block;font-family:var(--serif);font-size:clamp(30px, 5vw, 62px);letter-spacing:-.02em;line-height:1.02;padding:12px 0;color:rgba(255,255,255,.94);border-bottom:1px solid rgba(255,255,255,.12)}
-    .menuBig a:hover{color:#fff}
-    .menuSide{border-left:1px solid rgba(255,255,255,.14); padding-left:22px; display:flex; flex-direction:column; justify-content:space-between; gap:18px}
-    .menuSide .card{padding:18px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadowD)}
-    .menuSide h4{margin:0 0 10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.66)}
-    .menuSide p{margin:0;color:rgba(255,255,255,.80);font-size:14px;line-height:1.5}
-    .closeX{position:absolute; top:18px; right:18px; width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.08); cursor:pointer; display:grid; place-items:center}
-
-    /* Reveal */
-    [data-reveal]{opacity:0; transform:translateY(12px); transition:opacity .65s ease, transform .65s ease}
-    [data-reveal].in{opacity:1; transform:translateY(0)}
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .links{display:none}
-      .split{grid-template-columns:1fr}
-      .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
-      .sheet{grid-template-columns:1fr; padding-top:88px}
-      .menuSide{border-left:none;padding-left:0}
-      .twoCol{grid-template-columns:1fr}
-      .panelWrap{padding:46px 0 54px}
-      .hero{padding:46px 0 54px}
-    }
-
-    /* Mobile header + spacing corrections */
-    @media (max-width: 540px){
-      .container{padding:0 16px}
-      .nav{height:66px}
-      .brand{min-width:0}
-      .brand b{font-size:11px}
-      .brand span{font-size:11px}
-      .right{gap:8px}
-      .pill{padding:9px 12px;font-size:12px}
-      #contactBtn{display:none}
-      .chips{gap:6px}
-      .chip{font-size:11px;padding:7px 9px}
-      .headline{font-size:clamp(40px, 12vw, 60px)}
-      .sub{font-size:15px}
-      .row{gap:8px}
-      .btnD,.btnG{padding:11px 14px}
-    }
-      .nav{height:66px}
-      .brand{min-width:0}
-      .brand b{font-size:11px}
-      .brand span{font-size:11px}
-      .right{gap:8px}
-      .pill{padding:9px 12px;font-size:12px}
-      #contactBtn{display:none} /* reduce clutter; contact stays in menu + contact section */
-      .chips{gap:6px}
-      .chip{font-size:11px;padding:7px 9px}
-      .headline{
-      font-family:var(--serif);
-      font-weight:520;
-      font-size:clamp(44px, 6.2vw, 86px);
-      letter-spacing:-.035em;
-      line-height:1.02;align-items:flex-start}
-      .row .btnD,.row .btnG{width:100%;text-align:center}
-      .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
-      .panelWrap{padding:24px 0 40px}
-      .panel{border-radius:22px}
-      .sheet{grid-template-columns:1fr; padding-top:88px}
-      .menuSide{border-left:none;padding-left:0}
-      .twoCol{grid-template-columns:1fr}
-    }
-      .split{grid-template-columns:1fr}
-      .rightPane{border-left:none;border-top:1px solid rgba(255,255,255,.14)}
-      .sheet{grid-template-columns:1fr; padding-top:88px}
-      .menuSide{border-left:none;padding-left:0}
-      .twoCol{grid-template-columns:1fr}
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      html{scroll-behavior:auto}
-      .b1,.b2,.b3{animation:none}
-      .track{animation:none}
-      [data-reveal]{opacity:1;transform:none;transition:none}
-      .pill,.btnD,.btnG,.cardL{transition:none}
-    }
-  </style></head><body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="SETAEI home">
-        <span class="mark" aria-hidden="true"></span>
-        <div>
-          <b>SETAEI</b>
-          <span id="brandSub">Designed. Engineered. Intelligent.</span>
-        </div>
-      </a><nav class="links" aria-label="Primary">
-    <a href="#ai" data-nav id="nav1">AI & Web</a>
-    <a href="#seo" data-nav id="nav2">SEO</a>
-    <a href="#prosjekter" data-nav id="nav3">Prosjekter</a>
-    <a href="#cv" data-nav id="nav4">CV</a>
-    <a href="#kontakt" data-nav id="nav5">Kontakt</a>
-    <a href="#reviews" data-nav id="nav6">Anbefalinger</a>
-  </nav>
-
-  <div class="right">
-    <button class="pill" id="langBtn" type="button" aria-label="Switch language">
-      <span class="flag" id="langFlag" aria-hidden="true"></span>
-      <span id="langLabel" style="font-size:13px; color:rgba(255,255,255,.90)">NO</span>
-    </button>
-    <button class="pill" id="menuBtn" type="button"></button>
-    <button class="pill cta" id="contactBtn" type="button">Kontakt meg</button>
-  </div>
-</div>
-
-  </header>  <div class="overlay" id="overlay" aria-hidden="true">
-    <button class="closeX" id="closeOverlay" aria-label="Close menu" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <div class="sheet">
-      <div class="menuBig">
-        <a href="#ai" data-close data-nav id="nav1b">AI & Web</a>
-        <a href="#seo" data-close data-nav id="nav2b">SEO</a>
-        <a href="#prosjekter" data-close data-nav id="nav3b">Prosjekter</a>
-        <a href="#cv" data-close data-nav id="nav4b">CV</a>
-        <a href="#kontakt" data-close data-nav id="nav5b">Kontakt</a>
-        <a href="#reviews" data-close data-nav id="nav6b">Anbefalinger</a>
-      </div>
-      <aside class="menuSide">
-        <div class="card">
-          <h4 id="menuTitle">Designed. Engineered. Intelligent.</h4>
-          <p id="menuCopy">Premium levering for bedrifter som vil ha systemer — ikke bare deliverables.</p>
-        </div>
-        <div class="card">
-          <h4 id="menuNow">Pågående</h4>
-          <p>
-            <a href="https://fjolsenbanden.no" target="_blank" rel="noopener">FjOlsenbanden.no</a><br/>
-            <span>Somi Klinikken</span>
-          </p>
-        </div>
-        <div class="card">
-          <h4 id="menuActions">Kontakt</h4>
-          <p>
-            <a href="#" id="menuEmail">Send e-post</a><br/>
-            <a href="#" id="menuCall">Ring</a><br/>
-            <a href="https://wa.me/4741227175" target="_blank" rel="noopener">WhatsApp</a>
-          </p>
-        </div>
-      </aside>
-    </div>
-  </div>  <main id="top">
-    <section class="split" aria-label="Split hero" id="ai">
-      <div class="left">
-        <div class="fx" aria-hidden="true">
-          <div class="blob b1"></div>
-          <div class="blob b2"></div>
-          <div class="blob b3"></div>
-          <div class="grain"></div>
-        </div><div class="container leftInner">
-      <div class="hero">
-        <div class="chips" data-reveal>
-          <span class="chip" id="chip1">AI-automatisering</span>
-          <span class="chip" id="chip2">Webutvikling</span>
-          <span class="chip" id="chip3">Brand systems</span>
-          <span class="chip" id="chip4">SEO</span>
-        </div>
-
-        <h1 class="headline" data-reveal>
-          Designed.<br/>Engineered.<br/>Intelligent.
-        </h1>
-
-        <p class="sub" data-reveal id="heroSub">
-          Premium AI, web og brand systems for norske bedrifter. Bygg en digital motor som skalerer — med strategi, design og engineering i én leveranse.
-        </p>
-
-        <div class="row" data-reveal>
-          <button class="btnD" id="bookBtn" type="button"><span id="bookBtnTxt">Book 20-min samtale</span></button>
-          <a class="btnG" href="#tjenester"><span id="servicesBtnTxt">Se tjenester</span></a>
-        </div>
-
-        <div class="meta" data-reveal id="heroMeta">Remote · Norge · Premium fra dag 1</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="rightPane">
-    <div class="fx" aria-hidden="true">
-      <div class="blob b2" style="right:-340px; bottom:-320px; opacity:.30"></div>
-      <div class="grain" style="opacity:.07"></div>
-    </div>
-
-    <div class="container rightInner">
-      <div class="panelWrap">
-        <div class="panel" data-reveal>
-          <div class="panelTop">
-            <div class="k" id="panelK">STARTPAKKER</div>
-            <h1 id="panelH">Raske leveranser som åpner større B2B-prosjekter</h1>
-            <p id="panelP">Velg en start som gir klare funn, plan og neste steg. Deretter bygger vi systemet.</p>
-          </div>
-          <div class="cards">
-            <div class="cardL">
-              <div class="iL" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
-              </div>
-              <div>
-                <b id="s1t">AI Opportunity Audit</b>
-                <span id="s1d">Finn automatiseringsgevinster, raske prototyper og ROI-hypoteser.</span>
-              </div>
-            </div>
-            <div class="cardL">
-              <div class="iL" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M9 8h6"/><path d="M7 12h10"/></svg>
-              </div>
-              <div>
-                <b id="s2t">Digital System Review</b>
-                <span id="s2d">Brand + nettside + SEO som én sammenhengende motor.</span>
-              </div>
-            </div>
-            <div class="cardL">
-              <div class="iL" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14l4-4 4 4 8-8"/><path d="M4 20h16"/></svg>
-              </div>
-              <div>
-                <b id="s3t">SEO Sprint</b>
-                <span id="s3d">Teknisk SEO + innholdsplan + 10 søkeord med tydelig struktur.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:12px" class="row" data-reveal>
-          <button class="pill" id="emailBtn" type="button" style="background:#0F172A;color:#fff;border-color:rgba(2,6,23,.12)">Send e-post</button>
-          <button class="pill" id="callBtn" type="button" style="background:#fff;color:#0B1220;border-color:rgba(2,6,23,.12)">Ring</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="marquee" aria-label="Partners" style="background:#111827">
-  <div class="container">
-    <div class="track" aria-hidden="true">
-      <img class="logo" alt="Apple" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Apple%20Logo.svg" referrerpolicy="no-referrer" />
-      <img class="logo" alt="Google" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Google_%22G%22_logo.svg" referrerpolicy="no-referrer" />
-      <img class="logo" alt="Maserati" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Maserati_logo_2.svg" referrerpolicy="no-referrer" />
-      <img class="logo" alt="Telenor" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Telenor_Group_Logo.svg" referrerpolicy="no-referrer" />
-      <img class="logo" alt="Telia" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Telia-Logo.svg" referrerpolicy="no-referrer" />
-      <img class="logo" alt="Microsoft" style="filter:brightness(0) invert(1)" src="https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft_logo.svg" referrerpolicy="no-referrer" />
-      <svg class="logo" aria-label="GitHub" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#fff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.58.1.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.74 1.27 3.41.97.11-.75.41-1.27.75-1.56-2.55-.29-5.23-1.27-5.23-5.64 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.12 11.12 0 0 1 2.91-.39c.99 0 1.98.13 2.91.39 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.38-2.69 5.34-5.25 5.63.42.36.8 1.08.8 2.18 0 1.57-.02 2.83-.02 3.22 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
-      </svg>
-      <span class="logo wordmark" aria-label="GPT Codex">GPT / Codex</span>
-    </div>
-  </div>
-</section>
-
-<section id="expect" class="block" style="background:#0E3A3F">
-  <div class="container">
-    <h2 class="h2" data-reveal style="color:#E6F2F2">What to expect from SETAEI?</h2>
-    <p class="p" data-reveal style="color:#BFC5CC">
-      Et premium samarbeid bygget på struktur, tempo og kontrollert kreativitet.
-    </p>
-
-    <div class="twoCol" style="margin-top:22px">
-      <!-- 1 -->
-      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
-        <h3 style="display:flex; gap:10px; align-items:center">
-          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/>
-            </svg>
-          </span>
-          Tempo du kan stole på
-        </h3>
-        <p class="p" style="margin:0;color:#BFC5CC">Korte iterasjoner, tydelig scope og leveranser som kan testes og måles.</p>
-      </div>
-
-      <!-- 2 -->
-      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
-        <h3 style="display:flex; gap:10px; align-items:center">
-          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16v12H4z"/><path d="M8 20h8"/><path d="M9 8h6"/><path d="M7 12h10"/>
-            </svg>
-          </span>
-          Design + engineering som system
-        </h3>
-        <p class="p" style="margin:0;color:#BFC5CC">Alt henger sammen: brand, UI, kode, ytelse og SEO.</p>
-      </div>
-
-      <!-- 3 -->
-      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
-        <h3 style="display:flex; gap:10px; align-items:center">
-          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 14l4-4 4 4 8-8"/><path d="M4 20h16"/>
-            </svg>
-          </span>
-          Målbar effekt
-        </h3>
-        <p class="p" style="margin:0;color:#BFC5CC">Konvertering, synlighet og automatisering bygges inn fra dag 1.</p>
-      </div>
-
-      <!-- 4 -->
-      <div class="boxD" data-reveal style="background:rgba(17,24,39,.22); border-color:rgba(230,242,242,.18)">
-        <h3 style="display:flex; gap:10px; align-items:center">
-          <span aria-hidden="true" style="width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.30)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E6F2F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l9 4-9 4-9-4 9-4z"/><path d="M3 10v6c0 2.2 4 5 9 5s9-2.8 9-5v-6"/>
-            </svg>
-          </span>
-          Kompetanse som dokumenteres
-        </h3>
-        <p class="p" style="margin:0;color:#BFC5CC">Kurs og sertifiseringer vises som konkrete capability-updates — ikke buzzwords.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tjenester" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>AI-automatisering, webutvikling og branding for premium B2B</h2>
-    <p class="p" data-reveal>
-      Jeg leverer systemer som kombinerer design, engineering og growth: fra AI-automatisering og webutvikling til branding, SEO og konverteringsoptimalisering.
-    </p>
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>AI-automatisering for bedrift</h3>
-        <ul>
-          <li>Automatisering av kundereiser og intern drift</li>
-          <li>AI-verktøy og prototyper (POC → produksjon)</li>
-          <li>Prosess-kartlegging og ROI-modell</li>
-        </ul>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Webutvikling og digitale plattformer</h3>
-        <ul>
-          <li>Premium nettside som selger</li>
-          <li>MVP og produktutvikling</li>
-          <li>Integrasjoner, tracking og måling</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="ai" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>AI-automatisering for bedrift som faktisk skaper effekt</h2>
-    <p class="p" data-reveal>
-      Når du leter etter <strong>AI automatisering bedrift</strong>, er det lett å ende opp med demoer og verktøy uten drift.
-      Jeg bygger AI-løsninger som er integrert i prosessene dine: lead-håndtering, kundeservice, intern kunnskapsbase, rapportering og operativ automatisering.
-    </p>
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Typiske leveranser</h3>
-        <ul>
-          <li>AI-agenter for support, salg og intern assistanse</li>
-          <li>Automatiserte arbeidsflyter med logging og kontroll</li>
-          <li>Datagrunnlag, måling og sikker implementasjon</li>
-        </ul>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Format</h3>
-        <ul>
-          <li><strong>AI workshop for bedrift</strong> (mål, scope, risiko, ROI)</li>
-          <li>POC → produksjon (iterativt og målbart)</li>
-          <li>Retainer for kontinuerlig forbedring</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="ai" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>AI-automatisering for bedrift som faktisk skaper effekt</h2>
-    <p class="p" data-reveal>
-      Når du leter etter <strong>AI automatisering bedrift</strong>, er det lett å ende opp med demoer og verktøy uten drift.
-      Jeg bygger AI-løsninger som er integrert i prosessene dine: lead-håndtering, kundeservice, intern kunnskapsbase, rapportering og operativ automatisering.
-    </p>
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Typiske leveranser</h3>
-        <ul>
-          <li>AI-agenter for support, salg og intern assistanse</li>
-          <li>Automatiserte arbeidsflyter med logging og kontroll</li>
-          <li>Datagrunnlag, måling og sikker implementasjon</li>
-        </ul>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Format</h3>
-        <ul>
-          <li><strong>AI workshop for bedrift</strong> (mål, scope, risiko, ROI)</li>
-          <li>POC → produksjon (iterativt og målbart)</li>
-          <li>Retainer for kontinuerlig forbedring</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="seo" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>SEO, AI og digital synlighet for norske bedrifter</h2>
-    <p class="p" data-reveal style="margin-top:10px; color:rgba(255,255,255,.86)"><strong>Bygg systemer som rangerer. Design som konverterer. Engineering som skalerer.</strong></p>
-    <p class="p" data-reveal style="margin-top:10px; color:rgba(255,255,255,.86)"><strong>Bygg systemer som rangerer. Design som konverterer. Engineering som skalerer.</strong></p>
-    <p class="p" data-reveal>
-      SETAEI jobber strategisk med SEO i Norge for bedrifter som vil tiltrekke seg riktige kunder – ikke bare trafikk.
-      Jeg kombinerer teknisk SEO, AI-drevet innholdsstrategi og konverteringsoptimalisering for å bygge digitale systemer som gir målbar effekt over tid.
-    </p>
-    <p class="p" data-reveal style="margin-top:14px">
-      For selskaper som søker <strong>AI-automatisering for bedrift</strong>, <strong>SEO-konsulent i Norge</strong> eller
-      <strong>webutvikler i Oslo</strong>, starter arbeidet med struktur: informasjonsarkitektur, søkeordsanalyse og
-      teknisk fundament som skalerer.
-    </p>
-    <p class="p" data-reveal style="margin-top:14px">
-      Deretter bygges innhold og grensesnitt med fokus på <strong>branding</strong>, <strong>konverteringsoptimalisering (CRO)</strong>
-      og <strong>digital strategi for B2B</strong>. Resultatet er nettsider som både rangerer godt og konverterer –
-      enten det gjelder <strong>SEO for nettbutikk</strong>, tjenestesider eller produktplattformer.
-    </p>
-    <p class="p" data-reveal style="margin-top:14px">
-      Dette er en helhetlig tilnærming for virksomheter som ser etter premium leveranser innen
-      <strong>produktstrategi</strong>, <strong>AI-workshops for bedrift</strong> og langsiktig digital vekst.
-    </p>
-  </div>
-</section>
-
-<section id="prosjekter" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>Pågående prosjekter</h2>
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3><a href="https://fjolsenbanden.no" target="_blank" rel="noopener">FjOlsenbanden.no</a></h3>
-        <p class="p" style="margin:0">Brand · web · SEO · automatisering</p>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Somi Klinikken</h3>
-        <p class="p" style="margin:0">Digital profil · booking-flyt · local SEO</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="cv" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal>CV</h2>
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Utdanning</h3>
-        <ul>
-          <li>M.Sc. Computer Engineering (AI & Robotics)</li>
-          <li>B.Sc. Computer Engineering</li>
-          <li>Multimedia Design (3 år) — Noroff</li>
-        </ul>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Erfaring</h3>
-        <ul>
-          <li>Founder & CTO — systembygging</li>
-          <li>AI & Blockchain Consultant</li>
-          <li>Front-end & Product Engineer</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal id="tTitle">Anbefalinger</h2>
-    <p class="p" data-reveal id="tSub">Signal-reviews fra utvalgte samarbeid.</p>
-
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Åse Steinsland</h3>
-        <p class="p" style="margin:0">
-          Presis, strategisk og ekstremt gjennomføringssterk — leverer premium kvalitet med ro og kontroll.
-        </p>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Tor Martin Olsen</h3>
-        <p class="p" style="margin:0">
-          Sterk teknisk arkitektur og ansvarlighet — bygger systemer som tåler skala og endring.
-        </p>
-      </div>
-    </div>
-
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Stein Alvern</h3>
-        <p class="p" style="margin:0">
-          Rask problemløser med høy presisjon — enkel å samarbeide med og leverer alltid som avtalt.
-        </p>
-      </div>
-      <div class="boxD" data-reveal>
-        <h3>Flere referanser</h3>
-        <p class="p" style="margin:0">
-          Denne seksjonen fylles fortløpende når nye leveranser og partnerskap publiseres.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="kontakt" class="block">
-  <div class="container">
-    <h2 class="h2" data-reveal id="cTitle">Kontakt</h2>
-    <p class="p" data-reveal id="cSub">Send en kort melding, så svarer jeg raskt.</p>
-
-    <div class="twoCol" style="margin-top:18px">
-      <div class="boxD" data-reveal>
-        <h3>Send melding</h3>
-        <form action="https://formsubmit.co/khabat@setaei.com" method="POST" style="margin-top:12px">
-          <input type="hidden" name="_subject" value="New lead — SETAEI" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-
-          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">Navn</label>
-          <input name="name" required placeholder="Ditt navn" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none" />
-
-          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">E-post</label>
-          <input name="email" type="email" required placeholder="din@epost.no" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none" />
-
-          <label style="display:block; margin:10px 0 6px; color:var(--brand-light)">Melding</label>
-          <textarea name="message" required rows="5" placeholder="Hva vil du bygge, forbedre eller automatisere?" style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(230,242,242,.22); background:rgba(17,24,39,.35); color:var(--brand-light); outline:none; resize:vertical"></textarea>
-
-          <div class="row" style="margin-top:12px">
-            <button class="btnD" type="submit" style="background:rgba(37,99,235,.20); border-color:rgba(37,99,235,.40)">Send</button>
-            <a class="btnG" href="https://wa.me/4741227175" target="_blank" rel="noopener" style="border-color:rgba(230,242,242,.22)">WhatsApp</a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-  </main>  <script>
-    // ---------------- BRAND “POWER” ENGINE (numerology-inspired palette) ----------------
-    // Deterministic palette from name => feels intentional and consistent with “numbers/energy”.
-    const BRAND_NAME = 'SETAEI';
-
-    function pythagoreanValue(ch){
-      const map = {
-        1:['A','J','S'],2:['B','K','T'],3:['C','L','U'],4:['D','M','V'],
-        5:['E','N','W'],6:['F','O','X'],7:['G','P','Y'],8:['H','Q','Z'],9:['I','R']
-      };
-      ch = (ch||'').toUpperCase();
-      for(const k in map){ if(map[k].includes(ch)) return Number(k); }
-      return 0;
-    }
-    function reduceToDigit(n){
-      // keep master numbers 11/22/33
-      while(n > 9 && n !== 11 && n !== 22 && n !== 33){
-        n = String(n).split('').reduce((a,b)=>a + Number(b), 0);
-      }
-      return n;
-    }
-    function nameNumber(name){
-      const sum = String(name).replace(/[^a-z]/gi,'').split('').reduce((acc,ch)=>acc + pythagoreanValue(ch),0);
-      return reduceToDigit(sum);
-    }
-    function hsl(h,s,l){
-      return `hsl(${h} ${s}% ${l}%)`;
-    }
-
-    const nn = nameNumber(BRAND_NAME); // 1..9 or 11/22/33
-    // Map “number power” to hue set (calm→bold). This is a design lever.
-    const baseHue = ({
-      1:200, 2:168, 3:285, 4:214, 5:38, 6:152, 7:248, 8:205, 9:315,
-      11:190, 22:208, 33:170
-    })[nn] ?? 205;
-
-    const root = document.documentElement;
-    // Create a premium palette with strong contrast but bright feel.
-    root.style.setProperty('--p1', hsl((baseHue + 120) % 360, 92, 62));
-    root.style.setProperty('--p2', hsl((baseHue + 10) % 360, 92, 58));
-    root.style.setProperty('--p3', hsl((baseHue + 250) % 360, 90, 66));
-    root.style.setProperty('--p4', hsl((baseHue + 60) % 360, 95, 62));
-
-    // ---------------- Contact actions (UI-hidden) ----------------
-    const CONTACT = { email: 'khabat@setaei.com', phone: '+4741227175' };
-    const mail = (e)=>{ if(e) e.preventDefault(); window.location.href = `mailto:${CONTACT.email}`; };
-    const call = (e)=>{ if(e) e.preventDefault(); window.location.href = `tel:${CONTACT.phone}`; };
-
-    document.getElementById('emailBtn')?.addEventListener('click', mail);
-    document.getElementById('callBtn')?.addEventListener('click', call);
-    document.getElementById('emailBtn2')?.addEventListener('click', mail);
-    document.getElementById('callBtn2')?.addEventListener('click', call);
-
-    document.getElementById('menuEmail')?.addEventListener('click', mail);
-    document.getElementById('menuCall')?.addEventListener('click', call);
-
-    document.getElementById('contactBtn')?.addEventListener('click', ()=>{
-      document.querySelector('#kontakt')?.scrollIntoView({behavior:'smooth'});
-    });
-
-    document.getElementById('bookBtn')?.addEventListener('click', ()=>{
-      const message = encodeURIComponent('Hello Setaei. I would like to book 20 min..');
-      const link = `https://wa.me/4741227175?text=${message}`;
-      window.open(link, '_blank', 'noopener');
-    });
-
-    // ---------------- Overlay menu ----------------
-    const menuBtn = document.getElementById('menuBtn');
-    const overlay = document.getElementById('overlay');
-
-    function menuLabel(){
-      const lang = (localStorage.getItem('setaei_lang') || 'no').toLowerCase();
-      const d = copy[lang] || copy.no;
-      return d.menuBtn;
-    }
-    function closeLabel(){
-      const lang = (localStorage.getItem('setaei_lang') || 'no').toLowerCase();
-      const d = copy[lang] || copy.no;
-      return d.closeBtn;
-    }
-
-    const openMenu = ()=>{
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-      if(menuBtn) menuBtn.textContent = closeLabel();
-    };
-
-    const closeMenu = ()=>{
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-      if(menuBtn) menuBtn.textContent = menuLabel();
-    };
-
-    document.getElementById('menuBtn')?.addEventListener('click', (e)=>{
-      e.preventDefault();
-      if(overlay?.classList.contains('open')) closeMenu(); else openMenu();
-    });
-    document.getElementById('closeOverlay')?.addEventListener('click', (e)=>{ e.preventDefault(); closeMenu(); });
-    overlay?.addEventListener('click', (e)=>{ if(e.target === overlay) closeMenu(); });
-    document.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeMenu(); });
-
-    // ---------------- Language toggle (fixed + hardened) ----------------
-    const LS_KEY = 'setaei_lang';
-    const langBtn = document.getElementById('langBtn');
-    const langFlag = document.getElementById('langFlag');
-    const langLabel = document.getElementById('langLabel');
-
-    const copy = {
-      no:{
-        htmlLang:'no',
-        brandSub:'Designed. Engineered. Intelligent.',
-        nav1:'AI & Web', nav2:'SEO', nav3:'Prosjekter', nav4:'CV', nav5:'Kontakt', nav6:'Anbefalinger',
-        menuBtn:'MENY', closeBtn:'LUKK',
-        chip1:'AI-automatisering', chip2:'Webutvikling', chip3:'Brand systems', chip4:'SEO',
-        heroSub:'Premium AI, web og brand systems for norske bedrifter. Bygg en digital motor som skalerer — med strategi, design og engineering i én leveranse.',
-        heroMeta:'Remote · Norge · Premium fra dag 1',
-        bookBtn:'Book 20-min samtale',
-        servicesBtn:'Se tjenester',
-        panelK:'STARTPAKKER',
-        panelH:'Raske leveranser som åpner større B2B-prosjekter',
-        panelP:'Velg en start som gir klare funn, plan og neste steg. Deretter bygger vi systemet.',
-        tTitle:'Anbefalinger',
-        tSub:'Signal-reviews fra utvalgte samarbeid.',
-        cTitle:'Kontakt',
-        cSub:'Send en kort melding, så svarer jeg raskt.',
-        s1t:'AI Opportunity Audit', s1d:'Finn automatiseringsgevinster, raske prototyper og ROI-hypoteser.',
-        s2t:'Digital System Review', s2d:'Brand + nettside + SEO som én sammenhengende motor.',
-        s3t:'SEO Sprint', s3d:'Teknisk SEO + innholdsplan + 10 søkeord med tydelig struktur.',
-        menuCopy:'Premium levering for bedrifter som vil ha systemer — ikke bare deliverables.',
-        menuNow:'Pågående'
-      },
-      en:{
-        htmlLang:'en',
-        brandSub:'Designed. Engineered. Intelligent.',
-        nav1:'AI & Web', nav2:'SEO', nav3:'Projects', nav4:'CV', nav5:'Contact', nav6:'Reviews',
-        menuBtn:'MENU', closeBtn:'CLOSE',
-        chip1:'AI Automation', chip2:'Web Development', chip3:'Brand Systems', chip4:'SEO',
-        heroSub:'Premium AI, web and brand systems for Norwegian businesses. Build a scalable digital engine — strategy, design, and engineering in one delivery.',
-        heroMeta:'Remote · Norway · Premium from day 1',
-        bookBtn:'Book a 20-min call',
-        servicesBtn:'View services',
-        panelK:'START PACKS',
-        panelH:'Fast deliveries that unlock larger B2B projects',
-        panelP:'Choose a starting point with clear findings, plan and next steps. Then we build the system.',
-        tTitle:'Reviews',
-        tSub:'Signal reviews from selected collaborations.',
-        cTitle:'Contact',
-        cSub:"Send a short message and I’ll respond quickly.",
-        s1t:'AI Opportunity Audit', s1d:'Find automation wins, rapid prototypes and ROI hypotheses.',
-        s2t:'Digital System Review', s2d:'Brand + website + SEO as one connected engine.',
-        s3t:'SEO Sprint', s3d:'Technical SEO + content plan + 10 keywords with structure.',
-        menuCopy:'Premium delivery for teams that want systems — not just deliverables.',
-        menuNow:'Ongoing'
-      }
-    };
-
-    function safeText(id, val){ const el = document.getElementById(id); if(el && typeof val === 'string') el.textContent = val; }
-
-    function setLang(lang){
-      const d = copy[lang] || copy.no;
-      document.documentElement.lang = d.htmlLang;
-
-      safeText('nav1', d.nav1); safeText('nav2', d.nav2); safeText('nav3', d.nav3);
-      safeText('nav4', d.nav4); safeText('nav5', d.nav5); safeText('nav6', d.nav6);
-      safeText('nav1b', d.nav1); safeText('nav2b', d.nav2); safeText('nav3b', d.nav3);
-      safeText('nav4b', d.nav4); safeText('nav5b', d.nav5); safeText('nav6b', d.nav6);
-
-      safeText('brandSub', d.brandSub);
-      safeText('chip1', d.chip1); safeText('chip2', d.chip2); safeText('chip3', d.chip3); safeText('chip4', d.chip4);
-      safeText('heroSub', d.heroSub); safeText('heroMeta', d.heroMeta);
-      safeText('bookBtnTxt', d.bookBtn);
-      safeText('servicesBtnTxt', d.servicesBtn);
-      safeText('panelK', d.panelK); safeText('panelH', d.panelH); safeText('panelP', d.panelP);
-      safeText('tTitle', d.tTitle); safeText('tSub', d.tSub);
-      safeText('cTitle', d.cTitle); safeText('cSub', d.cSub);
-      safeText('s1t', d.s1t); safeText('s1d', d.s1d);
-      safeText('s2t', d.s2t); safeText('s2d', d.s2d);
-      safeText('s3t', d.s3t); safeText('s3d', d.s3d);
-      safeText('menuCopy', d.menuCopy);
-      safeText('menuNow', d.menuNow);
-
-      const showFlag = (lang === 'no') ? 'en' : 'no';
-      if(langFlag) langFlag.className = `flag ${showFlag}`;
-      if(langLabel) langLabel.textContent = lang.toUpperCase();
-      if(menuBtn) menuBtn.textContent = overlay?.classList.contains('open') ? closeLabel() : menuLabel();
-
-      try{ localStorage.setItem(LS_KEY, lang); }catch(_){ /* ignore */ }
-    }
-
-    function getInitLang(){
-      const qs = new URLSearchParams(location.search).get('lang');
-      if(qs) return qs.toLowerCase() === 'en' ? 'en' : 'no';
-      try{
-        const saved = localStorage.getItem(LS_KEY);
-        if(saved) return saved.toLowerCase() === 'en' ? 'en' : 'no';
-      }catch(_){ /* ignore */ }
-      return 'no';
-    }
-
-    setLang(getInitLang());
-    if(menuBtn) menuBtn.textContent = menuLabel();
-
-    // Ensure click always fires (some mobile browsers need explicit pointer events)
-    if(langBtn){
-      langBtn.style.pointerEvents = 'auto';
-      langBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        let current = 'no';
-        try{ current = (localStorage.getItem(LS_KEY) || 'no').toLowerCase(); }catch(_){ current = document.documentElement.lang === 'en' ? 'en' : 'no'; }
-        setLang(current === 'no' ? 'en' : 'no');
-      }, {passive:false});
-    }
-
-    // ---------------- Reveal on scroll ----------------
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
-    }, {threshold:0.12});
-    document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-
-    // ---------------- Magnetic buttons (desktop) ----------------
-    const finePointer = matchMedia('(pointer:fine)').matches;
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(finePointer && !reduced){
-      document.querySelectorAll('.pill, .btnD, .btnG').forEach(btn=>{
-        btn.addEventListener('mousemove', (e)=>{
-          const r = btn.getBoundingClientRect();
-          const x = e.clientX - (r.left + r.width/2);
-          const y = e.clientY - (r.top + r.height/2);
-          btn.style.transform = `translate(${x*0.06}px, ${y*0.10}px)`;
-        });
-        btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
-      });
-    }
-
-    // ---------------- Active nav highlight ----------------
-    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
-    const sections = navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const navIO = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          navLinks.forEach(a=>a.style.color='rgba(255,255,255,.78)');
-          const hit = navLinks.find(a=>a.getAttribute('href') === `#${entry.target.id}`);
-          if(hit) hit.style.color = '#fff';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setaei – AI, Web og Mer</title>
+    <style>
+        /* Basic Reset & common styles */
+        body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        h1, h2, h3, h4, p, ul, li, a { margin: 0; padding: 0; }
+        ul { list-style: none; padding: 0; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, #0A0A0A, #333);
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
         }
-      });
-    }, {threshold:0.35});
-    sections.forEach(s=>navIO.observe(s));
-  </script></body>
+        #hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        #hero p {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #hero .cta {
+            display: inline-block;
+            background: #fff;
+            color: #0A0A0A;
+            padding: 0.8em 1.5em;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 0.5em;
+        }
+        #hero .cta:hover {
+            background: #f0f0f0;
+        }
+        
+        /* Product Presentation Section */
+        #product {
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+        #product h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+        #product p {
+            max-width: 800px;
+            margin: 0 auto 1em auto;
+        }
+        #product ul {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #product li {
+            margin: 0.5em 0;
+            padding-left: 1.2em;
+            position: relative;
+        }
+        #product li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #555;
+        }
+        
+        /* Projects Section */
+        #projects {
+            padding: 60px 20px;
+        }
+        #projects h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        .project {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .project h3 {
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .project h3 a {
+            color: #0A0A0A;
+        }
+        .project p {
+            margin: 0.5em 0;
+        }
+        .project .tech {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 0.5em;
+        }
+        
+        /* Book Section */
+        #book {
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+        #book h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+        #book p {
+            max-width: 800px;
+            margin: 0 auto 1em auto;
+            text-align: center;
+        }
+        #book a {
+            color: #0A0A0A;
+            text-decoration: underline;
+        }
+        
+        /* Logo Display Section */
+        #logos {
+            padding: 60px 20px;
+        }
+        #logos h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+        #logos p {
+            max-width: 800px;
+            margin: 0 auto 2em auto;
+            text-align: center;
+        }
+        .logo-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        .logo-category {
+            flex: 1 1 200px;
+            text-align: center;
+        }
+        .logo-category h3 {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+        .logo-category img {
+            max-height: 50px;
+            margin: 0.5em 1em;
+        }
+        
+        /* Reviews/Recommendations Section */
+        #reviews {
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+        #reviews h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        .review-stack {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            /* to accommodate stacked cards, add some bottom padding if needed */
+            padding-bottom: 100px;
+        }
+        .review {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        .review h3 {
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+            color: #0A0A0A;
+        }
+        .review p {
+            font-style: italic;
+        }
+        /* Stack positioning */
+        .review.top   { z-index: 3; }
+        .review.second{ z-index: 2; top: -10px; left: 10px; }
+        .review.third { z-index: 1; top: -20px; left: 20px; }
+        .review.second, .review.third {
+            position: relative;
+        }
+        
+        /* CV Section */
+        #cv {
+            padding: 60px 20px;
+        }
+        #cv h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        #cv .cv-columns {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        #cv .cv-column {
+            flex: 1 1 300px;
+        }
+        #cv .cv-column h3 {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        #cv .cv-column ul li {
+            margin-bottom: 0.5em;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0A0A0A;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            #hero { padding: 80px 10px; }
+            #hero h1 { font-size: 2em; }
+            #hero p { font-size: 1em; }
+            .logo-categories { flex-direction: column; align-items: center; }
+            .logo-category { width: 100%; }
+            #cv .cv-columns { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Jeg er Setaei.</h1>
+        <p>Med solid utdanning, lang erfaring og nå et nytt produkt: <strong>SETai</strong>.</p>
+        <a href="#product" class="cta">Se hva SETai gjør</a>
+    </section>
+    
+    <!-- Product Presentation Section -->
+    <section id="product">
+        <h2>SETai – AI-automatisering for din nettside</h2>
+        <p><strong>SETai</strong> er et AI-produkt utviklet av Setaei, bestående av intelligente agenter som hjelper bedrifter med å automatisere nettsider fra A til Å. Løsningen kombinerer design, innhold og drift, og lar deg fokusere på kjernevirksomheten mens teknologien tar seg av resten.</p>
+        <ul>
+            <li>AI-agenter som integreres på nettsiden for kundeservice, salg og intern assistanse.</li>
+            <li>Automatiserer alt fra innholdsproduksjon og oppdateringer til brukerstøtte og dataanalyse.</li>
+            <li>Innebygget VPS-pekedomeneløsning: pek ditt domene til vår dedikerte VPS, så håndterer SETai hosting og vedlikehold automatisk.</li>
+            <li>Skalerbar og sikker arkitektur som vokser med din bedrift.</li>
+        </ul>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Prosjekter</h2>
+        <!-- Shahnameh Project -->
+        <div class="project">
+            <h3><a href="https://dyor.io/dapps/games/shahnameh" target="_blank" rel="noopener">Shahnameh</a></h3>
+            <img src="https://storage.dyor.io/dapps/images/poster/1732438597/53729928.png" alt="Shahnameh prosjekt plakat">
+            <p>Et banebrytende spill inspirert av Persias nasjonalepos, som forener kunstig intelligens og blokkjede-teknologi. <span class="tech">Teknologier: AI, TON blokkjede</span></p>
+            <p><a href="https://dyor.io/token/EQDhq_DjQUMJqfXLP8K8J6SlOvon08XQQK0T49xon2e0xU8p" target="_blank" rel="noopener">Se Shahnameh-token på blockchain</a></p>
+        </div>
+        <!-- Numerologist Project -->
+        <div class="project">
+            <h3><a href="https://numerologist.setaei.com" target="_blank" rel="noopener">Numerologist</a></h3>
+            <p>En utforskning av tallenes mystikk i samarbeid med numerolog Åse Steinsland. Prosjektet kombinerer symbolsk numerologi og moderne data-modellering for å gi innsikt i bevissthetens skjulte mønstre.</p>
+        </div>
+    </section>
+    
+    <!-- Book Section -->
+    <section id="book">
+        <h2>Boken <em>The Black and White Universe</em></h2>
+        <p>Et dypdykk i bevissthetens univers, hvor kvantefysikk møter Rumi og urgammel visdom. Denne kommende boken utforsker hvordan tall, bevissthet og skapelse gjenspeiler en og samme geometri.</p>
+        <p><a href="https://medium.com/@khabat.setaei/the-equation-of-the-soul-where-quantum-physics-meets-rumi-cefbe9a29bfb" target="_blank" rel="noopener">Les en smakebit i artikkelen på Medium</a></p>
+    </section>
+    
+    <!-- Logo Display Section -->
+    <section id="logos">
+        <h2>Erfaring, Utdanning og Kunder</h2>
+        <p>Gjennom karrieren har Setaei opparbeidet seg solid erfaring fra ledende teknologimiljøer, en sterk utdanningsbakgrunn innen AI og teknologi, samt levert tjenester til fornøyde kunder.</p>
+        <div class="logo-categories">
+            <div class="logo-category">
+                <h3>Utdanning</h3>
+                <!-- Eksempel: logos for educational institutions -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/NTNU_logo.png" alt="NTNU logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Noroff_logo.png" alt="Noroff logo">
+            </div>
+            <div class="logo-category">
+                <h3>Erfaring</h3>
+                <!-- Eksempel: logos for companies (experience) -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google logo">
+            </div>
+            <div class="logo-category">
+                <h3>Kunder</h3>
+                <!-- Eksempel: logos for client companies -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Telenor_logo.svg" alt="Telenor logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Telia_company_logo.svg" alt="Telia logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reviews/Recommendations Section -->
+    <section id="reviews">
+        <h2>Anbefalinger</h2>
+        <div class="review-stack">
+            <div class="review top">
+                <h3>Åse Steinsland</h3>
+                <p>Presis, strategisk og ekstremt gjennomføringssterk — leverer premium kvalitet med ro og kontroll.</p>
+            </div>
+            <div class="review second">
+                <h3>Tor Martin Olsen</h3>
+                <p>Sterk teknisk arkitektur og ansvarlighet — bygger systemer som tåler skala og endring.</p>
+            </div>
+            <div class="review third">
+                <h3>Stein Alvern</h3>
+                <p>Rask problemløser med høy presisjon — enkel å samarbeide med og leverer alltid som avtalt.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CV Section -->
+    <section id="cv">
+        <h2>CV</h2>
+        <div class="cv-columns">
+            <div class="cv-column">
+                <h3>🎓 Utdanning</h3>
+                <ul>
+                    <li>M.Sc. Computer Engineering (AI & Robotics)</li>
+                    <li>B.Sc. Computer Engineering</li>
+                    <li>Multimedia Design (3 år) — Noroff</li>
+                </ul>
+            </div>
+            <div class="cv-column">
+                <h3>💼 Erfaring</h3>
+                <ul>
+                    <li>Founder & CTO — systembygging</li>
+                    <li>AI & Blockchain konsulent</li>
+                    <li>Front-end & Product Engineer</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Setaei. Alle rettigheter reservert.</p>
+    </footer>
+    
+    <!-- Simple JS for reviews effect -->
+    <script>
+        // Klikk på øverste anbefaling for å vise neste
+        document.querySelector('.review.top').addEventListener('click', function() {
+            this.style.transform = 'translate(-150%, -150%) rotate(-10deg)';
+            this.style.opacity = '0';
+            var firstCard = this;
+            setTimeout(function() {
+                firstCard.style.display = 'none';
+            }, 700);
+        });
+        // Klikk på andre anbefaling for å vise den tredje
+        document.querySelector('.review.second').addEventListener('click', function() {
+            this.style.transform = 'translate(-150%, -150%) rotate(-10deg)';
+            this.style.opacity = '0';
+            var secondCard = this;
+            setTimeout(function() {
+                secondCard.style.display = 'none';
+            }, 700);
+        });
+    </script>
+</body>
 </html>
