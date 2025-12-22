@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فرم ثبت‌نام دوره: ساخت ایجنت هوش مصنوعی</title>
+  <style>
+    :root { color-scheme: light; }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:#f6f7fb; color:#111;
+      line-height:1.8;
+    }
+    .container{ max-width: 980px; margin: 0 auto; padding: 24px; }
+    .card{
+      background:#fff; border:1px solid #e6e8ef; border-radius:16px;
+      padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    }
+    h1{ margin:0 0 8px; font-size: 22px; }
+    .muted{ color:#555; font-size: 14px; margin: 0 0 16px; }
+    .grid{ display:grid; gap:14px; grid-template-columns: repeat(12, 1fr); }
+    .col-12{ grid-column: span 12; }
+    .col-6{ grid-column: span 12; }
+    @media (min-width: 860px){ .col-6{ grid-column: span 6; } }
+    label{ display:block; font-weight:600; margin: 0 0 6px; }
+    input, select, textarea{
+      width:100%; box-sizing:border-box;
+      border:1px solid #d7dbe7; border-radius:12px;
+      padding: 10px 12px; font-size: 14px; background:#fff;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus{ border-color:#7aa7ff; box-shadow: 0 0 0 3px rgba(122,167,255,.18); }
+    textarea{ min-height: 110px; resize: vertical; }
+    fieldset{
+      border:1px solid #e6e8ef; border-radius:16px; padding: 14px;
+    }
+    legend{ padding: 0 8px; font-weight:700; }
+    .options{ display:grid; gap:10px; margin-top: 6px; }
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      border:1px solid #e6e8ef; border-radius:12px; padding:10px;
+      background:#fafbff;
+    }
+    .opt input{ width:auto; margin-top:4px; }
+    .hint{ font-size: 12px; color:#666; margin-top: 6px; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    button{
+      border:0; border-radius:12px; padding: 11px 14px;
+      background:#111; color:#fff; font-weight:700; cursor:pointer;
+    }
+    button.secondary{ background:#eef1ff; color:#111; border:1px solid #d7dbe7; }
+    .note{
+      margin-top: 14px; padding: 12px; border-radius: 12px;
+      background:#fff7e6; border:1px solid #ffe2a8; font-size: 13px; color:#4a3b16;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>فرم درخواست شرکت در دوره: «چطور ایجنت هوش مصنوعی خودت را بسازی»</h1>
+      <p class="muted">
+        لطفاً این فرم را دقیق پر کنید تا محتوای دوره بر اساس سطح دانش و هدف‌های شما تنظیم شود.
+      </p>
+
+      <!--
+        FormSubmit:
+        - action باید به ایمیل مقصد اشاره کند
+        - method=POST
+        - fieldهای مخفی برای تنظیمات (موضوع ایمیل، ریدایرکت، کپچا)
+      -->
+      <form action="https://formsubmit.co/khabat.setaei@gmail.com" method="POST" accept-charset="UTF-8">
+        <!-- تنظیمات FormSubmit -->
+        <input type="hidden" name="_subject" value="درخواست دوره ایجنت هوش مصنوعی (form-agent.html)" />
+        <input type="hidden" name="_captcha" value="false" />
+        <!-- اگر صفحه تشکر دارید این را به آدرس خودتان تغییر دهید -->
+        <input type="hidden" name="_next" value="/thanks.html" />
+        <!-- برای جلوگیری از اسپم (اختیاری اما مفید): -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="grid">
+          <div class="col-6">
+            <label for="fullName">نام و نام خانوادگی *</label>
+            <input id="fullName" name="نام و نام خانوادگی" type="text" required />
+          </div>
+
+          <div class="col-6">
+            <label for="email">ایمیل *</label>
+            <input id="email" name="ایمیل" type="email" required />
+          </div>
+
+          <div class="col-6">
+            <label for="phone">شماره تماس (اختیاری)</label>
+            <input id="phone" name="شماره تماس" type="tel" placeholder="مثلاً +47 ... یا +98 ..." />
+          </div>
+
+          <div class="col-6">
+            <label for="timezone">منطقه زمانی</label>
+            <select id="timezone" name="منطقه زمانی">
+              <option value="ایران (UTC+3:30)">ایران (UTC+3:30)</option>
+              <option value="اروپا (Amsterdam/UTC+1 یا +2)">اروپا (Amsterdam/UTC+1 یا +2)</option>
+              <option value="خاورمیانه">خاورمیانه</option>
+              <option value="سایر">سایر</option>
+            </select>
+            <div class="hint">برای هماهنگی زمان جلسات و پشتیبانی.</div>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۱) هدف شما از شرکت در این دوره چیست؟ *</legend>
+              <div class="options">
+                <label class="opt">
+                  <input type="radio" name="هدف اصلی" value="ساخت ایجنت برای کار/بیزنس" required />
+                  <span>ساخت ایجنت برای کار/بیزنس (اتوماسیون، پاسخ‌گویی، تولید محتوا، فروش و ...)</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="هدف اصلی" value="یادگیری تکنیکی و توسعه" required />
+                  <span>یادگیری تکنیکی و توسعه (کدنویسی، API، طراحی معماری ایجنت)</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="هدف اصلی" value="ساخت نمونه اولیه برای محصول" required />
+                  <span>ساخت نمونه اولیه برای محصول/استارتاپ</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="هدف اصلی" value="سایر" required />
+                  <span>سایر</span>
+                </label>
+              </div>
+              <label for="goalDetails" style="margin-top:10px;">توضیح کوتاه درباره هدف (اختیاری)</label>
+              <textarea id="goalDetails" name="توضیح هدف" placeholder="مثلاً می‌خواهم یک ایجنت برای پاسخ‌گویی به مشتریان بسازم..."></textarea>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۲) سطح فعلی شما در هوش مصنوعی و ابزارهای مرتبط *</legend>
+              <div class="options">
+                <label class="opt">
+                  <input type="radio" name="سطح کلی" value="مبتدی" required />
+                  <span>مبتدی (فقط کاربر ChatGPT و ابزارهای آماده)</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="سطح کلی" value="متوسط" required />
+                  <span>متوسط (آشنایی با پرامپت‌ها، ابزارها، کمی کار با API یا اتوماسیون)</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="سطح کلی" value="پیشرفته" required />
+                  <span>پیشرفته (تجربه ساخت اپ/بات، اتصال به API، دیباگ و طراحی سیستم)</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۳) دانش فنی شما (چند مورد را انتخاب کنید) *</legend>
+              <div class="options">
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="بدون کدنویسی / No-code" />
+                  <span>بدون کدنویسی / No-code</span>
+                </label>
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="مقدماتی برنامه‌نویسی" />
+                  <span>مقدماتی برنامه‌نویسی</span>
+                </label>
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="Python" />
+                  <span>Python</span>
+                </label>
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="JavaScript/TypeScript" />
+                  <span>JavaScript / TypeScript</span>
+                </label>
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="API و کار با REST/JSON" />
+                  <span>API و کار با REST/JSON</span>
+                </label>
+                <label class="opt">
+                  <input type="checkbox" name="دانش فنی" value="اتوماسیون (Zapier/Make/n8n)" />
+                  <span>اتوماسیون (Zapier / Make / n8n)</span>
+                </label>
+              </div>
+              <div class="hint">حداقل یکی را انتخاب کنید (اگر هیچ‌کدام نیست، «بدون کدنویسی» را انتخاب کنید).</div>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۴) چه نوع ایجنتی می‌خواهید بسازید؟ (چند مورد) *</legend>
+              <div class="options">
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="چت‌بات پشتیبانی مشتری" /> <span>چت‌بات پشتیبانی مشتری</span></label>
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت تولید محتوا/مارکتینگ" /> <span>ایجنت تولید محتوا/مارکتینگ</span></label>
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت تحلیل داده/گزارش" /> <span>ایجنت تحلیل داده/گزارش</span></label>
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت فروش و لید" /> <span>ایجنت فروش و لید</span></label>
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت شخصی (کارهای روزمره)" /> <span>ایجنت شخصی (کارهای روزمره)</span></label>
+                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="سایر" /> <span>سایر</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <label for="dataSources">۵) ایجنت باید به چه منابعی دسترسی داشته باشد؟ (اختیاری)</label>
+            <textarea id="dataSources" name="منابع/داده‌های مورد نیاز" placeholder="مثلاً فایل‌های PDF، سایت، دیتابیس، Google Drive، Notion، CRM، ایمیل و ..."></textarea>
+            <div class="hint">اگر داده حساس دارید، فقط نوع داده را بنویسید (نه اطلاعات محرمانه).</div>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۶) بزرگ‌ترین چالش شما چیست؟ *</legend>
+              <div class="options">
+                <label class="opt"><input type="radio" name="چالش اصلی" value="نمی‌دانم از کجا شروع کنم" required /> <span>نمی‌دانم از کجا شروع کنم</span></label>
+                <label class="opt"><input type="radio" name="چالش اصلی" value="انتخاب ابزار/مدل مناسب" required /> <span>انتخاب ابزار/مدل مناسب</span></label>
+                <label class="opt"><input type="radio" name="چالش اصلی" value="اتصال به API و یکپارچه‌سازی" required /> <span>اتصال به API و یکپارچه‌سازی</span></label>
+                <label class="opt"><input type="radio" name="چالش اصلی" value="کیفیت پاسخ‌ها/هالوسینیشن" required /> <span>کیفیت پاسخ‌ها/کاهش خطا و هالوسینیشن</span></label>
+                <label class="opt"><input type="radio" name="چالش اصلی" value="دیپلوی و نگهداری" required /> <span>دیپلوی و نگهداری</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <label for="experience">۷) تجربه قبلی شما با ابزارهای زیر چیست؟ (اختیاری)</label>
+            <textarea id="experience" name="تجربه با ابزارها" placeholder="ChatGPT / Claude / Gemini / OpenAI API / LangChain / LlamaIndex / n8n / Make / Zapier / Telegram bot / Discord و ..."></textarea>
+          </div>
+
+          <div class="col-6">
+            <label for="format">۸) ترجیح شما برای مدل برگزاری *</label>
+            <select id="format" name="مدل برگزاری" required>
+              <option value="">انتخاب کنید</option>
+              <option value="حضوری">حضوری</option>
+              <option value="آنلاین">آنلاین</option>
+              <option value="ترکیبی">ترکیبی</option>
+            </select>
+          </div>
+
+          <div class="col-6">
+            <label for="timePref">۹) زمان‌های مناسب شما (اختیاری)</label>
+            <input id="timePref" name="زمان‌های مناسب" type="text" placeholder="مثلاً شنبه‌ها ۱۸-۲۰، یا روزهای کاری صبح..." />
+          </div>
+
+          <div class="col-12">
+            <label for="expectations">۱۰) چه چیزی دوست دارید در پایان دوره «حتماً» به آن برسید؟ *</label>
+            <textarea id="expectations" name="خروجی مورد انتظار" required placeholder="مثلاً یک ایجنت آماده که به دیتای من وصل شود، یا یک معماری قابل توسعه، یا نمونه اولیه..."></textarea>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۱۱) زبان محتوای دوره *</legend>
+              <div class="options">
+                <label class="opt"><input type="radio" name="زبان دوره" value="فارسی" required /> <span>فارسی</span></label>
+                <label class="opt"><input type="radio" name="زبان دوره" value="انگلیسی" required /> <span>انگلیسی</span></label>
+                <label class="opt"><input type="radio" name="زبان دوره" value="ترکیبی" required /> <span>ترکیبی</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-12">
+            <fieldset>
+              <legend>۱۲) رضایت‌نامه کوتاه *</legend>
+              <div class="options">
+                <label class="opt">
+                  <input type="checkbox" name="تایید" value="اطلاعات درست است" required />
+                  <span>اطلاعاتی که وارد کرده‌ام تا حد امکان درست است و می‌دانم پاسخ‌ها برای تنظیم بهتر دوره استفاده می‌شود.</span>
+                </label>
+              </div>
+              <div class="hint">این فرم اطلاعات را با ایمیل برای شما ارسال می‌کند. لطفاً اطلاعات حساس (رمزها، کلیدهای API و ...) را وارد نکنید.</div>
+            </fieldset>
+          </div>
+
+          <div class="col-12 actions">
+            <button type="submit">ارسال فرم</button>
+            <button type="reset" class="secondary">پاک کردن</button>
+          </div>
+        </div>
+
+        <div class="note">
+          نکته: اگر می‌خواهید بعد از ارسال، صفحه تشکر داشته باشید، یک فایل <code>thanks.html</code> بسازید و مقدار <code>_next</code> را به مسیر صحیح سایت خودتان تغییر دهید.
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
