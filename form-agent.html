@@ -256,6 +256,13 @@
 </head>
 
 <body>
+  <!-- Language toggle (FA default) -->
+  <div style="display:flex; justify-content:flex-end; padding:0 18px 10px;">
+    <button type="button" id="langBtn" style="border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.12); color:rgba(255,255,255,.85); border-radius:999px; padding:8px 10px; cursor:pointer;">
+      🇬🇧 English
+    </button>
+  </div>
+
   <div class="wrap">
     <div class="card">
       <div class="header">
@@ -274,7 +281,7 @@
         <!-- FormSubmit settings -->
         <input type="hidden" name="_subject" value="درخواست دوره: ساخت ایجنت هوش مصنوعی (Wizard)" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="/thanks.html" />
+        <input type="hidden" name="_next" value="https://setai.no/thanks.html" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <!-- Collected fields (hidden, to keep everything clean) -->
@@ -418,6 +425,7 @@
     const $ = (s, el=document) => el.querySelector(s);
     const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
 
+    const form = $("#wizardForm");
     const stepEls = $$(".step");
     const toast = $("#toast");
     const progressFill = $("#progressFill");
@@ -539,6 +547,12 @@
       $("#f_json").value = JSON.stringify(state, null, 2);
     }
 
+    // Use requestSubmit to ensure a real POST submit happens
+    function safeSubmit(){
+      if(form.requestSubmit) form.requestSubmit();
+      else form.submit();
+    }
+
     // Nav buttons
     prevBtn.addEventListener("click", () => showStep(current - 1));
 
@@ -552,12 +566,30 @@
       if(current === steps.length - 1){
         // final submit
         syncHiddenFields();
-        $("#wizardForm").submit();
+        safeSubmit();
         return;
       }
 
       showStep(current + 1);
     });
+
+    // --- Simple FA/EN toggle ---
+    let lang = "fa";
+    const i18n = {
+      fa: { btn: "🇬🇧 English" },
+      en: { btn: "🇮🇷 فارسی" }
+    };
+    const langBtn = $("#langBtn");
+    if(langBtn){
+      langBtn.addEventListener("click", () => {
+        lang = (lang === "fa") ? "en" : "fa";
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === "fa") ? "rtl" : "ltr";
+        langBtn.textContent = i18n[lang].btn;
+
+        // در صورت نیاز می‌توانید متن‌ها را نیز ترجمه و جابه‌جا کنید.
+      });
+    }
 
     // init
     renderPills();
