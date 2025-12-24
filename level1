@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SETÆI | Level 1 – دوره ساخت ایجنت فروش و جذب لید (No-code)</title>
+  <meta name="description" content="پرزنت دوره Level 1 برای حامد: ساخت ایجنت فروش و جذب لید بدون کدنویسی، با خروجی عملی در ۱ تا ۲ ساعت."/>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(0,0,0,.16);
+      --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --muted2:rgba(255,255,255,.55);
+      --accent:#a855f7;
+      --accent2:#22c55e;
+      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(168,85,247,.18), transparent 60%),
+        radial-gradient(900px 650px at 80% 90%, rgba(34,197,94,.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.9;
+    }
+    a{color:inherit;}
+    .container{width:min(1080px, 100%); margin:0 auto; padding:24px 16px 42px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 14px;
+      border:1px solid var(--border); border-radius:16px;
+      background:rgba(0,0,0,.18);
+      box-shadow: var(--shadow);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(168,85,247,.85), rgba(34,197,94,.55));
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .brand h1{margin:0; font-size:16px; letter-spacing:.4px;}
+    .brand p{margin:0; font-size:12px; color:var(--muted2);}
+    .pill{
+      font-size:12px; color:rgba(255,255,255,.86);
+      border:1px solid rgba(168,85,247,.45);
+      background:rgba(168,85,247,.12);
+      padding:8px 10px; border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .hero{margin-top:16px;}
+    .grid{display:grid; gap:14px; grid-template-columns:1fr;}
+    @media(min-width:900px){ .grid{grid-template-columns: 1.2fr .8fr;} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .pad{padding:18px;}
+    .kicker{
+      display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+      margin-bottom:10px;
+    }
+    .tag{
+      font-size:12px; color:rgba(255,255,255,.84);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.12);
+      padding:6px 10px; border-radius:999px;
+    }
+    .tag.green{border-color:rgba(34,197,94,.45); background:rgba(34,197,94,.10);}
+    .tag.purple{border-color:rgba(168,85,247,.45); background:rgba(168,85,247,.10);}
+
+    h2{margin:0 0 8px; font-size:22px;}
+    .lead{margin:0; color:var(--muted); font-size:14px;}
+    .sectionTitle{margin:0 0 10px; font-size:14px; color:rgba(255,255,255,.88); font-weight:800;}
+    ul{margin:0; padding:0 18px 0 0;}
+    li{margin:6px 0; color:rgba(255,255,255,.84);}
+    .muted{color:var(--muted);}
+    .divider{height:1px; background:rgba(255,255,255,.10); margin:14px 0;}
+    .twoCol{display:grid; gap:12px; grid-template-columns:1fr;}
+    @media(min-width:720px){ .twoCol{grid-template-columns:1fr 1fr;} }
+
+    .mini{
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:14px;
+    }
+    .mini h3{margin:0 0 6px; font-size:13px;}
+    .mini p{margin:0; color:var(--muted); font-size:13px;}
+
+    .cta{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:11px 14px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:rgba(255,255,255,.92);
+      transition: transform .08s ease, opacity .2s ease;
+    }
+    .btn:active{transform:scale(.99);}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      color:#0b1020;
+      border-color: rgba(255,255,255,.20);
+    }
+    .btn.success{
+      border-color: rgba(34,197,94,.45);
+      background: rgba(34,197,94,.12);
+    }
+    .small{font-size:12px; color:var(--muted2);}
+
+    .footer{
+      margin-top:16px;
+      padding:14px 16px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background: rgba(0,0,0,.14);
+      color: var(--muted2);
+      font-size:12px;
+    }
+    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>SETÆI</h1>
+          <p>Designed. Engineered. Intelligent.</p>
+        </div>
+      </div>
+      <div class="pill">Level 1 • Agent Builder (No-code)</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero grid">
+      <div class="card">
+        <div class="pad">
+          <div class="kicker">
+            <span class="tag purple">دوره اختصاصی</span>
+            <span class="tag green">۱ تا ۲ ساعت</span>
+            <span class="tag">برای: حامد</span>
+            <span class="tag">موضوع: ایجنت فروش و جذب لید</span>
+          </div>
+
+          <h2>Level 1 — ساخت ایجنت فروش و جذب لید (بدون کدنویسی)</h2>
+          <p class="lead">
+            این جلسه برای ساخت یک ایجنت کاربردی طراحی شده که بتواند لید جمع‌آوری کند، لید را ارزیابی کند،
+            و در پایان یک خروجی قابل استفاده برای فروش به شما بدهد.
+          </p>
+
+          <div class="divider"></div>
+
+          <div class="twoCol">
+            <div class="mini">
+              <h3>SETÆI holder ulike kurs</h3>
+              <p>
+                SETÆI دوره‌های مختلفی برگزار می‌کند. این صفحه مربوط به <b>Level 1</b> است:
+                شروع سریع، عملی، و بدون پیچیدگی‌های فنی.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>خروجی واقعی در پایان جلسه</h3>
+              <p>
+                یک ایجنت فروش آماده با سوالات استاندارد، امتیازدهی لید (Lead Scoring)،
+                و خلاصه‌سازی اطلاعات مشتری برای پیگیری.
+              </p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <div class="sectionTitle">این جلسه دقیقاً چه چیزی را پوشش می‌دهد؟</div>
+            <ul>
+              <li>تعریف دقیق نقش ایجنت فروش (Sales/Lead Agent) و هدف نهایی</li>
+              <li>طراحی جریان گفتگو (Conversation Flow) مخصوص جذب لید</li>
+              <li>سؤال‌های کلیدی: نیاز، بودجه، فوریت، تصمیم‌گیرنده، اطلاعات تماس</li>
+              <li>امتیازدهی ساده لید (۰ تا ۴) برای اولویت‌بندی پیگیری</li>
+              <li>خروجی استاندارد: خلاصه لید + امتیاز + قدم بعدی (CTA)</li>
+              <li>تست با سناریوهای واقعی و اصلاح پاسخ‌ها</li>
+            </ul>
+            <p class="small" style="margin-top:10px;">
+              نکته: در Level 1 تمرکز روی «مغز ایجنت» است. اتصال به سایت/واتساپ/اتوماسیون می‌تواند Level 2 باشد.
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="twoCol">
+            <div class="mini">
+              <h3>مناسب برای</h3>
+              <p>
+                افرادی که برنامه‌نویسی نمی‌دانند یا نمی‌خواهند درگیر کدنویسی شوند، ولی می‌خواهند یک ایجنت
+                عملی برای فروش و جذب مشتری داشته باشند.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>پیش‌نیاز</h3>
+              <p>
+                فقط آشنایی اولیه با ابزارهای AI کافی است. اگر حساب ChatGPT دارید، عالی است.
+                اگر ندارید هم راه‌حل جایگزین ارائه می‌شود.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Plan + CTA -->
+      <div class="card">
+        <div class="pad">
+          <div class="sectionTitle">برنامه زمانی (۱ تا ۲ ساعت)</div>
+          <ul>
+            <li><b>۱۰–۱۵ دقیقه:</b> هدف و چارچوب ایجنت</li>
+            <li><b>۱۵–۲۰ دقیقه:</b> دستورالعمل/Prompt حرفه‌ای</li>
+            <li><b>۲۰–۲۵ دقیقه:</b> طراحی جریان گفتگو</li>
+            <li><b>۱۰–۱۵ دقیقه:</b> Lead Scoring ساده</li>
+            <li><b>۱۵–۲۰ دقیقه:</b> خروجی لید و قدم بعدی</li>
+            <li><b>۱۵–۲۰ دقیقه:</b> تست و اصلاح</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="sectionTitle">قبل از شروع (۳ دقیقه آماده‌سازی)</div>
+          <div class="mini">
+            <p class="muted">
+              لطفاً این ۴ مورد را آماده کنید تا جلسه سریع و نتیجه‌محور باشد:
+            </p>
+            <ul>
+              <li>چه چیزی می‌فروشید؟ (محصول/خدمت + حدود قیمت)</li>
+              <li>مشتری شما کیست؟ (مخاطب هدف)</li>
+              <li>هدف نهایی: «رزرو جلسه» یا «دریافت درخواست قیمت»؟</li>
+              <li>زبان مکالمه: فارسی / انگلیسی</li>
+            </ul>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="cta">
+            <div class="sectionTitle">هماهنگی شروع</div>
+            <p class="muted" style="margin:0;">
+              حامد عزیز، هر زمان آماده بودی، یکی از گزینه‌های زیر را انتخاب کن تا زمان شروع را هماهنگ کنیم.
+            </p>
+
+            <div class="btnrow">
+              <!-- Replace with your preferred contact link(s) -->
+              <a class="btn primary" href="mailto:khabat.setaei@gmail.com?subject=آماده‌ام%20برای%20شروع%20Level%201&body=سلام%20ستائی،%0Aمن%20آماده‌ام%20برای%20شروع%20Level%201.%0Aزمان‌های%20پیشنهادی%20من:%0A1)%20...%0A2)%20...%0A">
+                ارسال ایمیل برای شروع
+              </a>
+
+              <a class="btn success" href="https://setai.no/form-agent.html">
+                تکمیل فرم (اگر هنوز تکمیل نکرده‌اید)
+              </a>
+            </div>
+
+            <div class="small">
+              اگر ترجیح می‌دهید، زمان پیشنهادی خودتان را هم داخل ایمیل بنویسید (۲ زمان جایگزین کافی است).
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>یادداشت:</b> این صفحه یک پرزنتیشن کوتاه برای Level 1 است. اگر نیاز به اتصال ایجنت به وب‌سایت، واتساپ، یا CRM دارید، Level 2 طراحی می‌شود.</div>
+      <div style="margin-top:6px;">© SETÆI — Level 1</div>
+    </div>
+
+  </div>
+</body>
+</html>
