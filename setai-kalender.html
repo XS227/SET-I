@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SETAi Kalender – booking, kundebase, e-post og SMS</title>
+  <meta name="description" content="SETAi Kalender samler booking, kundebase, e-post og SMS i én plattform. Mindre admin. Færre no-shows. Mer omsetning." />
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#111827;
+      --muted:#a6b0c3;
+      --text:#eaf0ff;
+      --line:rgba(255,255,255,.10);
+      --accent:#7c5cff; /* bytt til din brandfarge */
+      --accent2:#22c55e; /* sekundær */
+      --shadow:0 18px 45px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(900px 500px at 20% 0%, rgba(124,92,255,.25), transparent 55%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(34,197,94,.16), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(140%) blur(12px);
+      background: rgba(11,15,23,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.4px}
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--accent), rgba(124,92,255,.25));
+      box-shadow: 0 10px 25px rgba(124,92,255,.25);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .navlinks{display:flex; gap:16px; align-items:center; color:var(--muted); font-weight:600}
+    .navlinks a{padding:8px 10px; border-radius:10px}
+    .navlinks a:hover{background:rgba(255,255,255,.05); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:700;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), rgba(124,92,255,.35));
+      border-color: rgba(124,92,255,.35);
+      box-shadow: 0 18px 40px rgba(124,92,255,.22);
+    }
+    .btn.primary:hover{filter:brightness(1.05)}
+    .btn.ghost:hover{background: rgba(255,255,255,.10)}
+    .hero{padding:56px 0 28px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-weight:650;
+      width:fit-content;
+    }
+    .h1{font-size:44px; line-height:1.08; margin:14px 0 12px; letter-spacing:-.6px}
+    .sub{color:var(--muted); font-size:18px; margin:0 0 18px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .trust{margin-top:18px; color:var(--muted); font-weight:600}
+    .card{
+      background: rgba(17,24,39,.70);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .media{
+      padding:14px;
+      display:flex; flex-direction:column; gap:12px;
+      min-height:360px;
+    }
+    .frame{
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      flex:1;
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.55);
+      font-weight:700;
+    }
+    .frame video, .frame img{width:100%; height:100%; object-fit:cover; display:block}
+    .section{padding:28px 0}
+    .kicker{color:rgba(234,240,255,.9); font-weight:800; letter-spacing:.2px; margin:0 0 6px}
+    .desc{color:var(--muted); margin:0}
+    .cards{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .feat{
+      padding:16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(124,92,255,.12);
+      border:1px solid rgba(124,92,255,.22);
+      margin-bottom:10px;
+      font-weight:900;
+      color: rgba(234,240,255,.95);
+    }
+    .feat h3{margin:0 0 6px; font-size:16px}
+    .feat p{margin:0; color:var(--muted)}
+    .steps{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .step{padding:18px; border-radius:18px; border:1px solid var(--line); background: rgba(255,255,255,.04)}
+    .num{
+      width:34px; height:34px; border-radius:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.22);
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .two{
+      display:grid; gap:14px;
+      grid-template-columns: 1fr 1fr;
+      margin-top:14px;
+    }
+    .panel{padding:18px; border-radius:18px; border:1px solid var(--line); background: rgba(255,255,255,.04)}
+    .panel ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .pricing{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .price{padding:18px; border-radius:18px; border:1px solid var(--line); background: rgba(255,255,255,.04)}
+    .price .tag{color:var(--muted); font-weight:700}
+    .price .val{font-size:28px; font-weight:900; margin:8px 0 10px}
+    details{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:14px 16px;
+      background: rgba(255,255,255,.04);
+    }
+    details summary{cursor:pointer; font-weight:800}
+    details p{margin:10px 0 0; color:var(--muted)}
+    .faq{display:grid; gap:10px; margin-top:14px}
+    .final{
+      padding:38px 0 58px;
+    }
+    footer{
+      border-top:1px solid var(--line);
+      padding:18px 0 28px;
+      color:var(--muted);
+      font-weight:600;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .h1{font-size:36px}
+      .cards,.steps,.pricing{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .media{min-height:320px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>SETAi Kalender</div>
+        </div>
+        <nav class="navlinks" aria-label="Hovedmeny">
+          <a href="#funksjoner">Funksjoner</a>
+          <a href="#hvordan">Hvordan det fungerer</a>
+          <a href="#priser">Priser</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn primary" href="#demo">Bestill demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <div class="pill">Designed. Engineered. Intelligent.</div>
+            <h1 class="h1">Alt i én plattform for booking, kundebase, e-post og SMS</h1>
+            <p class="sub">
+              SETAi Kalender samler timebestilling, kundehistorikk og automatisert kommunikasjon i ett system – slik at du kan bruke tiden på kundene, ikke administrasjon.
+            </p>
+            <div class="cta">
+              <a class="btn primary" href="#demo">Bestill demo</a>
+              <a class="btn ghost" href="#funksjoner">Se funksjoner</a>
+            </div>
+            <div class="trust">Passer for konsulenter, klinikker, salonger, trenere og timebaserte tjenester.</div>
+          </div>
+
+          <aside class="card media" aria-label="Produktvideo">
+            <div class="frame">
+              <!-- Bytt til din video/gif. Eksempel:
+              <video autoplay muted loop playsinline src="assets/hero-demo.mp4"></video>
+              eller
+              <img src="assets/hero.gif" alt="Produktdemo" />
+              -->
+              Sett inn video/GIF her
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <div class="pill">Færre no-shows</div>
+              <div class="pill">Raskere gjenbooking</div>
+              <div class="pill">Mer oversikt</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="funksjoner">
+      <div class="wrap">
+        <h2 class="kicker">Hvorfor SETAi Kalender</h2>
+        <p class="desc">Bygget for å redusere friksjon i drift: booking, kunder og oppfølging – uten ekstra verktøy.</p>
+
+        <div class="cards">
+          <div class="feat">
+            <div class="icon">📅</div>
+            <h3>Smart kalender</h3>
+            <p>Dag/uke/måned, ressursstyring, buffertid og oversikt som skalerer fra solo til team.</p>
+          </div>
+          <div class="feat">
+            <div class="icon">👤</div>
+            <h3>Kundebase (CRM)</h3>
+            <p>Profilkort med historikk, notater og tags – perfekt for personlig oppfølging.</p>
+          </div>
+          <div class="feat">
+            <div class="icon">✉️</div>
+            <h3>E-post & SMS</h3>
+            <p>Bekreftelser, påminnelser og kampanjer – med maler og automatisering.</p>
+          </div>
+          <div class="feat">
+            <div class="icon">🔗</div>
+            <h3>Online booking</h3>
+            <p>Egen bookingside og delbare lenker for nettside, sosiale medier og Google.</p>
+          </div>
+          <div class="feat">
+            <div class="icon">📈</div>
+            <h3>Innsikt</h3>
+            <p>Følg kapasitet, populære tider og utvikling – ta beslutninger med data.</p>
+          </div>
+          <div class="feat">
+            <div class="icon">🛡️</div>
+            <h3>Trygghet</h3>
+            <p>GDPR-fokusert håndtering av kundedata med klare rutiner og tilgangsstyring.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hvordan">
+      <div class="wrap">
+        <h2 class="kicker">Hvordan det fungerer</h2>
+        <p class="desc">Kom i gang uten tung implementering. Du trenger kun tjenester, tider og en lenke.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Sett opp tjenester</h3>
+            <p class="desc">Definer varighet, priser, tilgjengelighet og eventuelle ressurser/ansatte.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Del bookinglenken</h3>
+            <p class="desc">Legg den på nettsiden, i bio på sosiale medier eller send den direkte til kunder.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Automatiser oppfølging</h3>
+            <p class="desc">Bekreftelse, påminnelse og etter-melding skjer automatisk – færre avbestillinger.</p>
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="panel">
+            <h3>Kalender & ressursstyring</h3>
+            <p class="desc">Kontroller kapasitet, arbeidstid, buffere og team – i én oversikt.</p>
+            <ul>
+              <li>Flere ansatte og ressurser</li>
+              <li>Venteliste og kapasitetskontroll</li>
+              <li>Deling og interne notater</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Kunder & kommunikasjon</h3>
+            <p class="desc">Kundekort, segmenter og automatiske meldinger gir profesjonell flyt.</p>
+            <ul>
+              <li>Tags/segmentering</li>
+              <li>SMS og e-post maler</li>
+              <li>Gjenbooking og oppfølging</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="priser">
+      <div class="wrap">
+        <h2 class="kicker">Priser</h2>
+        <p class="desc">Velg nivå etter hvor mye automatisering og teamfunksjoner du trenger.</p>
+
+        <div class="pricing">
+          <div class="price">
+            <div class="tag">Start</div>
+            <div class="val">Fra X kr/mnd</div>
+            <ul>
+              <li>Kalender + online booking</li>
+              <li>Kundekort</li>
+              <li>Standard e-post varsler</li>
+            </ul>
+            <div style="margin-top:14px;">
+              <a class="btn ghost" href="#demo">Kom i gang</a>
+            </div>
+          </div>
+
+          <div class="price" style="border-color: rgba(124,92,255,.30); background: rgba(124,92,255,.08);">
+            <div class="tag">Team</div>
+            <div class="val">Fra Y kr/mnd</div>
+            <ul>
+              <li>Flere ansatte/ressurser</li>
+              <li>SMS påminnelser</li>
+              <li>Segmenter og maler</li>
+            </ul>
+            <div style="margin-top:14px;">
+              <a class="btn primary" href="#demo">Bestill demo</a>
+            </div>
+          </div>
+
+          <div class="price">
+            <div class="tag">Pro</div>
+            <div class="val">Fra Z kr/mnd</div>
+            <ul>
+              <li>Automatiserte workflows</li>
+              <li>Kampanjer (e-post/SMS)</li>
+              <li>Rapporter og eksport</li>
+            </ul>
+            <div style="margin-top:14px;">
+              <a class="btn ghost" href="#demo">Snakk med oss</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="desc" style="margin-top:10px;">Tilpassede oppsett og migrering tilbys ved behov.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <h2 class="kicker">FAQ</h2>
+        <p class="desc">Svar på vanlige spørsmål før du bestemmer deg.</p>
+
+        <div class="faq">
+          <details>
+            <summary>Hvor raskt kan vi komme i gang?</summary>
+            <p>De fleste setter opp grunnleggende booking samme dag. Team og automatisering tar typisk 1–3 dager avhengig av kompleksitet.</p>
+          </details>
+          <details>
+            <summary>Kan jeg bruke min egen nettside og domene?</summary>
+            <p>Ja. Du kan lenke til booking eller integrere bookingflyt på siden din. Du kan også bruke en dedikert bookingside.</p>
+          </details>
+          <details>
+            <summary>Hvordan reduserer dere no-shows?</summary>
+            <p>Automatiske bekreftelser og påminnelser via e-post/SMS, med mulighet for tydelige avbestillingsregler.</p>
+          </details>
+          <details>
+            <summary>Støtter dere flere ansatte og ressurser?</summary>
+            <p>Ja. Du kan administrere ansatte, rom og utstyr, samt kapasitet, åpningstider og buffere.</p>
+          </details>
+          <details>
+            <summary>Er dette GDPR-tilpasset?</summary>
+            <p>Plattformen er designet for sikker håndtering av persondata med tilgangsstyring og rutiner for databehandling.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final" id="demo">
+      <div class="wrap">
+        <div class="card" style="padding:22px;">
+          <h2 class="kicker" style="margin-top:0;">Klar for å forenkle hverdagen?</h2>
+          <p class="desc">Bestill en kort demo. Du får anbefalt oppsett for din bransje og en plan for å komme i gang.</p>
+          <div class="cta" style="margin-top:12px;">
+            <a class="btn primary" href="mailto:Khabat.setaei@gmail.com?subject=Demo%20-%20SETAi%20Kalender">Bestill demo på e-post</a>
+            <a class="btn ghost" href="#funksjoner">Tilbake til funksjoner</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>© <span id="y"></span> SETAi</div>
+        <div>Kontakt: <a href="mailto:Khabat.setaei@gmail.com">Khabat.setaei@gmail.com</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
