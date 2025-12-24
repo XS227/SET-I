@@ -1,282 +1,567 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>فرم ثبت‌نام دوره: ساخت ایجنت هوش مصنوعی</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>فرم دوره ساخت ایجنت با هوش مصنوعی</title>
   <style>
-    :root { color-scheme: light; }
+    :root{
+      --bg:#0b1020;
+      --card:#0f1730;
+      --card2:#0c142b;
+      --border: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --accent:#a855f7;   /* بنفش */
+      --accent2:#22c55e;  /* سبز */
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:#f6f7fb; color:#111;
-      line-height:1.8;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(168,85,247,.18), transparent 60%),
+                  radial-gradient(1000px 700px at 80% 90%, rgba(34,197,94,.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 28px 16px;
     }
-    .container{ max-width: 980px; margin: 0 auto; padding: 24px; }
+
+    .wrap{
+      width:min(920px, 100%);
+      display:grid;
+      gap:16px;
+    }
+
     .card{
-      background:#fff; border:1px solid #e6e8ef; border-radius:16px;
-      padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,.05);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
     }
-    h1{ margin:0 0 8px; font-size: 22px; }
-    .muted{ color:#555; font-size: 14px; margin: 0 0 16px; }
-    .grid{ display:grid; gap:14px; grid-template-columns: repeat(12, 1fr); }
-    .col-12{ grid-column: span 12; }
-    .col-6{ grid-column: span 12; }
-    @media (min-width: 860px){ .col-6{ grid-column: span 6; } }
-    label{ display:block; font-weight:600; margin: 0 0 6px; }
-    input, select, textarea{
-      width:100%; box-sizing:border-box;
-      border:1px solid #d7dbe7; border-radius:12px;
-      padding: 10px 12px; font-size: 14px; background:#fff;
-      outline: none;
+
+    .header{
+      padding: 18px 18px 10px;
     }
-    input:focus, select:focus, textarea:focus{ border-color:#7aa7ff; box-shadow: 0 0 0 3px rgba(122,167,255,.18); }
-    textarea{ min-height: 110px; resize: vertical; }
-    fieldset{
-      border:1px solid #e6e8ef; border-radius:16px; padding: 14px;
+
+    .title{
+      margin:0;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .2px;
     }
-    legend{ padding: 0 8px; font-weight:700; }
-    .options{ display:grid; gap:10px; margin-top: 6px; }
-    .opt{
-      display:flex; align-items:flex-start; gap:10px;
-      border:1px solid #e6e8ef; border-radius:12px; padding:10px;
-      background:#fafbff;
+    .subtitle{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.7;
     }
-    .opt input{ width:auto; margin-top:4px; }
-    .hint{ font-size: 12px; color:#666; margin-top: 6px; }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
-    button{
-      border:0; border-radius:12px; padding: 11px 14px;
-      background:#111; color:#fff; font-weight:700; cursor:pointer;
+
+    /* Top step tabs */
+    .steps{
+      display:flex;
+      gap:10px;
+      padding: 14px 18px 0;
+      flex-wrap:wrap;
+      align-items:center;
     }
-    button.secondary{ background:#eef1ff; color:#111; border:1px solid #d7dbe7; }
-    .note{
-      margin-top: 14px; padding: 12px; border-radius: 12px;
-      background:#fff7e6; border:1px solid #ffe2a8; font-size: 13px; color:#4a3b16;
+    .step-pill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      font-size: 12px;
+      user-select:none;
+    }
+    .step-pill .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(255,255,255,.28);
+    }
+    .step-pill.active{
+      color: var(--text);
+      border-color: rgba(168,85,247,.55);
+      background: rgba(168,85,247,.12);
+    }
+    .step-pill.active .dot{ background: var(--accent); }
+    .step-pill.done{
+      color: rgba(255,255,255,.85);
+      border-color: rgba(34,197,94,.50);
+      background: rgba(34,197,94,.10);
+    }
+    .step-pill.done .dot{ background: var(--accent2); }
+
+    /* Progress bar */
+    .progress{
+      padding: 10px 18px 0;
+    }
+    .bar{
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      width: 0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, var(--accent), rgba(168,85,247,.35));
+      transition: width .45s ease;
+    }
+
+    .content{
+      padding: 14px 18px 18px;
+    }
+
+    .q{
+      margin: 14px 0 10px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .hint{
+      margin: -2px 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid{
+      display:grid;
+      gap:10px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 760px){
+      .grid.two{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .option{
+      width:100%;
+      text-align:right;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(12,20,43,.55);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 12px;
+      cursor:pointer;
+      transition: transform .08s ease, border-color .25s ease, background .25s ease;
+      outline:none;
+    }
+    .option:hover{ border-color: rgba(168,85,247,.35); }
+    .option:active{ transform: scale(.99); }
+    .option.selected{
+      border-color: rgba(168,85,247,.65);
+      background: rgba(168,85,247,.12);
+    }
+
+    .field label{
+      display:block;
+      margin: 10px 0 6px;
+      font-weight:700;
+      font-size: 13px;
+      color: rgba(255,255,255,.85);
+    }
+    .field input, .field select, .field textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(12,20,43,.55);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 11px 12px;
+      outline:none;
+      font-size: 14px;
+    }
+    .field textarea{ min-height: 120px; resize: vertical; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+      padding: 14px 18px 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.10);
+    }
+    .btn{
+      border:0;
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-weight: 800;
+      cursor:pointer;
+      transition: transform .08s ease, opacity .2s ease;
+    }
+    .btn:active{ transform: scale(.99); }
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      color:#0b1020;
+      min-width: 140px;
+    }
+    .btn.ghost{
+      background: transparent;
+      color: rgba(255,255,255,.75);
+      border:1px solid rgba(255,255,255,.14);
+      min-width: 120px;
+    }
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    /* Step transitions */
+    .step{
+      display:none;
+      animation: fadeIn .26s ease;
+    }
+    .step.active{ display:block; }
+    @keyframes fadeIn{
+      from{ opacity:0; transform: translateY(6px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .toast{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(245,158,11,.35);
+      background: rgba(245,158,11,.12);
+      color: rgba(255,255,255,.92);
+      display:none;
+      font-size: 13px;
+    }
+    .toast.show{ display:block; }
+
+    .fineprint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.7;
+    }
+
+    .small{
+      font-size:12px;
+      color: var(--muted);
     }
   </style>
 </head>
-<body>
-  <main class="container">
-    <section class="card">
-      <h1>فرم درخواست شرکت در دوره: «چطور ایجنت هوش مصنوعی خودت را بسازی»</h1>
-      <p class="muted">
-        لطفاً این فرم را دقیق پر کنید تا محتوای دوره بر اساس سطح دانش و هدف‌های شما تنظیم شود.
-      </p>
 
-      <!--
-        FormSubmit:
-        - action باید به ایمیل مقصد اشاره کند
-        - method=POST
-        - fieldهای مخفی برای تنظیمات (موضوع ایمیل، ریدایرکت، کپچا)
-      -->
-      <form action="https://formsubmit.co/khabat.setaei@gmail.com" method="POST" accept-charset="UTF-8">
-        <!-- تنظیمات FormSubmit -->
-        <input type="hidden" name="_subject" value="درخواست دوره ایجنت هوش مصنوعی (form-agent.html)" />
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <h1 class="title">فرم ثبت‌نام دوره: ساخت ایجنت با هوش مصنوعی</h1>
+        <p class="subtitle">چند سؤال کوتاه تا دوره دقیقاً مطابق سطح دانش و هدف شما تنظیم شود.</p>
+      </div>
+
+      <div class="steps" id="stepPills"></div>
+
+      <div class="progress">
+        <div class="bar"><i id="progressFill"></i></div>
+      </div>
+
+      <!-- FormSubmit -->
+      <form id="wizardForm" action="https://formsubmit.co/khabat.setaei@gmail.com" method="POST" accept-charset="UTF-8">
+        <!-- FormSubmit settings -->
+        <input type="hidden" name="_subject" value="درخواست دوره: ساخت ایجنت هوش مصنوعی (Wizard)" />
         <input type="hidden" name="_captcha" value="false" />
-        <!-- اگر صفحه تشکر دارید این را به آدرس خودتان تغییر دهید -->
         <input type="hidden" name="_next" value="/thanks.html" />
-        <!-- برای جلوگیری از اسپم (اختیاری اما مفید): -->
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
-        <div class="grid">
-          <div class="col-6">
-            <label for="fullName">نام و نام خانوادگی *</label>
-            <input id="fullName" name="نام و نام خانوادگی" type="text" required />
-          </div>
+        <!-- Collected fields (hidden, to keep everything clean) -->
+        <input type="hidden" name="هدف اصلی" id="f_goal" />
+        <input type="hidden" name="سطح تجربه" id="f_level" />
+        <input type="hidden" name="دانش فنی" id="f_skill" />
+        <input type="hidden" name="نوع ایجنت" id="f_agent_type" />
+        <input type="hidden" name="خروجی مورد انتظار" id="f_outcome" />
+        <input type="hidden" name="نام و نام خانوادگی" id="f_name" />
+        <input type="hidden" name="ایمیل" id="f_email" />
+        <input type="hidden" name="شماره تماس" id="f_phone" />
+        <input type="hidden" name="توضیحات تکمیلی" id="f_notes" />
+        <input type="hidden" name="خلاصه (JSON)" id="f_json" />
 
-          <div class="col-6">
-            <label for="email">ایمیل *</label>
-            <input id="email" name="ایمیل" type="email" required />
-          </div>
+        <div class="content">
+          <div class="toast" id="toast"></div>
 
-          <div class="col-6">
-            <label for="phone">شماره تماس (اختیاری)</label>
-            <input id="phone" name="شماره تماس" type="tel" placeholder="مثلاً +47 ... یا +98 ..." />
-          </div>
+          <!-- STEP 1 -->
+          <section class="step active" data-step="0">
+            <div class="q">هدف شما از شرکت در این دوره چیست؟</div>
+            <div class="hint">یک گزینه را انتخاب کنید.</div>
+            <div class="grid">
+              <button type="button" class="option" data-pick="goal" data-value="ساخت ایجنت برای کار/بیزنس">ساخت ایجنت برای کار/بیزنس (اتوماسیون، فروش، پشتیبانی و ...)</button>
+              <button type="button" class="option" data-pick="goal" data-value="یادگیری تکنیکی و توسعه">یادگیری تکنیکی و توسعه (API، معماری، کدنویسی)</button>
+              <button type="button" class="option" data-pick="goal" data-value="ساخت نمونه اولیه برای محصول">ساخت نمونه اولیه برای محصول/استارتاپ</button>
+              <button type="button" class="option" data-pick="goal" data-value="سایر">سایر</button>
+            </div>
+          </section>
 
-          <div class="col-6">
-            <label for="timezone">منطقه زمانی</label>
-            <select id="timezone" name="منطقه زمانی">
-              <option value="ایران (UTC+3:30)">ایران (UTC+3:30)</option>
-              <option value="اروپا (Amsterdam/UTC+1 یا +2)">اروپا (Amsterdam/UTC+1 یا +2)</option>
-              <option value="خاورمیانه">خاورمیانه</option>
-              <option value="سایر">سایر</option>
-            </select>
-            <div class="hint">برای هماهنگی زمان جلسات و پشتیبانی.</div>
-          </div>
+          <!-- STEP 2 -->
+          <section class="step" data-step="1">
+            <div class="q">سابقه و تجربه شما چقدر است؟</div>
+            <div class="hint">مثل نمونه‌ای که در ویدئو هست: سریع و ساده انتخاب کنید.</div>
+            <div class="grid">
+              <button type="button" class="option" data-pick="level" data-value="صفر هستم (تازه شروع می‌کنم)">صفر هستم (تازه شروع می‌کنم)</button>
+              <button type="button" class="option" data-pick="level" data-value="کمی تجربه دارم (ابزارها را می‌شناسم)">کمی تجربه دارم (ابزارها را می‌شناسم)</button>
+              <button type="button" class="option" data-pick="level" data-value="متوسط (گاهی با API/اتوماسیون کار کرده‌ام)">متوسط (گاهی با API/اتوماسیون کار کرده‌ام)</button>
+              <button type="button" class="option" data-pick="level" data-value="پیشرفته (ساخت بات/اپ/اتصال سرویس‌ها)">پیشرفته (ساخت بات/اپ/اتصال سرویس‌ها)</button>
+            </div>
+          </section>
 
-          <div class="col-12">
-            <fieldset>
-              <legend>۱) هدف شما از شرکت در این دوره چیست؟ *</legend>
-              <div class="options">
-                <label class="opt">
-                  <input type="radio" name="هدف اصلی" value="ساخت ایجنت برای کار/بیزنس" required />
-                  <span>ساخت ایجنت برای کار/بیزنس (اتوماسیون، پاسخ‌گویی، تولید محتوا، فروش و ...)</span>
-                </label>
-                <label class="opt">
-                  <input type="radio" name="هدف اصلی" value="یادگیری تکنیکی و توسعه" required />
-                  <span>یادگیری تکنیکی و توسعه (کدنویسی، API، طراحی معماری ایجنت)</span>
-                </label>
-                <label class="opt">
-                  <input type="radio" name="هدف اصلی" value="ساخت نمونه اولیه برای محصول" required />
-                  <span>ساخت نمونه اولیه برای محصول/استارتاپ</span>
-                </label>
-                <label class="opt">
-                  <input type="radio" name="هدف اصلی" value="سایر" required />
-                  <span>سایر</span>
-                </label>
+          <!-- STEP 3 -->
+          <section class="step" data-step="2">
+            <div class="q">سطح فنی شما کدام است؟</div>
+            <div class="hint">یک گزینه را انتخاب کنید.</div>
+            <div class="grid">
+              <button type="button" class="option" data-pick="skill" data-value="بدون کدنویسی (No-code)">بدون کدنویسی (No-code)</button>
+              <button type="button" class="option" data-pick="skill" data-value="مقدماتی برنامه‌نویسی">مقدماتی برنامه‌نویسی</button>
+              <button type="button" class="option" data-pick="skill" data-value="برنامه‌نویس (Python/JS و API)">برنامه‌نویس (Python/JS و API)</button>
+              <button type="button" class="option" data-pick="skill" data-value="فول‌استک/سیستم (دیپلوی/معماری)">فول‌استک/سیستم (دیپلوی/معماری)</button>
+            </div>
+          </section>
+
+          <!-- STEP 4 -->
+          <section class="step" data-step="3">
+            <div class="q">می‌خواهید چه نوع ایجنتی بسازید؟</div>
+            <div class="hint">یک گزینه انتخاب کنید. (در صورت نیاز جزئیات را در مرحله آخر بنویسید.)</div>
+            <div class="grid two">
+              <button type="button" class="option" data-pick="agent" data-value="پشتیبانی مشتری (Chatbot)">پشتیبانی مشتری (Chatbot)</button>
+              <button type="button" class="option" data-pick="agent" data-value="فروش و لید">فروش و لید</button>
+              <button type="button" class="option" data-pick="agent" data-value="تولید محتوا/مارکتینگ">تولید محتوا/مارکتینگ</button>
+              <button type="button" class="option" data-pick="agent" data-value="تحلیل/گزارش‌گیری">تحلیل/گزارش‌گیری</button>
+              <button type="button" class="option" data-pick="agent" data-value="ایجنت شخصی (کارهای روزمره)">ایجنت شخصی (کارهای روزمره)</button>
+              <button type="button" class="option" data-pick="agent" data-value="سایر">سایر</button>
+            </div>
+          </section>
+
+          <!-- STEP 5 -->
+          <section class="step" data-step="4">
+            <div class="q">در پایان دوره، دقیقاً چه خروجی می‌خواهید؟</div>
+            <div class="hint">یک جمله کوتاه کافی است.</div>
+            <div class="field">
+              <label for="outcome">خروجی مورد انتظار *</label>
+              <textarea id="outcome" placeholder="مثلاً: یک ایجنت آماده که به داده‌های من وصل شود و روی سایت کار کند..."></textarea>
+            </div>
+          </section>
+
+          <!-- STEP 6 -->
+          <section class="step" data-step="5">
+            <div class="q">اطلاعات تماس</div>
+            <div class="hint">برای هماهنگی و ارسال جزئیات دوره.</div>
+
+            <div class="grid two">
+              <div class="field">
+                <label for="name">نام و نام خانوادگی *</label>
+                <input id="name" type="text" placeholder="نام شما"/>
               </div>
-              <label for="goalDetails" style="margin-top:10px;">توضیح کوتاه درباره هدف (اختیاری)</label>
-              <textarea id="goalDetails" name="توضیح هدف" placeholder="مثلاً می‌خواهم یک ایجنت برای پاسخ‌گویی به مشتریان بسازم..."></textarea>
-            </fieldset>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۲) سطح فعلی شما در هوش مصنوعی و ابزارهای مرتبط *</legend>
-              <div class="options">
-                <label class="opt">
-                  <input type="radio" name="سطح کلی" value="مبتدی" required />
-                  <span>مبتدی (فقط کاربر ChatGPT و ابزارهای آماده)</span>
-                </label>
-                <label class="opt">
-                  <input type="radio" name="سطح کلی" value="متوسط" required />
-                  <span>متوسط (آشنایی با پرامپت‌ها، ابزارها، کمی کار با API یا اتوماسیون)</span>
-                </label>
-                <label class="opt">
-                  <input type="radio" name="سطح کلی" value="پیشرفته" required />
-                  <span>پیشرفته (تجربه ساخت اپ/بات، اتصال به API، دیباگ و طراحی سیستم)</span>
-                </label>
+              <div class="field">
+                <label for="email">ایمیل *</label>
+                <input id="email" type="email" placeholder="example@email.com"/>
               </div>
-            </fieldset>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۳) دانش فنی شما (چند مورد را انتخاب کنید) *</legend>
-              <div class="options">
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="بدون کدنویسی / No-code" />
-                  <span>بدون کدنویسی / No-code</span>
-                </label>
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="مقدماتی برنامه‌نویسی" />
-                  <span>مقدماتی برنامه‌نویسی</span>
-                </label>
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="Python" />
-                  <span>Python</span>
-                </label>
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="JavaScript/TypeScript" />
-                  <span>JavaScript / TypeScript</span>
-                </label>
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="API و کار با REST/JSON" />
-                  <span>API و کار با REST/JSON</span>
-                </label>
-                <label class="opt">
-                  <input type="checkbox" name="دانش فنی" value="اتوماسیون (Zapier/Make/n8n)" />
-                  <span>اتوماسیون (Zapier / Make / n8n)</span>
-                </label>
+              <div class="field">
+                <label for="phone">شماره تماس (اختیاری)</label>
+                <input id="phone" type="tel" placeholder="+47 ... یا +98 ..."/>
               </div>
-              <div class="hint">حداقل یکی را انتخاب کنید (اگر هیچ‌کدام نیست، «بدون کدنویسی» را انتخاب کنید).</div>
-            </fieldset>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۴) چه نوع ایجنتی می‌خواهید بسازید؟ (چند مورد) *</legend>
-              <div class="options">
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="چت‌بات پشتیبانی مشتری" /> <span>چت‌بات پشتیبانی مشتری</span></label>
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت تولید محتوا/مارکتینگ" /> <span>ایجنت تولید محتوا/مارکتینگ</span></label>
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت تحلیل داده/گزارش" /> <span>ایجنت تحلیل داده/گزارش</span></label>
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت فروش و لید" /> <span>ایجنت فروش و لید</span></label>
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="ایجنت شخصی (کارهای روزمره)" /> <span>ایجنت شخصی (کارهای روزمره)</span></label>
-                <label class="opt"><input type="checkbox" name="نوع ایجنت" value="سایر" /> <span>سایر</span></label>
+              <div class="field">
+                <label for="notes">توضیحات تکمیلی (اختیاری)</label>
+                <input id="notes" type="text" placeholder="مثلاً موضوع خاص، صنعت شما، ابزار مدنظر..."/>
               </div>
-            </fieldset>
-          </div>
+            </div>
 
-          <div class="col-12">
-            <label for="dataSources">۵) ایجنت باید به چه منابعی دسترسی داشته باشد؟ (اختیاری)</label>
-            <textarea id="dataSources" name="منابع/داده‌های مورد نیاز" placeholder="مثلاً فایل‌های PDF، سایت، دیتابیس، Google Drive، Notion، CRM، ایمیل و ..."></textarea>
-            <div class="hint">اگر داده حساس دارید، فقط نوع داده را بنویسید (نه اطلاعات محرمانه).</div>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۶) بزرگ‌ترین چالش شما چیست؟ *</legend>
-              <div class="options">
-                <label class="opt"><input type="radio" name="چالش اصلی" value="نمی‌دانم از کجا شروع کنم" required /> <span>نمی‌دانم از کجا شروع کنم</span></label>
-                <label class="opt"><input type="radio" name="چالش اصلی" value="انتخاب ابزار/مدل مناسب" required /> <span>انتخاب ابزار/مدل مناسب</span></label>
-                <label class="opt"><input type="radio" name="چالش اصلی" value="اتصال به API و یکپارچه‌سازی" required /> <span>اتصال به API و یکپارچه‌سازی</span></label>
-                <label class="opt"><input type="radio" name="چالش اصلی" value="کیفیت پاسخ‌ها/هالوسینیشن" required /> <span>کیفیت پاسخ‌ها/کاهش خطا و هالوسینیشن</span></label>
-                <label class="opt"><input type="radio" name="چالش اصلی" value="دیپلوی و نگهداری" required /> <span>دیپلوی و نگهداری</span></label>
-              </div>
-            </fieldset>
-          </div>
-
-          <div class="col-12">
-            <label for="experience">۷) تجربه قبلی شما با ابزارهای زیر چیست؟ (اختیاری)</label>
-            <textarea id="experience" name="تجربه با ابزارها" placeholder="ChatGPT / Claude / Gemini / OpenAI API / LangChain / LlamaIndex / n8n / Make / Zapier / Telegram bot / Discord و ..."></textarea>
-          </div>
-
-          <div class="col-6">
-            <label for="format">۸) ترجیح شما برای مدل برگزاری *</label>
-            <select id="format" name="مدل برگزاری" required>
-              <option value="">انتخاب کنید</option>
-              <option value="حضوری">حضوری</option>
-              <option value="آنلاین">آنلاین</option>
-              <option value="ترکیبی">ترکیبی</option>
-            </select>
-          </div>
-
-          <div class="col-6">
-            <label for="timePref">۹) زمان‌های مناسب شما (اختیاری)</label>
-            <input id="timePref" name="زمان‌های مناسب" type="text" placeholder="مثلاً شنبه‌ها ۱۸-۲۰، یا روزهای کاری صبح..." />
-          </div>
-
-          <div class="col-12">
-            <label for="expectations">۱۰) چه چیزی دوست دارید در پایان دوره «حتماً» به آن برسید؟ *</label>
-            <textarea id="expectations" name="خروجی مورد انتظار" required placeholder="مثلاً یک ایجنت آماده که به دیتای من وصل شود، یا یک معماری قابل توسعه، یا نمونه اولیه..."></textarea>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۱۱) زبان محتوای دوره *</legend>
-              <div class="options">
-                <label class="opt"><input type="radio" name="زبان دوره" value="فارسی" required /> <span>فارسی</span></label>
-                <label class="opt"><input type="radio" name="زبان دوره" value="انگلیسی" required /> <span>انگلیسی</span></label>
-                <label class="opt"><input type="radio" name="زبان دوره" value="ترکیبی" required /> <span>ترکیبی</span></label>
-              </div>
-            </fieldset>
-          </div>
-
-          <div class="col-12">
-            <fieldset>
-              <legend>۱۲) رضایت‌نامه کوتاه *</legend>
-              <div class="options">
-                <label class="opt">
-                  <input type="checkbox" name="تایید" value="اطلاعات درست است" required />
-                  <span>اطلاعاتی که وارد کرده‌ام تا حد امکان درست است و می‌دانم پاسخ‌ها برای تنظیم بهتر دوره استفاده می‌شود.</span>
-                </label>
-              </div>
-              <div class="hint">این فرم اطلاعات را با ایمیل برای شما ارسال می‌کند. لطفاً اطلاعات حساس (رمزها، کلیدهای API و ...) را وارد نکنید.</div>
-            </fieldset>
-          </div>
-
-          <div class="col-12 actions">
-            <button type="submit">ارسال فرم</button>
-            <button type="reset" class="secondary">پاک کردن</button>
-          </div>
+            <div class="fineprint">
+              لطفاً اطلاعات حساس (رمز، کلید API و ...) وارد نکنید. ارسال این فرم با ایمیل برای شما انجام می‌شود (FormSubmit).
+            </div>
+            <div class="small" id="reviewBox" style="margin-top:10px;"></div>
+          </section>
         </div>
 
-        <div class="note">
-          نکته: اگر می‌خواهید بعد از ارسال، صفحه تشکر داشته باشید، یک فایل <code>thanks.html</code> بسازید و مقدار <code>_next</code> را به مسیر صحیح سایت خودتان تغییر دهید.
+        <div class="actions">
+          <button type="button" class="btn ghost" id="prevBtn">قبلی</button>
+          <button type="button" class="btn primary" id="nextBtn">مرحله بعد</button>
         </div>
       </form>
-    </section>
-  </main>
+    </div>
+  </div>
+
+  <script>
+    const steps = [
+      { key: "goal",  label: "هدف",   required: true },
+      { key: "level", label: "تجربه", required: true },
+      { key: "skill", label: "سطح فنی", required: true },
+      { key: "agent", label: "نوع ایجنت", required: true },
+      { key: "outcome", label: "خروجی", required: true },
+      { key: "contact", label: "ارسال", required: true },
+    ];
+
+    const state = {
+      goal: "",
+      level: "",
+      skill: "",
+      agent: "",
+      outcome: "",
+      name: "",
+      email: "",
+      phone: "",
+      notes: ""
+    };
+
+    let current = 0;
+
+    const $ = (s, el=document) => el.querySelector(s);
+    const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
+
+    const stepEls = $$(".step");
+    const toast = $("#toast");
+    const progressFill = $("#progressFill");
+    const prevBtn = $("#prevBtn");
+    const nextBtn = $("#nextBtn");
+    const pills = $("#stepPills");
+    const reviewBox = $("#reviewBox");
+
+    // Build pills
+    function renderPills(){
+      pills.innerHTML = "";
+      steps.forEach((st, i) => {
+        const div = document.createElement("div");
+        div.className = "step-pill" + (i===current ? " active" : "") + (i<current ? " done" : "");
+        div.innerHTML = `<span class="dot"></span><span>${st.label}</span>`;
+        pills.appendChild(div);
+      });
+    }
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=> toast.classList.remove("show"), 2200);
+    }
+
+    function setProgress(){
+      const pct = Math.round((current)/(steps.length-1) * 100);
+      progressFill.style.width = pct + "%";
+    }
+
+    function showStep(index){
+      current = Math.max(0, Math.min(index, steps.length-1));
+      stepEls.forEach(el => el.classList.remove("active"));
+      stepEls[current].classList.add("active");
+
+      prevBtn.disabled = current === 0;
+      nextBtn.textContent = current === steps.length-1 ? "ارسال فرم" : "مرحله بعد";
+
+      renderPills();
+      setProgress();
+
+      if(current === steps.length-1){
+        renderReview();
+      }
+    }
+
+    function selectOption(pickKey, value, clickedBtn){
+      state[pickKey] = value;
+
+      // Clear selected among same pick group in current step
+      const scope = stepEls[current];
+      $$(`.option[data-pick="${pickKey}"]`, scope).forEach(b => b.classList.remove("selected"));
+      if(clickedBtn) clickedBtn.classList.add("selected");
+    }
+
+    // Option clicks
+    $$(".option").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pick = btn.getAttribute("data-pick");
+        const val = btn.getAttribute("data-value");
+        selectOption(pick, val, btn);
+      });
+    });
+
+    function validateCurrent(){
+      // Step-based validation
+      if(current === 0 && !state.goal)   return "لطفاً هدف خود را انتخاب کنید.";
+      if(current === 1 && !state.level)  return "لطفاً سطح تجربه را انتخاب کنید.";
+      if(current === 2 && !state.skill)  return "لطفاً سطح فنی را انتخاب کنید.";
+      if(current === 3 && !state.agent)  return "لطفاً نوع ایجنت را انتخاب کنید.";
+
+      if(current === 4){
+        const v = $("#outcome").value.trim();
+        if(!v) return "لطفاً خروجی مورد انتظار را بنویسید.";
+        state.outcome = v;
+      }
+
+      if(current === 5){
+        const n = $("#name").value.trim();
+        const e = $("#email").value.trim();
+        if(!n) return "لطفاً نام و نام خانوادگی را وارد کنید.";
+        if(!e) return "لطفاً ایمیل را وارد کنید.";
+        state.name = n;
+        state.email = e;
+        state.phone = $("#phone").value.trim();
+        state.notes = $("#notes").value.trim();
+      }
+
+      return "";
+    }
+
+    function renderReview(){
+      const lines = [
+        `هدف: ${state.goal || "-"}`,
+        `تجربه: ${state.level || "-"}`,
+        `سطح فنی: ${state.skill || "-"}`,
+        `نوع ایجنت: ${state.agent || "-"}`,
+        `خروجی: ${state.outcome || "-"}`,
+        `نام: ${state.name || "-"}`,
+        `ایمیل: ${state.email || "-"}`,
+        `شماره: ${state.phone || "-"}`,
+        `یادداشت: ${state.notes || "-"}`
+      ];
+      reviewBox.innerHTML = `<div class="small">مرور سریع قبل از ارسال:</div><div style="margin-top:6px; line-height:1.9; color: rgba(255,255,255,.80);">${lines.join("<br/>")}</div>`;
+    }
+
+    function syncHiddenFields(){
+      $("#f_goal").value = state.goal;
+      $("#f_level").value = state.level;
+      $("#f_skill").value = state.skill;
+      $("#f_agent_type").value = state.agent;
+      $("#f_outcome").value = state.outcome;
+      $("#f_name").value = state.name;
+      $("#f_email").value = state.email;
+      $("#f_phone").value = state.phone;
+      $("#f_notes").value = state.notes;
+
+      // JSON summary (useful in email)
+      $("#f_json").value = JSON.stringify(state, null, 2);
+    }
+
+    // Nav buttons
+    prevBtn.addEventListener("click", () => showStep(current - 1));
+
+    nextBtn.addEventListener("click", () => {
+      const err = validateCurrent();
+      if(err){
+        showToast(err);
+        return;
+      }
+
+      if(current === steps.length - 1){
+        // final submit
+        syncHiddenFields();
+        $("#wizardForm").submit();
+        return;
+      }
+
+      showStep(current + 1);
+    });
+
+    // init
+    renderPills();
+    setProgress();
+  </script>
 </body>
 </html>
