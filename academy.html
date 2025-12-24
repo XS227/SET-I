@@ -3,505 +3,500 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>آکادمی هوش مصنوعی ستائی | مسیر اختصاصی یادگیری</title>
-  <meta name="description" content="آکادمی هوش مصنوعی ستائی در ۳ سطح. ابتدا فرم هوشمند را پر کنید تا مسیر اختصاصی شما بر اساس DNA دیجیتال‌تان طراحی شود." />
+  <title>آکادمی هوش مصنوعی ستائی | اسکن ستائی و مسیر اختصاصی</title>
+  <meta name="description" content="آکادمی هوش مصنوعی ستائی در ۳ سطح. با «اسکن ستائی» (آنالیز آنلاین DNA دیجیتال) سطح پیشنهادی و مسیر اختصاصی‌تان را دریافت کنید." />
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --card:#ffffff;
-      --shadow:0 10px 30px rgba(17,24,39,.08);
-      --orange:#ff6a00;
-      --orange2:#ff8a3d;
-      --dark:#0b1220;
-      --violet:#7c3aed;
-      --violet2:#a78bfa;
+      /* Setai-like premium tech palette (no orange) */
+      --bg:#0b1020;
+      --bg2:#0a0f1c;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
+      --stroke:rgba(255,255,255,.10);
+      --stroke2:rgba(255,255,255,.14);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --muted2:rgba(234,240,255,.56);
+      --accent:#7c3aed;    /* violet */
+      --accent2:#a78bfa;   /* light violet */
+      --good:#22c55e;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
-      --max:1100px;
+      --max:1120px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", "Vazirmatn", Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Vazirmatn", "Noto Sans Arabic", Arial, sans-serif;
+      background:
+        radial-gradient(1000px 520px at 75% -10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 520px at 20% 0%, rgba(167,139,250,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
-      background:var(--bg);
       line-height:1.75;
+      overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
     .container{width:100%; max-width:var(--max); margin:0 auto; padding:0 18px}
 
-    /* Top bar */
+    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,.9);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(229,231,235,.65);
+      backdrop-filter: blur(12px);
+      background:rgba(10,15,28,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
     .topbar-inner{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 0;
-      gap:12px;
+      gap:14px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:900;
-      letter-spacing:-.2px;
+      font-weight:950;
+      letter-spacing:-.25px;
+      min-width: 220px;
     }
-    .logo-mark{
+    .mark{
       width:38px; height:38px; border-radius:14px;
-      background:linear-gradient(135deg,var(--orange),var(--orange2));
-      box-shadow: 0 8px 22px rgba(255,106,0,.25);
-      display:grid; place-items:center; color:#fff; font-weight:900;
+      background:linear-gradient(135deg, rgba(124,58,237,.95), rgba(167,139,250,.95));
+      box-shadow: 0 14px 30px rgba(124,58,237,.22);
+      display:grid; place-items:center;
+      font-weight:1000;
+      color:#fff;
     }
-    .brand small{display:block; font-weight:700; color:var(--muted); margin-top:-2px}
-    .nav-actions{display:flex; align-items:center; gap:10px}
+    .brand small{
+      display:block; margin-top:-2px;
+      font-weight:800;
+      color:var(--muted2);
+      letter-spacing:.1px;
+      font-size:12px;
+    }
+
+    .actions{display:flex; align-items:center; gap:10px}
     .btn{
       border:0; cursor:pointer;
       padding:11px 14px;
       border-radius:14px;
-      font-weight:800;
+      font-weight:900;
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
-      transition:.15s transform ease, .15s opacity ease;
       user-select:none;
+      transition:.15s transform ease, .15s opacity ease, .15s background ease, .15s border-color ease;
     }
     .btn:active{transform:translateY(1px)}
     .btn-primary{
-      color:#fff;
-      background:linear-gradient(135deg,var(--orange),var(--orange2));
-      box-shadow: 0 10px 24px rgba(255,106,0,.24);
+      color:#0b1020;
+      background:linear-gradient(135deg, rgba(167,139,250,1), rgba(124,58,237,1));
+      box-shadow: 0 18px 40px rgba(124,58,237,.22);
     }
     .btn-ghost{
-      background:#fff;
-      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
       color:var(--text);
     }
     .icon-btn{
       width:44px; height:44px;
       border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
       display:grid; place-items:center;
       cursor:pointer;
+      color:var(--text);
+      font-weight:1000;
     }
 
     /* Hero */
-    .hero{
-      padding:26px 0 0;
-      background:
-        radial-gradient(900px 400px at 70% 0%, rgba(255,106,0,.12), transparent 55%),
-        radial-gradient(900px 400px at 30% 10%, rgba(124,58,237,.10), transparent 60%);
-    }
+    .hero{padding:22px 0 0}
     .hero-grid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap:18px;
+      gap:16px;
       align-items:stretch;
-      padding:16px 0 26px;
+      padding:14px 0 22px;
     }
-    @media (max-width: 920px){
-      .hero-grid{grid-template-columns:1fr; }
-    }
-    .hero-card{
-      border:1px solid rgba(229,231,235,.7);
-      background:rgba(255,255,255,.85);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:20px;
-      overflow:hidden;
-      position:relative;
-    }
-    .hero-kicker{
-      display:inline-flex; gap:8px; align-items:center;
-      font-weight:900;
-      color:var(--orange);
-      background:rgba(255,106,0,.10);
-      border:1px solid rgba(255,106,0,.18);
-      padding:6px 10px;
-      border-radius:999px;
-      margin-bottom:10px;
-    }
-    h1{
-      font-size: clamp(28px, 3vw, 40px);
-      line-height:1.25;
-      margin:10px 0 10px;
-      letter-spacing:-.4px;
-    }
-    .lead{color:var(--muted); font-weight:700; margin:0 0 14px}
-    .cta-row{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:16px;
-    }
-    .mini{
-      display:flex; gap:14px; flex-wrap:wrap;
-      margin-top:14px; color:var(--muted); font-weight:700; font-size:13px;
-    }
-    .mini span{display:inline-flex; align-items:center; gap:7px}
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background:rgba(16,185,129,.85);
-      box-shadow:0 0 0 6px rgba(16,185,129,.12);
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns:1fr}
+      .actions .btn-ghost{display:none}
     }
 
-    /* Video/Testimonial mock */
-    .media{
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .media-frame{
+    .card{
       border-radius:var(--radius);
-      background:linear-gradient(135deg, rgba(11,18,32,.92), rgba(11,18,32,.75));
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
       overflow:hidden;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      width:max-content;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(167,139,250,.28);
+      background:rgba(124,58,237,.16);
+      color:rgba(234,240,255,.92);
+      font-weight:950;
+      font-size:12px;
+    }
+    h1{
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height:1.2;
+      margin:10px 0 10px;
+      letter-spacing:-.55px;
+    }
+    .lead{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top:14px;
+      color:var(--muted2);
+      font-weight:850;
+      font-size:13px;
+    }
+    .meta span{display:inline-flex; align-items:center; gap:8px}
+    .pulse{
+      width:8px; height:8px; border-radius:999px;
+      background:var(--good);
+      box-shadow:0 0 0 7px rgba(34,197,94,.14);
+    }
+
+    /* Right column */
+    .stack{display:grid; gap:12px; align-content:start}
+    .media{
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(700px 240px at 50% 20%, rgba(167,139,250,.18), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
       min-height:240px;
       position:relative;
+      overflow:hidden;
     }
-    .media-frame .play{
+    .media .label{
+      position:absolute; top:14px; right:14px; left:14px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      font-weight:900;
+      color:rgba(234,240,255,.92);
+      font-size:13px;
+    }
+    .play{
       position:absolute; inset:0;
       display:grid; place-items:center;
       opacity:.95;
     }
-    .play .circle{
+    .circle{
       width:74px; height:74px; border-radius:999px;
-      background:rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.22);
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.10);
       display:grid; place-items:center;
-      box-shadow:0 12px 28px rgba(0,0,0,.35);
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
     }
-    .triangle{
+    .tri{
       width:0; height:0;
       border-top:12px solid transparent;
       border-bottom:12px solid transparent;
-      border-right:0;
-      border-left:18px solid #fff;
+      border-left:18px solid rgba(234,240,255,.95);
       margin-right:3px;
     }
-    .slider{
+
+    .quote{
       border-radius:var(--radius);
-      border:1px solid rgba(229,231,235,.7);
-      background:#fff;
-      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .slide{
-      padding:14px 14px 12px;
-      display:none;
-    }
-    .slide.active{display:block}
-    .slide strong{display:block; font-weight:900}
-    .slide p{margin:8px 0 0; color:var(--muted); font-weight:700}
-    .slider-controls{
-      display:flex; justify-content:space-between; align-items:center;
+    .quote .body{padding:14px 14px 12px}
+    .quote strong{display:block; font-weight:1000}
+    .quote p{margin:8px 0 0; color:var(--muted); font-weight:800}
+    .quote .controls{
+      display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px;
-      border-top:1px solid rgba(229,231,235,.7);
-      background:linear-gradient(180deg, #fff, #fafafa);
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
     }
     .pill{
-      font-size:12px; font-weight:900; color:var(--muted);
-      padding:6px 10px; border-radius:999px;
-      border:1px solid rgba(229,231,235,.8);
-      background:#fff;
-    }
-
-    /* Orange section */
-    .section-orange{
-      background:linear-gradient(180deg, var(--orange), #ff7a1d);
-      padding:26px 0;
-      margin-top:10px;
-    }
-    .section-orange h2{
-      margin:0 0 10px;
-      font-size: clamp(22px, 2.2vw, 30px);
-      color:#fff;
-      letter-spacing:-.3px;
-    }
-    .section-orange .sub{
-      color:rgba(255,255,255,.88);
-      font-weight:800;
-      margin:0 0 16px;
-    }
-    .advisor{
-      background:linear-gradient(180deg, rgba(11,18,32,.98), rgba(11,18,32,.92));
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:28px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.18);
-      padding:16px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-      max-width:560px;
-    }
-    .advisor .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      width:max-content;
-      color:#fff;
-      font-weight:900;
       font-size:12px;
+      font-weight:950;
+      color:rgba(234,240,255,.70);
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-    }
-    .advisor h3{color:#fff; margin:0; font-size:18px}
-    .advisor p{margin:0; color:rgba(255,255,255,.82); font-weight:700}
-    .advisor .btn{
-      background:linear-gradient(135deg, var(--violet), var(--violet2));
-      color:#fff;
-      width:100%;
-      border-radius:18px;
-      padding:12px 14px;
-      box-shadow: 0 14px 30px rgba(124,58,237,.22);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
     }
 
-    /* Section base */
-    section{padding:26px 0}
+    /* Sections */
+    section{padding:24px 0}
     .title{
-      font-size: clamp(22px, 2.2vw, 30px);
       margin:0 0 10px;
+      font-size: clamp(22px, 2.2vw, 30px);
       letter-spacing:-.35px;
     }
-    .muted{color:var(--muted); font-weight:700; margin:0}
+    .muted{margin:0; color:var(--muted); font-weight:800}
 
-    /* Instructor */
-    .instructor{
+    /* DNA / Scan section */
+    .scan{
+      background:
+        radial-gradient(900px 420px at 70% 0%, rgba(124,58,237,.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:28px;
+      box-shadow: var(--shadow);
+      padding:16px;
       display:grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap:16px;
+      grid-template-columns: 1fr .95fr;
+      gap:12px;
       align-items:stretch;
-      margin-top:14px;
     }
-    @media (max-width: 900px){
-      .instructor{grid-template-columns:1fr}
+    @media (max-width: 980px){
+      .scan{grid-template-columns:1fr}
     }
-    .profile{
-      border-radius:var(--radius);
-      border:1px solid rgba(229,231,235,.7);
-      background:#fff;
-      box-shadow:var(--shadow);
+    .scan .panel{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:14px;
       overflow:hidden;
     }
-    .profile .cover{
-      height:160px;
-      background: radial-gradient(500px 180px at 50% 40%, rgba(255,106,0,.24), transparent 55%),
-                  radial-gradient(500px 220px at 20% 0%, rgba(124,58,237,.18), transparent 65%),
-                  linear-gradient(135deg, #0b1220, #1f2937);
-      position:relative;
-    }
-    .avatar{
-      width:118px; height:118px;
+    .scan .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      width:max-content;
+      padding:6px 10px;
       border-radius:999px;
-      border:6px solid #fff;
-      background:#111827;
-      position:absolute;
-      left:18px;
-      bottom:-52px;
-      display:grid; place-items:center;
-      color:#fff;
-      font-weight:900;
-      box-shadow: 0 18px 40px rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:rgba(234,240,255,.88);
+      font-weight:950;
+      font-size:12px;
     }
-    .profile .body{padding:64px 16px 16px}
-    .profile h3{margin:0 0 6px; font-size:18px}
-    .profile p{margin:0; color:var(--muted); font-weight:700}
+    .scan h3{margin:10px 0 8px; font-size:18px; letter-spacing:-.2px}
+    .scan p{margin:0; color:var(--muted); font-weight:800}
 
-    /* Method cards */
-    .grid-4{
-      margin-top:14px;
+    .partner{
+      margin-top:12px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(255,255,255,.03);
+    }
+    .partner .txt{
+      font-weight:900;
+      color:rgba(234,240,255,.86);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .partner img{
+      height:30px;
+      width:auto;
+      filter: brightness(0) invert(1);
+      opacity:.95;
+    }
+    @media (max-width:520px){
+      .partner{flex-direction:column; align-items:flex-start}
+      .partner img{height:26px}
+    }
+
+    /* Levels */
+    .levels{
+      margin-top:12px;
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap:12px;
     }
-    @media (max-width: 980px){ .grid-4{grid-template-columns: repeat(2,1fr)} }
-    @media (max-width: 520px){ .grid-4{grid-template-columns: 1fr} }
-    .method-card{
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,106,0,.97), rgba(255,122,29,.97));
-      color:#fff;
-      box-shadow: 0 14px 28px rgba(255,106,0,.18);
+    @media (max-width: 980px){ .levels{grid-template-columns:1fr} }
+    .level{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
       padding:16px;
       position:relative;
       overflow:hidden;
     }
-    .method-card .ico{
-      width:44px; height:44px; border-radius:16px;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.22);
+    .level .num{
+      width:44px; height:44px;
+      border-radius:16px;
       display:grid; place-items:center;
-      margin-bottom:10px;
-      font-weight:900;
+      border:1px solid rgba(167,139,250,.28);
+      background:rgba(124,58,237,.18);
+      font-weight:1000;
     }
-    .method-card h4{margin:0 0 6px; font-size:18px}
-    .method-card p{margin:0; font-weight:700; opacity:.92}
-
-    /* Packages */
-    .packages{
-      margin-top:14px;
-      border-radius:var(--radius);
-      border:1px solid rgba(229,231,235,.7);
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      background:#fff;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
+    .level h4{margin:10px 0 6px; font-size:18px}
+    .level ul{
+      margin:10px 0 0;
+      padding:0 18px 0 0;
+      color:var(--muted);
       font-weight:800;
     }
-    th, td{
-      padding:12px 12px;
-      border-bottom:1px solid rgba(229,231,235,.7);
-      text-align:center;
-      vertical-align:middle;
-    }
-    th{
-      background:#0b1220;
-      color:#fff;
+    .level li{margin:6px 0}
+    .level .out{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
       font-weight:900;
+      color:rgba(234,240,255,.86);
     }
-    td:first-child, th:first-child{
-      text-align:right;
-      width:32%;
-    }
-    .ok{color:#16a34a; font-weight:1000}
-    .no{color:#ef4444; font-weight:1000}
 
-    .pkg-cta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      padding:14px;
-      background:linear-gradient(180deg,#fff,#fafafa);
+    /* Instructor */
+    .about{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:12px;
+      align-items:stretch;
+      margin-top:12px;
     }
-    .pkg-cta .btn{flex:1; min-width:200px}
-    .btn-outline{
-      background:#fff;
-      border:2px solid rgba(255,106,0,.55);
-      color:var(--text);
+    @media (max-width: 980px){ .about{grid-template-columns:1fr} }
+    .profile{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
     }
+    .cover{
+      height:160px;
+      background:
+        radial-gradient(500px 200px at 35% 10%, rgba(167,139,250,.22), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position:relative;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .avatar{
+      width:118px; height:118px; border-radius:999px;
+      border:6px solid rgba(11,16,32,.95);
+      background:#0b1020;
+      position:absolute;
+      left:16px;
+      bottom:-52px;
+      overflow:hidden;
+      box-shadow: 0 18px 46px rgba(0,0,0,.55);
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover}
+    .profile .body{padding:64px 16px 16px}
+    .profile h3{margin:0 0 6px; font-size:18px}
+    .profile p{margin:0; color:var(--muted); font-weight:800}
 
     /* Smart form */
     .form-wrap{
-      margin-top:14px;
-      border-radius:var(--radius);
-      border:1px solid rgba(229,231,235,.7);
-      box-shadow:var(--shadow);
-      background:#fff;
+      margin-top:12px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
       overflow:hidden;
     }
     .form-head{
-      padding:14px 14px 10px;
-      border-bottom:1px solid rgba(229,231,235,.7);
+      padding:14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
       display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
     .progress{
       height:10px;
       border-radius:999px;
-      background:#f3f4f6;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
       overflow:hidden;
       flex:1;
-      border:1px solid rgba(229,231,235,.9);
     }
     .bar{
       height:100%;
       width:0%;
-      background:linear-gradient(135deg, var(--violet), var(--violet2));
+      background:linear-gradient(135deg, rgba(167,139,250,1), rgba(124,58,237,1));
       transition:width .2s ease;
     }
-    .step{
-      display:none;
-      padding:14px;
-    }
+
+    form{margin:0}
+    .step{display:none; padding:14px}
     .step.active{display:block}
-    label{display:block; font-weight:900; margin:10px 0 6px}
+    label{display:block; font-weight:950; margin:10px 0 6px; color:rgba(234,240,255,.92)}
     input, select, textarea{
       width:100%;
       padding:12px 12px;
       border-radius:14px;
-      border:1px solid rgba(229,231,235,.9);
+      border:1px solid rgba(255,255,255,.12);
       outline:none;
-      font-weight:800;
-      background:#fff;
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      font-weight:850;
     }
     textarea{min-height:92px; resize:vertical}
+    input::placeholder, textarea::placeholder{color:rgba(234,240,255,.45)}
     .form-actions{
       display:flex; gap:10px; flex-wrap:wrap;
       padding:14px;
-      border-top:1px solid rgba(229,231,235,.7);
-      background:linear-gradient(180deg,#fff,#fafafa);
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
     }
     .form-actions .btn{flex:1; min-width:160px}
-    .result{
-      padding:14px;
-      border-top:1px solid rgba(229,231,235,.7);
-      display:none;
-    }
+    .result{display:none; padding:14px; border-top:1px solid rgba(255,255,255,.08)}
     .result.active{display:block}
     .result-card{
-      border-radius:18px;
+      border-radius:22px;
+      border:1px solid rgba(167,139,250,.24);
+      background:linear-gradient(180deg, rgba(124,58,237,.14), rgba(255,255,255,.02));
       padding:14px;
-      border:1px solid rgba(124,58,237,.24);
-      background:linear-gradient(180deg, rgba(124,58,237,.08), rgba(167,139,250,.10));
     }
     .result-card h4{margin:0 0 8px}
-    .result-card p{margin:0; color:var(--muted); font-weight:800}
+    .result-card p{margin:0; color:var(--muted); font-weight:850}
 
-    /* Footer */
+    /* Footer + mobile floating */
     footer{
-      border-top:1px solid rgba(229,231,235,.8);
+      border-top:1px solid rgba(255,255,255,.08);
       padding:18px 0 24px;
-      color:var(--muted);
-      font-weight:800;
-      background:#fff;
+      color:var(--muted2);
+      font-weight:850;
+      background:rgba(0,0,0,.10);
     }
-    .foot{
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      align-items:center;
-    }
+    .foot{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center}
 
-    /* Floating CTA (mobile) */
     .floating{
-      position:fixed;
-      bottom:14px;
-      left:14px;
-      right:14px;
-      z-index:60;
+      position:fixed; bottom:14px; left:14px; right:14px; z-index:60;
       display:none;
     }
     @media (max-width: 860px){
       .floating{display:block}
-      .floating .chip{
+      .chip{
         border-radius:22px;
-        background:#fff;
-        border:1px solid rgba(229,231,235,.85);
-        box-shadow: 0 16px 40px rgba(17,24,39,.18);
+        background:rgba(10,15,28,.82);
+        border:1px solid rgba(255,255,255,.10);
+        box-shadow: 0 18px 50px rgba(0,0,0,.55);
         padding:10px;
         display:flex; gap:10px; align-items:center; justify-content:space-between;
+        backdrop-filter: blur(12px);
       }
-      .floating .btn{padding:12px 14px; border-radius:18px}
+      .chip .btn{padding:12px 14px; border-radius:18px}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Top bar -->
+  <!-- Topbar -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
         <a class="brand" href="#top">
-          <span class="logo-mark">S</span>
+          <span class="mark">S</span>
           <span>
             آکادمی هوش مصنوعی ستائی
             <small>Designed. Engineered. Intelligent.</small>
           </span>
         </a>
 
-        <div class="nav-actions">
-          <a class="btn btn-primary" href="#smart-form">شروع با فرم هوشمند</a>
-          <button class="icon-btn" type="button" aria-label="menu" onclick="scrollToSection('packages')">≡</button>
+        <div class="actions">
+          <a class="btn btn-primary" href="#scan-form">شروع اسکن ستائی</a>
+          <a class="btn btn-ghost" href="#levels">۳ سطح آموزشی</a>
+          <button class="icon-btn" type="button" aria-label="menu" onclick="scrollToSection('scan')">≡</button>
         </div>
       </div>
     </div>
@@ -512,56 +507,48 @@
     <div class="container">
       <div class="hero-grid">
 
-        <div class="hero-card">
-          <div class="hero-kicker">مسیر اختصاصی شما با تحلیل «DNA دیجیتال»</div>
-          <h1>آماده‌اید هوش مصنوعی را تبدیل به ابزار کار، دستیار و اهرم رشد خود کنید؟</h1>
+        <div class="card">
+          <div class="kicker">اسکن ستائی • آنالیز آنلاین DNA دیجیتال</div>
+          <h1>هوش مصنوعی را از «ابزارهای پراکنده» تبدیل کنید به یک سیستم قابل اتکا</h1>
           <p class="lead">
-            آکادمی ستائی در ۳ سطح برگزار می‌شود. ابتدا فرم هوشمند را پر کنید؛ سپس بر اساس پاسخ‌ها، مسیر و برنامه‌ی اختصاصی شما طراحی و پیشنهاد می‌شود.
+            این آکادمی در ۳ سطح برگزار می‌شود. شما ابتدا «اسکن ستائی» را انجام می‌دهید؛ سپس بر اساس هدف، سطح فعلی، زمان و نوع فعالیت‌تان،
+            سطح پیشنهادی و مسیر اختصاصی شما طراحی می‌شود.
           </p>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#smart-form">شروع مشاوره و تحلیل رایگان</a>
-            <a class="btn btn-ghost" href="#method">روش ستائی چیست؟</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <a class="btn btn-primary" href="#scan-form">شروع اسکن ستائی</a>
+            <a class="btn btn-ghost" href="#scan">DNA دیجیتال یعنی چه؟</a>
           </div>
 
-          <div class="mini">
-            <span><span class="dot"></span> طراحی مسیر بر اساس هدف و شرایط</span>
-            <span>•</span>
-            <span>۳ سطح آموزشی (شروع تا پیشرفته)</span>
+          <div class="meta">
+            <span><span class="pulse"></span> خروجی‌محور و پروژه‌محور</span>
             <span>•</span>
             <span>مناسب افراد، کسب‌وکارها و هنرمندان</span>
+            <span>•</span>
+            <span>طراحی مسیر، نه کلاس عمومی</span>
           </div>
         </div>
 
-        <div class="media">
-          <div class="media-frame" role="img" aria-label="video">
-            <div style="position:absolute; inset:0; padding:16px;">
-              <div style="font-weight:900; opacity:.95; font-size:14px;">نتایج هنرجویان و مشتریان</div>
-              <div style="opacity:.75; font-weight:800; font-size:12px; margin-top:4px;">نمونه ویدیو/بازخورد (قابل جایگزینی)</div>
+        <div class="stack">
+          <div class="media" role="img" aria-label="media">
+            <div class="label">
+              <div>نمونه نتایج / معرفی کوتاه</div>
+              <div style="color:rgba(234,240,255,.62); font-weight:850; font-size:12px;">ویدیو/گیف را اینجا قرار دهید</div>
             </div>
             <div class="play">
-              <div class="circle"><div class="triangle"></div></div>
+              <div class="circle"><div class="tri"></div></div>
             </div>
           </div>
 
-          <div class="slider" aria-label="testimonials">
-            <div class="slide active">
-              <strong>مبین — صاحب کسب‌وکار</strong>
-              <p>بعد از تحلیل ستائی، یک مسیر واقعی برای استفاده از AI در فروش و تولید محتوا گرفتم و دقیقاً می‌دانستم از کجا شروع کنم.</p>
+          <div class="quote">
+            <div class="body">
+              <strong id="tName">مبین — صاحب کسب‌وکار</strong>
+              <p id="tText">«بعد از اسکن ستائی، مسیر دقیق استفاده از AI برای فروش و محتوا مشخص شد و از سردرگمی خارج شدم.»</p>
             </div>
-            <div class="slide">
-              <strong>هستی — فریلنسر</strong>
-              <p>با تمرین‌ها و اصلاح فرآیندها، خروجی من سریع‌تر و منظم‌تر شد. ابزارها را درست و هدفمند انتخاب کردم.</p>
-            </div>
-            <div class="slide">
-              <strong>امیر — هنرمند</strong>
-              <p>برای ایده‌پردازی و تولید، AI تبدیل شد به دستیار واقعی. مسیر یادگیری شخصی‌سازی‌شده خیلی کمک کرد.</p>
-            </div>
-
-            <div class="slider-controls">
-              <button class="btn btn-ghost" type="button" onclick="prevSlide()">قبلی</button>
-              <span class="pill" id="slidePill">۱ / ۳</span>
-              <button class="btn btn-ghost" type="button" onclick="nextSlide()">بعدی</button>
+            <div class="controls">
+              <button class="btn btn-ghost" type="button" onclick="prevT()">قبلی</button>
+              <span class="pill" id="tPill">۱ / ۳</span>
+              <button class="btn btn-ghost" type="button" onclick="nextT()">بعدی</button>
             </div>
           </div>
         </div>
@@ -570,165 +557,155 @@
     </div>
   </div>
 
-  <!-- Orange CTA section (like Sedano) -->
-  <div class="section-orange">
+  <!-- Scan / DNA section -->
+  <section id="scan">
     <div class="container">
-      <h2>آماده‌اید با «DNA دیجیتال» خودتان مسیر دقیق را پیدا کنید؟</h2>
-      <p class="sub">اگر امروز اقدام کنید، تحلیل اولیه و پیشنهاد سطح برای شما رایگان انجام می‌شود.</p>
+      <h2 class="title">اسکن ستائی: «DNA دیجیتال» شما را تحلیل می‌کند و مسیر می‌چیند</h2>
+      <p class="muted">
+        مثل طراحی برنامه بر اساس DNA در نمونه‌های مشابه، اینجا هم ستائی پروفایل دیجیتال شما را می‌سنجد: هدف، محدودیت‌ها، سبک کار و خروجی مورد انتظار؛
+        سپس سطح مناسب و برنامه تمرین/پروژه را پیشنهاد می‌دهد.
+      </p>
 
-      <div class="advisor">
-        <div class="tag">ظرفیت محدود • برنامه اختصاصی</div>
-        <h3>نقشه راه اختصاصی را دریافت کنید</h3>
-        <p>هدف شما، سطح فعلی و نیازتان بررسی می‌شود؛ سپس سطح پیشنهادی + برنامه تمرین/پروژه ارائه خواهد شد.</p>
-        <a class="btn" href="#smart-form">شروع مشاوره</a>
+      <div class="scan" style="margin-top:12px;">
+        <div class="panel">
+          <div class="badge">چه چیزی را تحلیل می‌کنیم؟</div>
+          <h3>از «پرسش» تا «نقشه‌راه»</h3>
+          <p>
+            در اسکن ستائی، به جای معرفی یک لیست ابزار، به دنبال ساخت مسیر هستیم:
+            کدام خروجی دقیقاً باید ساخته شود، کدام ابزارها ضروری‌اند، چه تمرین‌هایی باید انجام شود،
+            و چطور نتیجه قابل اندازه‌گیری شود.
+          </p>
+
+          <div class="partner">
+            <div class="txt">
+              برگزاری جلسات حضوری و تخصصی در ایران<br/>
+              با همکاری <span style="color:rgba(234,240,255,.95); font-weight:1000;">WHAL Academy</span>
+            </div>
+            <img
+              src="https://www.whalcademy.com/build/assets/logo-5fd86e0a.svg"
+              alt="WHAL Academy logo"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="badge">خروجی اسکن ستائی</div>
+          <h3>پیشنهاد سطح + مسیر اختصاصی</h3>
+          <p>
+            خروجی شما یک پیشنهاد روشن است: سطح مناسب (۱/۲/۳) + نقشه‌ی اجرای مرحله‌ای.
+            اگر کسب‌وکار دارید، مسیر بر مبنای رشد و سیستم‌سازی چیده می‌شود؛
+            اگر هنرمند هستید، بر مبنای ایده‌پردازی، تولید و یکپارچگی خروجی.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <a class="btn btn-primary" href="#scan-form">شروع اسکن</a>
+            <a class="btn btn-ghost" href="#levels">آشنایی با ۳ سطح</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Levels -->
+  <section id="levels">
+    <div class="container">
+      <h2 class="title">۳ سطح آموزشی آکادمی ستائی</h2>
+      <p class="muted">سطح پیشنهادی شما پس از «اسکن ستائی» مشخص می‌شود.</p>
+
+      <div class="levels">
+        <div class="level">
+          <div class="num">۱</div>
+          <h4>سطح ۱ — پایه‌سازی و جهت‌دهی</h4>
+          <ul>
+            <li>شروع استاندارد، بدون آشفتگی ابزارها</li>
+            <li>شناخت اصول، محدودیت‌ها و چارچوب‌ها</li>
+            <li>ساخت عادت و روش درست کار با AI</li>
+          </ul>
+          <div class="out">خروجی: نقشه‌راه شخصی + انتخاب ابزارهای ضروری</div>
+        </div>
+
+        <div class="level">
+          <div class="num">۲</div>
+          <h4>سطح ۲ — کاربرد و سیستم</h4>
+          <ul>
+            <li>طراحی Use-case دقیق برای حوزه شما</li>
+            <li>ورک‌فلوهای محتوا/فروش/عملیات یا تولید هنری</li>
+            <li>تمرین هدایت‌شده و اصلاح مرحله‌ای</li>
+          </ul>
+          <div class="out">خروجی: فرآیند/ورک‌فلو قابل اجرا در کار واقعی</div>
+        </div>
+
+        <div class="level">
+          <div class="num">۳</div>
+          <h4>سطح ۳ — استراتژی و اتوماسیون</h4>
+          <ul>
+            <li>AI به‌عنوان دستیار دائمی و موتور رشد</li>
+            <li>سیستم‌سازی، استانداردسازی، و اتوماسیون</li>
+            <li>پروژه اختصاصی و خروجی پایدار</li>
+          </ul>
+          <div class="out">خروجی: سیستم پایدار + اتوماسیون + قابلیت توسعه</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Instructor -->
   <section id="instructor">
     <div class="container">
-      <h2 class="title">با مدرس آکادمی ستائی آشنا شوید</h2>
-      <p class="muted">این بخش را مطابق با بیوگرافی و تصویر واقعی خودتان کامل می‌کنید.</p>
+      <h2 class="title">درباره مدرس</h2>
+      <p class="muted">تمرکز ستائی: نتیجه‌ی قابل اجرا، نه آموزش عمومی.</p>
 
-      <div class="instructor">
+      <div class="about">
         <div class="profile">
           <div class="cover">
-            <div class="avatar">ST</div>
+            <div class="avatar">
+              <img
+                src="https://secure.b8cdn.com/images/uploads/user_photos/92/83192892_20240707160047.jpg"
+                alt="Setaei"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div class="body">
-            <h3>استاد ستائی</h3>
+            <h3>ستائی (Setaei)</h3>
             <p>
-              متخصص پیاده‌سازی هوش مصنوعی برای رشد فردی و کسب‌وکار. تمرکز بر «سیستم‌سازی»،
-              «اتوماسیون»، و «کاربرد عملی AI» برای محتوا، فروش، عملیات و خلق اثر.
+              ستائی سازنده‌ی سیستم است؛ جایی بین هوش مصنوعی، مهندسی و محصول.
+              تمرکز او روی «نتیجه‌ی قابل اجرا» است: طراحی مسیر، پیاده‌سازی ورک‌فلو،
+              و تبدیل AI به دستیار واقعی برای کار و خلق.
             </p>
           </div>
         </div>
 
-        <div class="hero-card" style="box-shadow:var(--shadow);">
-          <div class="hero-kicker">تفاوت ستائی</div>
-          <h3 style="margin:6px 0 8px; font-size:22px;">اینجا کلاس عمومی نیست؛ مسیر اختصاصی است.</h3>
+        <div class="card">
+          <div class="kicker">تفاوت آکادمی ستائی</div>
+          <h3 style="margin:10px 0 10px; font-size:22px; letter-spacing:-.25px;">اینجا کلاس عمومی نیست؛ مسیر اختصاصی است.</h3>
           <p class="lead" style="margin:0;">
-            خیلی‌ها ابزار را یاد می‌گیرند اما نتیجه نمی‌گیرند؛ چون مسیر، هدف، و تمرین‌های متناسب ندارند.
-            ستائی اول «پروفایل شما» را تحلیل می‌کند و سپس برنامه‌ی مرحله‌ای می‌چیند.
+            خیلی‌ها ابزار یاد می‌گیرند اما نتیجه نمی‌گیرند؛ چون مسیر، هدف، و تمرین‌های متناسب ندارند.
+            ستائی ابتدا وضعیت، هدف، محدودیت زمان و نوع فعالیت شما را تحلیل می‌کند؛ سپس مسیر شخصی شما طراحی می‌شود—
+            با ساختاری که قابل کنترل باشد و مرحله به مرحله قابل اصلاح و بهینه‌سازی.
           </p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#packages">دیدن پکیج‌ها</a>
-            <a class="btn btn-ghost" href="#smart-form">فرم هوشمند</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <a class="btn btn-primary" href="#scan-form">شروع اسکن ستائی</a>
+            <a class="btn btn-ghost" href="#levels">۳ سطح آموزشی</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Method -->
-  <section id="method">
+  <!-- Smart Scan Form -->
+  <section id="scan-form">
     <div class="container">
-      <h2 class="title">متد ستائی: شاه‌کلید موفقیت در یادگیری و کاربرد AI</h2>
-      <p class="muted">آموزش برای همه یکسان نیست. ما مسیر را متناسب با هدف و DNA دیجیتال شما طراحی می‌کنیم.</p>
+      <h2 class="title">اسکن ستائی</h2>
+      <p class="muted">آنالیز آنلاین DNA دیجیتال و پیشنهاد سطح + مسیر اختصاصی.</p>
 
-      <div class="grid-4">
-        <div class="method-card">
-          <div class="ico">🎯</div>
-          <h4>هدف‌گذاری</h4>
-          <p>اول مشخص می‌کنیم دقیقاً چه نتیجه‌ای می‌خواهید: رشد درآمد، سرعت تولید، سیستم‌سازی یا خلق.</p>
-        </div>
-        <div class="method-card">
-          <div class="ico">🧠</div>
-          <h4>آنالیز</h4>
-          <p>پروفایل شما، سطح فعلی، زمان آزاد، حوزه و چالش‌ها بررسی و امتیازدهی می‌شود.</p>
-        </div>
-        <div class="method-card">
-          <div class="ico">🛠️</div>
-          <h4>تمرین/پروژه</h4>
-          <p>تمرین‌ها و پروژه‌ها دقیقاً متناسب با حوزه شما طراحی می‌شوند (کسب‌وکار/هنری/فریلنس).</p>
-        </div>
-        <div class="method-card">
-          <div class="ico">✅</div>
-          <h4>اصلاح و تثبیت</h4>
-          <p>بازخورد، بهینه‌سازی مسیر، و تثبیت عادت‌ها تا رسیدن به خروجی قابل اندازه‌گیری.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Packages -->
-  <section id="packages">
-    <div class="container">
-      <h2 class="title">پکیج‌های آکادمی ستائی: مسیر خود را انتخاب کنید</h2>
-      <p class="muted">۳ سطح آموزشی داریم؛ سطح پیشنهادی بعد از فرم هوشمند مشخص می‌شود.</p>
-
-      <div class="packages">
-        <table aria-label="comparison">
-          <thead>
-            <tr>
-              <th>ویژگی</th>
-              <th>سطح ۱ (شروع)</th>
-              <th>سطح ۲ (کاربردی)</th>
-              <th>سطح ۳ (پیشرفته)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>مدت و ساختار</td>
-              <td>۴ جلسه گروهی</td>
-              <td>۴ جلسه + تمرین هدایت‌شده</td>
-              <td>۴ جلسه + پروژه اختصاصی</td>
-            </tr>
-            <tr>
-              <td>تحلیل DNA دیجیتال</td>
-              <td class="no">✕</td>
-              <td class="ok">✓</td>
-              <td class="ok">✓</td>
-            </tr>
-            <tr>
-              <td>طراحی مسیر شخصی</td>
-              <td class="no">✕</td>
-              <td class="ok">✓</td>
-              <td class="ok">✓</td>
-            </tr>
-            <tr>
-              <td>تمرین عملی (Use-case)</td>
-              <td>تمرین‌های پایه</td>
-              <td>Use-case حوزه شما</td>
-              <td>پیاده‌سازی کامل سیستم</td>
-            </tr>
-            <tr>
-              <td>جلسه رفع اشکال/کوچینگ</td>
-              <td class="no">✕</td>
-              <td class="ok">✓</td>
-              <td class="ok">✓</td>
-            </tr>
-            <tr>
-              <td>خروجی نهایی</td>
-              <td>نقشه ابزارها</td>
-              <td>فرآیند قابل اجرا</td>
-              <td>سیستم + اتوماسیون</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="pkg-cta">
-          <a class="btn btn-primary" href="#smart-form">می‌خواهم سطح پیشنهادی‌ام را بدانم</a>
-          <a class="btn btn-outline" href="#instructor">آشنایی با مدرس</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Smart Form -->
-  <section id="smart-form">
-    <div class="container">
-      <h2 class="title">فرم هوشمند ستائی</h2>
-      <p class="muted">این فرم کوتاه است. بعد از تکمیل، سطح پیشنهادی و مسیر اولیه برای شما نمایش داده می‌شود.</p>
-
-      <div class="form-wrap" aria-label="smart form">
+      <div class="form-wrap" aria-label="Setai Scan Form">
         <div class="form-head">
           <div class="pill" id="stepPill">مرحله ۱ از ۳</div>
           <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
         </div>
 
-        <form id="aiForm" onsubmit="return false;">
+        <form id="scanForm" onsubmit="return false;">
           <!-- Step 1 -->
           <div class="step active" data-step="1">
             <label>نام و نام خانوادگی</label>
@@ -799,12 +776,12 @@
             <div class="result-card">
               <h4 id="resultTitle">پیشنهاد سطح شما</h4>
               <p id="resultText"></p>
-              <div class="cta-row" style="margin-top:12px;">
-                <a class="btn btn-primary" id="whatsBtn" href="#" target="_blank" rel="noopener">ارسال به واتساپ و رزرو</a>
-                <a class="btn btn-ghost" href="#packages">مشاهده جزئیات پکیج‌ها</a>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+                <a class="btn btn-primary" id="whatsBtn" href="#" target="_blank" rel="noopener">ارسال به واتساپ و هماهنگی جلسه</a>
+                <a class="btn btn-ghost" href="#levels">مرور ۳ سطح</a>
               </div>
-              <p style="margin:10px 0 0; color:var(--muted); font-weight:800; font-size:12px;">
-                نکته: متن و منطق پیشنهاد سطح کاملاً قابل تنظیم است تا دقیقاً مطابق مدل کسب‌وکار شما شود.
+              <p style="margin:10px 0 0; color:rgba(234,240,255,.58); font-weight:850; font-size:12px;">
+                متن و منطق پیشنهاد سطح قابل تنظیم است تا دقیقاً مطابق مدل آکادمی و ظرفیت جلسات باشد.
               </p>
             </div>
           </div>
@@ -819,51 +796,49 @@
       <div class="foot">
         <div>Copyright © Setaei.com</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="pill" href="#smart-form">فرم هوشمند</a>
-          <a class="pill" href="#packages">پکیج‌ها</a>
-          <a class="pill" href="#method">متد ستائی</a>
+          <a class="pill" href="#scan">اسکن ستائی</a>
+          <a class="pill" href="#levels">۳ سطح</a>
+          <a class="pill" href="#scan-form">فرم</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Floating CTA (mobile) -->
   <div class="floating" aria-hidden="false">
     <div class="chip">
       <div style="font-weight:1000;">از اینجا شروع کن</div>
-      <a class="btn btn-primary" href="#smart-form">فرم هوشمند</a>
+      <a class="btn btn-primary" href="#scan-form">اسکن ستائی</a>
     </div>
   </div>
 
   <script>
-    // Simple slider
-    let currentSlide = 0;
-    const slides = () => Array.from(document.querySelectorAll('.slide'));
-    const slidePill = document.getElementById('slidePill');
-
-    function renderSlides(){
-      const s = slides();
-      s.forEach((el,i)=> el.classList.toggle('active', i===currentSlide));
-      if(slidePill) slidePill.textContent = (currentSlide+1) + " / " + s.length;
-    }
-    function nextSlide(){
-      const s = slides();
-      currentSlide = (currentSlide + 1) % s.length;
-      renderSlides();
-    }
-    function prevSlide(){
-      const s = slides();
-      currentSlide = (currentSlide - 1 + s.length) % s.length;
-      renderSlides();
-    }
-    setInterval(()=>{ nextSlide(); }, 6500);
-
     function scrollToSection(id){
       const el = document.getElementById(id);
       if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
-    // Smart form steps
+    /* Testimonials */
+    const testimonials = [
+      {name:"مبین — صاحب کسب‌وکار", text:"«بعد از اسکن ستائی، مسیر دقیق استفاده از AI برای فروش و محتوا مشخص شد و از سردرگمی خارج شدم.»"},
+      {name:"هستی — فریلنسر", text:"«ورک‌فلو پیشنهادی باعث شد خروجی‌ام سریع‌تر و منظم‌تر شود و ابزارها را درست انتخاب کنم.»"},
+      {name:"امیر — هنرمند", text:"«AI برای من یک دستیار واقعی شد: ایده‌پردازی، تولید و یکپارچه‌سازی خروجی‌ها با مسیر مشخص.»"},
+    ];
+    let tIndex = 0;
+    const tName = document.getElementById('tName');
+    const tText = document.getElementById('tText');
+    const tPill = document.getElementById('tPill');
+    function renderT(){
+      const t = testimonials[tIndex];
+      tName.textContent = t.name;
+      tText.textContent = t.text;
+      tPill.textContent = (tIndex+1) + " / " + testimonials.length;
+    }
+    function nextT(){ tIndex = (tIndex+1) % testimonials.length; renderT(); }
+    function prevT(){ tIndex = (tIndex-1+testimonials.length) % testimonials.length; renderT(); }
+    setInterval(nextT, 6500);
+    renderT();
+
+    /* Smart scan form */
     let step = 1;
     const totalSteps = 3;
     const stepPill = document.getElementById('stepPill');
@@ -899,46 +874,38 @@
 
     function nextOrSubmit(){
       if(!validateCurrentStep()) return;
-
-      if(step < totalSteps){
-        showStep(step + 1);
-      } else {
-        submitSmartForm();
-      }
+      if(step < totalSteps) showStep(step + 1);
+      else submitScan();
     }
-
     function prevStep(){
       if(step > 1) showStep(step - 1);
     }
 
-    function submitSmartForm(){
-      const form = document.getElementById('aiForm');
+    function submitScan(){
+      const form = document.getElementById('scanForm');
       const data = Object.fromEntries(new FormData(form).entries());
 
-      // Recommendation logic (simple heuristic — قابل تنظیم دقیق)
-      // Inputs: level, goal, time, domain
-      let recommended = "سطح ۱ (شروع)";
-      let reason = "برای شروع، نیاز به ساخت پایه‌های درست و انتخاب ابزارهای اصلی دارید.";
+      /* Heuristic recommendation (editable) */
+      let recommended = "سطح ۱ — پایه‌سازی و جهت‌دهی";
+      let reason = "برای شروع، باید پایه‌ها، چارچوب‌ها و انتخاب ابزارهای ضروری را دقیق کنید.";
 
       if(data.level === "mid" && (data.goal === "automation" || data.goal === "business_growth" || data.goal === "content_speed")){
-        recommended = "سطح ۲ (کاربردی)";
-        reason = "چون استفاده‌ی اولیه دارید و هدف شما خروجی عملی است، مسیر کاربردی + تمرین هدایت‌شده مناسب‌تر است.";
+        recommended = "سطح ۲ — کاربرد و سیستم";
+        reason = "چون استفاده‌ی اولیه دارید و هدف شما خروجی عملی است، مسیر کاربردی و طراحی ورک‌فلو مناسب‌تر است.";
       }
       if(data.level === "advanced" || (data.goal === "automation" && (data.time === "5to10" || data.time === "gt10"))){
-        recommended = "سطح ۳ (پیشرفته)";
-        reason = "با توجه به سطح/زمان شما، می‌توانیم روی پروژه اختصاصی، سیستم‌سازی و اتوماسیون کامل تمرکز کنیم.";
+        recommended = "سطح ۳ — استراتژی و اتوماسیون";
+        reason = "با توجه به سطح/زمان شما، می‌توان روی سیستم‌سازی، اتوماسیون و پروژه اختصاصی تمرکز کرد.";
       }
 
-      const title = document.getElementById('resultTitle');
-      const text = document.getElementById('resultText');
+      document.getElementById('resultTitle').textContent = `پیشنهاد سطح شما: ${recommended}`;
+      document.getElementById('resultText').textContent =
+        `${reason} همچنین مسیر شما بر اساس «DNA دیجیتال» اختصاصی‌سازی می‌شود (هدف، حوزه، زمان و خروجی).`;
 
-      title.textContent = `پیشنهاد سطح شما: ${recommended}`;
-      text.textContent = `${reason} همچنین بر اساس «DNA دیجیتال» شما، تمرین‌ها و پروژه‌ها اختصاصی‌سازی می‌شود.`;
-
-      // WhatsApp prefill
-      const phone = "09001422227"; // شماره شما (طبق درخواست)
+      /* WhatsApp prefill */
+      const waOwnerPhone = "09001422227"; // شماره شما
       const msg =
-`سلام، من فرم هوشمند آکادمی هوش مصنوعی ستائی را پر کردم.
+`سلام، من «اسکن ستائی» را انجام دادم.
 نام: ${data.name || "-"}
 هدف: ${mapGoal(data.goal)}
 سطح فعلی: ${mapLevel(data.level)}
@@ -948,10 +915,10 @@
 خروجی موردنظر: ${data.output || "-"}
 پیشنهاد سطح: ${recommended}
 
-لطفاً برای مرحله بعد و رزرو هماهنگ کنید.`;
+لطفاً برای هماهنگی جلسه و مرحله بعد راهنمایی کنید.`;
 
       const wa = document.getElementById('whatsBtn');
-      wa.href = `https://wa.me/98${normalizeIranPhone(phone)}?text=${encodeURIComponent(msg)}`;
+      wa.href = `https://wa.me/98${normalizeIranPhone(waOwnerPhone)}?text=${encodeURIComponent(msg)}`;
 
       result.classList.add('active');
       bar.style.width = "100%";
@@ -959,7 +926,6 @@
     }
 
     function normalizeIranPhone(p){
-      // expects 0xxxxxxxxxx -> xxxxxxxxxx
       const s = String(p).trim().replace(/\D/g,'');
       if(s.startsWith('0')) return s.slice(1);
       if(s.startsWith('98')) return s.slice(2);
@@ -989,10 +955,10 @@
       return m[v] || v || "-";
     }
 
-    // init
-    renderSlides();
+    /* init */
     showStep(1);
   </script>
 
 </body>
 </html>
+```0
