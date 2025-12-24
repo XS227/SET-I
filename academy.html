@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>آکادمی هوش مصنوعی ستائی | مسیر اختصاصی یادگیری</title>
+  <meta name="description" content="آکادمی هوش مصنوعی ستائی در ۳ سطح. ابتدا فرم هوشمند را پر کنید تا مسیر اختصاصی شما بر اساس DNA دیجیتال‌تان طراحی شود." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --card:#ffffff;
+      --shadow:0 10px 30px rgba(17,24,39,.08);
+      --orange:#ff6a00;
+      --orange2:#ff8a3d;
+      --dark:#0b1220;
+      --violet:#7c3aed;
+      --violet2:#a78bfa;
+      --radius:22px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", "Vazirmatn", Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.75;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:100%; max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(229,231,235,.65);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .logo-mark{
+      width:38px; height:38px; border-radius:14px;
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      box-shadow: 0 8px 22px rgba(255,106,0,.25);
+      display:grid; place-items:center; color:#fff; font-weight:900;
+    }
+    .brand small{display:block; font-weight:700; color:var(--muted); margin-top:-2px}
+    .nav-actions{display:flex; align-items:center; gap:10px}
+    .btn{
+      border:0; cursor:pointer;
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:800;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      transition:.15s transform ease, .15s opacity ease;
+      user-select:none;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      box-shadow: 0 10px 24px rgba(255,106,0,.24);
+    }
+    .btn-ghost{
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .icon-btn{
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      display:grid; place-items:center;
+      cursor:pointer;
+    }
+
+    /* Hero */
+    .hero{
+      padding:26px 0 0;
+      background:
+        radial-gradient(900px 400px at 70% 0%, rgba(255,106,0,.12), transparent 55%),
+        radial-gradient(900px 400px at 30% 10%, rgba(124,58,237,.10), transparent 60%);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+      padding:16px 0 26px;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr; }
+    }
+    .hero-card{
+      border:1px solid rgba(229,231,235,.7);
+      background:rgba(255,255,255,.85);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-weight:900;
+      color:var(--orange);
+      background:rgba(255,106,0,.10);
+      border:1px solid rgba(255,106,0,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    h1{
+      font-size: clamp(28px, 3vw, 40px);
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:-.4px;
+    }
+    .lead{color:var(--muted); font-weight:700; margin:0 0 14px}
+    .cta-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .mini{
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:14px; color:var(--muted); font-weight:700; font-size:13px;
+    }
+    .mini span{display:inline-flex; align-items:center; gap:7px}
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background:rgba(16,185,129,.85);
+      box-shadow:0 0 0 6px rgba(16,185,129,.12);
+    }
+
+    /* Video/Testimonial mock */
+    .media{
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .media-frame{
+      border-radius:var(--radius);
+      background:linear-gradient(135deg, rgba(11,18,32,.92), rgba(11,18,32,.75));
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:240px;
+      position:relative;
+    }
+    .media-frame .play{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      opacity:.95;
+    }
+    .play .circle{
+      width:74px; height:74px; border-radius:999px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);
+      display:grid; place-items:center;
+      box-shadow:0 12px 28px rgba(0,0,0,.35);
+    }
+    .triangle{
+      width:0; height:0;
+      border-top:12px solid transparent;
+      border-bottom:12px solid transparent;
+      border-right:0;
+      border-left:18px solid #fff;
+      margin-right:3px;
+    }
+    .slider{
+      border-radius:var(--radius);
+      border:1px solid rgba(229,231,235,.7);
+      background:#fff;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .slide{
+      padding:14px 14px 12px;
+      display:none;
+    }
+    .slide.active{display:block}
+    .slide strong{display:block; font-weight:900}
+    .slide p{margin:8px 0 0; color:var(--muted); font-weight:700}
+    .slider-controls{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px;
+      border-top:1px solid rgba(229,231,235,.7);
+      background:linear-gradient(180deg, #fff, #fafafa);
+    }
+    .pill{
+      font-size:12px; font-weight:900; color:var(--muted);
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(229,231,235,.8);
+      background:#fff;
+    }
+
+    /* Orange section */
+    .section-orange{
+      background:linear-gradient(180deg, var(--orange), #ff7a1d);
+      padding:26px 0;
+      margin-top:10px;
+    }
+    .section-orange h2{
+      margin:0 0 10px;
+      font-size: clamp(22px, 2.2vw, 30px);
+      color:#fff;
+      letter-spacing:-.3px;
+    }
+    .section-orange .sub{
+      color:rgba(255,255,255,.88);
+      font-weight:800;
+      margin:0 0 16px;
+    }
+    .advisor{
+      background:linear-gradient(180deg, rgba(11,18,32,.98), rgba(11,18,32,.92));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:28px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.18);
+      padding:16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      max-width:560px;
+    }
+    .advisor .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      width:max-content;
+      color:#fff;
+      font-weight:900;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+    }
+    .advisor h3{color:#fff; margin:0; font-size:18px}
+    .advisor p{margin:0; color:rgba(255,255,255,.82); font-weight:700}
+    .advisor .btn{
+      background:linear-gradient(135deg, var(--violet), var(--violet2));
+      color:#fff;
+      width:100%;
+      border-radius:18px;
+      padding:12px 14px;
+      box-shadow: 0 14px 30px rgba(124,58,237,.22);
+    }
+
+    /* Section base */
+    section{padding:26px 0}
+    .title{
+      font-size: clamp(22px, 2.2vw, 30px);
+      margin:0 0 10px;
+      letter-spacing:-.35px;
+    }
+    .muted{color:var(--muted); font-weight:700; margin:0}
+
+    /* Instructor */
+    .instructor{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:16px;
+      align-items:stretch;
+      margin-top:14px;
+    }
+    @media (max-width: 900px){
+      .instructor{grid-template-columns:1fr}
+    }
+    .profile{
+      border-radius:var(--radius);
+      border:1px solid rgba(229,231,235,.7);
+      background:#fff;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .profile .cover{
+      height:160px;
+      background: radial-gradient(500px 180px at 50% 40%, rgba(255,106,0,.24), transparent 55%),
+                  radial-gradient(500px 220px at 20% 0%, rgba(124,58,237,.18), transparent 65%),
+                  linear-gradient(135deg, #0b1220, #1f2937);
+      position:relative;
+    }
+    .avatar{
+      width:118px; height:118px;
+      border-radius:999px;
+      border:6px solid #fff;
+      background:#111827;
+      position:absolute;
+      left:18px;
+      bottom:-52px;
+      display:grid; place-items:center;
+      color:#fff;
+      font-weight:900;
+      box-shadow: 0 18px 40px rgba(0,0,0,.22);
+    }
+    .profile .body{padding:64px 16px 16px}
+    .profile h3{margin:0 0 6px; font-size:18px}
+    .profile p{margin:0; color:var(--muted); font-weight:700}
+
+    /* Method cards */
+    .grid-4{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .grid-4{grid-template-columns: repeat(2,1fr)} }
+    @media (max-width: 520px){ .grid-4{grid-template-columns: 1fr} }
+    .method-card{
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,106,0,.97), rgba(255,122,29,.97));
+      color:#fff;
+      box-shadow: 0 14px 28px rgba(255,106,0,.18);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .method-card .ico{
+      width:44px; height:44px; border-radius:16px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      display:grid; place-items:center;
+      margin-bottom:10px;
+      font-weight:900;
+    }
+    .method-card h4{margin:0 0 6px; font-size:18px}
+    .method-card p{margin:0; font-weight:700; opacity:.92}
+
+    /* Packages */
+    .packages{
+      margin-top:14px;
+      border-radius:var(--radius);
+      border:1px solid rgba(229,231,235,.7);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-weight:800;
+    }
+    th, td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(229,231,235,.7);
+      text-align:center;
+      vertical-align:middle;
+    }
+    th{
+      background:#0b1220;
+      color:#fff;
+      font-weight:900;
+    }
+    td:first-child, th:first-child{
+      text-align:right;
+      width:32%;
+    }
+    .ok{color:#16a34a; font-weight:1000}
+    .no{color:#ef4444; font-weight:1000}
+
+    .pkg-cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:14px;
+      background:linear-gradient(180deg,#fff,#fafafa);
+    }
+    .pkg-cta .btn{flex:1; min-width:200px}
+    .btn-outline{
+      background:#fff;
+      border:2px solid rgba(255,106,0,.55);
+      color:var(--text);
+    }
+
+    /* Smart form */
+    .form-wrap{
+      margin-top:14px;
+      border-radius:var(--radius);
+      border:1px solid rgba(229,231,235,.7);
+      box-shadow:var(--shadow);
+      background:#fff;
+      overflow:hidden;
+    }
+    .form-head{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(229,231,235,.7);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .progress{
+      height:10px;
+      border-radius:999px;
+      background:#f3f4f6;
+      overflow:hidden;
+      flex:1;
+      border:1px solid rgba(229,231,235,.9);
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(135deg, var(--violet), var(--violet2));
+      transition:width .2s ease;
+    }
+    .step{
+      display:none;
+      padding:14px;
+    }
+    .step.active{display:block}
+    label{display:block; font-weight:900; margin:10px 0 6px}
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(229,231,235,.9);
+      outline:none;
+      font-weight:800;
+      background:#fff;
+    }
+    textarea{min-height:92px; resize:vertical}
+    .form-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:14px;
+      border-top:1px solid rgba(229,231,235,.7);
+      background:linear-gradient(180deg,#fff,#fafafa);
+    }
+    .form-actions .btn{flex:1; min-width:160px}
+    .result{
+      padding:14px;
+      border-top:1px solid rgba(229,231,235,.7);
+      display:none;
+    }
+    .result.active{display:block}
+    .result-card{
+      border-radius:18px;
+      padding:14px;
+      border:1px solid rgba(124,58,237,.24);
+      background:linear-gradient(180deg, rgba(124,58,237,.08), rgba(167,139,250,.10));
+    }
+    .result-card h4{margin:0 0 8px}
+    .result-card p{margin:0; color:var(--muted); font-weight:800}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(229,231,235,.8);
+      padding:18px 0 24px;
+      color:var(--muted);
+      font-weight:800;
+      background:#fff;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Floating CTA (mobile) */
+    .floating{
+      position:fixed;
+      bottom:14px;
+      left:14px;
+      right:14px;
+      z-index:60;
+      display:none;
+    }
+    @media (max-width: 860px){
+      .floating{display:block}
+      .floating .chip{
+        border-radius:22px;
+        background:#fff;
+        border:1px solid rgba(229,231,235,.85);
+        box-shadow: 0 16px 40px rgba(17,24,39,.18);
+        padding:10px;
+        display:flex; gap:10px; align-items:center; justify-content:space-between;
+      }
+      .floating .btn{padding:12px 14px; border-radius:18px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">
+          <span class="logo-mark">S</span>
+          <span>
+            آکادمی هوش مصنوعی ستائی
+            <small>Designed. Engineered. Intelligent.</small>
+          </span>
+        </a>
+
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="#smart-form">شروع با فرم هوشمند</a>
+          <button class="icon-btn" type="button" aria-label="menu" onclick="scrollToSection('packages')">≡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero" id="top">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div class="hero-card">
+          <div class="hero-kicker">مسیر اختصاصی شما با تحلیل «DNA دیجیتال»</div>
+          <h1>آماده‌اید هوش مصنوعی را تبدیل به ابزار کار، دستیار و اهرم رشد خود کنید؟</h1>
+          <p class="lead">
+            آکادمی ستائی در ۳ سطح برگزار می‌شود. ابتدا فرم هوشمند را پر کنید؛ سپس بر اساس پاسخ‌ها، مسیر و برنامه‌ی اختصاصی شما طراحی و پیشنهاد می‌شود.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#smart-form">شروع مشاوره و تحلیل رایگان</a>
+            <a class="btn btn-ghost" href="#method">روش ستائی چیست؟</a>
+          </div>
+
+          <div class="mini">
+            <span><span class="dot"></span> طراحی مسیر بر اساس هدف و شرایط</span>
+            <span>•</span>
+            <span>۳ سطح آموزشی (شروع تا پیشرفته)</span>
+            <span>•</span>
+            <span>مناسب افراد، کسب‌وکارها و هنرمندان</span>
+          </div>
+        </div>
+
+        <div class="media">
+          <div class="media-frame" role="img" aria-label="video">
+            <div style="position:absolute; inset:0; padding:16px;">
+              <div style="font-weight:900; opacity:.95; font-size:14px;">نتایج هنرجویان و مشتریان</div>
+              <div style="opacity:.75; font-weight:800; font-size:12px; margin-top:4px;">نمونه ویدیو/بازخورد (قابل جایگزینی)</div>
+            </div>
+            <div class="play">
+              <div class="circle"><div class="triangle"></div></div>
+            </div>
+          </div>
+
+          <div class="slider" aria-label="testimonials">
+            <div class="slide active">
+              <strong>مبین — صاحب کسب‌وکار</strong>
+              <p>بعد از تحلیل ستائی، یک مسیر واقعی برای استفاده از AI در فروش و تولید محتوا گرفتم و دقیقاً می‌دانستم از کجا شروع کنم.</p>
+            </div>
+            <div class="slide">
+              <strong>هستی — فریلنسر</strong>
+              <p>با تمرین‌ها و اصلاح فرآیندها، خروجی من سریع‌تر و منظم‌تر شد. ابزارها را درست و هدفمند انتخاب کردم.</p>
+            </div>
+            <div class="slide">
+              <strong>امیر — هنرمند</strong>
+              <p>برای ایده‌پردازی و تولید، AI تبدیل شد به دستیار واقعی. مسیر یادگیری شخصی‌سازی‌شده خیلی کمک کرد.</p>
+            </div>
+
+            <div class="slider-controls">
+              <button class="btn btn-ghost" type="button" onclick="prevSlide()">قبلی</button>
+              <span class="pill" id="slidePill">۱ / ۳</span>
+              <button class="btn btn-ghost" type="button" onclick="nextSlide()">بعدی</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Orange CTA section (like Sedano) -->
+  <div class="section-orange">
+    <div class="container">
+      <h2>آماده‌اید با «DNA دیجیتال» خودتان مسیر دقیق را پیدا کنید؟</h2>
+      <p class="sub">اگر امروز اقدام کنید، تحلیل اولیه و پیشنهاد سطح برای شما رایگان انجام می‌شود.</p>
+
+      <div class="advisor">
+        <div class="tag">ظرفیت محدود • برنامه اختصاصی</div>
+        <h3>نقشه راه اختصاصی را دریافت کنید</h3>
+        <p>هدف شما، سطح فعلی و نیازتان بررسی می‌شود؛ سپس سطح پیشنهادی + برنامه تمرین/پروژه ارائه خواهد شد.</p>
+        <a class="btn" href="#smart-form">شروع مشاوره</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructor -->
+  <section id="instructor">
+    <div class="container">
+      <h2 class="title">با مدرس آکادمی ستائی آشنا شوید</h2>
+      <p class="muted">این بخش را مطابق با بیوگرافی و تصویر واقعی خودتان کامل می‌کنید.</p>
+
+      <div class="instructor">
+        <div class="profile">
+          <div class="cover">
+            <div class="avatar">ST</div>
+          </div>
+          <div class="body">
+            <h3>استاد ستائی</h3>
+            <p>
+              متخصص پیاده‌سازی هوش مصنوعی برای رشد فردی و کسب‌وکار. تمرکز بر «سیستم‌سازی»،
+              «اتوماسیون»، و «کاربرد عملی AI» برای محتوا، فروش، عملیات و خلق اثر.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-card" style="box-shadow:var(--shadow);">
+          <div class="hero-kicker">تفاوت ستائی</div>
+          <h3 style="margin:6px 0 8px; font-size:22px;">اینجا کلاس عمومی نیست؛ مسیر اختصاصی است.</h3>
+          <p class="lead" style="margin:0;">
+            خیلی‌ها ابزار را یاد می‌گیرند اما نتیجه نمی‌گیرند؛ چون مسیر، هدف، و تمرین‌های متناسب ندارند.
+            ستائی اول «پروفایل شما» را تحلیل می‌کند و سپس برنامه‌ی مرحله‌ای می‌چیند.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#packages">دیدن پکیج‌ها</a>
+            <a class="btn btn-ghost" href="#smart-form">فرم هوشمند</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section id="method">
+    <div class="container">
+      <h2 class="title">متد ستائی: شاه‌کلید موفقیت در یادگیری و کاربرد AI</h2>
+      <p class="muted">آموزش برای همه یکسان نیست. ما مسیر را متناسب با هدف و DNA دیجیتال شما طراحی می‌کنیم.</p>
+
+      <div class="grid-4">
+        <div class="method-card">
+          <div class="ico">🎯</div>
+          <h4>هدف‌گذاری</h4>
+          <p>اول مشخص می‌کنیم دقیقاً چه نتیجه‌ای می‌خواهید: رشد درآمد، سرعت تولید، سیستم‌سازی یا خلق.</p>
+        </div>
+        <div class="method-card">
+          <div class="ico">🧠</div>
+          <h4>آنالیز</h4>
+          <p>پروفایل شما، سطح فعلی، زمان آزاد، حوزه و چالش‌ها بررسی و امتیازدهی می‌شود.</p>
+        </div>
+        <div class="method-card">
+          <div class="ico">🛠️</div>
+          <h4>تمرین/پروژه</h4>
+          <p>تمرین‌ها و پروژه‌ها دقیقاً متناسب با حوزه شما طراحی می‌شوند (کسب‌وکار/هنری/فریلنس).</p>
+        </div>
+        <div class="method-card">
+          <div class="ico">✅</div>
+          <h4>اصلاح و تثبیت</h4>
+          <p>بازخورد، بهینه‌سازی مسیر، و تثبیت عادت‌ها تا رسیدن به خروجی قابل اندازه‌گیری.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages">
+    <div class="container">
+      <h2 class="title">پکیج‌های آکادمی ستائی: مسیر خود را انتخاب کنید</h2>
+      <p class="muted">۳ سطح آموزشی داریم؛ سطح پیشنهادی بعد از فرم هوشمند مشخص می‌شود.</p>
+
+      <div class="packages">
+        <table aria-label="comparison">
+          <thead>
+            <tr>
+              <th>ویژگی</th>
+              <th>سطح ۱ (شروع)</th>
+              <th>سطح ۲ (کاربردی)</th>
+              <th>سطح ۳ (پیشرفته)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>مدت و ساختار</td>
+              <td>۴ جلسه گروهی</td>
+              <td>۴ جلسه + تمرین هدایت‌شده</td>
+              <td>۴ جلسه + پروژه اختصاصی</td>
+            </tr>
+            <tr>
+              <td>تحلیل DNA دیجیتال</td>
+              <td class="no">✕</td>
+              <td class="ok">✓</td>
+              <td class="ok">✓</td>
+            </tr>
+            <tr>
+              <td>طراحی مسیر شخصی</td>
+              <td class="no">✕</td>
+              <td class="ok">✓</td>
+              <td class="ok">✓</td>
+            </tr>
+            <tr>
+              <td>تمرین عملی (Use-case)</td>
+              <td>تمرین‌های پایه</td>
+              <td>Use-case حوزه شما</td>
+              <td>پیاده‌سازی کامل سیستم</td>
+            </tr>
+            <tr>
+              <td>جلسه رفع اشکال/کوچینگ</td>
+              <td class="no">✕</td>
+              <td class="ok">✓</td>
+              <td class="ok">✓</td>
+            </tr>
+            <tr>
+              <td>خروجی نهایی</td>
+              <td>نقشه ابزارها</td>
+              <td>فرآیند قابل اجرا</td>
+              <td>سیستم + اتوماسیون</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pkg-cta">
+          <a class="btn btn-primary" href="#smart-form">می‌خواهم سطح پیشنهادی‌ام را بدانم</a>
+          <a class="btn btn-outline" href="#instructor">آشنایی با مدرس</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Smart Form -->
+  <section id="smart-form">
+    <div class="container">
+      <h2 class="title">فرم هوشمند ستائی</h2>
+      <p class="muted">این فرم کوتاه است. بعد از تکمیل، سطح پیشنهادی و مسیر اولیه برای شما نمایش داده می‌شود.</p>
+
+      <div class="form-wrap" aria-label="smart form">
+        <div class="form-head">
+          <div class="pill" id="stepPill">مرحله ۱ از ۳</div>
+          <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+        </div>
+
+        <form id="aiForm" onsubmit="return false;">
+          <!-- Step 1 -->
+          <div class="step active" data-step="1">
+            <label>نام و نام خانوادگی</label>
+            <input type="text" name="name" placeholder="مثلاً: علی رضایی" required />
+
+            <label>شماره تماس / واتساپ</label>
+            <input type="tel" name="phone" placeholder="مثلاً: 09xxxxxxxxx" required />
+
+            <label>هدف اصلی شما از AI چیست؟</label>
+            <select name="goal" required>
+              <option value="" selected disabled>انتخاب کنید…</option>
+              <option value="business_growth">رشد کسب‌وکار (فروش/مارکتینگ/عملیات)</option>
+              <option value="content_speed">سرعت تولید محتوا و خروجی</option>
+              <option value="automation">سیستم‌سازی و اتوماسیون</option>
+              <option value="creative">خلق اثر/هنری/ایده‌پردازی</option>
+              <option value="career">ارتقای شغلی/مهارت تخصصی</option>
+            </select>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step" data-step="2">
+            <label>سطح فعلی شما در AI</label>
+            <select name="level" required>
+              <option value="" selected disabled>انتخاب کنید…</option>
+              <option value="beginner">مبتدی (آشنایی کم)</option>
+              <option value="mid">متوسط (استفاده موردی)</option>
+              <option value="advanced">پیشرفته (کار حرفه‌ای/پروژه‌ای)</option>
+            </select>
+
+            <label>حوزه شما بیشتر کدام است؟</label>
+            <select name="domain" required>
+              <option value="" selected disabled>انتخاب کنید…</option>
+              <option value="owner">صاحب کسب‌وکار</option>
+              <option value="freelancer">فریلنسر</option>
+              <option value="artist">هنرمند/کریتیو</option>
+              <option value="employee">کارمند/مدیر</option>
+              <option value="student">دانشجو/در حال یادگیری</option>
+            </select>
+
+            <label>در هفته چقدر زمان می‌توانید اختصاص دهید؟</label>
+            <select name="time" required>
+              <option value="" selected disabled>انتخاب کنید…</option>
+              <option value="lt2">کمتر از ۲ ساعت</option>
+              <option value="2to5">۲ تا ۵ ساعت</option>
+              <option value="5to10">۵ تا ۱۰ ساعت</option>
+              <option value="gt10">بیشتر از ۱۰ ساعت</option>
+            </select>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step" data-step="3">
+            <label>بزرگ‌ترین چالش شما چیست؟</label>
+            <textarea name="challenge" placeholder="مثلاً: نمی‌دانم از کجا شروع کنم / ابزار زیاد است / خروجی ثابت نیست…" required></textarea>
+
+            <label>چه خروجی مشخصی می‌خواهید بسازید؟</label>
+            <textarea name="output" placeholder="مثلاً: سیستم تولید محتوا + اتوماسیون، یا دستیار فروش، یا ورک‌فلو طراحی…" required></textarea>
+
+            <label>ایمیل (اختیاری)</label>
+            <input type="email" name="email" placeholder="name@example.com" />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-ghost" type="button" onclick="prevStep()">مرحله قبل</button>
+            <button class="btn btn-primary" type="button" onclick="nextOrSubmit()">ادامه</button>
+          </div>
+
+          <div class="result" id="result">
+            <div class="result-card">
+              <h4 id="resultTitle">پیشنهاد سطح شما</h4>
+              <p id="resultText"></p>
+              <div class="cta-row" style="margin-top:12px;">
+                <a class="btn btn-primary" id="whatsBtn" href="#" target="_blank" rel="noopener">ارسال به واتساپ و رزرو</a>
+                <a class="btn btn-ghost" href="#packages">مشاهده جزئیات پکیج‌ها</a>
+              </div>
+              <p style="margin:10px 0 0; color:var(--muted); font-weight:800; font-size:12px;">
+                نکته: متن و منطق پیشنهاد سطح کاملاً قابل تنظیم است تا دقیقاً مطابق مدل کسب‌وکار شما شود.
+              </p>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>Copyright © Setaei.com</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="pill" href="#smart-form">فرم هوشمند</a>
+          <a class="pill" href="#packages">پکیج‌ها</a>
+          <a class="pill" href="#method">متد ستائی</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating CTA (mobile) -->
+  <div class="floating" aria-hidden="false">
+    <div class="chip">
+      <div style="font-weight:1000;">از اینجا شروع کن</div>
+      <a class="btn btn-primary" href="#smart-form">فرم هوشمند</a>
+    </div>
+  </div>
+
+  <script>
+    // Simple slider
+    let currentSlide = 0;
+    const slides = () => Array.from(document.querySelectorAll('.slide'));
+    const slidePill = document.getElementById('slidePill');
+
+    function renderSlides(){
+      const s = slides();
+      s.forEach((el,i)=> el.classList.toggle('active', i===currentSlide));
+      if(slidePill) slidePill.textContent = (currentSlide+1) + " / " + s.length;
+    }
+    function nextSlide(){
+      const s = slides();
+      currentSlide = (currentSlide + 1) % s.length;
+      renderSlides();
+    }
+    function prevSlide(){
+      const s = slides();
+      currentSlide = (currentSlide - 1 + s.length) % s.length;
+      renderSlides();
+    }
+    setInterval(()=>{ nextSlide(); }, 6500);
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // Smart form steps
+    let step = 1;
+    const totalSteps = 3;
+    const stepPill = document.getElementById('stepPill');
+    const bar = document.getElementById('bar');
+    const result = document.getElementById('result');
+    const btnNext = document.querySelector('.form-actions .btn.btn-primary');
+
+    function showStep(n){
+      step = n;
+      document.querySelectorAll('.step').forEach(el=>{
+        el.classList.toggle('active', Number(el.dataset.step) === step);
+      });
+      const pct = Math.round((step-1)/(totalSteps)*100);
+      bar.style.width = pct + "%";
+      stepPill.textContent = `مرحله ${step} از ${totalSteps}`;
+      result.classList.remove('active');
+      btnNext.textContent = (step === totalSteps) ? "ثبت و دریافت پیشنهاد" : "ادامه";
+    }
+
+    function validateCurrentStep(){
+      const active = document.querySelector(`.step[data-step="${step}"]`);
+      if(!active) return true;
+      const fields = Array.from(active.querySelectorAll('input,select,textarea'))
+        .filter(f => f.hasAttribute('required'));
+      for(const f of fields){
+        if(!f.value || (f.tagName === 'SELECT' && f.value === "")){
+          f.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function nextOrSubmit(){
+      if(!validateCurrentStep()) return;
+
+      if(step < totalSteps){
+        showStep(step + 1);
+      } else {
+        submitSmartForm();
+      }
+    }
+
+    function prevStep(){
+      if(step > 1) showStep(step - 1);
+    }
+
+    function submitSmartForm(){
+      const form = document.getElementById('aiForm');
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      // Recommendation logic (simple heuristic — قابل تنظیم دقیق)
+      // Inputs: level, goal, time, domain
+      let recommended = "سطح ۱ (شروع)";
+      let reason = "برای شروع، نیاز به ساخت پایه‌های درست و انتخاب ابزارهای اصلی دارید.";
+
+      if(data.level === "mid" && (data.goal === "automation" || data.goal === "business_growth" || data.goal === "content_speed")){
+        recommended = "سطح ۲ (کاربردی)";
+        reason = "چون استفاده‌ی اولیه دارید و هدف شما خروجی عملی است، مسیر کاربردی + تمرین هدایت‌شده مناسب‌تر است.";
+      }
+      if(data.level === "advanced" || (data.goal === "automation" && (data.time === "5to10" || data.time === "gt10"))){
+        recommended = "سطح ۳ (پیشرفته)";
+        reason = "با توجه به سطح/زمان شما، می‌توانیم روی پروژه اختصاصی، سیستم‌سازی و اتوماسیون کامل تمرکز کنیم.";
+      }
+
+      const title = document.getElementById('resultTitle');
+      const text = document.getElementById('resultText');
+
+      title.textContent = `پیشنهاد سطح شما: ${recommended}`;
+      text.textContent = `${reason} همچنین بر اساس «DNA دیجیتال» شما، تمرین‌ها و پروژه‌ها اختصاصی‌سازی می‌شود.`;
+
+      // WhatsApp prefill
+      const phone = "09001422227"; // شماره شما (طبق درخواست)
+      const msg =
+`سلام، من فرم هوشمند آکادمی هوش مصنوعی ستائی را پر کردم.
+نام: ${data.name || "-"}
+هدف: ${mapGoal(data.goal)}
+سطح فعلی: ${mapLevel(data.level)}
+حوزه: ${mapDomain(data.domain)}
+زمان هفتگی: ${mapTime(data.time)}
+چالش: ${data.challenge || "-"}
+خروجی موردنظر: ${data.output || "-"}
+پیشنهاد سطح: ${recommended}
+
+لطفاً برای مرحله بعد و رزرو هماهنگ کنید.`;
+
+      const wa = document.getElementById('whatsBtn');
+      wa.href = `https://wa.me/98${normalizeIranPhone(phone)}?text=${encodeURIComponent(msg)}`;
+
+      result.classList.add('active');
+      bar.style.width = "100%";
+      stepPill.textContent = "نتیجه آماده است";
+    }
+
+    function normalizeIranPhone(p){
+      // expects 0xxxxxxxxxx -> xxxxxxxxxx
+      const s = String(p).trim().replace(/\D/g,'');
+      if(s.startsWith('0')) return s.slice(1);
+      if(s.startsWith('98')) return s.slice(2);
+      return s;
+    }
+
+    function mapGoal(v){
+      const m = {
+        business_growth: "رشد کسب‌وکار",
+        content_speed: "سرعت تولید محتوا",
+        automation: "سیستم‌سازی و اتوماسیون",
+        creative: "خلق اثر/هنری",
+        career: "ارتقای شغلی"
+      };
+      return m[v] || v || "-";
+    }
+    function mapLevel(v){
+      const m = { beginner:"مبتدی", mid:"متوسط", advanced:"پیشرفته" };
+      return m[v] || v || "-";
+    }
+    function mapDomain(v){
+      const m = { owner:"صاحب کسب‌وکار", freelancer:"فریلنسر", artist:"هنرمند/کریتیو", employee:"کارمند/مدیر", student:"دانشجو" };
+      return m[v] || v || "-";
+    }
+    function mapTime(v){
+      const m = { lt2:"کمتر از ۲ ساعت", "2to5":"۲ تا ۵ ساعت", "5to10":"۵ تا ۱۰ ساعت", gt10:"بیشتر از ۱۰ ساعت" };
+      return m[v] || v || "-";
+    }
+
+    // init
+    renderSlides();
+    showStep(1);
+  </script>
+
+</body>
+</html>
