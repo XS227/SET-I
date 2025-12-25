@@ -1,77 +1,155 @@
 <!doctype html>
-<html lang="fa">
+<html lang="no">
 <head>
-<meta charset="utf-8">
-<title>Dot Art – 120</title>
-<style>
-  body{
-    margin:0;
-    background:#0b0c10;
-    color:#eaeaea;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-  pre{
-    font-size:9px;
-    line-height:1.05;
-    letter-spacing:0.02em;
-    white-space:pre;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farget ASCII (#) – 120</title>
+  <style>
+    :root { --bg:#0b0c10; --panel:#0f1013; --text:#eaeaea; }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      display:flex; min-height:100vh; align-items:center; justify-content:center; padding:18px;
+    }
+    .wrap{ width:min(1100px, 100%); }
+    .bar{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+      background:var(--panel); border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; padding:12px 14px; margin-bottom:14px;
+    }
+    label{ font-size:14px; opacity:.95; }
+    input[type="file"]{ color:var(--text); }
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background:transparent; color:var(--text);
+      padding:8px 10px; border-radius:10px; cursor:pointer;
+    }
+    .btn:active{ transform:translateY(1px); }
+    .hint{ font-size:12px; opacity:.75; }
+    .frame{
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:14px;
+      overflow:auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+    }
+    pre{
+      margin:0;
+      line-height:1.02;         /* viktig for “pixel”-look */
+      letter-spacing:0.00em;
+      font-size:8px;            /* juster for mer/mindre detalj */
+      white-space:pre;
+    }
+    .mono { font-variant-ligatures:none; }
+  </style>
 </head>
 <body>
-<pre>
-................................................................................................................
-..................................................##########################....................................
-..............................................###############################..................................
-...........................................#####################################................................
-........................................##########################################.............................
-.................................######################################################.........................
-..............................############################################################......................
-............................#########################................#####################.....................
-..........................#########################........................#################...................
-.........................########################..............................##############..................
-........................######################..............:::::::..............############.................
-.......................####################.............:::::::::::::::::............#########................
-......................###################............:::::::::::::::::::::::::........########................
-.....................##################..........:::::::::::::::::::::::::::::::::.......######...............
-....................#################........:::::::::::::::::::::::::::::::::::::::......######..............
-...................################........:::::::::::::::::::::::::::::::::::::::::::.....######.............
-..................###############.......::::::::::::::::::::::::::::::::::::::::::::::::....######............
-..................##############......::::::::::::::::::::::::::::::::::::::::::::::::::::...#####............
-..................#############.....::::::::::::::::::::::::::::::::::::::::::::::::::::::::..#####...........
-..................#############....:::::::::::::::::::::::::::::++++++:::::::::::::::::::::::.#####..........
-..................############....:::::::::::::::::::::::::::::+++++++++::::::::::::::::::::::.#####.........
-..................###########....::::::::::::::::::::::::::::+++++++++++++:::::::::::::::::::::.####.........
-..................###########....::::::::::::::::::::::::::+++++++++++++++++:::::::::::::::::::.####.........
-..................###########....:::::::::::::::::::::::::++++++++++++++++++++::::::::::::::::::.####........
-..................###########....::::::::::::::::::::::::++++++++++++++++++++++:::::::::::::::::.####........
-..................###########....::::::::::::::::::::::::++++++++++++++++++++++:::::::::::::::::.####........
-..................###########....:::::::::::::::::::::::::++++++++++++++++++++::::::::::::::::::.####........
-..................############....::::::::::::::::::::::::::++++++++++++++++::::::::::::::::::::.#####........
-..................#############....:::::::::::::::::::::::::::::++++++:::::::::::::::::::::::.#####..........
-..................#############.....::::::::::::::::::::::::::::::::::::::::::::::::::::::::..#####...........
-..................##############......::::::::::::::::::::::::::::::::::::::::::::::::::::...#####............
-..................###############.......::::::::::::::::::::::::::::::::::::::::::::::::....######............
-...................################........:::::::::::::::::::::::::::::::::::::::::::.....######.............
-....................#################........:::::::::::::::::::::::::::::::::::::::......######..............
-.....................##################..........:::::::::::::::::::::::::::::::::.......######...............
-......................###################............:::::::::::::::::::::::::........########................
-.......................####################.............:::::::::::::::::............#########................
-........................######################..............:::::::..............############.................
-.........................########################..............................##############..................
-..........................#########################........................#################...................
-............................#########################................#####################.....................
-..............................############################################################......................
-.................................######################################################.........................
-........................................##########################################.............................
-...........................................#####################################................................
-..............................................###############################..................................
-..................................................##########################....................................
-................................................................................................................
-</pre>
+<div class="wrap">
+  <div class="bar">
+    <label>
+      Velg bilde:
+      <input id="file" type="file" accept="image/*" />
+    </label>
+
+    <label>
+      Bredde (kolonner):
+      <input id="w" type="number" min="40" max="300" value="120" style="width:90px;">
+    </label>
+
+    <label>
+      Tegn:
+      <input id="ch" type="text" value="#" maxlength="1" style="width:40px; text-align:center;">
+    </label>
+
+    <button class="btn" id="render">Generer</button>
+    <button class="btn" id="copy">Kopier HTML</button>
+
+    <span class="hint">Tips: prøv font-size 7–10px for best resultat på mobil.</span>
+  </div>
+
+  <div class="frame">
+    <pre id="out" class="mono">Last opp et bilde og trykk “Generer”.</pre>
+  </div>
+</div>
+
+<script>
+  const fileEl = document.getElementById('file');
+  const out = document.getElementById('out');
+  const wEl = document.getElementById('w');
+  const chEl = document.getElementById('ch');
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d', { willReadFrequently:true });
+
+  function escapeHtml(s){
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function render(){
+    const f = fileEl.files?.[0];
+    if(!f){ out.textContent = "Ingen fil valgt."; return; }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const targetW = Math.max(40, Math.min(300, parseInt(wEl.value || "120", 10)));
+        const char = (chEl.value || "#").slice(0,1);
+
+        // Skaleringslogikk:
+        // ASCII "pixels" er ikke kvadratiske i tekst — høyde må korrigeres.
+        const aspect = img.height / img.width;
+        const charAspectFix = 0.55; // juster 0.5–0.65 etter font
+        const targetH = Math.max(20, Math.round(targetW * aspect * charAspectFix));
+
+        canvas.width = targetW;
+        canvas.height = targetH;
+
+        ctx.clearRect(0,0,targetW,targetH);
+        ctx.drawImage(img, 0, 0, targetW, targetH);
+
+        const data = ctx.getImageData(0,0,targetW,targetH).data;
+
+        // Bygg HTML med farge per tegn
+        let htmlLines = [];
+        for(let y=0; y<targetH; y++){
+          let line = "";
+          for(let x=0; x<targetW; x++){
+            const i = (y*targetW + x) * 4;
+            const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+
+            // Transparent -> “tom”
+            if(a < 30){
+              line += " ";
+              continue;
+            }
+
+            // Farge-tegn
+            line += `<span style="color:rgb(${r},${g},${b})">${escapeHtml(char)}</span>`;
+          }
+          htmlLines.push(line);
+        }
+
+        out.innerHTML = htmlLines.join("\n");
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(f);
+  }
+
+  document.getElementById('render').addEventListener('click', render);
+
+  document.getElementById('copy').addEventListener('click', async () => {
+    // Kopierer kun <pre> innholdet (ASCII-delen) som HTML
+    const html = out.innerHTML;
+    try{
+      await navigator.clipboard.writeText(html);
+      alert("Kopiert! (HTML for ASCII-delen)");
+    } catch(e){
+      alert("Kunne ikke kopiere automatisk. Marker og kopier manuelt.");
+    }
+  });
+</script>
 </body>
 </html>
