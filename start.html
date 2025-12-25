@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SETÆI • Level 1 Session Slides</title>
+  <style>
+    :root{
+      /* Setai-like green/teal */
+      --bg1:#0b1020;
+      --bg2:#0a0f1c;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
+      --stroke:rgba(255,255,255,.10);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --muted2:rgba(234,240,255,.56);
+      --accent:#10b981;
+      --accent2:#34d399;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --r:24px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Vazirmatn", "Noto Sans Arabic", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 640px at 70% -10%, rgba(16,185,129,.22), transparent 60%),
+        radial-gradient(900px 560px at 20% 0%, rgba(14,165,164,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    /* Layout */
+    .app{
+      height:100%;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(10,15,28,.70);
+      backdrop-filter: blur(12px);
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:240px;
+      font-weight:950; letter-spacing:-.2px;
+    }
+    .mark{
+      width:36px; height:36px; border-radius:14px;
+      background:linear-gradient(135deg, var(--accent2), var(--accent));
+      display:grid; place-items:center;
+      color:#062018; font-weight:1000;
+      box-shadow: 0 14px 30px rgba(16,185,129,.22);
+      user-select:none;
+    }
+    .sub{
+      display:block;
+      color:var(--muted2);
+      font-weight:800;
+      font-size:12px;
+      margin-top:-2px;
+    }
+
+    .controls{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s transform ease, .15s opacity ease, .15s border-color ease;
+      user-select:none;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      border:0;
+      color:#062018;
+      background:linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow: 0 18px 40px rgba(16,185,129,.18);
+    }
+    .kbd{
+      font-weight:950;
+      font-size:12px;
+      color:rgba(234,240,255,.72);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      padding:6px 10px;
+      border-radius:999px;
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    /* Slide stage */
+    .stage{
+      padding:18px;
+      display:grid;
+      place-items:center;
+    }
+    .slide{
+      width:min(1180px, calc(100vw - 36px));
+      height:min(660px, calc(100vh - 160px));
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      padding:28px 28px 22px;
+      display:none;
+    }
+    .slide.active{display:block}
+
+    .slide::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 420px at 75% 10%, rgba(16,185,129,.16), transparent 55%),
+        radial-gradient(800px 420px at 20% 0%, rgba(14,165,164,.10), transparent 55%);
+      pointer-events:none;
+      filter:saturate(1.1);
+    }
+    .slide > *{position:relative; z-index:1}
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,.24);
+      background:rgba(16,185,129,.12);
+      font-weight:950;
+      font-size:12px;
+      color:rgba(234,240,255,.92);
+      width:max-content;
+    }
+    h1,h2{margin:10px 0 10px; letter-spacing:-.35px}
+    h1{font-size:clamp(28px, 3.0vw, 44px); line-height:1.15}
+    h2{font-size:clamp(22px, 2.2vw, 32px); line-height:1.2}
+    p{margin:0 0 10px; color:var(--muted); font-weight:850; font-size:16px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      margin-top:12px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .slide{height:auto; min-height: calc(100vh - 160px)}
+      .grid{grid-template-columns:1fr}
+      body{overflow:auto}
+      .app{overflow:auto}
+      .stage{place-items:stretch}
+    }
+
+    .box{
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .box h3{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    ul{
+      margin:8px 0 0;
+      padding:0 18px 0 0;
+      color:var(--muted);
+      font-weight:850;
+    }
+    li{margin:7px 0}
+
+    .big-number{
+      font-size:44px;
+      font-weight:1000;
+      letter-spacing:-.8px;
+      color:rgba(234,240,255,.95);
+      margin:0;
+    }
+    .hint{
+      color:rgba(234,240,255,.58);
+      font-weight:850;
+      font-size:13px;
+      margin-top:8px;
+    }
+
+    /* Footer / progress */
+    .footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 18px 14px;
+      gap:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.10);
+    }
+    .progress{
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      width:min(520px, 54vw);
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(135deg, var(--accent2), var(--accent));
+      transition:width .18s ease;
+    }
+    .note{
+      color:rgba(234,240,255,.62);
+      font-weight:850;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    /* Presenter notes */
+    .notes{
+      display:none;
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(255,255,255,.03);
+      color:rgba(234,240,255,.74);
+      font-weight:850;
+      font-size:13px;
+      line-height:1.7;
+    }
+    .notes.on{display:block}
+
+    /* Help modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      place-items:center;
+      background:rgba(0,0,0,.55);
+      z-index:999;
+      padding:18px;
+    }
+    .modal.on{display:grid}
+    .modal-card{
+      width:min(740px, 96vw);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,15,28,.92);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .modal-card h3{margin:0 0 10px; letter-spacing:-.2px}
+    .modal-card .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width:720px){
+      .modal-card .row{grid-template-columns:1fr}
+    }
+    .key{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+      color:rgba(234,240,255,.82);
+      font-weight:850;
+      font-size:14px;
+    }
+    .key b{color:rgba(234,240,255,.95)}
+    .right{display:flex; gap:10px; align-items:center; justify-content:flex-end; flex-wrap:wrap}
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark">S</div>
+        <div>
+          اسلاید جلسه ۱ • سطح ۱ (حامد)
+          <span class="sub">SETÆI Academy • Designed. Engineered. Intelligent.</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <span class="kbd">←/→ یا Space</span>
+        <button class="btn" type="button" onclick="toggleNotes()">N: نوت مدرس</button>
+        <button class="btn" type="button" onclick="toggleFullscreen()">F: تمام‌صفحه</button>
+        <button class="btn btn-ghost" type="button" onclick="openHelp()">H: راهنما</button>
+        <button class="btn btn-primary" type="button" onclick="prev()">قبلی</button>
+        <button class="btn btn-primary" type="button" onclick="next()">بعدی</button>
+      </div>
+    </div>
+
+    <div class="stage">
+
+      <!-- SLIDE 1 -->
+      <section class="slide active" data-title="شروع">
+        <div class="eyebrow">جلسه ۱ • سطح ۱</div>
+        <h1>هدف امروز: از سردرگمی به یک مسیر قابل اجرا</h1>
+        <p>در پایان جلسه، یک هدف یک‌جمله‌ای + ابزارهای اصلی + یک ورک‌فلو ساده داریم که همین هفته خروجی بدهد.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>چه چیزی امروز تحویل می‌گیری؟</h3>
+            <ul>
+              <li>هدف دقیق (قابل اندازه‌گیری)</li>
+              <li>۳ ابزار اصلی (بدون ابزار اضافه)</li>
+              <li>ورک‌فلو ۵ مرحله‌ای: Brief → Outline → Draft → Edit → Publish</li>
+              <li>تکلیف هفته اول با معیار</li>
+            </ul>
+          </div>
+          <div class="box">
+            <p class="big-number">۹۰–۱۲۰ دقیقه</p>
+            <p class="hint">تمرکز: «سیستم» نه «ابزارهای زیاد»</p>
+            <ul>
+              <li>هر چیزی که می‌سازیم باید قابل تکرار باشد</li>
+              <li>خروجی واقعی، حتی ساده</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          افتتاحیه: «امروز قرار نیست همه‌چیز یاد بگیریم؛ یک روش ثابت می‌سازیم که خروجی بدهد. ابزار جدید تا هفته آینده ممنوع.»
+        </div>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section class="slide" data-title="هدف">
+        <div class="eyebrow">گام ۱</div>
+        <h2>هدف یک‌جمله‌ای (Outcome Statement)</h2>
+        <p>این جمله را با هم می‌نویسیم؛ اگر این جمله شفاف باشد، مسیر نصفه‌راه ساخته شده است.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>قالب هدف:</h3>
+            <ul>
+              <li>تا تاریخ <b>X</b> بتوانم <b>Y</b> را</li>
+              <li>با کیفیت <b>Z</b> و در زمان <b>W</b></li>
+              <li>برای مخاطب <b>Audience</b> تولید/اجرا کنم.</li>
+            </ul>
+            <p class="hint">مثال: «تا ۴ هفته دیگر، هفته‌ای ۳ پست تخصصی با CTA مشخص تولید کنم.»</p>
+          </div>
+          <div class="box">
+            <h3>۳ سؤال طلایی:</h3>
+            <ul>
+              <li>بعد از ۴ هفته دقیقاً چه چیزی باید تغییر کند؟</li>
+              <li>بزرگ‌ترین گره الآن چیست؟ (شروع/نظم/کیفیت/زمان)</li>
+              <li>روزانه واقعاً چند دقیقه وقت داری؟</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          اگر هدف مبهم شد: زمان را کم کن، خروجی را کوچک کن. «یک خروجی کوچک ولی واقعی» بهتر از برنامه بزرگ است.
+        </div>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section class="slide" data-title="DNA دیجیتال">
+        <div class="eyebrow">گام ۲</div>
+        <h2>DNA دیجیتال یعنی چه؟ (نسخه ساده و عملی)</h2>
+        <p>DNA اینجا فلسفه نیست؛ یعنی «شرایط واقعی تو» که مسیر را تعیین می‌کند.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>ورودی‌ها (Inputs)</h3>
+            <ul>
+              <li>زمان واقعی در هفته</li>
+              <li>حوزه فعالیت (کسب‌وکار/هنری/شغلی)</li>
+              <li>سطح فعلی و تجربه</li>
+              <li>سبک یادگیری (دیداری/اجرایی/کتبی)</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>خروجی‌ها (Outputs)</h3>
+            <ul>
+              <li>نوع خروجی: محتوا / سیستم / محصول / سرویس</li>
+              <li>کانال: اینستاگرام / سایت / پشتیبانی / …</li>
+              <li>معیار: سرعت، کیفیت، درآمد، کاهش کار تکراری</li>
+              <li>ریسک‌ها: کمال‌گرایی، حواس‌پرتی، ابزار زیاد</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          روی کاغذ یک جدول ۲×۳ بکش: What you do / What you want / What blocks you. سریع پر کن. همین می‌شود DNA جلسه اول.
+        </div>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section class="slide" data-title="قانون ابزار">
+        <div class="eyebrow">گام ۳</div>
+        <h2>قانون سطح ۱: فقط ۳ ابزار</h2>
+        <p>برای اینکه مسیر سریع نتیجه بدهد، ابزارها را محدود می‌کنیم. ابزار جدید تا پایان هفته اول ممنوع.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>۳ ابزار پایه:</h3>
+            <ul>
+              <li><b>Model:</b> ChatGPT (یا مشابه)</li>
+              <li><b>System:</b> Google Docs / Notion (یک جای ثابت)</li>
+              <li><b>Output:</b> Canva / CapCut / ابزار تخصصی حوزه</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>چرا محدودیت؟</h3>
+            <ul>
+              <li>تمرکز روی «روش» نه «ابزار»</li>
+              <li>کاهش اصطکاک (Friction)</li>
+              <li>قابل اندازه‌گیری شدن پیشرفت</li>
+            </ul>
+            <p class="hint">این تصمیم بزرگ‌ترین تفاوت سطح ۱ با یادگیری پراکنده است.</p>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          اگر حامد دنبال ابزار جدید رفت: «این هفته فقط خروجی می‌سازیم. ابزار جدید هفته بعد اگر لازم بود.»
+        </div>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section class="slide" data-title="ورک‌فلو">
+        <div class="eyebrow">گام ۴</div>
+        <h2>ورک‌فلو ۵ مرحله‌ای (سیستم اصلی)</h2>
+        <p>هر خروجی باید از این مسیر رد شود. ساده، تکرارپذیر، قابل اصلاح.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>۱) Brief</h3>
+            <ul>
+              <li>مخاطب کیست؟</li>
+              <li>هدف خروجی چیست؟</li>
+              <li>لحن و محدودیت‌ها</li>
+              <li>Call to Action</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>۲) Outline → ۳) Draft → ۴) Edit → ۵) Publish</h3>
+            <ul>
+              <li>Outline: ساختار و تیترها</li>
+              <li>Draft: نسخه اول بدون وسواس</li>
+              <li>Edit: چک‌لیست کیفیت</li>
+              <li>Publish: انتشار/تحویل + ثبت نتیجه</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          در همین جلسه یک نمونه واقعی را با هم تولید کنید (حتی کوچک). خروجی جلسه باید «فایل» باشد نه فقط حرف.
+        </div>
+      </section>
+
+      <!-- SLIDE 6 -->
+      <section class="slide" data-title="۵ پرامپت">
+        <div class="eyebrow">گام ۵</div>
+        <h2>۵ پرامپت ثابت (برای تمام هفته)</h2>
+        <p>فقط همین ۵ مورد. هدف: ثبات و سرعت.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>پرامپت‌های سطح ۱</h3>
+            <ul>
+              <li>۱) «از من سؤال بپرس تا هدفم دقیق شود…»</li>
+              <li>۲) «برای این هدف ۳ مسیر پیشنهاد بده + مزایا/ریسک…»</li>
+              <li>۳) «برای این موضوع یک Outline حرفه‌ای بده…»</li>
+              <li>۴) «این متن را با این لحن و ساختار اصلاح کن…»</li>
+              <li>۵) «برای این خروجی چک‌لیست کنترل کیفیت بساز…»</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>قانون اجرا</h3>
+            <ul>
+              <li>پرامپت‌ها را در یک سند ذخیره کن</li>
+              <li>هر بار فقط ورودی را عوض کن</li>
+              <li>خروجی‌ها را نسخه‌بندی کن (v1, v2)</li>
+            </ul>
+            <p class="hint">این می‌شود «سیستم تولید» تو.</p>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          اگر حامد گیج شد: فقط پرامپت ۱ و ۳ را اجرا کنید. بعد از خروجی اولیه، به ۴ و ۵ بروید.
+        </div>
+      </section>
+
+      <!-- SLIDE 7 -->
+      <section class="slide" data-title="تکلیف">
+        <div class="eyebrow">هفته اول</div>
+        <h2>تکلیف هفته اول (قابل اندازه‌گیری)</h2>
+        <p>هدف: ساخت عادت + تولید حداقل ۳ خروجی واقعی.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>Task 1 (روزانه ۱۵ دقیقه)</h3>
+            <ul>
+              <li>یک Brief + یک Outline</li>
+              <li>در یک سند ثابت ذخیره شود</li>
+            </ul>
+
+            <h3 style="margin-top:12px;">Task 2 (۳ بار در هفته)</h3>
+            <ul>
+              <li>یک خروجی کامل با ورک‌فلو ۵ مرحله‌ای</li>
+              <li>v1 و v2 ذخیره شود</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Task 3 (پایان هفته)</h3>
+            <ul>
+              <li>گزارش یک صفحه‌ای: چه چیزی جواب داد / چه چیزی نه</li>
+              <li>بزرگ‌ترین اصطکاک کجا بود؟</li>
+              <li>یک تغییر برای هفته دوم</li>
+            </ul>
+            <p class="hint">جلسه دوم: اصلاح و ارتقای سیستم بر اساس داده واقعی.</p>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          پایان جلسه اول، تکلیف را با خود حامد زمان‌بندی کن: «چه روزهایی؟ چه ساعتی؟» و در تقویمش بنویسد.
+        </div>
+      </section>
+
+      <!-- SLIDE 8 -->
+      <section class="slide" data-title="جمع‌بندی">
+        <div class="eyebrow">پایان جلسه</div>
+        <h2>جمع‌بندی و قدم بعد</h2>
+        <p>اگر این ۴ خروجی را داریم، جلسه موفق بوده است.</p>
+
+        <div class="grid">
+          <div class="box">
+            <h3>خروجی‌های جلسه امروز</h3>
+            <ul>
+              <li>هدف یک‌جمله‌ای</li>
+              <li>۳ ابزار قفل‌شده</li>
+              <li>یک خروجی واقعی تولیدشده</li>
+              <li>تکلیف هفته اول با معیار</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>جلسه بعد چه می‌کنیم؟</h3>
+            <ul>
+              <li>بررسی خروجی‌ها و اصلاح مسیر</li>
+              <li>بهینه‌سازی پرامپت‌ها</li>
+              <li>ساخت یک ورک‌فلو اختصاصی‌تر</li>
+            </ul>
+            <p class="hint">هدف: «سیستم پایدار» نه انگیزه مقطعی.</p>
+          </div>
+        </div>
+
+        <div class="notes" data-notes>
+          پایان: «یک خروجی واقعی را همین الآن انتخاب کنیم (موضوع/قالب). بعد از جلسه هم همان را ادامه بده.»
+        </div>
+      </section>
+
+    </div>
+
+    <div class="footer">
+      <div class="note" id="counter">اسلاید 1 / 8 • شروع</div>
+      <div class="progress" aria-hidden="true"><div class="bar" id="prog"></div></div>
+      <div class="right">
+        <span class="kbd">G: رفتن به اسلاید</span>
+        <span class="kbd">N: نوت</span>
+        <span class="kbd">F: Fullscreen</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-label="Help">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <h3 style="margin:0;">راهنمای کنترل اسلایدها</h3>
+        <button class="btn btn-primary" onclick="closeHelp()">بستن</button>
+      </div>
+
+      <div class="row">
+        <div class="key"><b>→ / Space</b> : اسلاید بعد</div>
+        <div class="key"><b>←</b> : اسلاید قبل</div>
+        <div class="key"><b>F</b> : تمام‌صفحه (Fullscreen)</div>
+        <div class="key"><b>N</b> : نمایش/عدم نمایش نوت مدرس</div>
+        <div class="key"><b>H</b> : نمایش همین راهنما</div>
+        <div class="key"><b>G</b> : رفتن به شماره اسلاید</div>
+      </div>
+
+      <p style="margin-top:12px; color:rgba(234,240,255,.62); font-weight:850;">
+        پیشنهاد اجرا: مرور کامل در حالت Fullscreen و فعال کردن Notes فقط برای خودتان (اگر اسکرین‌شیر می‌کنید، Notes را خاموش بگذارید).
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const prog = document.getElementById('prog');
+    const helpModal = document.getElementById('helpModal');
+
+    let idx = 0;
+    let notesOn = false;
+
+    function update(){
+      slides.forEach((s,i)=>s.classList.toggle('active', i===idx));
+      const title = slides[idx].dataset.title || "";
+      counter.textContent = `اسلاید ${idx+1} / ${slides.length} • ${title}`;
+      prog.style.width = `${Math.round((idx)/(slides.length-1) * 100)}%`;
+
+      // Notes toggle state per slide
+      const notes = slides[idx].querySelector('[data-notes]');
+      if(notes){
+        notes.classList.toggle('on', notesOn);
+      }
+      // ensure notes in non-active slides hidden
+      slides.forEach((s,i)=>{
+        if(i!==idx){
+          const n = s.querySelector('[data-notes]');
+          if(n) n.classList.remove('on');
+        }
+      });
+
+      // update URL hash for quick refresh
+      history.replaceState(null, "", `#s${idx+1}`);
+    }
+
+    function next(){ if(idx < slides.length-1){ idx++; update(); } }
+    function prev(){ if(idx > 0){ idx--; update(); } }
+
+    function toggleNotes(){
+      notesOn = !notesOn;
+      update();
+    }
+
+    function toggleFullscreen(){
+      if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+
+    function openHelp(){ helpModal.classList.add('on'); }
+    function closeHelp(){ helpModal.classList.remove('on'); }
+
+    // Keyboard
+    document.addEventListener('keydown', (e)=>{
+      if(helpModal.classList.contains('on')){
+        if(e.key === 'Escape') closeHelp();
+        return;
+      }
+      if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); next(); }
+      if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); prev(); }
+      if(e.key.toLowerCase() === 'n'){ toggleNotes(); }
+      if(e.key.toLowerCase() === 'f'){ toggleFullscreen(); }
+      if(e.key.toLowerCase() === 'h'){ openHelp(); }
+      if(e.key.toLowerCase() === 'g'){
+        const input = prompt(`شماره اسلاید؟ (۱ تا ${slides.length})`);
+        const n = Number(input);
+        if(Number.isFinite(n) && n>=1 && n<=slides.length){ idx = n-1; update(); }
+      }
+      if(e.key === 'Escape'){ /* no-op */ }
+    });
+
+    // Click outside modal to close
+    helpModal.addEventListener('click', (e)=>{
+      if(e.target === helpModal) closeHelp();
+    });
+
+    // Load from hash (#s3)
+    (function initFromHash(){
+      const m = (location.hash || "").match(/^#s(\d+)$/);
+      if(m){
+        const n = Number(m[1]);
+        if(Number.isFinite(n) && n>=1 && n<=slides.length) idx = n-1;
+      }
+      update();
+    })();
+  </script>
+</body>
+</html>
+```0
