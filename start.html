@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>جلسه ۱ • سطح ۱ | آکادمی هوش مصنوعی ستائی (Flow Slides)</title>
+<title>جلسه ۱ • سطح ۱ | Flow — آکادمی هوش مصنوعی ستائی</title>
 <style>
   :root{
     --bg1:#0b1020;
@@ -33,7 +33,7 @@
     overflow:hidden;
   }
 
-  /* Topbar */
+  /* Header (desktop default) */
   header{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; justify-content:space-between;
@@ -75,15 +75,30 @@
     background:linear-gradient(135deg,var(--accent2),var(--accent));
     box-shadow: 0 18px 40px rgba(16,185,129,.16);
   }
-  .kbd{
-    font-weight:950;
-    font-size:12px;
-    color:rgba(234,240,255,.70);
-    border:1px solid rgba(255,255,255,.12);
+  .btn.ghost{
     background:rgba(255,255,255,.03);
-    padding:6px 10px;
-    border-radius:999px;
+    border:1px solid rgba(255,255,255,.10);
   }
+
+  /* Mobile header compact */
+  .mobile-mini{display:none; align-items:center; gap:10px; width:100%}
+  .mobile-title{font-weight:1000; letter-spacing:-.2px; line-height:1.1}
+  .mobile-sub{font-size:11px; color:var(--muted2); font-weight:850}
+  .morewrap{position:relative}
+  .menu{
+    position:absolute;
+    top:46px; left:0;
+    min-width:190px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(10,15,28,.92);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow);
+    padding:8px;
+    display:none;
+  }
+  .menu.on{display:block}
+  .menu button{width:100%; text-align:right; padding:10px 10px; border-radius:12px}
 
   /* Stage */
   .stage{
@@ -138,13 +153,6 @@
     margin-top:12px;
     align-items:start;
   }
-  @media (max-width: 860px){
-    body{overflow:auto}
-    .stage{height:auto; place-items:stretch}
-    .slide{max-height:none}
-    .grid{grid-template-columns:1fr}
-    .kbd{display:none}
-  }
 
   .box{
     border-radius:18px;
@@ -172,7 +180,6 @@
   .choice:active{transform:translateY(1px)}
   .choice small{display:block; margin-top:4px; color:var(--muted2); font-weight:850}
 
-  /* “Text that I say” block */
   .script{
     margin-top:12px;
     border-radius:18px;
@@ -183,7 +190,6 @@
   .script .label{font-size:12px; font-weight:1000; color:rgba(234,240,255,.78); margin-bottom:8px}
   .script .line{color:rgba(234,240,255,.92); font-weight:900; font-size:16px; line-height:1.9}
 
-  /* Footer */
   footer{
     height:56px;
     display:flex; align-items:center; justify-content:space-between;
@@ -207,7 +213,6 @@
     transition:width .18s ease;
   }
 
-  /* Summary chip */
   .summary{
     display:flex; gap:10px; flex-wrap:wrap;
     margin-top:10px;
@@ -221,11 +226,26 @@
     font-weight:900;
     font-size:12px;
   }
+
+  /* Mobile tweaks */
+  @media (max-width: 860px){
+    body{overflow:auto}
+    .stage{height:auto; place-items:stretch}
+    .slide{max-height:none; padding:18px}
+    .grid{grid-template-columns:1fr}
+    footer .progress{display:none}
+
+    /* compact header */
+    header{padding:10px 10px}
+    .brand, .controls{display:none}
+    .mobile-mini{display:flex}
+  }
 </style>
 </head>
 
 <body>
 <header>
+  <!-- Desktop -->
   <div class="brand">
     <div class="mark">S</div>
     <div>
@@ -235,45 +255,63 @@
   </div>
 
   <div class="controls">
-    <span class="kbd">←/→ یا Space</span>
     <button class="btn" type="button" onclick="toggleFullscreen()">تمام‌صفحه</button>
     <button class="btn" type="button" onclick="restart()">شروع از اول</button>
     <button class="btn primary" type="button" onclick="prev()">قبلی</button>
     <button class="btn primary" type="button" onclick="next()">بعدی</button>
   </div>
+
+  <!-- Mobile compact -->
+  <div class="mobile-mini">
+    <div class="mark">S</div>
+    <div style="flex:1; min-width:0">
+      <div class="mobile-title">جلسه ۱ • سطح ۱ (Flow)</div>
+      <div class="mobile-sub" id="miniSub">آکادمی هوش مصنوعی ستائی</div>
+    </div>
+
+    <button class="btn primary" type="button" onclick="prev()">قبلی</button>
+    <button class="btn primary" type="button" onclick="next()">بعدی</button>
+
+    <div class="morewrap">
+      <button class="btn ghost" type="button" onclick="toggleMenu()">⋯</button>
+      <div class="menu" id="menu">
+        <button class="btn" type="button" onclick="toggleFullscreen(); closeMenu()">تمام‌صفحه</button>
+        <button class="btn" type="button" onclick="restart(); closeMenu()">شروع از اول</button>
+        <button class="btn" type="button" onclick="go('tools_intro'); closeMenu()">برو به ابزارها</button>
+        <button class="btn" type="button" onclick="go('demo_1'); closeMenu()">برو به دمو عملی</button>
+      </div>
+    </div>
+  </div>
 </header>
 
 <main class="stage">
 
-  <!-- 1: Welcome -->
+  <!-- 1 -->
   <section class="slide active" id="s1" data-title="خوش آمدید">
     <div class="eyebrow">شروع جلسه • سطح ۱</div>
     <h1>به دوره هوش مصنوعی خوش آمدید</h1>
-    <p>امروز ما دنبال ابزارهای زیاد نیستیم. هدف این است که هوش مصنوعی برای شما تبدیل شود به یک سیستم قابل اجرا: درآمد، سرعت و نظم.</p>
+    <p>امروز دنبال ابزارهای زیاد نیستیم. هدف این است که هوش مصنوعی برای شما تبدیل شود به یک سیستم قابل اجرا: درآمد، سرعت و نظم.</p>
 
     <div class="script">
       <div class="label">متن پیشنهادی برای گفتن (روی اسکرین)</div>
       <div class="line">
-        «حامد خوش اومدی. امروز قرار نیست با ابزارها گیجت کنم. با هم یک مسیر ساده می‌سازیم که همین هفته خروجی بده.
-        آخر جلسه باید دقیق بدونی چی می‌خوای، با چه ابزارهایی، و چطور کیفیت خروجی‌ت رو بالا ببری.»
+        «حامد خوش اومدی. امروز با ابزارها گیجت نمی‌کنم. یک مسیر ساده می‌سازیم که همین هفته خروجی بده.
+        آخر این بخش دقیق می‌دونی چی می‌خوای، با چه ابزارهایی، و چطور کیفیت خروجی‌ت رو بالا ببری.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('s2')">
-        شروع کنیم
-        <small>بریم سر اولین سؤال</small>
-      </div>
+      <div class="choice" onclick="go('s2')">شروع کنیم <small>بریم سر توضیح کوتاه</small></div>
     </div>
   </section>
 
-  <!-- 2: Mini intro of AI & our method -->
-  <section class="slide" id="s2" data-title="AI و روش تدریس">
+  <!-- 2 -->
+  <section class="slide" id="s2" data-title="روش ستائی">
     <div class="eyebrow">نگاه کلی</div>
     <h2>هوش مصنوعی و روش تدریس ما</h2>
     <div class="grid">
       <div class="box">
-        <h3>هوش مصنوعی در این دوره یعنی…</h3>
+        <h3>AI در این دوره یعنی…</h3>
         <ul>
           <li>دستیار فکر کردن و ساختار دادن، نه جایگزین شما</li>
           <li>سریع‌تر کردن اجرای کارهای تکراری</li>
@@ -283,9 +321,9 @@
       <div class="box">
         <h3>روش ستائی</h3>
         <ul>
-          <li>خروجی‌محور: هر جلسه یک خروجی واقعی</li>
+          <li>خروجی‌محور: هر جلسه خروجی واقعی</li>
           <li>سیستم‌محور: روش ثابت، نه آزمون‌وخطا</li>
-          <li>شخصی‌سازی: مسیر مطابق هدف و شرایط</li>
+          <li>شخصی‌سازی: مسیر مطابق هدف و شرایط شما</li>
         </ul>
       </div>
     </div>
@@ -293,74 +331,47 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «من AI رو به‌عنوان موتور اجرا می‌بینم. اما موتور بدون مسیر، فقط دود می‌کنه. ما امروز مسیر می‌سازیم: هدف + سیستم + تمرین.»
+        «AI موتور اجراست، ولی موتور بدون مسیر فقط انرژی تلف می‌کنه. ما امروز مسیر می‌سازیم: هدف + سیستم + تمرین.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('s3')">
-        برو به سؤال‌ها
-        <small>شروع تشخیص مسیر</small>
-      </div>
+      <div class="choice" onclick="go('s3')">برو سر سؤال‌ها <small>تشخیص مسیر</small></div>
     </div>
   </section>
 
-  <!-- 3: Goal question -->
+  <!-- 3 -->
   <section class="slide" id="s3" data-title="هدف">
     <div class="eyebrow">سؤال ۱</div>
     <h2>اگر این دوره موفق باشد، بعد از ۴ هفته چه چیزی باید تغییر کند؟</h2>
     <p>فقط مهم‌ترین گزینه را انتخاب کن.</p>
 
     <div class="choices">
-      <div class="choice" onclick="select('goal','income'); go('s4')">
-        درآمد
-        <small>یعنی خروجی باید پول‌ساز شود</small>
-      </div>
-      <div class="choice" onclick="select('goal','speed'); go('s4')">
-        سرعت
-        <small>یعنی زمان تولید/اجرا کم شود</small>
-      </div>
-      <div class="choice" onclick="select('goal','order'); go('s4')">
-        نظم
-        <small>یعنی روش ثابت و قابل تکرار داشته باشی</small>
-      </div>
-      <div class="choice" onclick="select('goal','all'); go('s4')">
-        هر سه (درآمد + سرعت + نظم)
-        <small>همه را می‌خواهی، ما اولویت می‌گذاریم</small>
-      </div>
+      <div class="choice" onclick="select('goal','income'); go('s4')">درآمد <small>خروجی باید پول‌ساز شود</small></div>
+      <div class="choice" onclick="select('goal','speed'); go('s4')">سرعت <small>زمان تولید/اجرا کم شود</small></div>
+      <div class="choice" onclick="select('goal','order'); go('s4')">نظم <small>روش ثابت و قابل تکرار</small></div>
+      <div class="choice" onclick="select('goal','all'); go('s4')">هر سه <small>اولویت می‌گذاریم</small></div>
     </div>
 
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «هیچ اشکالی نداره چند هدف داشته باشی، ولی برای نتیجه گرفتن باید اولویت بسازیم. انتخابت مسیر جلسه رو مشخص می‌کنه.»
+        «اگه چند هدف داری مشکلی نیست؛ ولی برای نتیجه گرفتن باید یک اولویت اصلی انتخاب کنیم.»
       </div>
     </div>
   </section>
 
-  <!-- 4: Biggest problem question -->
+  <!-- 4 -->
   <section class="slide" id="s4" data-title="گره اصلی">
     <div class="eyebrow">سؤال ۲</div>
     <h2>الان بزرگ‌ترین گره‌ات کدام است؟</h2>
     <p>فقط یکی را انتخاب کن.</p>
 
     <div class="choices">
-      <div class="choice" onclick="select('problem','start'); go('p_start')">
-        شروع کردن
-        <small>می‌دانی چی می‌خواهی ولی شروع سخت است</small>
-      </div>
-      <div class="choice" onclick="select('problem','order'); go('p_order')">
-        نظم
-        <small>شروع می‌کنی ولی ادامه‌دار نیست</small>
-      </div>
-      <div class="choice" onclick="select('problem','speed'); go('p_speed')">
-        سرعت
-        <small>خروجی هست، ولی خیلی زمان می‌برد</small>
-      </div>
-      <div class="choice" onclick="select('problem','quality'); go('p_quality')">
-        کیفیت خروجی
-        <small>خروجی نهایی حس حرفه‌ای بودن ندارد</small>
-      </div>
+      <div class="choice" onclick="select('problem','start'); go('p_start')">شروع کردن <small>شروع سخت است</small></div>
+      <div class="choice" onclick="select('problem','order'); go('p_order')">نظم <small>ادامه‌دار نیست</small></div>
+      <div class="choice" onclick="select('problem','speed'); go('p_speed')">سرعت <small>زمان زیاد می‌برد</small></div>
+      <div class="choice" onclick="select('problem','quality'); go('p_quality')">کیفیت خروجی <small>حرفه‌ای نیست</small></div>
     </div>
 
     <div class="summary" id="summaryRow"></div>
@@ -368,32 +379,32 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «این انتخاب، تشخیص اصلی ماست. از اینجا به بعد، ما یک نسخه واحد برای همه نمی‌ریم. مسیر تو مخصوص خودته.»
+        «از اینجا به بعد مسیر تو شخصی می‌شه. ما نسخه واحد برای همه نداریم.»
       </div>
     </div>
   </section>
 
-  <!-- BRANCH: START -->
+  <!-- Branch: Start -->
   <section class="slide" id="p_start" data-title="مسیر: شروع">
     <div class="eyebrow">تشخیص مسیر • شروع</div>
     <h2>مسئله تو «شروع» است</h2>
-    <p>پس ما باید اصطکاک شروع را کم کنیم: خروجی کوچک + قالب آماده + قدم‌های خیلی کوتاه.</p>
+    <p>پس امروز خروجی را کوچک می‌کنیم و یک قالب ثابت می‌سازیم تا شروع کردن ساده شود.</p>
 
     <div class="grid">
       <div class="box">
-        <h3>قانون امروز برای تو</h3>
+        <h3>قانون تو</h3>
         <ul>
-          <li>خروجی را کوچک کن (Minimum Output)</li>
-          <li>فقط ۱۵ دقیقه شروع کن، نه پروژه کامل</li>
-          <li>یک قالب ثابت داشته باش</li>
+          <li>خروجی ۱۵ دقیقه‌ای تعریف می‌کنیم</li>
+          <li>فقط یک قالب Brief ثابت</li>
+          <li>روزانه شروع کوچک</li>
         </ul>
       </div>
       <div class="box">
-        <h3>قدم بعدی</h3>
+        <h3>نتیجه‌ای که می‌خواهیم</h3>
         <ul>
-          <li>تعریف خروجی ۱۵ دقیقه‌ای</li>
-          <li>ساخت قالب Brief</li>
-          <li>معرفی GPT به‌عنوان «پرسش‌گر»</li>
+          <li>شروع بدون مقاومت</li>
+          <li>خروجی‌های کوچک اما واقعی</li>
+          <li>جمع شدن خروجی در هفته</li>
         </ul>
       </div>
     </div>
@@ -401,7 +412,7 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «تو قرار نیست کامل شروع کنی. فقط باید شروعِ کوچک را استاندارد کنیم. وقتی شروع استاندارد شد، ادامه‌اش خودکار می‌شه.»
+        «تو قرار نیست کامل شروع کنی. فقط باید “شروع کوچک” رو استاندارد کنیم.»
       </div>
     </div>
 
@@ -410,27 +421,27 @@
     </div>
   </section>
 
-  <!-- BRANCH: ORDER -->
+  <!-- Branch: Order -->
   <section class="slide" id="p_order" data-title="مسیر: نظم">
     <div class="eyebrow">تشخیص مسیر • نظم</div>
     <h2>مسئله تو «نظم» است</h2>
-    <p>پس ما باید یک ریتم ثابت بسازیم: زمان‌بندی، چک‌لیست، و ثبت نتیجه.</p>
+    <p>پس امروز یک ریتم ثابت می‌چینیم: زمان‌بندی + سند ثابت + ثبت نتیجه.</p>
 
     <div class="grid">
       <div class="box">
-        <h3>قانون امروز برای تو</h3>
+        <h3>قانون تو</h3>
         <ul>
-          <li>زمان ثابت روزانه (۱۵ دقیقه)</li>
+          <li>۱۵ دقیقه ثابت روزانه</li>
           <li>یک سند ثابت برای همه خروجی‌ها</li>
-          <li>نسخه‌بندی (v1, v2) و ثبت پیشرفت</li>
+          <li>نسخه‌بندی (v1, v2)</li>
         </ul>
       </div>
       <div class="box">
-        <h3>قدم بعدی</h3>
+        <h3>نتیجه‌ای که می‌خواهیم</h3>
         <ul>
-          <li>ساخت روتین هفته اول</li>
-          <li>تعیین معیار: انجام شد/نشد</li>
-          <li>OpenAI به‌عنوان «کمک‌مربی روزانه»</li>
+          <li>ریتم و تداوم</li>
+          <li>خروجی قابل پیگیری</li>
+          <li>کاهش آشفتگی ذهنی</li>
         </ul>
       </div>
     </div>
@@ -438,7 +449,7 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «نظم یعنی سیستم. ما امروز سیستم رو ساده می‌چینیم که انجام‌دادنش از انجام‌ندادنش راحت‌تر باشه.»
+        «نظم یعنی سیستم. سیستم باید اونقدر ساده باشه که انجام دادنش راحت‌تر از انجام ندادنش باشه.»
       </div>
     </div>
 
@@ -447,27 +458,27 @@
     </div>
   </section>
 
-  <!-- BRANCH: SPEED -->
+  <!-- Branch: Speed -->
   <section class="slide" id="p_speed" data-title="مسیر: سرعت">
     <div class="eyebrow">تشخیص مسیر • سرعت</div>
     <h2>مسئله تو «سرعت» است</h2>
-    <p>پس ما باید فرآیند را کوتاه کنیم: Brief دقیق، Outline سریع، و کاهش رفت‌وبرگشت.</p>
+    <p>پس امروز فرآیند را کوتاه می‌کنیم: Brief دقیق + Outline سریع + اصلاح سریع.</p>
 
     <div class="grid">
       <div class="box">
-        <h3>قانون امروز برای تو</h3>
+        <h3>قانون تو</h3>
         <ul>
-          <li>Brief = کوتاه اما دقیق</li>
+          <li>Brief کوتاه اما دقیق</li>
           <li>Outline قبل از Draft</li>
-          <li>یک چک‌لیست اصلاح سریع</li>
+          <li>چک‌لیست اصلاح سریع</li>
         </ul>
       </div>
       <div class="box">
-        <h3>قدم بعدی</h3>
+        <h3>نتیجه‌ای که می‌خواهیم</h3>
         <ul>
-          <li>ساخت قالب Brief</li>
-          <li>معرفی «پرامپت‌های کوتاه»</li>
-          <li>OpenAI برای خروجی‌های تکراری</li>
+          <li>کاهش رفت‌وبرگشت</li>
+          <li>سرعت تولید بالا</li>
+          <li>زمان آزاد بیشتر</li>
         </ul>
       </div>
     </div>
@@ -475,7 +486,7 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «سرعت یعنی تصمیم‌های کمتر و قالب‌های ثابت‌تر. ما امروز قالب می‌سازیم تا هر بار از صفر شروع نکنی.»
+        «سرعت یعنی تصمیم‌های کمتر و قالب‌های ثابت‌تر. ما قالب می‌سازیم تا هر بار از صفر شروع نکنی.»
       </div>
     </div>
 
@@ -484,61 +495,44 @@
     </div>
   </section>
 
-  <!-- BRANCH: QUALITY -->
+  <!-- Branch: Quality -->
   <section class="slide" id="p_quality" data-title="مسیر: کیفیت">
     <div class="eyebrow">تشخیص مسیر • کیفیت</div>
     <h2>مسئله تو «کیفیت خروجی» است</h2>
-    <p>پس ما باید یک سیستم اصلاح ثابت بسازیم: چک‌لیست کیفیت + پرامپت اصلاح + خط پایان مشخص.</p>
+    <p>پس امروز سیستم اصلاح ثابت می‌سازیم: چک‌لیست کیفیت + پرامپت اصلاح + خط پایان.</p>
 
     <div class="choices">
-      <div class="choice" onclick="go('q_quality_which')">
-        ادامه: کیفیت دقیقاً کجا می‌لنگه؟
-        <small>سؤال ۳</small>
-      </div>
+      <div class="choice" onclick="go('q_quality_which')">ادامه: کیفیت دقیقاً کجا می‌لنگه؟ <small>سؤال ۳</small></div>
     </div>
 
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «تو خروجی داری، ولی خروجی نهایی حس حرفه‌ای بودن نداره. امروز ما بخش “اصلاح” رو استاندارد می‌کنیم.»
+        «تو خروجی داری، اما خروجی نهایی حس حرفه‌ای بودن نداره. ما مرحله اصلاح رو استاندارد می‌کنیم.»
       </div>
     </div>
   </section>
 
-  <!-- QUALITY: sub-question -->
   <section class="slide" id="q_quality_which" data-title="جزئیات کیفیت">
     <div class="eyebrow">سؤال ۳ • کیفیت</div>
     <h2>کیفیت دقیقاً کجا می‌لنگه؟</h2>
     <p>فقط یکی را انتخاب کن.</p>
 
     <div class="choices">
-      <div class="choice" onclick="select('quality_issue','ideas'); go('q_fix_ideas')">
-        ایده‌ها معمولی‌اند
-        <small>خلاقیت/زاویه دید کم است</small>
-      </div>
-      <div class="choice" onclick="select('quality_issue','structure'); go('q_fix_structure')">
-        ساختار به‌هم‌ریخته است
-        <small>ترتیب و چارچوب خروجی مشکل دارد</small>
-      </div>
-      <div class="choice" onclick="select('quality_issue','pro'); go('q_fix_pro')">
-        خروجی نهایی حرفه‌ای به نظر نمی‌رسد
-        <small>لحن/جزئیات/پولیش کم است</small>
-      </div>
-      <div class="choice" onclick="select('quality_issue','finish'); go('q_fix_finish')">
-        نمی‌دانم کی آماده انتشار/فروش است
-        <small>خط پایان و معیار ندارم</small>
-      </div>
+      <div class="choice" onclick="select('quality_issue','ideas'); go('q_fix_ideas')">ایده‌ها معمولی‌اند <small>زاویه دید کم است</small></div>
+      <div class="choice" onclick="select('quality_issue','structure'); go('q_fix_structure')">ساختار به‌هم‌ریخته است <small>چارچوب مشکل دارد</small></div>
+      <div class="choice" onclick="select('quality_issue','pro'); go('q_fix_pro')">خروجی نهایی حرفه‌ای نیست <small>پولیش کم است</small></div>
+      <div class="choice" onclick="select('quality_issue','finish'); go('q_fix_finish')">نمی‌دانم کی آماده است <small>خط پایان ندارم</small></div>
     </div>
 
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «این انتخاب به من می‌گه ما باید کدوم مرحله رو تقویت کنیم: ایده، ساختار، پولیش، یا معیار پایان.»
+        «این انتخاب مشخص می‌کنه ما روی ایده، ساختار، پولیش یا معیار پایان کار کنیم.»
       </div>
     </div>
   </section>
 
-  <!-- QUALITY FIX: IDEAS -->
   <section class="slide" id="q_fix_ideas" data-title="کیفیت: ایده">
     <div class="eyebrow">راه‌حل • ایده</div>
     <h2>اگر ایده‌ها معمولی‌اند</h2>
@@ -546,32 +540,23 @@
       <div class="box">
         <h3>کاری که می‌کنیم</h3>
         <ul>
-          <li>زاویه‌های جدید (Angles) تولید می‌کنیم</li>
-          <li>مقایسه، مثال، و داستان اضافه می‌کنیم</li>
-          <li>یک بانک ایده می‌سازیم</li>
+          <li>تولید زاویه‌های متفاوت (Angles)</li>
+          <li>مثال واقعی + ضد مثال</li>
+          <li>بانک ایده (قابل تکرار)</li>
         </ul>
       </div>
       <div class="box">
-        <h3>پرامپت ثابت</h3>
+        <h3>پرامپت ثابت (نمونه)</h3>
         <ul>
-          <li>«برای این موضوع ۱۰ زاویه متفاوت بده…»</li>
+          <li>«برای این موضوع ۱۰ زاویه بده…»</li>
           <li>«۳ مثال واقعی + ۳ ضد مثال بده…»</li>
           <li>«یک داستان کوتاه مرتبط بساز…»</li>
         </ul>
       </div>
     </div>
-    <div class="script">
-      <div class="label">متن برای گفتن</div>
-      <div class="line">
-        «ایده خوب یعنی زاویه خوب. ما زاویه می‌سازیم، نه فقط متن.»
-      </div>
-    </div>
-    <div class="choices">
-      <div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div>
-    </div>
+    <div class="choices"><div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div></div>
   </section>
 
-  <!-- QUALITY FIX: STRUCTURE -->
   <section class="slide" id="q_fix_structure" data-title="کیفیت: ساختار">
     <div class="eyebrow">راه‌حل • ساختار</div>
     <h2>اگر ساختار به‌هم‌ریخته است</h2>
@@ -579,9 +564,9 @@
       <div class="box">
         <h3>کاری که می‌کنیم</h3>
         <ul>
-          <li>Outline قبل از Draft (همیشه)</li>
-          <li>قالب ثابت برای هر خروجی</li>
-          <li>تبدیل متن به بخش‌های مشخص</li>
+          <li>Outline قبل از Draft</li>
+          <li>قالب ثابت برای خروجی‌ها</li>
+          <li>تقسیم به بخش‌های مشخص</li>
         </ul>
       </div>
       <div class="box">
@@ -592,18 +577,9 @@
         </ul>
       </div>
     </div>
-    <div class="script">
-      <div class="label">متن برای گفتن</div>
-      <div class="line">
-        «کیفیت خیلی وقت‌ها یعنی ساختار. وقتی ساختار درست شد، متن خودش بهتر می‌شه.»
-      </div>
-    </div>
-    <div class="choices">
-      <div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div>
-    </div>
+    <div class="choices"><div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div></div>
   </section>
 
-  <!-- QUALITY FIX: PRO -->
   <section class="slide" id="q_fix_pro" data-title="کیفیت: حرفه‌ای">
     <div class="eyebrow">راه‌حل • پولیش</div>
     <h2>اگر خروجی نهایی حرفه‌ای نیست</h2>
@@ -611,33 +587,24 @@
       <div class="box">
         <h3>کاری که می‌کنیم</h3>
         <ul>
-          <li>چک‌لیست پولیش می‌سازیم</li>
-          <li>یک مرحله Edit ثابت اضافه می‌کنیم</li>
-          <li>لحن و جزئیات را استاندارد می‌کنیم</li>
+          <li>چک‌لیست پولیش</li>
+          <li>مرحله Edit ثابت</li>
+          <li>استانداردسازی لحن و جزئیات</li>
         </ul>
       </div>
       <div class="box">
         <h3>چک‌لیست سریع (نمونه)</h3>
         <ul>
-          <li>آیا پیام اصلی روشن است؟</li>
-          <li>آیا مثال واقعی دارد؟</li>
-          <li>آیا جمله‌های اضافی حذف شده؟</li>
-          <li>آیا CTA مشخص است؟</li>
+          <li>پیام اصلی روشن است؟</li>
+          <li>یک مثال واقعی دارد؟</li>
+          <li>جمله اضافی حذف شده؟</li>
+          <li>CTA مشخص است؟</li>
         </ul>
       </div>
     </div>
-    <div class="script">
-      <div class="label">متن برای گفتن</div>
-      <div class="line">
-        «از این به بعد کیفیت با احساس سنجیده نمی‌شه؛ با چک‌لیست سنجیده می‌شه.»
-      </div>
-    </div>
-    <div class="choices">
-      <div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div>
-    </div>
+    <div class="choices"><div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div></div>
   </section>
 
-  <!-- QUALITY FIX: FINISH -->
   <section class="slide" id="q_fix_finish" data-title="کیفیت: خط پایان">
     <div class="eyebrow">راه‌حل • خط پایان</div>
     <h2>اگر نمی‌دانی کی آماده انتشار/فروش است</h2>
@@ -645,9 +612,9 @@
       <div class="box">
         <h3>کاری که می‌کنیم</h3>
         <ul>
-          <li>تعریف معیارهای «آماده است»</li>
+          <li>تعریف معیار «آماده است»</li>
           <li>چک‌لیست تایید نهایی</li>
-          <li>نسخه‌بندی و توقف در v2</li>
+          <li>توقف در v2 (نه وسواس بی‌نهایت)</li>
         </ul>
       </div>
       <div class="box">
@@ -660,38 +627,30 @@
         </ul>
       </div>
     </div>
-    <div class="script">
-      <div class="label">متن برای گفتن</div>
-      <div class="line">
-        «وقتی خط پایان نداری، همیشه حس می‌کنی کار ناقصه. ما خط پایان می‌سازیم.»
-      </div>
-    </div>
-    <div class="choices">
-      <div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div>
-    </div>
+    <div class="choices"><div class="choice" onclick="go('tools_intro')">بریم ابزارها (OpenAI)</div></div>
   </section>
 
-  <!-- TOOLS INTRO (OpenAI) -->
-  <section class="slide" id="tools_intro" data-title="ابزارها • OpenAI">
+  <!-- Tools -->
+  <section class="slide" id="tools_intro" data-title="ابزارها">
     <div class="eyebrow">بخش عملی</div>
-    <h2>معرفی ابزارهای OpenAI (برای سطح ۱)</h2>
-    <p>در سطح ۱ ما فقط روی پایه‌ها تمرکز می‌کنیم: پرسش درست، ساختار درست، و اصلاح درست.</p>
+    <h2>OpenAI در سطح ۱ (فقط پایه‌ها)</h2>
+    <p>سه کار اصلی: Brief → Outline → Edit. همین.</p>
 
     <div class="grid">
       <div class="box">
-        <h3>سه کار اصلی که امروز با GPT انجام می‌دهیم</h3>
+        <h3>سه استفاده اصلی</h3>
         <ul>
-          <li><b>Brief:</b> از تو سؤال می‌پرسد تا هدف دقیق شود</li>
-          <li><b>Outline:</b> ساختار می‌دهد تا متن/خروجی حرفه‌ای شود</li>
-          <li><b>Edit:</b> با چک‌لیست، خروجی را پولیش می‌کند</li>
+          <li><b>Brief:</b> سؤال می‌پرسد تا هدف دقیق شود</li>
+          <li><b>Outline:</b> ساختار می‌دهد تا خروجی حرفه‌ای شود</li>
+          <li><b>Edit:</b> با چک‌لیست خروجی را پولیش می‌کند</li>
         </ul>
       </div>
       <div class="box">
         <h3>قانون سطح ۱</h3>
         <ul>
           <li>ابزار جدید ممنوع تا پایان هفته اول</li>
-          <li>همه خروجی‌ها در یک سند ثابت ذخیره شوند</li>
-          <li>هر خروجی: v1 (سریع) + v2 (اصلاح‌شده)</li>
+          <li>همه خروجی‌ها در یک سند ثابت</li>
+          <li>هر خروجی: v1 سریع + v2 اصلاح‌شده</li>
         </ul>
       </div>
     </div>
@@ -699,111 +658,77 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «از این لحظه GPT رو اینطور استفاده نمی‌کنیم که: “یه چیزی بنویس”. ما نقش می‌دیم، ساختار می‌دیم، معیار می‌دیم، بعد اصلاح.»
+        «از این لحظه GPT رو اینطور استفاده نمی‌کنیم که: “یه چیزی بنویس”.
+        نقش می‌دیم، ساختار می‌دیم، معیار می‌دیم، بعد اصلاح.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('scientific_1')">
-        ادامه: بخش علمی (خیلی کوتاه و کاربردی)
-        <small>برای اینکه بدانی چرا این روش جواب می‌دهد</small>
-      </div>
-      <div class="choice" onclick="go('wrapup')">
-        برو جمع‌بندی جلسه
-        <small>اگر بخش علمی را بعداً می‌خواهی</small>
-      </div>
+      <div class="choice" onclick="go('demo_1')">بریم دمو عملی (۵ دقیقه) <small>خروجی واقعی بسازیم</small></div>
+      <div class="choice" onclick="go('scientific_1')">بخش علمی کوتاه <small>چرا این روش جواب می‌دهد</small></div>
     </div>
   </section>
 
-  <!-- SCIENTIFIC PART -->
-  <section class="slide" id="scientific_1" data-title="بخش علمی ۱">
-    <div class="eyebrow">بخش علمی (کاربردی)</div>
-    <h2>هوش مصنوعیِ زبانی چیست؟ (خیلی خلاصه)</h2>
-    <div class="grid">
-      <div class="box">
-        <h3>مدل زبانی چه کار می‌کند؟</h3>
-        <ul>
-          <li>الگوهای زبان را یاد گرفته و متن/پاسخ تولید می‌کند</li>
-          <li>درک «هدف» را از روی متن شما حدس می‌زند</li>
-          <li>هرچه ورودی دقیق‌تر، خروجی بهتر</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>چرا بعضی خروجی‌ها ضعیف می‌شوند؟</h3>
-        <ul>
-          <li>ورودی مبهم (Brief ضعیف)</li>
-          <li>ساختار نداریم (Outline نیست)</li>
-          <li>معیار کیفیت نداریم (Edit کور)</li>
-        </ul>
-      </div>
-    </div>
+  <!-- Demo: practical -->
+  <section class="slide" id="demo_1" data-title="دمو عملی ۱">
+    <div class="eyebrow">دمو عملی (کوتاه)</div>
+    <h2>الان یک خروجی واقعی می‌سازیم</h2>
+    <p>حامد، فقط یک موضوع واقعی بگو (مثلاً: یک پست، یک صفحه سایت، یک پیام فروش، یا یک ایده محتوا).</p>
 
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «مدل ذهن‌خوان نیست. هرچی مسئله رو دقیق‌تر تعریف کنی، خروجی دقیق‌تر می‌شه. به همین خاطر ما اول Brief و Outline می‌سازیم.»
+        «موضوع رو تو می‌گی. من فقط سیستم رو اجرا می‌کنم. هدف: همین الآن یک خروجی قابل استفاده بسازیم.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('scientific_2')">ادامه بخش علمی</div>
-      <div class="choice" onclick="go('wrapup')">برو جمع‌بندی</div>
+      <div class="choice" onclick="go('demo_2')">ادامه: قالب Brief <small>سؤال‌های دقیق</small></div>
     </div>
   </section>
 
-  <section class="slide" id="scientific_2" data-title="بخش علمی ۲">
-    <div class="eyebrow">بخش علمی (کاربردی)</div>
-    <h2>دو خطا که باید بشناسی</h2>
-    <div class="grid">
-      <div class="box">
-        <h3>۱) Hallucination (اطمینانِ غلط)</h3>
-        <ul>
-          <li>گاهی مدل با اعتمادبه‌نفس چیزی می‌گوید که دقیق نیست</li>
-          <li>راه‌حل: درخواست منبع، جزئیات، و تست با مثال</li>
-          <li>در کار حساس: همیشه بررسی انسانی</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>۲) Generic Output (خروجی عمومی)</h3>
-        <ul>
-          <li>وقتی Brief ضعیف باشد، خروجی کلیشه‌ای می‌شود</li>
-          <li>راه‌حل: محدودیت، مخاطب، لحن، و مثال واقعی بده</li>
-          <li>درخواست چند نسخه: v1 سریع، v2 پولیش</li>
-        </ul>
-      </div>
+  <section class="slide" id="demo_2" data-title="دمو عملی ۲">
+    <div class="eyebrow">Brief</div>
+    <h2>قالب Brief (همین را در GPT می‌نویسیم)</h2>
+    <div class="box">
+      <ul>
+        <li><b>هدف خروجی:</b> …</li>
+        <li><b>مخاطب:</b> …</li>
+        <li><b>لحن:</b> رسمی/خودمانی/حرفه‌ای…</li>
+        <li><b>طول:</b> کوتاه/متوسط…</li>
+        <li><b>CTA:</b> دقیقاً از مخاطب چی می‌خوای؟</li>
+      </ul>
     </div>
 
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «هر وقت خروجی عمومی شد، مشکل مدل نیست؛ مشکل ورودی ماست. ما ورودی رو مثل سفارش دقیق می‌نویسیم.»
+        «هر بار خروجی‌ت ضعیف شد، ۹۰٪ مشکل Briefـه. ما Brief رو استاندارد می‌کنیم.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('scientific_3')">ادامه: بهترین روش استفاده (سیستم)</div>
-      <div class="choice" onclick="go('wrapup')">برو جمع‌بندی</div>
+      <div class="choice" onclick="go('demo_3')">ادامه: Outline <small>ساختار خروجی</small></div>
     </div>
   </section>
 
-  <section class="slide" id="scientific_3" data-title="بخش علمی ۳">
-    <div class="eyebrow">بخش علمی (سیستم)</div>
-    <h2>چرا روش «سیستم‌محور» جواب می‌دهد؟</h2>
+  <section class="slide" id="demo_3" data-title="دمو عملی ۳">
+    <div class="eyebrow">Outline → Draft → Edit</div>
+    <h2>الگوی ۳ مرحله‌ای که کیفیت می‌دهد</h2>
+
     <div class="grid">
       <div class="box">
-        <h3>مدل به «فرآیند» بهتر جواب می‌دهد</h3>
+        <h3>۱) Outline</h3>
         <ul>
-          <li>مرحله‌بندی: Brief → Outline → Draft → Edit</li>
-          <li>در هر مرحله فقط یک هدف</li>
-          <li>کاهش خطا و افزایش کنترل</li>
+          <li>تیترها و ترتیب بخش‌ها</li>
+          <li>قبل از متن کامل</li>
         </ul>
       </div>
       <div class="box">
-        <h3>سه اصل طلایی</h3>
+        <h3>۲) Draft + ۳) Edit</h3>
         <ul>
-          <li><b>Constraint:</b> محدودیت بده (طول، لحن، ساختار)</li>
-          <li><b>Examples:</b> مثال خوب/بد بده</li>
-          <li><b>Checklist:</b> معیار کیفیت بده</li>
+          <li>Draft سریع (بدون وسواس)</li>
+          <li>Edit با چک‌لیست</li>
         </ul>
       </div>
     </div>
@@ -811,37 +736,36 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «وقتی فرآیند داری، خروجی تکرارپذیر می‌شه. تکرارپذیری یعنی می‌تونی درآمد بسازی، چون هر بار شانسی نیست.»
+        «ما با Draft سریع خروجی می‌گیریم، بعد با Edit حرفه‌ای می‌کنیم. این تفاوت سطح ۱ با آموزش پراکنده است.»
       </div>
     </div>
 
     <div class="choices">
-      <div class="choice" onclick="go('wrapup')">برو جمع‌بندی جلسه</div>
+      <div class="choice" onclick="go('homework')">بریم تمرین هفته اول <small>پایان بخش اول جلسه</small></div>
     </div>
   </section>
 
-  <!-- WRAP UP -->
-  <section class="slide" id="wrapup" data-title="جمع‌بندی">
-    <div class="eyebrow">پایان جلسه</div>
-    <h2>جمع‌بندی جلسه اول + قدم بعدی</h2>
-    <p>اگر این ۴ مورد را داشته باشیم، جلسه اول موفق است.</p>
+  <!-- Homework / end of part 1 -->
+  <section class="slide" id="homework" data-title="تمرین هفته اول">
+    <div class="eyebrow">پایان بخش اول جلسه</div>
+    <h2>تمرین هفته اول (خیلی ساده و قابل انجام)</h2>
+    <p>هدف: عادت + خروجی واقعی. همین.</p>
 
     <div class="grid">
       <div class="box">
-        <h3>خروجی‌های جلسه</h3>
+        <h3>هر روز (۱۵ دقیقه)</h3>
         <ul>
-          <li>هدف مشخص شد</li>
-          <li>گره اصلی مشخص شد</li>
-          <li>مسیر مناسب انتخاب شد</li>
-          <li>شروع کار با OpenAI تعریف شد</li>
+          <li>یک Brief کوتاه</li>
+          <li>یک Outline کوتاه</li>
+          <li>ذخیره در یک سند ثابت</li>
         </ul>
       </div>
       <div class="box">
-        <h3>تمرین هفته اول (ساده)</h3>
+        <h3>۳ بار در هفته</h3>
         <ul>
-          <li>روزانه ۱۵ دقیقه: Brief + Outline</li>
-          <li>۳ بار در هفته: یک خروجی کامل (v1 + v2)</li>
-          <li>آخر هفته: گزارش یک صفحه‌ای (چی جواب داد/چی نه)</li>
+          <li>یک خروجی کامل با Draft + Edit</li>
+          <li>نسخه v1 و v2 را نگه دار</li>
+          <li>آخرش یک جمله: چی بهتر شد؟</li>
         </ul>
       </div>
     </div>
@@ -849,14 +773,117 @@
     <div class="script">
       <div class="label">متن برای گفتن</div>
       <div class="line">
-        «جلسه بعد ما با داده واقعی برمی‌گردیم: خروجی‌هات رو می‌بینیم، گره‌ها رو اصلاح می‌کنیم، و سیستم رو حرفه‌ای‌تر می‌کنیم.»
+        «این پایان بخش اول جلسه‌ست. اگر همین تمرین رو انجام بدی، جلسه بعد با داده واقعی برمی‌گردیم و سیستم رو دقیق‌تر می‌کنیم.»
       </div>
+    </div>
+
+    <div class="choices">
+      <div class="choice" onclick="go('wrapup_part1')">جمع‌بندی سریع <small>۳۰ ثانیه</small></div>
+    </div>
+  </section>
+
+  <section class="slide" id="wrapup_part1" data-title="جمع‌بندی بخش اول">
+    <div class="eyebrow">پایان بخش اول</div>
+    <h2>جمع‌بندی (کوتاه)</h2>
+    <div class="box">
+      <ul>
+        <li>هدف مشخص شد</li>
+        <li>گره اصلی مشخص شد</li>
+        <li>روش سطح ۱ را شناختی: Brief → Outline → Edit</li>
+        <li>تمرین هفته اول را گرفتی</li>
+      </ul>
     </div>
 
     <div class="summary" id="finalSummary"></div>
 
     <div class="choices">
+      <div class="choice" onclick="go('scientific_1')">اگر وقت داریم: بخش علمی کوتاه</div>
       <div class="choice" onclick="restart()">شروع دوباره از اول</div>
+    </div>
+  </section>
+
+  <!-- Scientific (optional after part 1) -->
+  <section class="slide" id="scientific_1" data-title="علمی ۱">
+    <div class="eyebrow">اختیاری • بخش علمی</div>
+    <h2>مدل زبانی چیست؟ (خیلی خلاصه)</h2>
+
+    <div class="grid">
+      <div class="box">
+        <h3>مدل چه می‌کند؟</h3>
+        <ul>
+          <li>الگوهای زبان را یاد گرفته و متن تولید می‌کند</li>
+          <li>هدف را از روی ورودی شما حدس می‌زند</li>
+          <li>هرچه ورودی دقیق‌تر، خروجی بهتر</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>چرا خروجی ضعیف می‌شود؟</h3>
+        <ul>
+          <li>Brief مبهم</li>
+          <li>ساختار نداریم</li>
+          <li>معیار کیفیت نداریم</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="choices">
+      <div class="choice" onclick="go('scientific_2')">ادامه</div>
+      <div class="choice" onclick="go('wrapup_part1')">برگرد جمع‌بندی</div>
+    </div>
+  </section>
+
+  <section class="slide" id="scientific_2" data-title="علمی ۲">
+    <div class="eyebrow">اختیاری • بخش علمی</div>
+    <h2>دو خطای مهم</h2>
+
+    <div class="grid">
+      <div class="box">
+        <h3>۱) اطمینان غلط</h3>
+        <ul>
+          <li>گاهی با اعتمادبه‌نفس اشتباه می‌گوید</li>
+          <li>راه‌حل: سؤال دقیق + تست با مثال</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>۲) خروجی عمومی</h3>
+        <ul>
+          <li>ورودی مبهم → خروجی کلیشه‌ای</li>
+          <li>راه‌حل: محدودیت + مخاطب + مثال واقعی</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="choices">
+      <div class="choice" onclick="go('scientific_3')">ادامه</div>
+      <div class="choice" onclick="go('wrapup_part1')">برگرد جمع‌بندی</div>
+    </div>
+  </section>
+
+  <section class="slide" id="scientific_3" data-title="علمی ۳">
+    <div class="eyebrow">اختیاری • بخش علمی</div>
+    <h2>چرا سیستم‌محور جواب می‌دهد؟</h2>
+
+    <div class="grid">
+      <div class="box">
+        <h3>مرحله‌بندی</h3>
+        <ul>
+          <li>Brief → Outline → Draft → Edit</li>
+          <li>هر مرحله یک هدف</li>
+          <li>کنترل کیفیت بالا</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>سه اصل طلایی</h3>
+        <ul>
+          <li>محدودیت (Constraint)</li>
+          <li>مثال (Examples)</li>
+          <li>چک‌لیست (Checklist)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="choices">
+      <div class="choice" onclick="go('wrapup_part1')">پایان</div>
     </div>
   </section>
 
@@ -865,28 +892,18 @@
 <footer>
   <div class="counter" id="counter">اسلاید 1 • خوش آمدید</div>
   <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
-  <div class="counter">کلیدها: ←/→ یا Space • F</div>
+  <div class="counter">←/→ یا Space • F</div>
 </footer>
 
 <script>
-  // State
   const state = { goal:null, problem:null, quality_issue:null };
-
-  // Linear order for Next/Prev (works even with branches by jumping into the correct branch)
-  const order = [
-    "s1","s2","s3","s4",
-    // branches will be injected dynamically:
-    // p_start | p_order | p_speed | p_quality -> q_quality_which -> q_fix_...
-    "tools_intro",
-    "scientific_1","scientific_2","scientific_3",
-    "wrapup"
-  ];
-
   const slides = Array.from(document.querySelectorAll(".slide"));
   const counter = document.getElementById("counter");
   const bar = document.getElementById("bar");
   const summaryRow = document.getElementById("summaryRow");
   const finalSummary = document.getElementById("finalSummary");
+  const miniSub = document.getElementById("miniSub");
+  const menu = document.getElementById("menu");
 
   let currentId = "s1";
 
@@ -902,8 +919,28 @@
     el.classList.add("active");
     currentId = id;
     updateUI();
-    // hash for sharing
     history.replaceState(null, "", `#${id}`);
+    closeMenu();
+  }
+
+  function pill(text){
+    const s = document.createElement("span");
+    s.className = "pill";
+    s.textContent = text;
+    return s;
+  }
+
+  function goalLabel(v){
+    const m = { income:"درآمد", speed:"سرعت", order:"نظم", all:"هر سه" };
+    return m[v] || "";
+  }
+  function problemLabel(v){
+    const m = { start:"شروع", order:"نظم", speed:"سرعت", quality:"کیفیت" };
+    return m[v] || "";
+  }
+  function qualityLabel(v){
+    const m = { ideas:"ایده‌ها", structure:"ساختار", pro:"پولیش/حرفه‌ای", finish:"خط پایان" };
+    return m[v] || "";
   }
 
   function updateSummary(){
@@ -923,49 +960,19 @@
     const q = qualityLabel(state.quality_issue);
     if(g) finalSummary.appendChild(pill(`هدف: ${g}`));
     if(p) finalSummary.appendChild(pill(`گره: ${p}`));
-    if(q) finalSummary.appendChild(pill(`جزئیات کیفیت: ${q}`));
+    if(q) finalSummary.appendChild(pill(`جزئیات: ${q}`));
   }
 
-  function pill(text){
-    const s = document.createElement("span");
-    s.className = "pill";
-    s.textContent = text;
-    return s;
+  function select(key,value){
+    state[key] = value;
+    if(key === "problem" && value !== "quality") state.quality_issue = null;
+    updateSummary();
+    updateFinalSummary();
   }
 
-  function goalLabel(v){
-    const m = {
-      income:"درآمد",
-      speed:"سرعت",
-      order:"نظم",
-      all:"هر سه"
-    };
-    return m[v] || "";
-  }
-  function problemLabel(v){
-    const m = {
-      start:"شروع",
-      order:"نظم",
-      speed:"سرعت",
-      quality:"کیفیت"
-    };
-    return m[v] || "";
-  }
-  function qualityLabel(v){
-    const m = {
-      ideas:"ایده‌ها",
-      structure:"ساختار",
-      pro:"پولیش/حرفه‌ای‌سازی",
-      finish:"خط پایان"
-    };
-    return m[v] || "";
-  }
-
-  // Build a "navigation index" that respects the chosen branch
   function getPath(){
     const path = ["s1","s2","s3","s4"];
 
-    // branch after s4
     if(state.problem === "start") path.push("p_start");
     else if(state.problem === "order") path.push("p_order");
     else if(state.problem === "speed") path.push("p_speed");
@@ -975,15 +982,15 @@
       else if(state.quality_issue === "structure") path.push("q_fix_structure");
       else if(state.quality_issue === "pro") path.push("q_fix_pro");
       else if(state.quality_issue === "finish") path.push("q_fix_finish");
-      else {
-        // if not chosen yet, navigation will stop at q_quality_which until selected
-      }
-    } else {
-      // if not chosen yet, stay linear
+      // if not chosen yet, navigation will pause at q_quality_which
     }
 
-    // tools & science & wrap
-    path.push("tools_intro","scientific_1","scientific_2","scientific_3","wrapup");
+    // then go to tools + demo + homework + wrapup(part1)
+    path.push("tools_intro","demo_1","demo_2","demo_3","homework","wrapup_part1");
+
+    // scientific optional
+    path.push("scientific_1","scientific_2","scientific_3");
+
     return path;
   }
 
@@ -995,10 +1002,7 @@
   function next(){
     const path = getPath();
     const i = currentIndexInPath();
-
-    // If user is in quality branch and hasn't selected quality_issue yet, don't jump past q_quality_which
-    if(currentId === "q_quality_which" && !state.quality_issue) return;
-
+    if(currentId === "q_quality_which" && state.problem === "quality" && !state.quality_issue) return;
     if(i < path.length - 1) go(path[i+1]);
   }
 
@@ -1013,25 +1017,11 @@
     const i = currentIndexInPath();
     const t = titleOf(currentId);
     counter.textContent = `اسلاید ${i+1} / ${path.length} • ${t}`;
+    if(miniSub) miniSub.textContent = t ? `اسلاید ${i+1}: ${t}` : "آکادمی هوش مصنوعی ستائی";
     const pct = path.length <= 1 ? 100 : Math.round((i)/(path.length-1) * 100);
-    bar.style.width = pct + "%";
-
+    if(bar) bar.style.width = pct + "%";
     updateSummary();
     updateFinalSummary();
-  }
-
-  function select(key,value){
-    state[key] = value;
-
-    // When user chooses problem, show summary pills and force branch
-    if(key === "problem"){
-      // If moving away from quality, clear quality_issue
-      if(value !== "quality") state.quality_issue = null;
-      updateSummary();
-    }
-    if(key === "quality_issue"){
-      updateFinalSummary();
-    }
   }
 
   function restart(){
@@ -1049,14 +1039,26 @@
     }
   }
 
-  // Keyboard
+  function toggleMenu(){
+    if(!menu) return;
+    menu.classList.toggle("on");
+  }
+  function closeMenu(){
+    if(menu) menu.classList.remove("on");
+  }
+  document.addEventListener("click",(e)=>{
+    if(!menu) return;
+    const mw = document.querySelector(".morewrap");
+    if(mw && !mw.contains(e.target)) closeMenu();
+  });
+
   document.addEventListener("keydown", (e)=>{
     if(e.key === "ArrowRight" || e.key === " " || e.key === "PageDown"){ e.preventDefault(); next(); }
     if(e.key === "ArrowLeft" || e.key === "PageUp"){ e.preventDefault(); prev(); }
     if(e.key.toLowerCase() === "f"){ toggleFullscreen(); }
+    if(e.key === "Escape"){ closeMenu(); }
   });
 
-  // Init from hash
   (function init(){
     const h = (location.hash || "").replace("#","");
     if(h && document.getElementById(h)) currentId = h;
