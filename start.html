@@ -1,559 +1,173 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>اسلایدهای جلسه ۱ • سطح ۱ | آکادمی هوش مصنوعی ستائی</title>
-  <style>
-    :root{
-      --bg1:#0b1020;
-      --bg2:#0a0f1c;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.04);
-      --stroke:rgba(255,255,255,.10);
-      --text:#eaf0ff;
-      --muted:rgba(234,240,255,.70);
-      --muted2:rgba(234,240,255,.55);
-
-      /* Setai green */
-      --accent:#10b981;
-      --accent2:#34d399;
-
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --r:24px;
-      --maxw:1200px;
-      --maxh:680px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Vazirmatn", "Noto Sans Arabic", Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 640px at 70% -10%, rgba(16,185,129,.22), transparent 60%),
-        radial-gradient(900px 560px at 20% 0%, rgba(14,165,164,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      overflow:hidden;
-    }
-    a{color:inherit; text-decoration:none}
-
-    /* Top bar */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 18px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background:rgba(10,15,28,.70);
-      backdrop-filter: blur(12px);
-      gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:950; letter-spacing:-.2px;
-      min-width:240px;
-    }
-    .mark{
-      width:36px; height:36px; border-radius:14px;
-      background:linear-gradient(135deg, var(--accent2), var(--accent));
-      display:grid; place-items:center;
-      color:#062018; font-weight:1000;
-      box-shadow: 0 14px 30px rgba(16,185,129,.22);
-      user-select:none;
-    }
-    .sub{
-      display:block;
-      color:var(--muted2);
-      font-weight:850;
-      font-size:12px;
-      margin-top:-2px;
-      letter-spacing:.1px;
-    }
-
-    .controls{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .btn{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:14px;
-      font-weight:900;
-      cursor:pointer;
-      transition:.15s transform ease, .15s opacity ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn-primary{
-      border:0;
-      color:#062018;
-      background:linear-gradient(135deg, var(--accent2), var(--accent));
-      box-shadow: 0 18px 40px rgba(16,185,129,.18);
-    }
-    .kbd{
-      font-weight:950;
-      font-size:12px;
-      color:rgba(234,240,255,.72);
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      padding:6px 10px;
-      border-radius:999px;
-      user-select:none;
-      white-space:nowrap;
-    }
-
-    /* Stage */
-    .stage{
-      height:calc(100% - 116px);
-      display:grid;
-      place-items:center;
-      padding:18px;
-    }
-    .deck{
-      width:min(var(--maxw), calc(100vw - 36px));
-      height:min(var(--maxh), calc(100vh - 170px));
-      position:relative;
-    }
-    .slide{
-      position:absolute; inset:0;
-      border-radius:var(--r);
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
-      padding:34px 34px 26px;
-      overflow:hidden;
-      display:none;
-    }
-    .slide.active{display:block}
-    .slide::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(1000px 460px at 75% 10%, rgba(16,185,129,.16), transparent 55%),
-        radial-gradient(860px 460px at 20% 0%, rgba(14,165,164,.10), transparent 55%);
-      pointer-events:none;
-      filter:saturate(1.06);
-    }
-    .slide > *{position:relative; z-index:1}
-
-    .eyebrow{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid rgba(52,211,153,.24);
-      background:rgba(16,185,129,.12);
-      font-weight:950;
-      font-size:12px;
-      color:rgba(234,240,255,.92);
-      width:max-content;
-    }
-    h1,h2{margin:14px 0 10px; letter-spacing:-.4px}
-    h1{font-size:clamp(32px, 3.3vw, 50px); line-height:1.12}
-    h2{font-size:clamp(24px, 2.4vw, 36px); line-height:1.18}
-    p{
-      margin:0 0 10px;
-      color:var(--muted);
-      font-weight:850;
-      font-size:18px;
-      max-width: 920px;
-    }
-
-    .grid{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .box{
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .box h3{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:-.2px;
-    }
-    ul{
-      margin:8px 0 0;
-      padding:0 20px 0 0;
-      color:var(--muted);
-      font-weight:850;
-      font-size:17px;
-      line-height:1.8;
-    }
-    li{margin:8px 0}
-
-    /* Slide 3 (Instructor) */
-    .profile{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 280px 1fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    .avatar{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-    .avatar img{
-      width:100%;
-      height:100%;
-      max-height: 320px;
-      object-fit:cover;
-      border-radius:18px;
-    }
-    .bio{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .bio .name{
-      font-size:22px;
-      font-weight:1000;
-      margin:0 0 8px;
-      letter-spacing:-.2px;
-    }
-    .pillrow{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin-top:12px;
-    }
-    .pill{
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      color:rgba(234,240,255,.74);
-      font-weight:900;
-      font-size:12px;
-    }
-
-    /* Footer */
-    .footer{
-      height:52px;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 18px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      background:rgba(0,0,0,.10);
-      gap:12px;
-    }
-    .counter{
-      color:rgba(234,240,255,.70);
-      font-weight:900;
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .progress{
-      height:10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      overflow:hidden;
-      width:min(560px, 58vw);
-    }
-    .bar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(135deg, var(--accent2), var(--accent));
-      transition:width .18s ease;
-    }
-
-    @media (max-width: 980px){
-      body{overflow:auto}
-      .stage{height:auto; place-items:stretch}
-      .deck{height:auto}
-      .slide{position:relative; display:block; margin-bottom:14px; height:auto}
-      .controls .kbd{display:none}
-      .progress{width:100%}
-      .profile{grid-template-columns:1fr}
-      .avatar img{max-height:260px}
-    }
-  </style>
+<meta charset="utf-8">
+<title>جلسه اول | سطح ۱ – آکادمی هوش مصنوعی ستائی</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#0b1020;
+  --card:#111832;
+  --text:#eaf0ff;
+  --muted:#aab2d5;
+  --accent:#10b981;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Vazirmatn, system-ui, sans-serif;
+  background:linear-gradient(180deg,#0b1020,#070b16);
+  color:var(--text);
+}
+.app{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+}
+.slide{
+  width:min(900px,100%);
+  background:var(--card);
+  border-radius:20px;
+  padding:40px;
+  display:none;
+}
+.slide.active{display:block}
+h1,h2{margin:0 0 12px}
+p{color:var(--muted); font-size:18px}
+.buttons{
+  margin-top:24px;
+  display:grid;
+  gap:12px;
+}
+button{
+  background:#18204a;
+  color:var(--text);
+  border:1px solid #27306b;
+  padding:14px;
+  border-radius:14px;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{border-color:var(--accent)}
+.next{
+  margin-top:30px;
+  background:linear-gradient(135deg,#34d399,#10b981);
+  color:#022014;
+  font-weight:700;
+}
+.footer{
+  margin-top:30px;
+  color:#7f89c7;
+  font-size:13px;
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="mark">S</div>
-      <div>
-        آکادمی هوش مصنوعی ستائی • جلسه ۱ (سطح ۱)
-        <span class="sub">کلیدها: ←/→ یا Space • تمام‌صفحه: F</span>
-      </div>
-    </div>
+<div class="app">
 
-    <div class="controls">
-      <span class="kbd">←/→ یا Space</span>
-      <button class="btn" type="button" onclick="toggleFullscreen()">تمام‌صفحه</button>
-      <button class="btn btn-primary" type="button" onclick="prev()">قبلی</button>
-      <button class="btn btn-primary" type="button" onclick="next()">بعدی</button>
-    </div>
-  </header>
+<!-- SLIDE 1 -->
+<section class="slide active" id="s1">
+  <h1>به دوره هوش مصنوعی خوش آمدید</h1>
+  <p>
+    این دوره برای یاد گرفتن ابزار نیست.  
+    اینجاییم تا هوش مصنوعی را تبدیل کنیم به چیزی که واقعاً
+    <b>درآمد، سرعت و نظم</b> ایجاد کند.
+  </p>
+  <button class="next" onclick="go('s2')">شروع جلسه</button>
+</section>
 
-  <main class="stage">
-    <div class="deck" id="deck">
+<!-- SLIDE 2 -->
+<section class="slide" id="s2">
+  <h2>قبل از شروع، یک سؤال مهم</h2>
+  <p>
+    اگر این دوره برایت موفق باشد، بعد از چند هفته
+    دقیقاً چه چیزی باید تغییر کرده باشد؟
+  </p>
+  <div class="buttons">
+    <button onclick="select('goal','income')">درآمد</button>
+    <button onclick="select('goal','speed')">سرعت</button>
+    <button onclick="select('goal','order')">نظم</button>
+  </div>
+</section>
 
-      <!-- Slide 1 -->
-      <section class="slide active" data-title="خوش آمدید">
-        <div class="eyebrow">جلسه ۱ • سطح ۱</div>
-        <h1>به دوره هوش مصنوعی خوش آمدید</h1>
-        <p>
-          امروز در سطح ۱، هدف ما این است که یک مسیر ساده و قابل اجرا بسازیم تا هوش مصنوعی
-          برای شما تبدیل به یک «سیستم» شود، نه چند ابزار پراکنده.
-        </p>
+<!-- SLIDE 3 -->
+<section class="slide" id="s3">
+  <h2>الان بزرگ‌ترین گره‌ات کدام است؟</h2>
+  <p>فقط یکی را انتخاب کن.</p>
+  <div class="buttons">
+    <button onclick="select('problem','start')">شروع کردن</button>
+    <button onclick="select('problem','order')">نظم</button>
+    <button onclick="select('problem','speed')">سرعت</button>
+    <button onclick="select('problem','quality')">کیفیت خروجی</button>
+  </div>
+</section>
 
-        <div class="grid">
-          <div class="box">
-            <h3>خروجی جلسه امروز</h3>
-            <ul>
-              <li>یک هدف دقیق و قابل اندازه‌گیری</li>
-              <li>انتخاب ۲–۳ ابزار اصلی (بدون اضافه‌کاری)</li>
-              <li>یک روش کار ثابت برای هفته اول</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>قانون سطح ۱</h3>
-            <ul>
-              <li>تمرکز روی نتیجه، نه تعداد ابزار</li>
-              <li>پیشرفت کوچک اما واقعی</li>
-              <li>هر چیزی که می‌سازیم قابل تکرار است</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<!-- SLIDE 4 -->
+<section class="slide" id="s4-quality">
+  <h2>مسئله تو کیفیت است</h2>
+  <p>
+    یعنی خروجی تولید می‌کنی،  
+    اما حس حرفه‌ای بودن ندارد و به سختی می‌شود به آن اعتماد کرد.
+  </p>
+  <button class="next" onclick="go('s5')">ادامه</button>
+</section>
 
-      <!-- Slide 2 -->
-      <section class="slide" data-title="AI و روش تدریس">
-        <div class="eyebrow">نگاه کلی</div>
-        <h2>هوش مصنوعی چیست و روش تدریس ما چطور است؟</h2>
-        <p>
-          هوش مصنوعی برای ما یک «دستیار و موتور اجرا» است: ایده‌پردازی، تولید، تحلیل و اتوماسیون.
-          اما نتیجه زمانی می‌آید که آن را داخل یک روش کار مشخص قرار بدهیم.
-        </p>
+<!-- SLIDE 5 -->
+<section class="slide" id="s5">
+  <h2>بیشتر با GPT برای چه کاری کار می‌کنی؟</h2>
+  <div class="buttons">
+    <button onclick="select('use','content')">تولید متن / محتوا</button>
+    <button onclick="select('use','ideas')">ایده‌پردازی</button>
+    <button onclick="select('use','edit')">بهتر کردن خروجی</button>
+  </div>
+</section>
 
-        <div class="grid">
-          <div class="box">
-            <h3>AI در این دوره یعنی…</h3>
-            <ul>
-              <li>کمک به تصمیم‌گیری (نه تصمیم‌گیری به جای شما)</li>
-              <li>سریع‌تر کردن تولید و اجرای کارهای تکراری</li>
-              <li>ساخت ساختار: قالب‌ها، چک‌لیست‌ها، ورک‌فلو</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>روش تدریس ستائی</h3>
-            <ul>
-              <li>خروجی‌محور: هر جلسه یک خروجی واقعی</li>
-              <li>سیستم‌محور: ساخت روش ثابت برای کار</li>
-              <li>شخصی‌سازی: مسیر بر اساس هدف و شرایط شما</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<!-- SLIDE 6 -->
+<section class="slide" id="s6">
+  <h2>هدف جلسه امروز</h2>
+  <p>
+    امروز GPT را تبدیل می‌کنیم به:
+    <br><br>
+    <b>یک سیستم تولید خروجی حرفه‌ای</b>
+    <br><br>
+    نه ابزار شانسی، نه آزمون‌وخطا.
+  </p>
+  <button class="next" onclick="go('s7')">برو سر برنامه</button>
+</section>
 
-      <!-- Slide 3 -->
-      <section class="slide" data-title="معرفی مدرس">
-        <div class="eyebrow">مدرس</div>
-        <h2>معرفی مدرس</h2>
-        <p>من ستائی هستم. تمرکز من این است که AI را به یک «سیستم قابل اجرا» برای کار و خلق تبدیل کنم.</p>
+<!-- SLIDE 7 -->
+<section class="slide" id="s7">
+  <h2>برنامه روز اول</h2>
+  <p>
+    • شفاف‌سازی هدف  
+    • انتخاب ابزارهای محدود  
+    • ساخت روش اصلاح خروجی  
+    • تمرین هفته اول
+  </p>
+  <p>
+    از اینجا به بعد وارد بخش عملی می‌شویم.
+  </p>
+  <div class="footer">پایان بخش مقدمه – شروع کار عملی</div>
+</section>
 
-        <div class="profile">
-          <div class="avatar">
-            <img
-              src="https://secure.b8cdn.com/images/uploads/user_photos/92/83192892_20240707160047.jpg"
-              alt="Setaei"
-              loading="lazy"
-            />
-          </div>
+</div>
 
-          <div class="bio">
-            <div class="name">ستائی (Setaei)</div>
-            <p style="font-size:17px;">
-              در این دوره، ما با آموزش‌های پراکنده جلو نمی‌رویم. از روز اول، مسیر را شفاف می‌کنیم،
-              ابزارها را محدود می‌کنیم، و با تمرین‌های کوتاه و پروژه‌محور، خروجی واقعی می‌سازیم.
-            </p>
+<script>
+const state = {};
+function go(id){
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function select(key,value){
+  state[key]=value;
+  if(key==='goal') go('s3');
+  if(key==='problem' && value==='quality') go('s4-quality');
+  if(key==='use') go('s6');
+}
+</script>
 
-            <div class="pillrow">
-              <span class="pill">خروجی‌محور</span>
-              <span class="pill">سیستم‌محور</span>
-              <span class="pill">پروژه‌محور</span>
-              <span class="pill">مناسب کسب‌وکار و هنرمندان</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 4 -->
-      <section class="slide" data-title="برنامه روز اول">
-        <div class="eyebrow">جلسه امروز</div>
-        <h2>فهرست برنامه روز اول</h2>
-        <p>گام‌ها را کوتاه و روشن می‌رویم تا در پایان جلسه یک مسیر عملی داشته باشید.</p>
-
-        <div class="grid">
-          <div class="box">
-            <h3>گام‌های جلسه</h3>
-            <ul>
-              <li>۱) تعیین هدف یک‌جمله‌ای</li>
-              <li>۲) بررسی کوتاه شرایط و نیازها (DNA دیجیتال)</li>
-              <li>۳) انتخاب ۲–۳ ابزار اصلی</li>
-              <li>۴) ساخت روش کار هفته اول</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>نکات کلیدی</h3>
-            <ul>
-              <li>ابزار جدید فعلاً ممنوع (تمرکز روی سیستم)</li>
-              <li>خروجی کوچک اما واقعی</li>
-              <li>تمرین کوتاه روزانه (۱۵ دقیقه)</li>
-              <li>ثبت نتیجه و اصلاح در جلسه بعد</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 5 -->
-      <section class="slide" data-title="بررسی و آشنایی با OpenAI">
-        <div class="eyebrow">شروع عملی</div>
-        <h2>بررسی کوتاه با دانشجو + معرفی ابزارهای OpenAI</h2>
-        <p>
-          در این بخش، وضعیت فعلی شما را سریع بررسی می‌کنیم و بعد OpenAI را به‌عنوان ابزار اصلی سطح ۱ معرفی می‌کنیم.
-        </p>
-
-        <div class="grid">
-          <div class="box">
-            <h3>بررسی کوتاه (۵ دقیقه‌ای)</h3>
-            <ul>
-              <li>هدف شما چیست؟</li>
-              <li>الان کجا گیر می‌کنید؟ (شروع/نظم/کیفیت/زمان)</li>
-              <li>در هفته چقدر زمان دارید؟</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>OpenAI در سطح ۱</h3>
-            <ul>
-              <li>چطور سؤال درست بپرسیم (Brief)</li>
-              <li>چطور ساختار بگیریم (Outline)</li>
-              <li>چطور خروجی را بهتر کنیم (Edit + Checklist)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 6 -->
-      <section class="slide" data-title="روش کار هفته اول">
-        <div class="eyebrow">سیستم هفته اول</div>
-        <h2>روش کار هفته اول: ۱۵ دقیقه در روز</h2>
-        <p>هدف: ساخت عادت + خروجی واقعی. این برنامه را ساده نگه می‌داریم تا انجام شود.</p>
-
-        <div class="grid">
-          <div class="box">
-            <h3>هر روز (۱۵ دقیقه)</h3>
-            <ul>
-              <li>یک Brief کوتاه</li>
-              <li>یک Outline کوتاه</li>
-              <li>ذخیره در یک سند ثابت</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>۳ بار در هفته</h3>
-            <ul>
-              <li>تبدیل یکی از Outlineها به خروجی کامل</li>
-              <li>اصلاح با چک‌لیست کیفیت</li>
-              <li>ثبت نتیجه (چه چیزی جواب داد؟)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 7 -->
-      <section class="slide" data-title="پایان و قدم بعد">
-        <div class="eyebrow">جمع‌بندی</div>
-        <h2>پایان جلسه و قدم بعد</h2>
-        <p>اگر این ۴ مورد را داشته باشیم، جلسه اول موفق است.</p>
-
-        <div class="grid">
-          <div class="box">
-            <h3>چک‌لیست خروجی جلسه</h3>
-            <ul>
-              <li>هدف یک‌جمله‌ای ثبت شد</li>
-              <li>۲–۳ ابزار اصلی انتخاب شد</li>
-              <li>روش کار هفته اول مشخص شد</li>
-              <li>اولین تمرین/خروجی تعریف شد</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h3>جلسه دوم</h3>
-            <ul>
-              <li>بررسی خروجی‌های هفته</li>
-              <li>رفع گره‌ها و اصلاح سیستم</li>
-              <li>شخصی‌سازی بیشتر بر اساس نتیجه واقعی</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="counter" id="counter">اسلاید 1 / 7 • خوش آمدید</div>
-    <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
-    <div class="counter" style="text-align:left;">
-      کلیدها: ←/→ یا Space • تمام‌صفحه: F
-    </div>
-  </footer>
-
-  <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const counter = document.getElementById('counter');
-    const bar = document.getElementById('bar');
-    let i = 0;
-
-    function render(){
-      slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
-      const title = slides[i].dataset.title || "";
-      counter.textContent = `اسلاید ${i+1} / ${slides.length} • ${title}`;
-      const pct = slides.length === 1 ? 100 : Math.round((i)/(slides.length-1) * 100);
-      bar.style.width = pct + "%";
-      history.replaceState(null, "", `#s${i+1}`);
-    }
-    function next(){ if(i < slides.length-1){ i++; render(); } }
-    function prev(){ if(i > 0){ i--; render(); } }
-
-    function toggleFullscreen(){
-      if(!document.fullscreenElement){
-        document.documentElement.requestFullscreen?.();
-      } else {
-        document.exitFullscreen?.();
-      }
-    }
-
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); next(); }
-      if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); prev(); }
-      if(e.key.toLowerCase() === 'f'){ toggleFullscreen(); }
-    });
-
-    // init from hash
-    (function init(){
-      const m = (location.hash || "").match(/^#s(\d+)$/);
-      if(m){
-        const n = Number(m[1]);
-        if(Number.isFinite(n) && n>=1 && n<=slides.length) i = n-1;
-      }
-      render();
-    })();
-  </script>
 </body>
 </html>
-```0
