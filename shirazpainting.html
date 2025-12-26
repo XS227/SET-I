@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shiraz Painting</title>
   <meta name="description" content="Shiraz Painting — paintings and commissions by an artist based in Shiraz, Iran." />
+
   <style>
     :root{
       --navy-900:#071428;
@@ -13,7 +14,6 @@
       --ink:#EAF0FF;
       --muted:#BFD0FF;
       --card: rgba(255,255,255,0.06);
-      --card2: rgba(255,255,255,0.10);
       --border: rgba(255,255,255,0.16);
       --shadow: 0 14px 50px rgba(0,0,0,0.35);
       --radius: 18px;
@@ -24,7 +24,7 @@
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
       background:
         radial-gradient(1200px 600px at 10% 0%, rgba(191,208,255,0.18), transparent 60%),
@@ -33,7 +33,6 @@
         linear-gradient(180deg, var(--navy-900), var(--navy-800));
       line-height:1.5;
     }
-
     a{ color: var(--ink); text-decoration:none; }
     a:hover{ text-decoration:underline; }
     .container{
@@ -41,21 +40,21 @@
       margin:0 auto;
     }
 
-    /* Top nav */
+    /* Sticky top nav */
     .nav{
-      position:sticky;
-      top:0;
-      z-index:10;
+      position: sticky; /* sticky header/menu */
+      top: 0;
+      z-index: 100;
       backdrop-filter: blur(10px);
-      background: rgba(7,20,40,0.70);
+      background: rgba(7,20,40,0.78);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:14px 0;
-      gap:18px;
+      padding:12px 0;
+      gap:16px;
     }
     .brand{
       display:flex;
@@ -74,16 +73,19 @@
       color: var(--muted);
       margin-top:2px;
     }
-    .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
-    }
+    .brand-text{ display:flex; flex-direction:column; line-height:1.1; }
 
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
     .nav-links{
       display:flex;
       align-items:center;
-      gap:16px;
+      gap:8px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
@@ -101,10 +103,31 @@
       text-decoration:none;
     }
 
-    /* Hero */
-    .hero{
-      padding:56px 0 26px;
+    .icon-btn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--ink);
+      padding:8px 10px;
+      border-radius: 999px;
+      font-weight:650;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
+    .icon-btn:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.26);
+    }
+    .flag{
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    /* Hero */
+    .hero{ padding:54px 0 24px; }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
@@ -142,7 +165,6 @@
       border-radius:999px;
       background: rgba(255,255,255,0.05);
     }
-
     .hero h2{
       margin:14px 0 8px;
       font-size:42px;
@@ -201,25 +223,12 @@
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.06);
     }
-    .stat .k{
-      font-size:12px;
-      color: var(--muted);
-      margin-bottom:6px;
-    }
-    .stat .v{
-      font-size:15px;
-      font-weight:650;
-    }
-    .mini{
-      font-size:12px;
-      color: var(--muted);
-      margin-top:6px;
-    }
+    .stat .k{ font-size:12px; color: var(--muted); margin-bottom:6px; }
+    .stat .v{ font-size:15px; font-weight:650; }
+    .mini{ font-size:12px; color: var(--muted); margin-top:6px; }
 
     /* Sections */
-    section{
-      padding:28px 0;
-    }
+    section{ padding:28px 0; }
     .section-head{
       display:flex;
       align-items:flex-end;
@@ -227,36 +236,18 @@
       gap:16px;
       margin-bottom:14px;
     }
-    .section-head h3{
-      margin:0;
-      font-size:20px;
-      letter-spacing:0.2px;
-    }
-    .section-head p{
-      margin:0;
-      color: var(--muted);
-      font-size:13px;
-      max-width: 60ch;
-    }
+    .section-head h3{ margin:0; font-size:20px; letter-spacing:0.2px; }
+    .section-head p{ margin:0; color: var(--muted); font-size:13px; max-width: 60ch; }
 
     /* About */
-    .about-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:18px;
-    }
+    .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
     .about-card{
       padding:18px;
       border-radius: var(--radius2);
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.14);
     }
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
+    .pill-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
     .pill{
       font-size:12px;
       color: var(--muted);
@@ -267,11 +258,7 @@
     }
 
     /* Gallery */
-    .gallery-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
+    .gallery-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
     .work{
       overflow:hidden;
       border-radius: var(--radius2);
@@ -287,7 +274,6 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      position:relative;
     }
     .thumb span{
       font-size:12px;
@@ -297,19 +283,9 @@
       border-radius: 999px;
       background: rgba(0,0,0,0.10);
     }
-    .work .meta{
-      padding:14px 14px 16px;
-    }
-    .work .meta .title{
-      margin:0;
-      font-size:14px;
-      font-weight:650;
-    }
-    .work .meta .desc{
-      margin:6px 0 0;
-      color: var(--muted);
-      font-size:12px;
-    }
+    .work .meta{ padding:14px 14px 16px; }
+    .work .meta .title{ margin:0; font-size:14px; font-weight:650; }
+    .work .meta .desc{ margin:6px 0 0; color: var(--muted); font-size:12px; }
 
     /* Contact */
     .contact-grid{
@@ -324,12 +300,7 @@
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.06);
     }
-    label{
-      display:block;
-      font-size:12px;
-      color: var(--muted);
-      margin:12px 0 6px;
-    }
+    label{ display:block; font-size:12px; color: var(--muted); margin:12px 0 6px; }
     input, textarea{
       width:100%;
       padding:12px 12px;
@@ -344,31 +315,16 @@
       box-shadow: 0 0 0 4px rgba(191,208,255,0.10);
     }
     textarea{ min-height: 130px; resize: vertical; }
-    .form-row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    .helper{
-      margin-top:10px;
-      color: var(--muted);
-      font-size:12px;
-    }
+    .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .helper{ margin-top:10px; color: var(--muted); font-size:12px; }
     .note{
       padding:18px;
       border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.05);
     }
-    .note h4{
-      margin:0 0 8px;
-      font-size:14px;
-    }
-    .note p{
-      margin:0;
-      color: var(--muted);
-      font-size:12px;
-    }
+    .note h4{ margin:0 0 8px; font-size:14px; }
+    .note p{ margin:0; color: var(--muted); font-size:12px; }
 
     footer{
       padding:22px 0 34px;
@@ -384,6 +340,95 @@
       gap:12px;
       flex-wrap:wrap;
     }
+
+    /* AI Agent Widget */
+    .agent{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: min(360px, calc(100% - 36px));
+      z-index: 200;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(7,20,40,0.78);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .agent-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .agent-title{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .agent-title strong{ font-size:13px; }
+    .agent-title span{ font-size:12px; color: var(--muted); }
+    .agent-body{
+      padding:12px;
+      max-height: 320px;
+      overflow:auto;
+    }
+    .msg{
+      display:flex;
+      gap:10px;
+      margin:10px 0;
+      align-items:flex-start;
+    }
+    .bubble{
+      padding:10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      font-size:12.5px;
+      color: var(--ink);
+      max-width: 100%;
+      white-space: pre-wrap;
+    }
+    .bubble.user{
+      background: rgba(191,208,255,0.14);
+      border-color: rgba(191,208,255,0.22);
+      margin-left:auto;
+    }
+    .agent-foot{
+      padding:12px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display:flex;
+      gap:10px;
+    }
+    .agent-foot input{
+      flex:1;
+      border-radius: 999px;
+      padding:10px 12px;
+    }
+    .agent-toggle{
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: var(--ink);
+      border-radius: 12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:650;
+      font-size:12px;
+    }
+
+    /* RTL tweaks */
+    html[dir="rtl"] body{ font-family: ui-sans-serif, system-ui, "Vazirmatn", "IRANSans", Tahoma, Arial; }
+    html[dir="rtl"] .nav-inner{ direction: rtl; }
+    html[dir="rtl"] .brand{ flex-direction: row-reverse; }
+    html[dir="rtl"] .nav-actions{ direction: rtl; }
+    html[dir="rtl"] .cta-row{ direction: rtl; }
+    html[dir="rtl"] .agent{ right: auto; left: 18px; } /* agent on left in RTL */
+    html[dir="rtl"] .bubble.user{ margin-left: 0; margin-right:auto; }
+    html[dir="rtl"] .agent-foot{ direction: rtl; }
+    html[dir="rtl"] .section-head{ direction: rtl; }
+    html[dir="rtl"] .about-grid, html[dir="rtl"] .contact-grid{ direction: rtl; }
 
     /* Responsive */
     @media (max-width: 920px){
@@ -410,8 +455,7 @@
         <a class="brand" href="#top" aria-label="Shiraz Painting Home">
           <!-- Dots-only Logo (SVG) -->
           <svg width="34" height="34" viewBox="0 0 34 34" role="img" aria-label="Shiraz Painting dot logo">
-            <!-- A stylized “SP” monogram suggested using ONLY dots -->
-            <!-- S curve -->
+            <!-- S -->
             <circle cx="10" cy="8" r="2.1" fill="#EAF0FF"/>
             <circle cx="14" cy="8" r="2.1" fill="#EAF0FF"/>
             <circle cx="18" cy="10" r="2.1" fill="#EAF0FF"/>
@@ -423,13 +467,11 @@
             <circle cx="10" cy="22" r="2.1" fill="#EAF0FF"/>
             <circle cx="14" cy="24" r="2.1" fill="#EAF0FF"/>
             <circle cx="18" cy="24" r="2.1" fill="#EAF0FF"/>
-
-            <!-- P stem + bowl -->
+            <!-- P -->
             <circle cx="24" cy="9" r="2.1" fill="#EAF0FF"/>
             <circle cx="24" cy="13" r="2.1" fill="#EAF0FF"/>
             <circle cx="24" cy="17" r="2.1" fill="#EAF0FF"/>
             <circle cx="24" cy="21" r="2.1" fill="#EAF0FF"/>
-
             <circle cx="28" cy="10" r="2.1" fill="#EAF0FF"/>
             <circle cx="30" cy="12" r="2.1" fill="#EAF0FF"/>
             <circle cx="28" cy="14" r="2.1" fill="#EAF0FF"/>
@@ -437,21 +479,28 @@
           </svg>
 
           <div class="brand-text">
-            <h1>Shiraz Painting</h1>
-            <div class="tag">Artist • Painting • Shiraz, Iran</div>
+            <h1 data-i18n="brand_name">Shiraz Painting</h1>
+            <div class="tag" data-i18n="brand_tag">Artist • Painting • Shiraz, Iran</div>
           </div>
         </a>
 
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
+        <div class="nav-actions">
+          <nav class="nav-links" aria-label="Main menu">
+            <a href="#about" data-i18n="menu_about">About</a>
+            <a href="#gallery" data-i18n="menu_gallery">Gallery</a>
+            <a href="#contact" data-i18n="menu_contact">Contact</a>
+          </nav>
+
+          <!-- Language toggle: shows the OTHER language’s flag -->
+          <button class="icon-btn" id="langToggle" type="button" aria-label="Toggle language">
+            <span class="flag" id="langFlag" aria-hidden="true">🇮🇷</span>
+            <span id="langLabel">فارسی</span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Page Top Anchor -->
   <div id="top"></div>
 
   <!-- Hero -->
@@ -460,39 +509,39 @@
       <div class="hero-grid">
         <div class="card hero-left">
           <div class="eyebrow">
-            <span>Original paintings & commissions</span>
+            <span data-i18n="hero_eyebrow_left">Original paintings & commissions</span>
             <span>•</span>
-            <span>Shiraz Painting</span>
+            <span data-i18n="hero_eyebrow_right">Shiraz Painting</span>
           </div>
 
-          <h2>Paintings that bring calm, depth, and story into your space.</h2>
+          <h2 data-i18n="hero_title">Paintings that bring calm, depth, and story into your space.</h2>
 
-          <p>
+          <p data-i18n="hero_desc">
             I’m an artist based in Shiraz, Iran. I create original works and accept commissions for personal collections,
             gifts, and interiors. Explore a selection of earlier paintings below, and reach out to discuss your idea.
           </p>
 
           <div class="cta-row">
-            <a class="btn primary" href="#gallery">View Gallery</a>
-            <a class="btn" href="#contact">Request a Commission</a>
+            <a class="btn primary" href="#gallery" data-i18n="cta_view_gallery">View Gallery</a>
+            <a class="btn" href="#contact" data-i18n="cta_request_commission">Request a Commission</a>
           </div>
         </div>
 
         <aside class="card hero-right" aria-label="Quick info">
           <div class="stat">
-            <div class="k">Location</div>
-            <div class="v">Shiraz, Iran</div>
-            <div class="mini">Available for local and remote commissions.</div>
+            <div class="k" data-i18n="stat_location_k">Location</div>
+            <div class="v" data-i18n="stat_location_v">Shiraz, Iran</div>
+            <div class="mini" data-i18n="stat_location_m">Available for local and remote commissions.</div>
           </div>
           <div class="stat">
-            <div class="k">What I offer</div>
-            <div class="v">Original artworks • Commissions</div>
-            <div class="mini">Sizes, styles, and timelines by request.</div>
+            <div class="k" data-i18n="stat_offer_k">What I offer</div>
+            <div class="v" data-i18n="stat_offer_v">Original artworks • Commissions</div>
+            <div class="mini" data-i18n="stat_offer_m">Sizes, styles, and timelines by request.</div>
           </div>
           <div class="stat">
-            <div class="k">Contact</div>
-            <div class="v">Use the form below</div>
-            <div class="mini">You will receive a reply as soon as possible.</div>
+            <div class="k" data-i18n="stat_contact_k">Contact</div>
+            <div class="v" data-i18n="stat_contact_v">Use the form below</div>
+            <div class="mini" data-i18n="stat_contact_m">You will receive a reply as soon as possible.</div>
           </div>
         </aside>
       </div>
@@ -504,8 +553,8 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <h3>About me</h3>
-          <p>
+          <h3 data-i18n="about_title">About me</h3>
+          <p data-i18n="about_subtitle">
             A short introduction visitors can read quickly, with enough detail to build trust and interest.
           </p>
         </div>
@@ -513,30 +562,30 @@
 
       <div class="about-grid">
         <div class="about-card">
-          <p style="margin:0;color:var(--muted);font-size:14px;">
+          <p style="margin:0;color:var(--muted);font-size:14px;" data-i18n="about_p1">
             I’m an artist who loves painting, living and working in Shiraz, Iran. My work explores atmosphere, light,
             and mood—balancing thoughtful composition with expressive brushwork.
           </p>
 
           <div class="pill-row" aria-label="Highlights">
-            <span class="pill">Original paintings</span>
-            <span class="pill">Commissioned pieces</span>
-            <span class="pill">Home & office decor</span>
-            <span class="pill">Gift artworks</span>
+            <span class="pill" data-i18n="pill_original">Original paintings</span>
+            <span class="pill" data-i18n="pill_commission">Commissioned pieces</span>
+            <span class="pill" data-i18n="pill_decor">Home & office decor</span>
+            <span class="pill" data-i18n="pill_gifts">Gift artworks</span>
           </div>
         </div>
 
         <div class="about-card">
-          <p style="margin:0;color:var(--muted);font-size:14px;">
+          <p style="margin:0;color:var(--muted);font-size:14px;" data-i18n="about_p2">
             If you’re interested in a commission, I can adapt the size, palette, and overall feel to match your space.
             Share a reference, theme, or color preference, and we’ll align on concept and timeline.
           </p>
 
           <div class="pill-row" aria-label="Commission process">
-            <span class="pill">1) Idea & reference</span>
-            <span class="pill">2) Concept alignment</span>
-            <span class="pill">3) Painting & updates</span>
-            <span class="pill">4) Delivery</span>
+            <span class="pill" data-i18n="pill_step1">1) Idea & reference</span>
+            <span class="pill" data-i18n="pill_step2">2) Concept alignment</span>
+            <span class="pill" data-i18n="pill_step3">3) Painting & updates</span>
+            <span class="pill" data-i18n="pill_step4">4) Delivery</span>
           </div>
         </div>
       </div>
@@ -548,70 +597,62 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <h3>Earlier projects / paintings</h3>
-          <p>
+          <h3 data-i18n="gallery_title">Earlier projects / paintings</h3>
+          <p data-i18n="gallery_subtitle">
             Replace these placeholders with images of your paintings. Each card supports a title and a short note.
           </p>
         </div>
       </div>
 
       <div class="gallery-grid" aria-label="Gallery grid">
-        <!-- Replace each .thumb with an <img> when you have photos -->
         <article class="work">
-          <div class="thumb"><span>Painting 01 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Sunlit Quiet</p>
-            <p class="desc">Medium: Oil / Acrylic • Year: 20XX • Notes: brief story or inspiration.</p>
+            <p class="title" data-i18n="w1_title">Sunlit Quiet</p>
+            <p class="desc" data-i18n="w1_desc">Medium: Oil / Acrylic • Year: 20XX • Notes: brief story or inspiration.</p>
           </div>
         </article>
 
         <article class="work">
-          <div class="thumb"><span>Painting 02 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Blue Depth</p>
-            <p class="desc">Medium: Oil / Acrylic • Year: 20XX • Notes: what you explored in this piece.</p>
+            <p class="title" data-i18n="w2_title">Blue Depth</p>
+            <p class="desc" data-i18n="w2_desc">Medium: Oil / Acrylic • Year: 20XX • Notes: what you explored in this piece.</p>
           </div>
         </article>
 
         <article class="work">
-          <div class="thumb"><span>Painting 03 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Shiraz Evening</p>
-            <p class="desc">Medium: Oil / Acrylic • Year: 20XX • Notes: mood, palette, and technique.</p>
+            <p class="title" data-i18n="w3_title">Shiraz Evening</p>
+            <p class="desc" data-i18n="w3_desc">Medium: Oil / Acrylic • Year: 20XX • Notes: mood, palette, and technique.</p>
           </div>
         </article>
 
         <article class="work">
-          <div class="thumb"><span>Painting 04 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Textures Study</p>
-            <p class="desc">Medium: Mixed • Year: 20XX • Notes: materials or methods you used.</p>
+            <p class="title" data-i18n="w4_title">Textures Study</p>
+            <p class="desc" data-i18n="w4_desc">Medium: Mixed • Year: 20XX • Notes: materials or methods you used.</p>
           </div>
         </article>
 
         <article class="work">
-          <div class="thumb"><span>Painting 05 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Warm Light</p>
-            <p class="desc">Medium: Oil / Acrylic • Year: 20XX • Notes: concept and client feedback if applicable.</p>
+            <p class="title" data-i18n="w5_title">Warm Light</p>
+            <p class="desc" data-i18n="w5_desc">Medium: Oil / Acrylic • Year: 20XX • Notes: concept and client feedback if applicable.</p>
           </div>
         </article>
 
         <article class="work">
-          <div class="thumb"><span>Painting 06 (add image)</span></div>
+          <div class="thumb"><span data-i18n="gallery_placeholder">Painting (add image)</span></div>
           <div class="meta">
-            <p class="title">Abstract Study</p>
-            <p class="desc">Medium: Acrylic • Year: 20XX • Notes: your approach and intention.</p>
+            <p class="title" data-i18n="w6_title">Abstract Study</p>
+            <p class="desc" data-i18n="w6_desc">Medium: Acrylic • Year: 20XX • Notes: your approach and intention.</p>
           </div>
         </article>
       </div>
-
-      <p style="margin-top:12px;color:var(--muted);font-size:12px;">
-        Tip: When you have images, replace a placeholder with:
-        <code style="color:var(--ink);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:8px;">
-          &lt;img src="images/painting01.jpg" alt="Sunlit Quiet" style="width:100%;height:190px;object-fit:cover;display:block;"&gt;
-        </code>
-      </p>
     </div>
   </section>
 
@@ -620,10 +661,8 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <h3>Contact</h3>
-          <p>
-            Use the form to inquire about pricing, commissions, availability, or collaborations.
-          </p>
+          <h3 data-i18n="contact_title">Contact</h3>
+          <p data-i18n="contact_subtitle">Use the form to inquire about pricing, commissions, availability, or collaborations.</p>
         </div>
       </div>
 
@@ -631,49 +670,38 @@
         <form id="contactForm">
           <div class="form-row">
             <div>
-              <label for="name">Name</label>
+              <label for="name" data-i18n="f_name">Name</label>
               <input id="name" name="name" type="text" placeholder="Your name" required />
             </div>
             <div>
-              <label for="email">Email</label>
+              <label for="email" data-i18n="f_email">Email</label>
               <input id="email" name="email" type="email" placeholder="you@example.com" required />
             </div>
           </div>
 
-          <label for="subject">Subject</label>
+          <label for="subject" data-i18n="f_subject">Subject</label>
           <input id="subject" name="subject" type="text" placeholder="Commission request / Question / Collaboration" required />
 
-          <label for="message">Message</label>
+          <label for="message" data-i18n="f_message">Message</label>
           <textarea id="message" name="message" placeholder="Tell me what you’re looking for (size, style, timeline, references)..." required></textarea>
 
           <div class="cta-row" style="margin-top:14px;">
-            <button class="btn primary" type="submit">Send message</button>
-            <button class="btn" type="button" id="copyEmailBtn">Copy email draft</button>
+            <button class="btn primary" type="submit" data-i18n="f_send">Send message</button>
           </div>
 
-          <div class="helper" id="formHelper">
-            This demo form creates an email draft on your device. To actually receive messages automatically, connect it to Formspree / Netlify Forms (instructions below).
+          <div class="helper" id="formHelper" data-i18n="f_helper">
+            This form opens an email draft on your device. To receive messages automatically, connect it to Formspree / Netlify Forms.
           </div>
         </form>
 
         <div class="note">
-          <h4>How to make the contact form “real”</h4>
-          <p>
-            Right now, the form uses a safe default: it generates an email draft you can send from your mail app.
-            If you want people’s messages to arrive in your inbox automatically, use one of these lightweight options:
-            <br><br>
-            <strong>Option A — Formspree:</strong> create a form endpoint and set the form action to that URL.
+          <h4 data-i18n="note_title">Business details</h4>
+          <p data-i18n="note_body">
+            Business name: Shiraz Painting
             <br>
-            <strong>Option B — Netlify Forms:</strong> deploy on Netlify and add the Netlify attributes (no backend code).
+            Location: Shiraz, Iran
             <br><br>
-            If you tell me where you plan to host (GitHub Pages, Netlify, your own server), I can adjust the form wiring accordingly.
-          </p>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10);margin:14px 0;">
-
-          <p style="margin:0;color:var(--muted);font-size:12px;">
-            Business name: <strong style="color:var(--ink);">Shiraz Painting</strong><br>
-            Location: <strong style="color:var(--ink);">Shiraz, Iran</strong>
+            For a precise address, add it in the CONFIG section in the script (ADDRESS_TEXT).
           </p>
         </div>
       </div>
@@ -683,22 +711,285 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <div>© <span id="year"></span> Shiraz Painting. All rights reserved.</div>
-        <div style="color:var(--muted);">Navy Blue theme • Dots-only logo</div>
+        <div>© <span id="year"></span> <span data-i18n="brand_name">Shiraz Painting</span>. <span data-i18n="footer_rights">All rights reserved.</span></div>
+        <div style="color:var(--muted);" data-i18n="footer_meta">Navy Blue theme • Dots-only logo</div>
       </div>
     </div>
   </footer>
 
+  <!-- AI Agent Widget -->
+  <div class="agent" id="agentWidget" aria-label="AI assistant">
+    <div class="agent-head">
+      <div class="agent-title">
+        <strong data-i18n="agent_title">Studio Assistant</strong>
+        <span data-i18n="agent_subtitle">Ask about Persian painting, commissions, or location.</span>
+      </div>
+      <button class="agent-toggle" id="agentMinBtn" type="button" aria-label="Minimize chat">—</button>
+    </div>
+
+    <div class="agent-body" id="agentBody">
+      <div class="msg">
+        <div class="bubble" id="agentHello" data-i18n="agent_hello">
+          Hello. I can answer simple questions about Persian painting, Shiraz Painting, commissions, and our location.
+        </div>
+      </div>
+    </div>
+
+    <div class="agent-foot" id="agentFoot">
+      <input id="agentInput" type="text" placeholder="Ask a question..." />
+      <button class="agent-toggle" id="agentSend" type="button" data-i18n="agent_send">Send</button>
+    </div>
+  </div>
+
   <script>
-    // Year
+    // =========================
+    // CONFIG (edit these)
+    // =========================
+    // Set your real email here so the contact form can open a ready-to-send draft.
+    const DESTINATION_EMAIL = "your-email@example.com";
+
+    // If you want to show a more specific address/location in the AI answers:
+    const ADDRESS_TEXT_EN = "Shiraz, Iran (exact address available on request).";
+    const ADDRESS_TEXT_FA = "شیراز، ایران (آدرس دقیق در صورت درخواست ارائه می‌شود).";
+
+    // =========================
+    // i18n strings
+    // =========================
+    const I18N = {
+      en: {
+        brand_name: "Shiraz Painting",
+        brand_tag: "Artist • Painting • Shiraz, Iran",
+
+        menu_about: "About",
+        menu_gallery: "Gallery",
+        menu_contact: "Contact",
+
+        hero_eyebrow_left: "Original paintings & commissions",
+        hero_eyebrow_right: "Shiraz Painting",
+        hero_title: "Paintings that bring calm, depth, and story into your space.",
+        hero_desc:
+          "I’m an artist based in Shiraz, Iran. I create original works and accept commissions for personal collections, gifts, and interiors. Explore a selection of earlier paintings below, and reach out to discuss your idea.",
+        cta_view_gallery: "View Gallery",
+        cta_request_commission: "Request a Commission",
+
+        stat_location_k: "Location",
+        stat_location_v: "Shiraz, Iran",
+        stat_location_m: "Available for local and remote commissions.",
+        stat_offer_k: "What I offer",
+        stat_offer_v: "Original artworks • Commissions",
+        stat_offer_m: "Sizes, styles, and timelines by request.",
+        stat_contact_k: "Contact",
+        stat_contact_v: "Use the form below",
+        stat_contact_m: "You will receive a reply as soon as possible.",
+
+        about_title: "About me",
+        about_subtitle: "A short introduction visitors can read quickly, with enough detail to build trust and interest.",
+        about_p1:
+          "I’m an artist who loves painting, living and working in Shiraz, Iran. My work explores atmosphere, light, and mood—balancing thoughtful composition with expressive brushwork.",
+        pill_original: "Original paintings",
+        pill_commission: "Commissioned pieces",
+        pill_decor: "Home & office decor",
+        pill_gifts: "Gift artworks",
+        about_p2:
+          "If you’re interested in a commission, I can adapt the size, palette, and overall feel to match your space. Share a reference, theme, or color preference, and we’ll align on concept and timeline.",
+        pill_step1: "1) Idea & reference",
+        pill_step2: "2) Concept alignment",
+        pill_step3: "3) Painting & updates",
+        pill_step4: "4) Delivery",
+
+        gallery_title: "Earlier projects / paintings",
+        gallery_subtitle: "Replace these placeholders with images of your paintings. Each card supports a title and a short note.",
+        gallery_placeholder: "Painting (add image)",
+        w1_title: "Sunlit Quiet",
+        w1_desc: "Medium: Oil / Acrylic • Year: 20XX • Notes: brief story or inspiration.",
+        w2_title: "Blue Depth",
+        w2_desc: "Medium: Oil / Acrylic • Year: 20XX • Notes: what you explored in this piece.",
+        w3_title: "Shiraz Evening",
+        w3_desc: "Medium: Oil / Acrylic • Year: 20XX • Notes: mood, palette, and technique.",
+        w4_title: "Textures Study",
+        w4_desc: "Medium: Mixed • Year: 20XX • Notes: materials or methods you used.",
+        w5_title: "Warm Light",
+        w5_desc: "Medium: Oil / Acrylic • Year: 20XX • Notes: concept and client feedback if applicable.",
+        w6_title: "Abstract Study",
+        w6_desc: "Medium: Acrylic • Year: 20XX • Notes: your approach and intention.",
+
+        contact_title: "Contact",
+        contact_subtitle: "Use the form to inquire about pricing, commissions, availability, or collaborations.",
+        f_name: "Name",
+        f_email: "Email",
+        f_subject: "Subject",
+        f_message: "Message",
+        f_send: "Send message",
+        f_helper: "This form opens an email draft on your device. To receive messages automatically, connect it to Formspree / Netlify Forms.",
+
+        note_title: "Business details",
+        note_body:
+          "Business name: Shiraz Painting<br>Location: Shiraz, Iran<br><br>For a precise address, add it in the CONFIG section in the script (ADDRESS_TEXT).",
+
+        footer_rights: "All rights reserved.",
+        footer_meta: "Navy Blue theme • Dots-only logo",
+
+        agent_title: "Studio Assistant",
+        agent_subtitle: "Ask about Persian painting, commissions, or location.",
+        agent_hello: "Hello. I can answer simple questions about Persian painting, Shiraz Painting, commissions, and our location.",
+        agent_send: "Send",
+        agent_input_ph: "Ask a question...",
+        agent_fallback:
+          "I can help with: Persian painting basics, commissions, contact, and location. Try: “What is Persian miniature?”, “How do I request a commission?”, or “What is your address?”"
+      },
+
+      fa: {
+        brand_name: "نقاشی شیراز",
+        brand_tag: "هنرمند • نقاشی • شیراز، ایران",
+
+        menu_about: "درباره من",
+        menu_gallery: "گالری",
+        menu_contact: "تماس",
+
+        hero_eyebrow_left: "نقاشی‌های اصلی و سفارش‌ها",
+        hero_eyebrow_right: "نقاشی شیراز",
+        hero_title: "نقاشی‌هایی برای آرامش، عمق و روایت در فضای شما.",
+        hero_desc:
+          "من یک هنرمند ساکن شیراز هستم. آثار اصلی خلق می‌کنم و سفارش نقاشی برای مجموعه‌های شخصی، هدیه و دکوراسیون می‌پذیرم. نمونه‌هایی از کارهای قبلی را در پایین ببینید و برای گفتگو درباره ایده‌تان پیام بدهید.",
+        cta_view_gallery: "مشاهده گالری",
+        cta_request_commission: "درخواست سفارش",
+
+        stat_location_k: "موقعیت",
+        stat_location_v: "شیراز، ایران",
+        stat_location_m: "پذیرش سفارش حضوری و غیرحضوری.",
+        stat_offer_k: "خدمات",
+        stat_offer_v: "آثار اصلی • سفارش نقاشی",
+        stat_offer_m: "ابعاد، سبک و زمان تحویل با توافق.",
+        stat_contact_k: "ارتباط",
+        stat_contact_v: "از فرم زیر استفاده کنید",
+        stat_contact_m: "در اولین فرصت پاسخ می‌دهم.",
+
+        about_title: "درباره من",
+        about_subtitle: "یک معرفی کوتاه برای ایجاد اعتماد و شناخت سریع.",
+        about_p1:
+          "من یک هنرمند عاشق نقاشی هستم و در شیراز زندگی و کار می‌کنم. آثارم روی فضا، نور و حس‌وحال تمرکز دارد و بین ترکیب‌بندی دقیق و حرکت قلم‌مو تعادل ایجاد می‌کند.",
+        pill_original: "آثار اصلی",
+        pill_commission: "سفارش اختصاصی",
+        pill_decor: "دکور منزل و دفتر",
+        pill_gifts: "هدیه هنری",
+        about_p2:
+          "اگر قصد سفارش دارید، می‌توانم اندازه، پالت رنگ و حال‌وهوای کلی را متناسب با فضای شما تنظیم کنم. یک مرجع، موضوع یا رنگ‌های موردنظر را ارسال کنید تا درباره ایده و زمان‌بندی هماهنگ شویم.",
+        pill_step1: "۱) ایده و مرجع",
+        pill_step2: "۲) هماهنگی کانسپت",
+        pill_step3: "۳) اجرا و به‌روزرسانی",
+        pill_step4: "۴) تحویل",
+
+        gallery_title: "نمونه کارها / نقاشی‌های قبلی",
+        gallery_subtitle: "این بخش را با عکس آثار واقعی جایگزین کنید. هر کارت عنوان و توضیح کوتاه دارد.",
+        gallery_placeholder: "نقاشی (افزودن تصویر)",
+        w1_title: "سکوتِ آفتابی",
+        w1_desc: "مدیوم: رنگ‌روغن / اکریلیک • سال: ۲۰XX • توضیح کوتاه.",
+        w2_title: "عمقِ آبی",
+        w2_desc: "مدیوم: رنگ‌روغن / اکریلیک • سال: ۲۰XX • توضیح کوتاه.",
+        w3_title: "شبِ شیراز",
+        w3_desc: "مدیوم: رنگ‌روغن / اکریلیک • سال: ۲۰XX • حس‌وحال و تکنیک.",
+        w4_title: "مطالعه بافت",
+        w4_desc: "مدیوم: ترکیبی • سال: ۲۰XX • مواد و روش اجرا.",
+        w5_title: "نورِ گرم",
+        w5_desc: "مدیوم: رنگ‌روغن / اکریلیک • سال: ۲۰XX • ایده و بازخورد (در صورت وجود).",
+        w6_title: "مطالعه انتزاعی",
+        w6_desc: "مدیوم: اکریلیک • سال: ۲۰XX • رویکرد و هدف.",
+
+        contact_title: "تماس",
+        contact_subtitle: "برای قیمت، سفارش، زمان‌بندی یا همکاری پیام بدهید.",
+        f_name: "نام",
+        f_email: "ایمیل",
+        f_subject: "موضوع",
+        f_message: "پیام",
+        f_send: "ارسال پیام",
+        f_helper: "این فرم یک پیش‌نویس ایمیل در دستگاه شما باز می‌کند. برای دریافت خودکار پیام‌ها، آن را به Formspree یا Netlify Forms وصل کنید.",
+
+        note_title: "اطلاعات کسب‌وکار",
+        note_body:
+          "نام کسب‌وکار: نقاشی شیراز<br>موقعیت: شیراز، ایران<br><br>برای آدرس دقیق‌تر، آن را در بخش CONFIG اسکریپت تنظیم کنید.",
+
+        footer_rights: "تمام حقوق محفوظ است.",
+        footer_meta: "تم سرمه‌ای • لوگوی نقطه‌ای",
+
+        agent_title: "دستیار استودیو",
+        agent_subtitle: "درباره نقاشی ایرانی، سفارش یا موقعیت بپرسید.",
+        agent_hello: "سلام. می‌توانم به سوال‌های ساده درباره نقاشی ایرانی، نقاشی شیراز، سفارش‌ها و موقعیت پاسخ بدهم.",
+        agent_send: "ارسال",
+        agent_input_ph: "سوال خود را بنویسید...",
+        agent_fallback:
+          "می‌توانم درباره: مبانی نقاشی ایرانی، سفارش، تماس و موقعیت کمک کنم. مثال: «مینیاتور ایرانی چیست؟»، «چطور سفارش بدهم؟»، «آدرس شما کجاست؟»"
+      }
+    };
+
+    // =========================
+    // Language handling
+    // =========================
+    const htmlEl = document.documentElement;
+    const langToggle = document.getElementById("langToggle");
+    const langFlag = document.getElementById("langFlag");
+    const langLabel = document.getElementById("langLabel");
+
+    function setLang(lang){
+      const dict = I18N[lang] || I18N.en;
+
+      htmlEl.setAttribute("lang", lang === "fa" ? "fa" : "en");
+      htmlEl.setAttribute("dir", lang === "fa" ? "rtl" : "ltr");
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] !== undefined){
+          // allow HTML in some strings (note_body)
+          if (String(dict[key]).includes("<br>")) el.innerHTML = dict[key];
+          else el.textContent = dict[key];
+        }
+      });
+
+      // placeholders that should be translated
+      const input = document.getElementById("agentInput");
+      input.placeholder = dict.agent_input_ph;
+
+      // Toggle button shows OTHER language flag + label
+      // Requirement:
+      // - If Persian page: show English flag
+      // - If English page: show Persian flag
+      if (lang === "fa"){
+        langFlag.textContent = "🇬🇧";
+        langLabel.textContent = "English";
+      } else {
+        langFlag.textContent = "🇮🇷";
+        langLabel.textContent = "فارسی";
+      }
+
+      // Save
+      localStorage.setItem("site_lang", lang);
+
+      // Update agent hello message to match language (reset welcome bubble)
+      const hello = document.getElementById("agentHello");
+      hello.textContent = dict.agent_hello;
+    }
+
+    function getLang(){
+      return localStorage.getItem("site_lang") || "en";
+    }
+
+    langToggle.addEventListener("click", () => {
+      const current = getLang();
+      setLang(current === "fa" ? "en" : "fa");
+    });
+
+    // Initialize language
+    setLang(getLang());
+
+    // =========================
+    // Footer year
+    // =========================
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Contact form: generate a mailto draft (works on any static hosting)
+    // =========================
+    // Contact form: mailto draft (static-friendly)
+    // =========================
     const form = document.getElementById("contactForm");
     const helper = document.getElementById("formHelper");
-
-    // Set YOUR email here (when you have one). Example: "shirazpainting@example.com"
-    const DESTINATION_EMAIL = "your-email@example.com";
 
     function buildMailtoLink(data){
       const subject = `[Shiraz Painting] ${data.subject}`;
@@ -709,18 +1000,17 @@ Email: ${data.email}
 Message:
 ${data.message}
 
-— Sent from ShirazPainting.com contact form`;
+— Sent from Shiraz Painting contact form`;
 
-      const params = new URLSearchParams({
-        subject: subject,
-        body: body
-      });
-
+      const params = new URLSearchParams({ subject, body });
       return `mailto:${encodeURIComponent(DESTINATION_EMAIL)}?${params.toString()}`;
     }
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      const lang = getLang();
+      const dict = I18N[lang];
+
       const data = {
         name: document.getElementById("name").value.trim(),
         email: document.getElementById("email").value.trim(),
@@ -729,41 +1019,112 @@ ${data.message}
       };
 
       if (!DESTINATION_EMAIL || DESTINATION_EMAIL === "your-email@example.com"){
-        helper.textContent = "Update DESTINATION_EMAIL in the code first (search for DESTINATION_EMAIL). Then try again.";
+        helper.textContent = (lang === "fa")
+          ? "لطفاً ابتدا DESTINATION_EMAIL را در کد تنظیم کنید (عبارت DESTINATION_EMAIL را جستجو کنید)."
+          : "Please set DESTINATION_EMAIL in the code first (search for DESTINATION_EMAIL).";
         return;
       }
 
-      const link = buildMailtoLink(data);
-      window.location.href = link;
+      window.location.href = buildMailtoLink(data);
     });
 
-    // Copy an email draft to clipboard (useful even before email is configured)
-    document.getElementById("copyEmailBtn").addEventListener("click", async () => {
-      const data = {
-        name: document.getElementById("name").value.trim() || "(name)",
-        email: document.getElementById("email").value.trim() || "(email)",
-        subject: document.getElementById("subject").value.trim() || "(subject)",
-        message: document.getElementById("message").value.trim() || "(message)",
-      };
+    // =========================
+    // Simple “AI agent” (rule-based assistant)
+    // Note: This is NOT a real LLM. It answers simple FAQs reliably.
+    // If you want a real AI (OpenAI API), you would add a backend or serverless function.
+    // =========================
+    const agentBody = document.getElementById("agentBody");
+    const agentInput = document.getElementById("agentInput");
+    const agentSend = document.getElementById("agentSend");
+    const agentMinBtn = document.getElementById("agentMinBtn");
+    const agentFoot = document.getElementById("agentFoot");
 
-      const subject = `[Shiraz Painting] ${data.subject}`;
-      const body =
-`To: ${DESTINATION_EMAIL}
+    let agentMinimized = false;
 
-Subject: ${subject}
+    function appendMsg(text, who){
+      const row = document.createElement("div");
+      row.className = "msg";
+      const bubble = document.createElement("div");
+      bubble.className = "bubble" + (who === "user" ? " user" : "");
+      bubble.textContent = text;
+      row.appendChild(bubble);
+      agentBody.appendChild(row);
+      agentBody.scrollTop = agentBody.scrollHeight;
+    }
 
-Name: ${data.name}
-Email: ${data.email}
+    function normalize(s){
+      return (s || "")
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+        .trim();
+    }
 
-Message:
-${data.message}`;
+    function agentAnswer(q){
+      const lang = getLang();
+      const dict = I18N[lang];
+      const t = normalize(q);
 
-      try{
-        await navigator.clipboard.writeText(body);
-        helper.textContent = "Copied. Paste into your email and send.";
-      }catch(err){
-        helper.textContent = "Could not copy automatically (browser permissions). You can still submit to open a mail draft.";
+      const addressText = (lang === "fa") ? ADDRESS_TEXT_FA : ADDRESS_TEXT_EN;
+
+      // Keywords (English + Persian)
+      const isAddress = /address|location|where are you|آدرس|کجا|موقعیت|نشانی/.test(t);
+      const isPersianPainting = /persian painting|iranian painting|miniature|tazhib|illumination| نگارگری|مینیاتور|تذهیب|نقاشی ایرانی/.test(t);
+      const isShirazPainting = /shiraz painting|your business|studio|about you|نقاشی شیراز|کسب.?و.?کار|استودیو|درباره شما/.test(t);
+      const isCommission = /commission|order|price|pricing|timeline|how much|سفارش|قیمت|هزینه|زمان|زمانبندی/.test(t);
+      const isContact = /contact|email|message|reach|تماس|ایمیل|پیام/.test(t);
+
+      if (isAddress){
+        return (lang === "fa")
+          ? `موقعیت: ${addressText}`
+          : `Location: ${addressText}`;
       }
+
+      if (isPersianPainting){
+        return (lang === "fa")
+          ? "نقاشی ایرانی طیف گسترده‌ای دارد؛ از نگارگری (مینیاتور) و تذهیب در نسخه‌های خطی تا نقاشی‌های معاصر. نگارگری معمولاً با جزئیات بسیار، رنگ‌های لایه‌لایه، روایت‌محوری و ترکیب‌بندی دقیق شناخته می‌شود. اگر بگویید دنبال «نگارگری»، «سنتی» یا «معاصر» هستید، دقیق‌تر راهنمایی می‌کنم."
+          : "Persian painting covers a wide range—from manuscript illumination (tazhib) and Persian miniature (negargari) to modern Iranian painting. Miniatures are known for fine detail, layered color, narrative scenes, and carefully balanced composition. If you tell me whether you mean ‘miniature/traditional’ or ‘modern’, I can answer more precisely.";
+      }
+
+      if (isShirazPainting){
+        return (lang === "fa")
+          ? "«نقاشی شیراز» نام برند هنری شماست؛ ارائه‌دهنده آثار اصلی و پذیرش سفارش نقاشی. شما در شیراز فعالیت می‌کنید و می‌توانید برای دکور، هدیه و سفارش‌های اختصاصی با مخاطبان هماهنگ شوید."
+          : "“Shiraz Painting” is your art brand for original artworks and commissions. You are based in Shiraz and can create pieces for interiors, gifts, and custom requests based on size, palette, and mood.";
+      }
+
+      if (isCommission){
+        return (lang === "fa")
+          ? "برای سفارش: ۱) ایده/مرجع و اندازه را ارسال کنید. ۲) درباره سبک و پالت رنگ هماهنگ می‌شویم. ۳) زمان تحویل و هزینه را مشخص می‌کنیم. ۴) در طول اجرا چند به‌روزرسانی دریافت می‌کنید. اگر ابعاد و سبک مدنظر را بگویید، بهتر راهنمایی می‌کنم."
+          : "For commissions: (1) share your idea/reference and size, (2) align on style and palette, (3) confirm timeline and pricing, (4) receive a few progress updates during creation. If you share the size and style you want, I can guide you more specifically.";
+      }
+
+      if (isContact){
+        return (lang === "fa")
+          ? "برای تماس، از فرم بخش «تماس» استفاده کنید. اگر ایمیل مقصد را در کد تنظیم کنید، فرم به‌صورت پیش‌نویس ایمیل آماده می‌شود."
+          : "To contact, use the form in the Contact section. Once you set DESTINATION_EMAIL in the code, it will open a ready-to-send email draft.";
+      }
+
+      return dict.agent_fallback;
+    }
+
+    function sendAgent(){
+      const q = agentInput.value.trim();
+      if (!q) return;
+      appendMsg(q, "user");
+      agentInput.value = "";
+      const a = agentAnswer(q);
+      appendMsg(a, "agent");
+    }
+
+    agentSend.addEventListener("click", sendAgent);
+    agentInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendAgent();
+    });
+
+    agentMinBtn.addEventListener("click", () => {
+      agentMinimized = !agentMinimized;
+      agentFoot.style.display = agentMinimized ? "none" : "flex";
+      agentBody.style.display = agentMinimized ? "none" : "block";
+      agentMinBtn.textContent = agentMinimized ? "+" : "—";
     });
   </script>
 </body>
