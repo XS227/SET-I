@@ -1,12 +1,12 @@
 :root{
-  --bg:#070A0F;
-  --panel:#0B1020;
-  --card:#0E1630;
-  --text:#EAF0FF;
-  --muted:#A9B5D6;
-  --line:rgba(234,240,255,.10);
-  --brand:#7C5CFF;
-  --brand2:#28D9B7;
+  --bg:#07130D;
+  --panel:#0B1C13;
+  --card:#0E2618;
+  --text:#E9F7EE;
+  --muted:#A8C7B4;
+  --line:rgba(233,247,239,.12);
+  --brand:#4DD286;
+  --brand2:#1EB56D;
   --warn:#FFCC66;
 
   --radius:18px;
@@ -20,9 +20,9 @@ body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.35), transparent 55%),
-    radial-gradient(900px 500px at 90% 10%, rgba(40,217,183,.20), transparent 60%),
-    radial-gradient(800px 500px at 50% 110%, rgba(124,92,255,.18), transparent 60%),
+    radial-gradient(1200px 600px at 20% -10%, rgba(77,210,134,.32), transparent 55%),
+    radial-gradient(900px 500px at 90% 10%, rgba(30,181,109,.20), transparent 60%),
+    radial-gradient(800px 500px at 50% 110%, rgba(77,210,134,.16), transparent 60%),
     var(--bg);
   color:var(--text);
   line-height:1.5;
@@ -43,9 +43,10 @@ a{color:inherit;text-decoration:none}
 }
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
 .logo{
-  width:34px;height:34px;border-radius:10px;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  box-shadow: 0 10px 22px rgba(124,92,255,.25);
+  width:34px;height:34px;border-radius:10px;display:block;
+  background: #0F2417 url('/logo.png') center/contain no-repeat;
+  box-shadow: 0 10px 22px rgba(77,210,134,.18);
+  border:1px solid rgba(233,247,239,.08);
   flex:0 0 auto;
 }
 .navlinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
@@ -57,26 +58,26 @@ a{color:inherit;text-decoration:none}
   transition:.2s ease;
   font-size:14px;
 }
-.pill:hover{border-color:rgba(124,92,255,.35);color:var(--text)}
+.pill:hover{border-color:rgba(77,210,134,.32);color:var(--text)}
 .pill.active{
   color:var(--text);
-  border-color: rgba(40,217,183,.35);
-  background: rgba(40,217,183,.08);
+  border-color: rgba(77,210,134,.40);
+  background: rgba(77,210,134,.10);
 }
 
 .cta{
   padding:10px 14px;
   border-radius:999px;
   font-weight:700;
-  background: linear-gradient(135deg, var(--brand), #9B7CFF);
+  background: linear-gradient(135deg, var(--brand2), var(--brand));
   border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 14px 30px rgba(124,92,255,.22);
+  box-shadow: 0 14px 30px rgba(77,210,134,.22);
   cursor:pointer;
 }
 .cta:hover{filter:brightness(1.05)}
 .cta.secondary{
-  background: rgba(14,22,48,.55);
-  border:1px solid rgba(124,92,255,.35);
+  background: rgba(15,36,23,.55);
+  border:1px solid rgba(77,210,134,.32);
   box-shadow:none;
   font-weight:600;
   color:var(--text);
@@ -107,8 +108,8 @@ header.hero{
   background: rgba(14,22,48,.35);
 }
 .dot{
-  width:8px;height:8px;border-radius:999px;background:var(--brand2);
-  box-shadow:0 0 0 4px rgba(40,217,183,.12);
+  width:8px;height:8px;border-radius:999px;background:var(--brand);
+  box-shadow:0 0 0 4px rgba(77,210,134,.12);
 }
 h1{
   margin:14px 0 10px;
@@ -149,8 +150,8 @@ section{margin-top:18px;padding-top:6px}
   display:inline-block;margin-top:12px;font-size:12px;
   color:rgba(234,240,255,.82);
   padding:6px 10px;border-radius:999px;
-  border:1px solid rgba(124,92,255,.30);
-  background: rgba(124,92,255,.10);
+  border:1px solid rgba(77,210,134,.32);
+  background: rgba(77,210,134,.12);
 }
 
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
@@ -159,7 +160,7 @@ section{margin-top:18px;padding-top:6px}
 .callout{
   border:1px solid rgba(255,255,255,.12);
   background:
-    radial-gradient(800px 260px at 20% 0%, rgba(124,92,255,.25), transparent 60%),
+    radial-gradient(800px 260px at 20% 0%, rgba(77,210,134,.22), transparent 60%),
     rgba(11,16,32,.65);
   border-radius: calc(var(--radius) + 6px);
   padding:20px;
@@ -188,8 +189,8 @@ input, textarea, select{
 }
 textarea{min-height:110px;resize:vertical}
 input:focus, textarea:focus, select:focus{
-  border-color: rgba(124,92,255,.45);
-  box-shadow: 0 0 0 4px rgba(124,92,255,.12);
+  border-color: rgba(77,210,134,.45);
+  box-shadow: 0 0 0 4px rgba(77,210,134,.12);
 }
 .formRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width: 720px){ .formRow{grid-template-columns:1fr} }
