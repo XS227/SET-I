@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt | SETai</title>
+  <meta name="description" content="Kontakt SETai — AI-agent utvikler. Fortell hva du vil automatisere." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <!-- MENY -->
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span><span>SETai</span></a>
+      <div class="navlinks">
+        <a class="pill" data-nav href="ai-agent.html">AI-agent</a>
+        <a class="pill" data-nav href="tjenester.html">Tjenester</a>
+        <a class="pill" data-nav href="moduler.html">Moduler</a>
+        <a class="pill" data-nav href="kurs.html">Kurs</a>
+        <a class="cta" data-nav href="kontakt.html">Kontakt</a>
+      </div>
+    </nav>
+
+    <header class="hero" style="grid-template-columns: 1fr;">
+      <div class="heroCard">
+        <span class="kicker"><span class="dot" aria-hidden="true"></span> Kontakt</span>
+        <h1>Start med én konkret arbeidsflyt</h1>
+        <p class="sub">Skriv hva som er manuelt i dag, og hva du ønsker at en AI-agent skal gjøre.</p>
+
+        <div class="split" style="margin-top:12px">
+          <div class="callout">
+            <h2>Rask avklaring</h2>
+            <p>Jeg svarer med et forslag til agent/modul, estimert effekt og neste steg.</p>
+            <div class="notice"><strong>Tips:</strong> Legg ved lenke til nettside + hvilke verktøy dere bruker (CRM, e-post, booking, osv.).</div>
+          </div>
+
+          <div class="card">
+            <h2>Send forespørsel</h2>
+
+            <form action="https://formsubmit.com/khabat.setaei@gmail.com" method="POST">
+              <!-- FormSubmit options -->
+              <input type="hidden" name="_subject" value="Ny forespørsel: SETai (AI-agent)" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <!-- <input type="hidden" name="_next" value="https://www.setai.no/takk.html" /> -->
+
+              <div class="formRow">
+                <div>
+                  <label for="name">Navn</label>
+                  <input id="name" name="Navn" autocomplete="name" required />
+                </div>
+                <div>
+                  <label for="company">Bedrift</label>
+                  <input id="company" name="Bedrift" autocomplete="organization" />
+                </div>
+              </div>
+
+              <div class="formRow">
+                <div>
+                  <label for="email">E-post</label>
+                  <input id="email" name="E-post" type="email" autocomplete="email" required />
+                </div>
+                <div>
+                  <label for="type">Hva gjelder det?</label>
+                  <select id="type" name="Type" required>
+                    <option value="" disabled selected>Velg</option>
+                    <option>AI-agent / modul</option>
+                    <option>Nettside som system</option>
+                    <option>Synlighet (SEO/AEO)</option>
+                    <option>Kurs for bedrift</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="msg">Kort beskrivelse</label>
+                <textarea id="msg" name="Melding" placeholder="Hva er manuelt i dag? Hva vil du automatisere?" required></textarea>
+              </div>
+
+              <button class="cta" type="submit">Send</button>
+              <div class="tiny">Ved å sende godtar du at jeg kan kontakte deg på e-post.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <footer>
+      <div><strong>SETai</strong> <span class="muted">— AI-agent utvikler</span><div class="tiny">© <span id="year"></span> • Norge</div></div>
+      <div class="tiny"><a class="pill" href="index.html">Hjem</a></div>
+    </footer>
+  </div>
+
+  <script src="site.js"></script>
+</body>
+</html>
