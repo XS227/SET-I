@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>۱۰ پرامپ برتر برای معلمان ریاضی (قابل کپی)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1b33;
+      --muted:#9fb0d0;
+      --text:#eef3ff;
+      --accent:#4da3ff;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Noto Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(77,163,255,.22), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(128,99,255,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.75;
+    }
+    header{
+      padding: 40px 18px 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: 26px;
+      letter-spacing: -.2px;
+    }
+    p.lead{
+      margin:0;
+      color:var(--muted);
+      max-width: 850px;
+      font-size: 15px;
+    }
+    .container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 12;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-head{
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+    .meta{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+    }
+    .title{
+      font-size: 18px;
+      margin:0;
+    }
+    .desc{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 13px;
+      transition: .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(77,163,255,.45)}
+    .btn:active{transform: translateY(0)}
+    .badge{
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      background: rgba(77,163,255,.18);
+      border: 1px solid rgba(77,163,255,.30);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .card-body{
+      padding: 14px 16px 16px;
+    }
+    textarea{
+      width:100%;
+      min-height: 170px;
+      resize: vertical;
+      background: rgba(0,0,0,.30);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12.8px;
+      line-height:1.55;
+      outline:none;
+    }
+    textarea:focus{
+      border-color: rgba(77,163,255,.55);
+      box-shadow: 0 0 0 4px rgba(77,163,255,.14);
+    }
+    .hint{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    footer{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 10px 18px 40px;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 860px){
+      .grid-2{
+        grid-template-columns: 1fr 1fr;
+      }
+      .card{grid-column: span 6;}
+      header{padding-top: 50px;}
+      h1{font-size: 30px;}
+    }
+    .toast{
+      position: fixed;
+      inset-inline-start: 18px;
+      bottom: 18px;
+      background: rgba(15,27,51,.92);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-size: 13px;
+      box-shadow: var(--shadow);
+      opacity:0;
+      transform: translateY(8px);
+      pointer-events:none;
+      transition: .2s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>۱۰ پرامپ برتر برای معلمان ریاضی (ایران) — قابل کپی</h1>
+    <p class="lead">
+      هر کارت شامل: نام پرامپ، توضیح کوتاه، و یک باکس کپی‌کردنی است. داخل پرامپ‌ها قسمت‌های داخل [] را با موضوع و پایه/فصل خودتان جایگزین کنید.
+    </p>
+  </header>
+
+  <main class="container grid-2">
+
+    <!-- 1 -->
+    <section class="card" id="p1">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۱) طرح درس کامل (الگوی رسمی ایران)</h2>
+          <p class="desc">برای ساخت طرح درس اجرایی با اهداف، مراحل تدریس، ارزشیابی و تکلیف.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">طرح درس</span>
+          <button class="btn" data-copy="t1">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t1" readonly>یک طرح درس جامع و قابل اجرا برای درس «ریاضی پایه [نهم]» با موضوع «[موضوع دقیق درس]» مطابق با برنامه درسی ملی و کتاب درسی رسمی ریاضی [نهم] تهیه کن.
+خروجی را رسمی و ساختارمند بنویس و شامل بخش‌های زیر باشد:
+1) مشخصات درس: پایه، مدت زمان (45/90 دقیقه)، عنوان، پیش‌نیازها
+2) اهداف: دانشی، مهارتی، نگرشی (قابل سنجش)
+3) روش‌ها و ابزارها: روش تدریس + وسایل کمک‌آموزشی
+4) مراحل تدریس دقیق و زمان‌بندی‌شده: آغازین، ارائه مفاهیم، مثال‌ها، تمرین هدایت‌شده، تمرین مستقل، جمع‌بندی
+5) سوالات کلیدی معلم (حداقل 6 سوال) برای هدایت بحث
+6) ارزشیابی: تشخیصی + تکوینی + پایانی (همراه با معیار نمره‌دهی کوتاه)
+7) توجه به تفاوت‌های فردی: حمایت برای ضعیف‌ترها + غنی‌سازی برای قوی‌ترها
+8) تکلیف: 3 سطح (ساده/متوسط/چالشی)
+در انتها «فهرست خطاهای رایج دانش‌آموزان در این درس و راه‌حل آموزشی» را هم اضافه کن.</textarea>
+        <div class="hint">پیشنهاد: موضوع را دقیق بنویس (مثلاً «حل معادله درجه دوم با روش تجزیه»).</div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="p2">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۲) ۱۰ سؤال ارزشیابی تکوینی (ترکیبی)</h2>
+          <p class="desc">برای سنجش سریع فهم دانش‌آموزان در طول تدریس (چندگزینه‌ای + تشریحی کوتاه).</p>
+        </div>
+        <div class="actions">
+          <span class="badge">ارزشیابی</span>
+          <button class="btn" data-copy="t2">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t2" readonly>برای درس «ریاضی پایه نهم» و موضوع «[موضوع درس]» یک مجموعه 10 سوال «ارزشیابی تکوینی» طراحی کن تا میزان درک دانش‌آموزان را بررسی کند.
+الزامات:
+- 6 سوال چندگزینه‌ای با 4 گزینه (فقط یک پاسخ درست) + پاسخ کلیدی
+- 4 سوال پاسخ‌کوتاه/تشریحی کوتاه + راهنمای تصحیح (rubric ساده)
+- سوال‌ها از سطح آسان تا متوسط و 2 سوال چالشی‌تر
+- خطاهای رایج را هدف بگیر (مثلاً اشتباه در علامت، انتقال طرفین، ترتیب عملیات)
+- سوال‌ها با مثال‌های قابل فهم و نزدیک به کتاب درسی باشند
+در پایان، پیشنهاد بده معلم هر سوال را در کلاس چگونه استفاده کند (برای گفت‌وگو/بازخورد سریع/کاربرگ).</textarea>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="p3">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۳) تدریس تفکیک‌شده (ضعیف/متوسط/قوی)</h2>
+          <p class="desc">برای طراحی یک جلسه با مسیرهای یادگیری متفاوت و پشتیبانی هدفمند.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">تفکیک آموزشی</span>
+          <button class="btn" data-copy="t3">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t3" readonly>یک جلسه تدریس برای «ریاضی پایه نهم» با موضوع «[موضوع درس]» طراحی کن که تفکیک آموزشی (Differentiation) را رعایت کند.
+خروجی شامل:
+- سناریوی تدریس 45/90 دقیقه با زمان‌بندی
+- سه سطح فعالیت: سطح 1 (نیازمند حمایت)، سطح 2 (استاندارد کلاس)، سطح 3 (پیشرفته)
+- برای هر سطح: توضیح فعالیت، تمرین نمونه، پاسخ/راهنما
+- راهبردهای پشتیبانی: سرنخ مرحله‌ای، مثال ساده‌تر، چک‌لیست، کار با همیار
+- غنی‌سازی برای قوی‌ها: مسئله ترکیبی/چندمرحله‌ای/استدلالی
+- روش ارزشیابی درجا برای هر سطح (یک سوال کلیدی/Exit Ticket)
+- مدیریت کلاس: نحوه گروه‌بندی و گردش معلم بین گروه‌ها</textarea>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="p4">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۴) تکلیف خانگی ۱۰ سؤالی + پاسخ تشریحی</h2>
+          <p class="desc">برای تولید برگه تکلیف با سطوح مختلف دشواری و کلید کامل.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">تکلیف</span>
+          <button class="btn" data-copy="t4">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t4" readonly>برای درس «ریاضی پایه نهم» و موضوع «[موضوع درس]» یک تکلیف خانگی شامل 10 سوال طراحی کن.
+الزامات:
+- توزیع دشواری: 3 آسان، 5 متوسط، 2 چالشی
+- سوال‌ها متنوع باشند (محاسباتی، مفهومی، کاربردی)
+- پاسخ‌نامه «کاملاً تشریحی» مرحله‌به‌مرحله ارائه کن
+- برای 2 سوال، «روش جایگزین حل» هم ارائه بده
+- در پایان، یک جدول کوتاه بده: شماره سوال → مهارت هدف → خطای رایج
+خروجی را آماده چاپ و شماره‌گذاری‌شده ارائه کن.</textarea>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="p5">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۵) فعالیت گروهی مشارکتی (کلاسی)</h2>
+          <p class="desc">برای طراحی کارگروهی با دستورالعمل، مواد لازم و خروجی قابل ارزیابی.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">کارگروهی</span>
+          <button class="btn" data-copy="t5">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t5" readonly>یک فعالیت گروهی مشارکتی برای «ریاضی پایه نهم» با موضوع «[موضوع درس]» طراحی کن.
+خروجی شامل:
+- هدف فعالیت (مهارت/مفهوم)
+- زمان اجرا (20 تا 30 دقیقه)
+- تعداد نفرات هر گروه و نقش‌ها (سرگروه، نویسنده، ارائه‌دهنده، ناظر زمان)
+- دستورالعمل گام‌به‌گام برای دانش‌آموزان
+- مواد لازم (برگه، خط‌کش، ماشین‌حساب در صورت نیاز، …)
+- محصول نهایی مورد انتظار (پوستر/حل کامل/ارائه 2 دقیقه‌ای/کاربرگ تکمیل‌شده)
+- معیار ارزیابی (rubric 4 معیار با سطح‌بندی ساده)
+- یک نسخه جایگزین برای کلاس‌های پرجمعیت یا زمان کم</textarea>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="card" id="p6">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۶) ۳ فعالیت گرم‌کن (کمتر از ۱۰ دقیقه)</h2>
+          <p class="desc">برای شروع جذاب کلاس و فعال‌سازی پیش‌دانسته‌ها.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">گرم‌کن</span>
+          <button class="btn" data-copy="t6">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t6" readonly>برای کلاس «ریاضی پایه نهم» و موضوع «[موضوع درس]» سه فعالیت گرم‌کن (Warm-up) پیشنهاد بده که هرکدام حداکثر 10 دقیقه زمان بگیرد.
+برای هر فعالیت بنویس:
+- هدف (چه مهارتی را فعال می‌کند)
+- مراحل اجرا (3 تا 5 گام)
+- نمونه سوال/محرک
+- شیوه جمع‌بندی سریع (1 دقیقه)
+فعالیت‌ها متنوع باشند (مثلاً بازی کوتاه، پرسش سریع، خطایابی، حدس و بررسی).</textarea>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="card" id="p7">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۷) ۵ سناریوی مسئله‌محور واقعی</h2>
+          <p class="desc">برای مرتبط کردن ریاضی با زندگی روزمره و تقویت حل مسئله.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">مسئله واقعی</span>
+          <button class="btn" data-copy="t7">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t7" readonly>برای آموزش موضوع «[موضوع درس]» در «ریاضی پایه نهم» پنج سناریوی مسئله‌محور از زندگی واقعی طراحی کن که برای سن دانش‌آموزان مناسب باشد.
+برای هر سناریو ارائه کن:
+- متن مسئله (روشن و کوتاه)
+- داده‌های لازم (عددها واقعی و معقول)
+- سوالات هدایت‌گر (2 تا 3 سوال)
+- پاسخ نهایی + راه‌حل خلاصه
+- نکته آموزشی (این سناریو چه مفهوم/مهارتی را تقویت می‌کند)
+موضوع‌ها را تا حد امکان بومی و روزمره انتخاب کن (خرید، تخفیف، نقشه، ورزش، زمان‌بندی، مصرف آب/برق، …).</textarea>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card" id="p8">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۸) فعالیت پژوهش‌محور (Inquiry-Based)</h2>
+          <p class="desc">برای ایجاد کشف مفهوم توسط دانش‌آموز با گام‌های کاوش و جمع‌بندی.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">کاوش</span>
+          <button class="btn" data-copy="t8">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t8" readonly>برای «ریاضی پایه نهم» و موضوع «[موضوع درس]» یک تکلیف/فعالیت پژوهش‌محور (Inquiry-Based) طراحی کن.
+الزامات خروجی:
+- صورت مسئله/پرسش محرک (Driving Question)
+- فرضیه‌های احتمالی دانش‌آموزان (3 نمونه)
+- مراحل کاوش (حداقل 5 گام) شامل جمع‌آوری داده/آزمایش عددی/رسم/بررسی الگو
+- سوالات راهنما برای هر گام
+- نتیجه‌گیری مورد انتظار و نحوه جمع‌بندی معلم
+- یک بخش «بحث کلاسی» با 3 سوال برای استدلال و توجیه پاسخ
+- پیشنهاد ارزشیابی: چک‌لیست مشاهده + خروجی کتبی کوتاه</textarea>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="card" id="p9">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۹) ادغام فناوری (GeoGebra/Desmos/…)</h2>
+          <p class="desc">برای ارائه راهکارهای عملی استفاده از ابزارهای دیجیتال در کلاس یا تکلیف.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">فناوری</span>
+          <button class="btn" data-copy="t9">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t9" readonly>سه روش عملی برای ادغام فناوری در تدریس «ریاضی پایه نهم» با موضوع «[موضوع درس]» پیشنهاد بده.
+الزامات:
+- ابزار پیشنهادی (مثل GeoGebra، Desmos، ماشین‌حساب، شبیه‌سازهای ساده، یا حتی پاورپوینت تعاملی)
+- هدف آموزشی هر روش (مفهومی/مهارتی)
+- مراحل اجرا در کلاس (گام‌به‌گام و کوتاه)
+- خروجی مورد انتظار از دانش‌آموز (اسکرین‌شات، نمودار، پاسخ به پرسش‌ها، …)
+- چالش‌های احتمالی و راه‌حل (نبود اینترنت/گوشی/زمان)
+در پایان، یک «طرح 10 دقیقه‌ای» آماده اجرا هم بده.</textarea>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="card" id="p10">
+      <div class="card-head">
+        <div class="meta">
+          <h2 class="title">۱۰) درس بین‌رشته‌ای (ریاضی + علوم/هنر)</h2>
+          <p class="desc">برای جذاب‌سازی و کاربردی‌کردن مفهوم با اتصال به علوم یا هنر.</p>
+        </div>
+        <div class="actions">
+          <span class="badge">بین‌رشته‌ای</span>
+          <button class="btn" data-copy="t10">کپی</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea id="t10" readonly>یک درس/پروژه بین‌رشته‌ای برای «ریاضی پایه نهم» با موضوع «[موضوع ریاضی]» طراحی کن که با یک درس دیگر مثل «علوم» یا «هنر» ارتباط داشته باشد.
+خروجی شامل:
+- عنوان جذاب پروژه
+- هدف‌های ریاضی + هدف‌های بین‌رشته‌ای
+- سناریوی اجرایی (45/90 دقیقه یا پروژه 1 هفته‌ای)
+- فعالیت‌های دانش‌آموزی مرحله‌به‌مرحله
+- داده‌ها/مواد لازم (ساده و در دسترس)
+- محصول نهایی (پوستر، گزارش کوتاه، مدل ساده، ارائه)
+- معیار ارزیابی (Rubric: دقت ریاضی، خلاقیت، استدلال، همکاری)
+- پیشنهاد برای دانش‌آموزان قوی‌تر و حمایت برای دانش‌آموزان نیازمند کمک</textarea>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    نکته: برای بهترین نتیجه، داخل [موضوع درس] دقیقاً فصل/مبحث را بنویس (مثلاً «تشابه مثلث‌ها»، «احتمال»، «معادله درجه دوم»، «تابع و نمودار»، «هندسه و فیثاغورس»).
+  </footer>
+
+  <div class="toast" id="toast">کپی شد.</div>
+
+  <script>
+    const toast = document.getElementById('toast');
+
+    function showToast(text){
+      toast.textContent = text || 'کپی شد.';
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=> toast.classList.remove('show'), 1500);
+    }
+
+    async function copyTextFromTextarea(id){
+      const ta = document.getElementById(id);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+
+      try{
+        await navigator.clipboard.writeText(ta.value);
+        showToast('پرامپ کپی شد.');
+      }catch(e){
+        // Fallback
+        try{
+          document.execCommand('copy');
+          showToast('پرامپ کپی شد.');
+        }catch(err){
+          showToast('کپی انجام نشد. متن را دستی انتخاب کنید.');
+        }
+      }
+    }
+
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', ()=> copyTextFromTextarea(btn.getAttribute('data-copy')));
+    });
+  </script>
+</body>
+</html>
