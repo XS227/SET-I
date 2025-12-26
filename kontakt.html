@@ -1,20 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kontakt | SETai</title>
+  <meta name="description" content="Kontakt SETai — AI-agent utvikler. Fortell hva du vil automatisere." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
+    <!-- MENY -->
     <nav class="nav">
-      <a class="brand" href="index.html" aria-label="Gå til forsiden">
-        <span class="logo" aria-hidden="true"></span>
-        <span>SETai</span>
-      </a>
-
-      <div class="navlinks" aria-label="Navigasjon">
+      <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span><span>SETai</span></a>
+      <div class="navlinks">
         <a class="pill" data-nav href="ai-agent.html">AI-agent</a>
         <a class="pill" data-nav href="tjenester.html">Tjenester</a>
         <a class="pill" data-nav href="moduler.html">Moduler</a>
@@ -23,76 +21,76 @@
       </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero" style="grid-template-columns: 1fr;">
       <div class="heroCard">
-        <span class="kicker"><span class="dot" aria-hidden="true"></span> Kontakt oss</span>
-        <h1>Fortell oss hva du vil bygge</h1>
-        <p class="sub">Fyll ut skjemaet så svarer vi innen én arbeidsdag. Vi kan også sette opp en rask intro-call.</p>
-        <div class="btnrow">
-          <a class="cta" href="tel:+4741227175">Ring oss</a>
-          <a class="cta secondary" href="mailto:post@setai.no">Send e-post</a>
+        <span class="kicker"><span class="dot" aria-hidden="true"></span> Kontakt</span>
+        <h1>Start med én konkret arbeidsflyt</h1>
+        <p class="sub">Skriv hva som er manuelt i dag, og hva du ønsker at en AI-agent skal gjøre.</p>
+
+        <div class="split" style="margin-top:12px">
+          <div class="callout">
+            <h2>Rask avklaring</h2>
+            <p>Jeg svarer med et forslag til agent/modul, estimert effekt og neste steg.</p>
+            <div class="notice"><strong>Tips:</strong> Legg ved lenke til nettside + hvilke verktøy dere bruker (CRM, e-post, booking, osv.).</div>
+          </div>
+
+          <div class="card">
+            <h2>Send forespørsel</h2>
+
+            <form action="https://formsubmit.com/khabat.setaei@gmail.com" method="POST">
+              <!-- FormSubmit options -->
+              <input type="hidden" name="_subject" value="Ny forespørsel: SETai (AI-agent)" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <!-- <input type="hidden" name="_next" value="https://www.setai.no/takk.html" /> -->
+
+              <div class="formRow">
+                <div>
+                  <label for="name">Navn</label>
+                  <input id="name" name="Navn" autocomplete="name" required />
+                </div>
+                <div>
+                  <label for="company">Bedrift</label>
+                  <input id="company" name="Bedrift" autocomplete="organization" />
+                </div>
+              </div>
+
+              <div class="formRow">
+                <div>
+                  <label for="email">E-post</label>
+                  <input id="email" name="E-post" type="email" autocomplete="email" required />
+                </div>
+                <div>
+                  <label for="type">Hva gjelder det?</label>
+                  <select id="type" name="Type" required>
+                    <option value="" disabled selected>Velg</option>
+                    <option>AI-agent / modul</option>
+                    <option>Nettside som system</option>
+                    <option>Synlighet (SEO/AEO)</option>
+                    <option>Kurs for bedrift</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="msg">Kort beskrivelse</label>
+                <textarea id="msg" name="Melding" placeholder="Hva er manuelt i dag? Hva vil du automatisere?" required></textarea>
+              </div>
+
+              <button class="cta" type="submit">Send</button>
+              <div class="tiny">Ved å sende godtar du at jeg kan kontakte deg på e-post.</div>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="sideCard">
-        <h3>Hva vi gjerne vet</h3>
-        <ul class="list">
-          <li>Mål og ønsket effekt<small>Hva ønsker du å løse akkurat nå?</small></li>
-          <li>Tidslinje<small>Når trenger du de første leveransene?</small></li>
-          <li>Team og verktøy<small>Hvem samarbeider vi med og hva bruker dere i dag?</small></li>
-        </ul>
       </div>
     </header>
 
-    <section aria-labelledby="kontakt-skjema">
-      <div class="callout">
-        <h3 id="kontakt-skjema">Send en melding</h3>
-        <form>
-          <div class="formRow">
-            <div>
-              <label for="navn">Navn</label>
-              <input id="navn" name="navn" type="text" placeholder="Ditt navn" required />
-            </div>
-            <div>
-              <label for="firma">Firma</label>
-              <input id="firma" name="firma" type="text" placeholder="Firmanavn" />
-            </div>
-          </div>
-          <div class="formRow">
-            <div>
-              <label for="rolle">Rolle</label>
-              <input id="rolle" name="rolle" type="text" placeholder="Rolle" />
-            </div>
-            <div>
-              <label for="epost">E-post</label>
-              <input id="epost" name="epost" type="email" placeholder="deg@firma.no" required />
-            </div>
-          </div>
-          <div>
-            <label for="behov">Hva trenger du hjelp med?</label>
-            <textarea id="behov" name="behov" placeholder="Kort om prosjektet, mål og ønsket tidslinje"></textarea>
-          </div>
-          <div>
-            <label for="kanal">Hvordan vil du kontaktes?</label>
-            <select id="kanal" name="kanal">
-              <option>E-post</option>
-              <option>Telefon</option>
-              <option>Videomøte</option>
-            </select>
-          </div>
-          <div class="btnrow">
-            <button class="cta" type="submit">Send</button>
-            <span class="micro">Vi behandler opplysningene kun for å følge opp henvendelsen.</span>
-          </div>
-        </form>
-        <div class="notice" role="note">Skjemaet sender ikke data automatisk i denne demoen. Bruk e-post eller telefon hvis du vil kontakte oss nå.</div>
-      </div>
-    </section>
-
     <footer>
-      <span>SETai © <span id="year"></span></span>
-      <span class="tiny">Vi svarer raskt og konkret.</span>
+      <div><strong>SETai</strong> <span class="muted">— AI-agent utvikler</span><div class="tiny">© <span id="year"></span> • Norge</div></div>
+      <div class="tiny"><a class="pill" href="index.html">Hjem</a></div>
     </footer>
   </div>
+
   <script src="site.js"></script>
 </body>
 </html>
