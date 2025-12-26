@@ -7,17 +7,18 @@
 <style>
   :root{
     --bg1:#0b1020; --bg2:#071018;
-    --card:rgba(255,255,255,.06);
-    --stroke:rgba(255,255,255,.10);
     --text:#ecf3ff; --muted:rgba(236,243,255,.75);
     --accent:#10b981; --accent2:#34d399;
+    --card:rgba(255,255,255,.06);
+    --stroke:rgba(255,255,255,.10);
     --r:20px; --shadow:0 18px 60px rgba(0,0,0,.55);
     --maxw:980px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", Arial;
+    margin:0;
+    font-family: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", Arial;
     color:var(--text);
     background:
       radial-gradient(1100px 600px at 70% -10%, rgba(16,185,129,.20), transparent 60%),
@@ -26,92 +27,215 @@
     overflow:hidden;
   }
 
-  /* Header compact */
   header{
     position:sticky; top:0; z-index:50;
     display:flex; gap:10px; align-items:center; justify-content:space-between;
     padding:10px 12px;
-    background:rgba(8,12,22,.75); backdrop-filter: blur(12px);
+    background:rgba(8,12,22,.75);
+    backdrop-filter: blur(12px);
     border-bottom:1px solid rgba(255,255,255,.08);
   }
   .brand{display:flex; align-items:center; gap:10px}
-  .mark{width:34px; height:34px; border-radius:12px; display:grid; place-items:center;
+  .mark{
+    width:34px; height:34px; border-radius:12px; display:grid; place-items:center;
     color:#062018; font-weight:1000;
     background:linear-gradient(135deg,var(--accent2),var(--accent));
-    box-shadow:0 12px 30px rgba(16,185,129,.18)}
+    box-shadow:0 12px 30px rgba(16,185,129,.18)
+  }
   .title{font-weight:1000; letter-spacing:-.2px}
   .sub{font-size:11px; color:rgba(236,243,255,.72); font-weight:850}
 
   .controls{display:flex; gap:8px; align-items:center}
   .btn{
-    cursor:pointer; border-radius:14px; padding:10px 12px; border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.04); color:var(--text); font-weight:900; white-space:nowrap;
+    cursor:pointer; border-radius:14px; padding:10px 12px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-weight:900;
+    white-space:nowrap;
   }
   .btn.primary{border:0; color:#062018; background:linear-gradient(135deg,var(--accent2),var(--accent))}
   .btn.ghost{background:rgba(255,255,255,.03)}
+  .btn.small{padding:8px 10px; border-radius:12px; font-size:13px}
   .menu{position:relative}
-  .menu > .panel{display:none; position:absolute; top:44px; left:0; min-width:190px; padding:8px;
-    background:rgba(9,14,26,.92); border:1px solid rgba(255,255,255,.12); border-radius:14px; backdrop-filter:blur(10px)}
+  .menu > .panel{
+    display:none; position:absolute; top:44px; left:0;
+    min-width:210px; padding:8px;
+    background:rgba(9,14,26,.92);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    backdrop-filter:blur(10px);
+    box-shadow: var(--shadow);
+  }
   .menu.open > .panel{display:block}
+  .panel .btn{width:100%; text-align:right}
 
-  /* Stage & slide */
   .stage{height:calc(100% - 120px); display:grid; place-items:center; padding:14px}
   .slide{
     width:min(var(--maxw), calc(100vw - 28px));
-    max-height:calc(100vh - 165px); overflow:auto;
-    padding:22px; border-radius:var(--r); border:1px solid rgba(255,255,255,.10);
+    max-height:calc(100vh - 165px);
+    overflow:auto;
+    padding:22px;
+    border-radius:var(--r);
+    border:1px solid rgba(255,255,255,.10);
     background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
-    box-shadow:var(--shadow); display:none; position:relative;
+    box-shadow:var(--shadow);
+    display:none;
+    position:relative;
   }
   .slide.active{display:block}
-  .slide::before{content:""; position:absolute; inset:-2px;
+  .slide::before{
+    content:"";
+    position:absolute; inset:-2px;
     background:radial-gradient(900px 420px at 72% 8%, rgba(16,185,129,.15), transparent 55%);
-    pointer-events:none}
-  .eyebrow{display:inline-flex; gap:8px; padding:6px 10px; border-radius:999px;
-    border:1px solid rgba(52,211,153,.26); background:rgba(16,185,129,.12); font-size:12px; font-weight:950}
+    pointer-events:none
+  }
+  .slide > *{position:relative}
+
+  .eyebrow{
+    display:inline-flex; gap:8px; align-items:center;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(52,211,153,.26);
+    background:rgba(16,185,129,.12);
+    font-size:12px; font-weight:950
+  }
   h1,h2{margin:12px 0 10px; letter-spacing:-.35px}
   h1{font-size:clamp(26px,3.2vw,42px); line-height:1.15}
   h2{font-size:clamp(22px,2.3vw,32px); line-height:1.18}
   p{margin:0 0 10px; color:var(--muted); font-weight:850; font-size:17px}
+
   .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
-  .box{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.04); border-radius:16px; padding:12px}
+  .box{
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.04);
+    border-radius:16px;
+    padding:12px
+  }
   .box h3{margin:0 0 8px; font-size:16px; letter-spacing:-.2px}
   ul{margin:8px 0 0; padding:0 18px 0 0; color:var(--muted); font-weight:850}
   li{margin:6px 0}
 
   .choices{display:grid; gap:10px; margin-top:12px}
-  .choice{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
-    border-radius:14px; padding:12px; cursor:pointer; font-weight:900}
+  .choice{
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    border-radius:14px;
+    padding:12px;
+    cursor:pointer;
+    font-weight:900
+  }
   .choice small{display:block; color:rgba(236,243,255,.66); margin-top:4px; font-weight:850}
   .choice:hover{border-color:rgba(52,211,153,.45)}
 
   /* Teacher script (toggle) */
-  .toolbar{display:flex; align-items:center; gap:8px; margin-top:10px}
-  .toggle{cursor:pointer; border:1px dashed rgba(255,255,255,.26); background:rgba(0,0,0,.14);
-    color:var(--text); padding:8px 10px; font-weight:900; border-radius:12px}
-  .script{margin-top:10px; border:1px dashed rgba(255,255,255,.20); background:rgba(0,0,0,.12);
-    border-radius:16px; padding:12px; display:none}
+  .toolbar{display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap}
+  .toggle{
+    cursor:pointer;
+    border:1px dashed rgba(255,255,255,.26);
+    background:rgba(0,0,0,.14);
+    color:var(--text);
+    padding:8px 10px;
+    font-weight:900;
+    border-radius:12px
+  }
+  .script{
+    margin-top:10px;
+    border:1px dashed rgba(255,255,255,.20);
+    background:rgba(0,0,0,.12);
+    border-radius:16px;
+    padding:12px;
+    display:none
+  }
   .script.on{display:block}
   .script .label{font-size:12px; color:rgba(236,243,255,.78); font-weight:1000; margin-bottom:6px}
   .script .line{color:rgba(236,243,255,.94); font-weight:900; line-height:1.9}
 
-  /* Icons */
+  /* Tiny UI bits */
   .ico{width:26px; height:26px; margin-left:6px; vertical-align:-5px}
+  .pillRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+  .pill{
+    padding:7px 10px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.03);
+    color:rgba(236,243,255,.74);
+    font-weight:900; font-size:12px;
+  }
+  .hr{
+    height:1px; background:rgba(255,255,255,.08);
+    margin:12px 0;
+  }
 
-  /* Footer */
-  footer{height:56px; display:flex; align-items:center; justify-content:space-between;
-    padding:10px 12px; border-top:1px solid rgba(255,255,255,.08); background:rgba(0,0,0,.10)}
+  /* Demo widgets */
+  textarea, input, select{
+    width:100%;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.03);
+    color:var(--text);
+    padding:12px;
+    font-family: inherit;
+    font-weight:850;
+    outline:none;
+  }
+  textarea{min-height:120px; resize:vertical}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .mono{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size:13px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-break:break-word;
+  }
+  .callout{
+    border:1px solid rgba(52,211,153,.24);
+    background:rgba(16,185,129,.10);
+    border-radius:16px;
+    padding:12px;
+    color:rgba(236,243,255,.90);
+    font-weight:900;
+  }
+
+  /* Modal */
+  .modalBackdrop{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.55);
+    display:none; place-items:center;
+    z-index:999;
+    padding:16px;
+  }
+  .modalBackdrop.on{display:grid}
+  .modal{
+    width:min(980px, 96vw);
+    max-height:88vh;
+    overflow:auto;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(9,14,26,.92);
+    backdrop-filter:blur(12px);
+    box-shadow: var(--shadow);
+    padding:14px;
+  }
+  .modalHead{display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px}
+  .modalHead .h{font-weight:1000}
+  .modalHead .x{border-radius:12px}
+
+  footer{
+    height:56px; display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.10)
+  }
   .counter{font-size:13px; color:rgba(236,243,255,.72); font-weight:900; white-space:nowrap}
-  .progress{height:10px; width:min(560px,58vw); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10);
-    border-radius:999px; overflow:hidden}
+  .progress{height:10px; width:min(560px,58vw); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); border-radius:999px; overflow:hidden}
   .bar{height:100%; width:0%; background:linear-gradient(135deg,var(--accent2),var(--accent)); transition:width .2s}
 
-  /* Mobile */
   @media (max-width:860px){
     body{overflow:auto}
     .stage{height:auto; place-items:stretch}
     .slide{max-height:none; padding:18px}
     .grid{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr}
     .progress{display:none}
   }
 </style>
@@ -132,10 +256,10 @@
     <div class="menu" id="menu">
       <button class="btn ghost" onclick="toggleMenu()">⋯</button>
       <div class="panel">
-        <button class="btn" style="width:100%" onclick="restart(); toggleMenu(false)">شروع از اول</button>
-        <button class="btn" style="width:100%" onclick="toggleAllScripts(true); toggleMenu(false)">نمایش توضیحات استاد</button>
-        <button class="btn" style="width:100%" onclick="toggleAllScripts(false); toggleMenu(false)">پنهان کردن توضیحات</button>
-        <button class="btn" style="width:100%" onclick="toggleFullscreen(); toggleMenu(false)">تمام‌صفحه</button>
+        <button class="btn" onclick="restart(); toggleMenu(false)">شروع از اول</button>
+        <button class="btn" onclick="toggleAllScripts(true); toggleMenu(false)">نمایش توضیحات استاد</button>
+        <button class="btn" onclick="toggleAllScripts(false); toggleMenu(false)">پنهان کردن توضیحات</button>
+        <button class="btn" onclick="toggleFullscreen(); toggleMenu(false)">تمام‌صفحه</button>
       </div>
     </div>
   </div>
@@ -146,21 +270,22 @@
   <!-- 1 -->
   <section class="slide active" id="s1" data-title="خوش آمدید">
     <div class="eyebrow">
-      <!-- flag icon -->
       <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M5 21V4h10l-1.5 3H19l-1.5 3H19v8H5Z" stroke="currentColor" stroke-width="1.6"/></svg>
       شروع جلسه • سطح ۱
     </div>
     <h1>به دوره هوش مصنوعی خوش آمدید</h1>
     <p>امروز دنبال ابزارهای زیاد نیستیم. قرار است هوش مصنوعی برای شما تبدیل شود به یک «سیستم قابل اجرا» برای افزایش: درآمد، سرعت و نظم.</p>
 
-    <div class="toolbar"><button class="toggle" onclick="toggleScript('s1')">راهنمای استاد</button></div>
+    <div class="toolbar">
+      <button class="toggle" onclick="toggleScript('s1')">راهنمای استاد</button>
+    </div>
     <div class="script" id="script-s1">
       <div class="label">هدف این اسلاید</div>
-      <div class="line">تنظیم توقع: «ابزار زیاد» هدف ما نیست؛ «سیستم ساده و قابل اجرا» هدف است.</div>
+      <div class="line">تنظیم توقع: «ابزار زیاد» هدف نیست؛ «سیستم ساده و قابل اجرا» هدف است.</div>
       <div class="label">متن پیشنهادی</div>
-      <div class="line">«امروز با چند تصمیم کوچک، مسیری می‌سازیم که همین هفته خروجی بده. من حرف پیچیده نمی‌زنم؛ قدم‌به‌قدم جلو می‌رویم.»</div>
+      <div class="line">«امروز با چند تصمیم کوچک، یک مسیر می‌سازیم که همین هفته خروجی بده. قدم‌به‌قدم جلو می‌رویم.»</div>
       <div class="label">اگر گیج شد</div>
-      <div class="line">مثال بزن: «مثل برنامه غذا یا ورزش: ساده ولی ثابت؛ همین الگو را برای کار با هوش مصنوعی می‌سازیم.»</div>
+      <div class="line">مثال بزن: «مثل برنامه ورزش: ساده ولی ثابت. ما همین الگو را برای خروجی‌گرفتن با هوش مصنوعی می‌سازیم.»</div>
     </div>
 
     <div class="choices"><div class="choice" onclick="go('s2')">ادامه</div></div>
@@ -178,7 +303,7 @@
         <h3>تعریف ساده</h3>
         <ul>
           <li>هوش مصنوعی = دستیار فکر و اجرا</li>
-          <li>خروجی منظم، نه پاسخ شانسی</li>
+          <li>خروجی منظم، نه جواب شانسی</li>
           <li>روش ثابت برای کارهای تکراری</li>
         </ul>
       </div>
@@ -194,9 +319,9 @@
 
     <div class="toolbar"><button class="toggle" onclick="toggleScript('s2')">راهنمای استاد</button></div>
     <div class="script" id="script-s2">
-      <div class="label">هدف</div><div class="line">ساخت تصویر ذهنی واحد از دوره.</div>
-      <div class="label">متن پیشنهادی</div><div class="line">«من هوش مصنوعی را موتور می‌دانم؛ ولی موتور بدون مسیر فقط انرژی می‌سوزاند. ما مسیر می‌سازیم.»</div>
-      <div class="label">سؤال‌ها</div><div class="line">«الان بیشتر دنبال چه تغییری هستی؟ پول؟ سرعت؟ نظم؟»</div>
+      <div class="label">هدف</div><div class="line">یک تصویر ذهنی روشن: خروجی‌محور + سیستم‌محور + شخصی‌سازی.</div>
+      <div class="label">متن پیشنهادی</div><div class="line">«هوش مصنوعی موتور است؛ ما مسیر می‌سازیم تا موتور برایت نتیجه بده.»</div>
+      <div class="label">سؤال</div><div class="line">«الان بیشتر دنبال چه تغییری هستی؟»</div>
     </div>
 
     <div class="choices"><div class="choice" onclick="go('s3')">ادامه</div></div>
@@ -208,7 +333,7 @@
       <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       تصمیم ۱
     </div>
-    <h2>اگر این دوره موفق باشد، بعد از ۴ هفته چه چیزی باید تغییر کند؟</h2>
+    <h2>بعد از ۴ هفته چه چیزی باید تغییر کند؟</h2>
     <div class="choices">
       <div class="choice" onclick="select('goal','income'); go('s4')">درآمد <small>خروجی قابل فروش</small></div>
       <div class="choice" onclick="select('goal','speed'); go('s4')">سرعت <small>زمان کمتر، خروجی بیشتر</small></div>
@@ -219,7 +344,7 @@
     <div class="toolbar"><button class="toggle" onclick="toggleScript('s3')">راهنمای استاد</button></div>
     <div class="script" id="script-s3">
       <div class="label">متن پیشنهادی</div>
-      <div class="line">«انتخاب تو مسیر جلسه را تعیین می‌کند. اگر گفتی هر سه، یک مورد را به‌عنوان اولویت می‌گیریم.»</div>
+      <div class="line">«اگر هر سه را گفتی، مشکلی نیست؛ ولی برای نتیجه، یک اولویت اصلی انتخاب می‌کنیم.»</div>
     </div>
   </section>
 
@@ -239,30 +364,29 @@
 
     <div class="toolbar"><button class="toggle" onclick="toggleScript('s4')">راهنمای استاد</button></div>
     <div class="script" id="script-s4">
-      <div class="label">بازتعریف</div>
-      <div class="line">«از این لحظه برنامه تو شخصی می‌شود؛ یک نسخه برای همه نداریم.»</div>
+      <div class="label">متن پیشنهادی</div>
+      <div class="line">«از اینجا به بعد مسیر تو شخصی می‌شود. ما نسخه واحد برای همه نداریم.»</div>
     </div>
   </section>
 
-  <!-- 5 (branch result) -->
+  <!-- 5 -->
   <section class="slide" id="s5" data-title="نسخه پیشنهادی تو">
     <div class="eyebrow">
       <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 18V6h16v12H4Z" stroke="currentColor" stroke-width="1.6"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       نسخه پیشنهادی
     </div>
     <h2 id="plan-title">نسخه مناسب تو</h2>
+
+    <div class="pillRow" id="summaryPills"></div>
+
     <div class="grid">
       <div class="box">
-        <h3 id="plan-law">قوانین امروز</h3>
-        <ul id="plan-laws">
-          <!-- filled by JS -->
-        </ul>
+        <h3>قوانین این هفته</h3>
+        <ul id="plan-laws"></ul>
       </div>
       <div class="box">
         <h3>نتیجه‌ای که می‌خواهیم</h3>
-        <ul id="plan-result">
-          <!-- filled by JS -->
-        </ul>
+        <ul id="plan-result"></ul>
       </div>
     </div>
 
@@ -270,6 +394,8 @@
     <div class="script" id="script-s5">
       <div class="label">متن پیشنهادی</div>
       <div class="line" id="plan-coach">—</div>
+      <div class="label">روشن‌سازی</div>
+      <div class="line">«این نسخه را یک هفته انجام بده. جلسه بعد با داده واقعی، نسخه را دقیق‌تر می‌کنیم.»</div>
     </div>
 
     <div class="choices"><div class="choice" onclick="go('s6')">ادامه</div></div>
@@ -279,7 +405,7 @@
   <section class="slide" id="s6" data-title="سه مرحله برای خروجی حرفه‌ای">
     <div class="eyebrow">
       <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 18h5V6H4v12Zm6 0h5V10h-5v8Zm6 0h4V4h-4v14Z" stroke="currentColor" stroke-width="1.6"/></svg>
-      الگوی ۳ مرحله‌ای
+      سیستم ستائی
     </div>
     <h2>سه مرحله که کیفیت می‌دهد</h2>
     <div class="grid">
@@ -295,85 +421,176 @@
 
     <div class="toolbar"><button class="toggle" onclick="toggleScript('s6')">راهنمای استاد</button></div>
     <div class="script" id="script-s6">
-      <div class="label">توضیح ساده</div>
+      <div class="label">متن پیشنهادی</div>
       <div class="line">«اول نقشه، بعد ساخت، بعد پرداخت نهایی. همین الگو را برای هر خروجی تکرار می‌کنیم.»</div>
-      <div class="label">مثال آماده</div>
-      <div class="line">«برای یک پست: سه تیتر → پیش‌نویس کوتاه → اصلاح با مثال و دعوت به اقدام.»</div>
+      <div class="label">اگر دانشجو گیج شد</div>
+      <div class="line">مثال: «اول سرفصل‌های یک مقاله را می‌چینی، بعد متن می‌نویسی، آخرش ویرایش می‌کنی.»</div>
     </div>
 
-    <div class="choices"><div class="choice" onclick="go('s7')">تمرین ۵ دقیقه‌ای</div></div>
+    <div class="choices"><div class="choice" onclick="go('s7')">بریم دمو واقعی ورودی/خروجی</div></div>
   </section>
 
-  <!-- 7 -->
-  <section class="slide" id="s7" data-title="تمرین کوتاه داخل کلاس">
+  <!-- 7: Real I/O demo -->
+  <section class="slide" id="s7" data-title="دمو واقعی ورودی/خروجی">
     <div class="eyebrow">
-      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M8 21v-7h8v7M7 8l5-5 5 5M12 3v11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      تمرین مشترک
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7l3-7Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      بخش عملی
     </div>
-    <h2>الان یک خروجی واقعی می‌سازیم</h2>
-    <p>یک موضوع واقعی بگو: پست، صفحه سایت یا پیام فروش. با سه سؤال زیر «طرح کلی» را می‌سازیم:</p>
-    <div class="box">
+
+    <h2>یک ورودی بده → یک خروجی بگیر</h2>
+    <p>اول من (استاد) انجام می‌دم تا ببینی. بعد خودت همان را تکرار می‌کنی.</p>
+
+    <div class="grid">
+      <div class="box">
+        <h3>انتخاب نوع خروجی</h3>
+        <select id="demoType" onchange="fillDemoTemplate()">
+          <option value="content">تولید محتوا برای اینستاگرام</option>
+          <option value="website">ساخت صفحه وب (لندینگ ساده)</option>
+          <option value="support">ایده ایجنت پاسخ‌گو برای مشتری</option>
+        </select>
+
+        <div class="hr"></div>
+
+        <h3>ورودی (موضوع واقعی)</h3>
+        <textarea id="demoTopic" placeholder="مثال: من عکاسم و می‌خوام با محتوا مشتری بگیرم. مخاطب: عروس و داماد. هدف: رزرو جلسه."></textarea>
+
+        <div class="toolbar">
+          <button class="btn small" onclick="fillDemoTemplate()">قالب آماده</button>
+          <button class="btn small" onclick="copyText('demoPrompt')">کپی متن برای چت‌جی‌پی‌تی</button>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>متن آماده برای ارسال به چت‌جی‌پی‌تی</h3>
+        <div class="callout mono" id="demoPrompt"></div>
+
+        <div class="hr"></div>
+
+        <h3>خروجی مورد انتظار</h3>
+        <ul>
+          <li>طرح کلی (تیترها)</li>
+          <li>پیش‌نویس سریع</li>
+          <li>اصلاح با چک‌لیست</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="toggle" onclick="toggleScript('s7')">راهنمای استاد</button>
+      <button class="btn small ghost" onclick="openModal('modalQuickChecklist')">چک‌لیست اصلاح (نمایش)</button>
+    </div>
+    <div class="script" id="script-s7">
+      <div class="label">هدف</div>
+      <div class="line">این اسلاید «رود تمام نمی‌شود»؛ اینجا دانشجو خروجی واقعی می‌بیند و همان‌جا خودش تکرار می‌کند.</div>
+      <div class="label">روش اجرا (۲ مرحله)</div>
+      <div class="line">۱) شما موضوع را از حامد می‌گیرید، قالب را کپی می‌کنید و در چت‌جی‌پی‌تی می‌گذارید. ۲) بعد همان قالب را می‌دهید خودش با موضوع خودش انجام دهد.</div>
+      <div class="label">سؤال‌های کلیدی</div>
+      <div class="line">«هدف دقیق این خروجی چیست؟ مخاطب کیست؟ از مخاطب چه اقدام می‌خواهی؟»</div>
+      <div class="label">اگر خروجی ضعیف شد</div>
+      <div class="line">به Brief برگرد: «یک محدودیت اضافه کن: طول، لحن، مثال واقعی، و یک CTA دقیق.»</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s8')">حالا برنامه ۳ جلسه‌ای و تکلیف</div></div>
+  </section>
+
+  <!-- 8: Homework + 3-session roadmap -->
+  <section class="slide" id="s8" data-title="تکلیف + نقشه ۳ جلسه">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M7 3h10v4H7V3Zm-2 6h14v12H5V9Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      مسیر ادامه
+    </div>
+
+    <h2>تا جلسه ۳، با دست خالی نمی‌مونی</h2>
+    <p>هدف این است که طی ۳ جلسه، یک سیستم واقعی بسازی: خروجی، نظم و یک نمونه محصول/ابزار.</p>
+
+    <div class="grid">
+      <div class="box">
+        <h3>جلسه ۱ (امروز)</h3>
+        <ul>
+          <li>هدف و گره اصلی مشخص شد</li>
+          <li>سیستم ۳ مرحله‌ای را یاد گرفتی</li>
+          <li>یک خروجی واقعی دیدی و خودت تکرار کردی</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>جلسه ۲</h3>
+        <ul>
+          <li>بهبود کیفیت خروجی‌ها با چک‌لیست و نسخه‌گذاری</li>
+          <li>ساخت قالب‌های ثابت (پست، صفحه، پیام فروش)</li>
+          <li>شروع طراحی «ایجنت ساده» برای پاسخ‌گویی و لید</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:12px">
+      <h3>جلسه ۳</h3>
       <ul>
-        <li>هدف این خروجی چیست؟</li>
-        <li>مخاطب کیست؟</li>
-        <li>از مخاطب چه اقدامی می‌خواهی؟</li>
+        <li>نهایی‌سازی ایجنت ساده (FAQ + دریافت لید)</li>
+        <li>اتصال مسیر به هدف: محتوا/سایت/پشتیبانی</li>
+        <li>برنامه ۳۰ روزه برای تثبیت و رشد</li>
       </ul>
     </div>
 
-    <div class="toolbar"><button class="toggle" onclick="toggleScript('s7')">راهنمای استاد</button></div>
-    <div class="script" id="script-s7">
-      <div class="label">روش اجرا</div>
-      <div class="line">سؤال‌ها را یکی‌یکی بپرس. سپس سه تیتر بده و سریع به پیش‌نویس برس؛ وسواس ممنوع.</div>
-    </div>
+    <div class="hr"></div>
 
-    <div class="choices"><div class="choice" onclick="go('s8')">تکلیف هفته اول</div></div>
-  </section>
-
-  <!-- 8 -->
-  <section class="slide" id="s8" data-title="تکلیف هفته اول">
-    <div class="eyebrow">
-      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M7 3h10v4H7V3Zm-2 6h14v12H5V9Z" stroke="currentColor" stroke-width="1.6"/></svg>
-      برنامه هفتگی
-    </div>
-    <h2>تمرین هفته اول (ساده و قابل انجام)</h2>
+    <h3 style="margin:0 0 8px">تکلیف هفته اول (۱۵ دقیقه)</h3>
     <div class="grid">
       <div class="box">
-        <h3>هر روز (۱۵ دقیقه)</h3>
-        <ul><li>یک «طرح کلی» کوتاه</li><li>ذخیره در یک سند ثابت</li></ul>
+        <h3>هر روز</h3>
+        <ul><li>یک طرح کلی کوتاه</li><li>یک پیش‌نویس سریع</li><li>ثبت در یک سند ثابت</li></ul>
       </div>
       <div class="box">
         <h3>سه‌بار در هفته</h3>
-        <ul><li>یک خروجی کامل: پیش‌نویس + اصلاح</li><li>نسخه ۱ و ۲ را نگه‌دار</li></ul>
+        <ul><li>نسخه ۱ + نسخه ۲ (اصلاح‌شده)</li><li>یک مثال واقعی داخل خروجی</li><li>یک CTA دقیق</li></ul>
       </div>
     </div>
 
     <div class="toolbar"><button class="toggle" onclick="toggleScript('s8')">راهنمای استاد</button></div>
     <div class="script" id="script-s8">
-      <div class="label">تأکید</div>
-      <div class="line">«هدف عادت است، نه کمال. هر خروجی باید قابل نمایش باشد؛ حتی کوچک.»</div>
+      <div class="label">هدف</div>
+      <div class="line">دانشجو باید «ادامه مسیر» را ببیند: جلسه ۲ و ۳ محصول‌سازی می‌کنند، نه فقط آموزش.</div>
+      <div class="label">نکته مهم</div>
+      <div class="line">تکلیف را خیلی ساده نگه دار. «عادت و خروجی» مهم‌تر از کیفیت کامل است.</div>
     </div>
 
-    <div class="choices"><div class="choice" onclick="go('s9')">جمع‌بندی</div></div>
+    <div class="choices"><div class="choice" onclick="go('s9')">پایان + نمونه ایجنت HTML</div></div>
   </section>
 
-  <!-- 9 -->
-  <section class="slide" id="s9" data-title="پایان بخش اول جلسه">
+  <!-- 9: Wrap + Agent HTML example -->
+  <section class="slide" id="s9" data-title="پایان + نمونه ایجنت HTML">
     <div class="eyebrow">
       <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 20V6h8l2 3h6v11H4Z" stroke="currentColor" stroke-width="1.6"/></svg>
       پایان بخش اول
     </div>
+
     <h2>جمع‌بندی کوتاه</h2>
     <ul>
       <li>هدف و گره اصلی مشخص شد</li>
       <li>نسخه مناسب تو تعیین شد</li>
-      <li>الگوی سه‌مرحله‌ای را شناختی</li>
-      <li>تمرین هفته اول را گرفتی</li>
+      <li>سیستم سه‌مرحله‌ای را اجرا کردیم</li>
+      <li>تکلیف هفته اول مشخص شد</li>
     </ul>
 
-    <div class="toolbar"><button class="toggle" onclick="toggleScript('s9')">راهنمای استاد</button></div>
+    <div class="hr"></div>
+
+    <h3 style="margin:0 0 8px">نمونه «ایجنت ساده با HTML» برای پاسخ‌گویی و لید</h3>
+    <p>این یک نمونه خیلی ساده است: چند سؤال پرتکرار را جواب می‌دهد و در آخر اطلاعات تماس می‌گیرد تا لید ایجاد شود.</p>
+
+    <div class="choices">
+      <div class="choice" onclick="openModal('modalAgentDemo')">نمایش دمو ایجنت (در همین صفحه) <small>FAQ + دریافت لید</small></div>
+      <div class="choice" onclick="openModal('modalAgentCode')">نمایش کد آماده (کپی کن و استفاده کن) <small>یک فایل HTML</small></div>
+    </div>
+
+    <div class="toolbar">
+      <button class="toggle" onclick="toggleScript('s9')">راهنمای استاد</button>
+    </div>
     <div class="script" id="script-s9">
-      <div class="label">متن پایانی</div>
-      <div class="line">«جلسه بعد با خروجی‌های واقعی برمی‌گردیم و سیستم تو را دقیق‌تر می‌کنیم.»</div>
+      <div class="label">هدف این پایان‌بندی</div>
+      <div class="line">دانشجو با «یک چیز عملی» از جلسه بیرون برود: نمونه ایجنت HTML که می‌تواند از همین امشب استفاده کند.</div>
+      <div class="label">متن پیشنهادی</div>
+      <div class="line">«جلسه بعد با خروجی‌های واقعی برمی‌گردی و این ایجنت را دقیق‌تر می‌کنیم تا برای کار تو لید واقعی بگیرد.»</div>
+      <div class="label">تمرین پیشنهادی برای حامد</div>
+      <div class="line">از او بخواه ۳ سؤال پرتکرار مشتری‌هایش را بنویسد؛ جلسه ۲ همان‌ها را وارد ایجنت می‌کنید.</div>
     </div>
 
     <div class="choices">
@@ -389,31 +606,117 @@
   <div class="counter">کلیدها: ←/→ یا Space • F</div>
 </footer>
 
+<!-- Modals -->
+<div class="modalBackdrop" id="backdrop" onclick="backdropClose(event)">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modalHead">
+      <div class="h" id="modalTitle">—</div>
+      <button class="btn small x" onclick="closeModal()">بستن</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<template id="tplQuickChecklist">
+  <div class="box">
+    <h3>چک‌لیست اصلاح سریع (کیفیت)</h3>
+    <ul>
+      <li>هدف خروجی روشن است؟ (یک جمله)</li>
+      <li>مخاطب مشخص است؟</li>
+      <li>یک مثال واقعی دارد؟</li>
+      <li>جمله‌های اضافی حذف شده؟</li>
+      <li>دعوت به اقدام (CTA) دقیق است؟</li>
+    </ul>
+  </div>
+</template>
+
+<template id="tplAgentDemo">
+  <div class="box">
+    <h3>دمو ایجنت ساده (آفلاین)</h3>
+    <p style="margin-top:6px">یک سؤال پرتکرار را انتخاب کن. اگر جواب کافی نبود، اطلاعات تماس می‌گیرد تا شما پیگیری کنی.</p>
+
+    <div class="row" style="margin-top:10px">
+      <div>
+        <h3 style="margin:0 0 8px">سؤال</h3>
+        <select id="faqSelect" onchange="renderFAQ()">
+          <option value="price">قیمت از کجا شروع می‌شود؟</option>
+          <option value="time">چقدر زمان می‌برد؟</option>
+          <option value="need">برای شروع چه چیزهایی لازم است؟</option>
+          <option value="custom">سؤال من متفاوت است</option>
+        </select>
+        <div class="toolbar" style="margin-top:10px">
+          <button class="btn small" onclick="renderFAQ()">نمایش پاسخ</button>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin:0 0 8px">پاسخ ایجنت</h3>
+        <div class="callout" id="faqAnswer">—</div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="box">
+      <h3>اگر می‌خوای پیگیری کنیم (لید)</h3>
+      <div class="row" style="margin-top:10px">
+        <div><input id="leadName" placeholder="نام" /></div>
+        <div><input id="leadPhone" placeholder="شماره تماس" /></div>
+      </div>
+      <textarea id="leadMsg" style="margin-top:10px" placeholder="پیام کوتاه: چی می‌خوای بسازی؟ هدف چیه؟"></textarea>
+
+      <div class="toolbar" style="margin-top:10px">
+        <button class="btn primary" onclick="saveLead()">ثبت لید (دمو)</button>
+        <button class="btn ghost" onclick="prefillLead()">پرکردن نمونه</button>
+      </div>
+      <div class="pillRow" id="leadStatus" style="margin-top:10px"></div>
+    </div>
+  </div>
+</template>
+
+<template id="tplAgentCode">
+  <div class="box">
+    <h3>کد آماده یک فایل HTML (ایجنت FAQ + لید)</h3>
+    <p style="margin-top:6px">این کد را در یک فایل مثل <span class="mono">agent.html</span> ذخیره کن و بازش کن. کاملاً ساده و بدون نیاز به سرور است.</p>
+    <div class="toolbar">
+      <button class="btn small" onclick="copyText('agentCode')">کپی کل کد</button>
+    </div>
+    <div class="callout mono" id="agentCode"></div>
+  </div>
+</template>
+
 <script>
+  // --- Core state ---
   const state = { goal:null, problem:null };
+
   const slides = [...document.querySelectorAll('.slide')];
   const counter = document.getElementById('counter');
   const bar = document.getElementById('bar');
   const miniSub = document.getElementById('miniSub');
   const menu = document.getElementById('menu');
 
+  // --- Slide nav ---
   function go(id){
     const el = document.getElementById(id); if(!el) return;
-    slides.forEach(s=>s.classList.remove('active')); el.classList.add('active');
+    slides.forEach(s=>s.classList.remove('active'));
+    el.classList.add('active');
     history.replaceState(null,"",`#${id}`);
     updateUI();
+    // when entering slide 5 or 7 ensure dynamic content
+    if(id==='s5') renderPlan();
+    if(id==='s7') fillDemoTemplate();
   }
   function next(){ const i = idx(); if(i<slides.length-1) go(slides[i+1].id); }
   function prev(){ const i = idx(); if(i>0) go(slides[i-1].id); }
   function idx(){ return Math.max(0, slides.findIndex(s=>s.classList.contains('active'))); }
   function updateUI(){
-    const i = idx(); const t = slides[i].dataset.title || '';
+    const i = idx();
+    const t = slides[i].dataset.title || '';
     counter.textContent = `اسلاید ${i+1} / ${slides.length} • ${t}`;
     miniSub.textContent = t ? `اسلاید ${i+1}: ${t}` : 'آکادمی هوش مصنوعی ستائی';
     bar.style.width = Math.round((i)/(slides.length-1)*100)+'%';
   }
 
-  // Teacher script toggles
+  // --- Teacher scripts ---
   function toggleScript(k){
     const el = document.getElementById(`script-${k}`); if(!el) return;
     el.classList.toggle('on');
@@ -422,76 +725,320 @@
     document.querySelectorAll('.script').forEach(s=> s.classList[show?'add':'remove']('on'));
   }
 
-  // Menu
+  // --- Menu ---
   function toggleMenu(force){
     if(typeof force==='boolean'){ menu.classList.toggle('open', force); return; }
     menu.classList.toggle('open');
   }
-  document.addEventListener('click', (e)=>{
-    if(!menu.contains(e.target)) menu.classList.remove('open');
-  });
+  document.addEventListener('click', (e)=>{ if(!menu.contains(e.target)) menu.classList.remove('open'); });
 
-  // Keyboard
+  // --- Keyboard ---
   document.addEventListener('keydown', e=>{
     if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); next(); }
     if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); prev(); }
     if(e.key.toLowerCase()==='f'){ toggleFullscreen(); }
-    if(e.key==='Escape'){ toggleMenu(false); toggleAllScripts(false); }
+    if(e.key==='Escape'){ toggleMenu(false); closeModal(); }
   });
-
   function toggleFullscreen(){
     if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
     else{ document.exitFullscreen?.(); }
   }
 
-  // Branching content for slide 5 (based on chosen problem)
-  function select(key,val){
-    state[key]=val;
-  }
-  // Populate slide 5 when opening it
+  // --- Choices state ---
+  function select(key,val){ state[key]=val; }
+
+  // --- Slide 5 plan render ---
   const planLaws = {
-    start: ['خروجی ۱۵ دقیقه‌ای','قالب ثابت برای «طرح کلی»','شروع روزانه، بدون وسواس'],
-    order: ['۱۵ دقیقه ثابت روزانه','یک سند مشترک برای همه خروجی‌ها','نسخه‌گذاری (۱ و ۲)'],
-    speed: ['«طرح کلی» قبل از نوشتن','کاهش رفت‌وبرگشت با پرسش دقیق','چک‌لیست اصلاح سریع'],
-    quality: ['چک‌لیست کیفیت ثابت','پیش‌نویس سریع سپس اصلاح','تعریف خط پایان روشن']
+    start: ['خروجی ۱۵ دقیقه‌ای', 'قالب ثابت برای «طرح کلی»', 'شروع روزانه، بدون وسواس'],
+    order: ['۱۵ دقیقه ثابت روزانه', 'یک سند ثابت برای همه خروجی‌ها', 'نسخه‌گذاری (۱ و ۲)'],
+    speed: ['طرح کلی قبل از نوشتن', 'کاهش رفت‌وبرگشت با پرسش دقیق', 'چک‌لیست اصلاح سریع'],
+    quality: ['چک‌لیست کیفیت ثابت', 'پیش‌نویس سریع سپس اصلاح', 'تعریف خط پایان روشن']
   };
   const planRes = {
-    start: ['شروع بدون مقاومت','انرژی و اعتمادبه‌نفس','جمع شدن خروجی‌های کوچک'],
-    order: ['ریتم پایدار کاری','قابلیت پیگیری پیشرفت','کاهش آشفتگی'],
-    speed: ['زمان کمتر تا نسخه ۱','تصمیم‌های کمتر','تولید سریع‌تر'],
-    quality: ['خروجی قابل ارائه','افزایش اعتماد و قیمت‌گذاری','استاندارد حرفه‌ای']
+    start: ['شروع بدون مقاومت', 'اعتمادبه‌نفس با خروجی‌های کوچک', 'جمع شدن خروجی در هفته'],
+    order: ['ریتم پایدار', 'قابلیت پیگیری پیشرفت', 'کاهش آشفتگی'],
+    speed: ['نسخه ۱ سریع‌تر', 'تصمیم‌های کمتر', 'تولید بیشتر'],
+    quality: ['خروجی قابل ارائه', 'افزایش ارزش و قیمت‌گذاری', 'استاندارد حرفه‌ای']
   };
   const planCoach = {
     start:'«قرار نیست کامل شروع کنی؛ فقط شروع کوچک را استاندارد می‌کنیم.»',
-    order:'«نظم یعنی سیستم ساده‌ای که انجام‌دادنش از انجام‌ندادنش راحت‌تر باشد.»',
+    order:'«نظم یعنی سیستم ساده‌ای که انجام‌دادنش راحت‌تر از انجام‌ندادنش باشد.»',
     speed:'«سرعت از قالب و تصمیم‌های کمتر می‌آید؛ هر بار از صفر شروع نکن.»',
     quality:'«کیفیت با احساس سنجیده نمی‌شود؛ با چک‌لیست سنجیده می‌شود.»'
   };
-
-  // Intercept when entering s5 to render branch
-  const observer = new MutationObserver(()=>{
-    const active = document.querySelector('.slide.active');
-    if(active && active.id==='s5'){
-      const p = state.problem || 'start';
-      const laws = planLaws[p]; const res = planRes[p];
-      document.getElementById('plan-title').textContent = 'نسخه مناسب تو — ' + problemLabel(p);
-      document.getElementById('plan-laws').innerHTML = laws.map(i=>`<li>${i}</li>`).join('');
-      document.getElementById('plan-result').innerHTML = res.map(i=>`<li>${i}</li>`).join('');
-      document.getElementById('plan-coach').textContent = planCoach[p];
-    }
-  });
-  observer.observe(document.querySelector('main'), {attributes:true, subtree:true, attributeFilter:['class']});
-
+  function goalLabel(v){
+    return {income:'درآمد', speed:'سرعت', order:'نظم', all:'هر سه'}[v] || '';
+  }
   function problemLabel(v){
-    return {start:'شروع',order:'نظم',speed:'سرعت',quality:'کیفیت'}[v] || '';
+    return {start:'شروع', order:'نظم', speed:'سرعت', quality:'کیفیت'}[v] || '';
+  }
+  function pill(text){
+    const s=document.createElement('span');
+    s.className='pill'; s.textContent=text;
+    return s;
+  }
+  function renderPlan(){
+    const p = state.problem || 'start';
+    const g = state.goal || null;
+
+    document.getElementById('plan-title').textContent = 'نسخه مناسب تو — ' + problemLabel(p);
+    document.getElementById('plan-laws').innerHTML = (planLaws[p]||[]).map(x=>`<li>${x}</li>`).join('');
+    document.getElementById('plan-result').innerHTML = (planRes[p]||[]).map(x=>`<li>${x}</li>`).join('');
+    document.getElementById('plan-coach').textContent = planCoach[p] || '—';
+
+    const pills = document.getElementById('summaryPills');
+    pills.innerHTML = '';
+    if(g) pills.appendChild(pill('هدف: ' + goalLabel(g)));
+    if(p) pills.appendChild(pill('گره: ' + problemLabel(p)));
   }
 
-  // Init from hash
+  // --- Slide 7 demo prompt builder ---
+  function fillDemoTemplate(){
+    const type = document.getElementById('demoType')?.value || 'content';
+    const topic = (document.getElementById('demoTopic')?.value || '').trim();
+
+    let role = 'تو یک دستیار حرفه‌ای برای تولید خروجی هستی.';
+    let task = '';
+    if(type==='content'){
+      task = 'می‌خواهم یک محتوای اینستاگرامی بسازم که مشتری (لید) ایجاد کند.';
+    } else if(type==='website'){
+      task = 'می‌خواهم یک صفحه لندینگ ساده بسازم که کاربر را به تماس/رزرو هدایت کند.';
+    } else {
+      task = 'می‌خواهم یک پاسخ‌گوی ساده (ایجنت) داشته باشم که سؤال‌های پرتکرار را جواب دهد و در پایان اطلاعات تماس بگیرد.';
+    }
+
+    const prompt =
+`${role}
+
+وظیفه:
+${task}
+
+ورودی واقعی من:
+${topic || 'موضوع/کسب‌وکار/هدف/مخاطب را اینجا بنویس.'}
+
+قانون روش ستائی (حتماً رعایت کن):
+۱) اول «طرح کلی» بده (۳ تا ۷ تیتر کوتاه)
+۲) بعد «پیش‌نویس سریع» بده (کوتاه و بدون وسواس)
+۳) بعد «اصلاح حرفه‌ای» انجام بده با این چک‌لیست:
+- هدف روشن؟
+- مخاطب مشخص؟
+- یک مثال واقعی؟
+- جمله اضافی حذف؟
+- دعوت به اقدام (CTA) دقیق؟
+
+خروجی را به همین ترتیب و با تیترهای واضح بنویس.`;
+
+    document.getElementById('demoPrompt').textContent = prompt;
+  }
+
+  // --- Clipboard ---
+  function copyText(id){
+    const el = document.getElementById(id);
+    const text = el?.textContent || el?.value || '';
+    navigator.clipboard?.writeText(text);
+  }
+
+  // --- Modal system ---
+  const backdrop = document.getElementById('backdrop');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+
+  function openModal(which){
+    backdrop.classList.add('on');
+
+    if(which==='modalQuickChecklist'){
+      modalTitle.textContent = 'چک‌لیست اصلاح سریع';
+      modalBody.innerHTML = '';
+      modalBody.appendChild(document.getElementById('tplQuickChecklist').content.cloneNode(true));
+      return;
+    }
+
+    if(which==='modalAgentDemo'){
+      modalTitle.textContent = 'دمو ایجنت ساده (FAQ + لید)';
+      modalBody.innerHTML = '';
+      modalBody.appendChild(document.getElementById('tplAgentDemo').content.cloneNode(true));
+      // init
+      setTimeout(()=>renderFAQ(), 0);
+      return;
+    }
+
+    if(which==='modalAgentCode'){
+      modalTitle.textContent = 'کد آماده ایجنت HTML';
+      modalBody.innerHTML = '';
+      modalBody.appendChild(document.getElementById('tplAgentCode').content.cloneNode(true));
+      document.getElementById('agentCode').textContent = agentHtmlCode();
+      return;
+    }
+  }
+  function closeModal(){
+    backdrop.classList.remove('on');
+    modalBody.innerHTML = '';
+  }
+  function backdropClose(e){
+    if(e.target === backdrop) closeModal();
+  }
+
+  // --- Agent demo logic (inside modal) ---
+  function renderFAQ(){
+    const sel = document.getElementById('faqSelect');
+    const ans = document.getElementById('faqAnswer');
+    if(!sel || !ans) return;
+
+    const map = {
+      price: 'از یک سطح پایه شروع می‌کنیم و با توجه به هدف شما (درآمد/سرعت/نظم) نسخه دقیق پیشنهاد می‌شود. برای قیمت دقیق، یک پیام کوتاه از وضعیت فعلی‌تان لازم است.',
+      time: 'برای نتیجه اولیه، همین هفته با تمرین‌های ساده خروجی می‌گیرید. طی ۳ جلسه، سیستم شما تثبیت می‌شود و نمونه ابزار/ایجنت هم ساخته می‌شود.',
+      need: 'فقط: هدف، مخاطب، و نوع خروجی. باقی را قدم‌به‌قدم با سیستم ستائی جلو می‌بریم.',
+      custom: 'اشکالی ندارد. لطفاً پیام کوتاه بنویس: «چه چیزی می‌خواهی بسازی؟ مخاطب کیست؟ و هدف دقیق چیست؟»'
+    };
+    ans.textContent = map[sel.value] || '—';
+  }
+
+  function prefillLead(){
+    const n = document.getElementById('leadName');
+    const p = document.getElementById('leadPhone');
+    const m = document.getElementById('leadMsg');
+    if(n) n.value = 'حامد';
+    if(p) p.value = '09xxxxxxxxx';
+    if(m) m.value = 'می‌خوام یک صفحه ساده بسازم که مشتری بگیره و بعد یک پاسخ‌گو برای سوال‌های پرتکرار داشته باشم.';
+  }
+
+  function saveLead(){
+    const n = document.getElementById('leadName')?.value?.trim() || '';
+    const p = document.getElementById('leadPhone')?.value?.trim() || '';
+    const m = document.getElementById('leadMsg')?.value?.trim() || '';
+    const status = document.getElementById('leadStatus');
+    if(!status) return;
+
+    status.innerHTML = '';
+    if(!n || !p){
+      status.appendChild(pill('لطفاً نام و شماره را وارد کن.'));
+      return;
+    }
+
+    const lead = {name:n, phone:p, msg:m, at:new Date().toISOString()};
+    const key = 'setai_leads_demo';
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    arr.push(lead);
+    localStorage.setItem(key, JSON.stringify(arr));
+
+    status.appendChild(pill('ثبت شد (دمو)'));
+    status.appendChild(pill('ذخیره در مرورگر'));
+    status.appendChild(pill('جلسه ۲: سوال‌های پرتکرار را اضافه می‌کنیم'));
+  }
+
+  // --- Agent code generator (single-file html) ---
+  function agentHtmlCode(){
+return `<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ایجنت ساده • پاسخ‌گویی + لید</title>
+<style>
+  body{margin:0;font-family:Vazirmatn,system-ui;background:#0b1020;color:#ecf3ff}
+  .wrap{max-width:820px;margin:24px auto;padding:16px}
+  .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:14px;margin-bottom:12px}
+  h1{margin:0 0 10px;font-size:22px}
+  p{margin:0 0 10px;color:rgba(236,243,255,.78);font-weight:800}
+  select,input,textarea{width:100%;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#ecf3ff;font-family:inherit;font-weight:800;outline:none}
+  textarea{min-height:110px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{cursor:pointer;border-radius:14px;padding:10px 12px;border:0;background:linear-gradient(135deg,#34d399,#10b981);color:#062018;font-weight:1000}
+  .ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#ecf3ff}
+  .ans{padding:12px;border-radius:14px;border:1px solid rgba(52,211,153,.26);background:rgba(16,185,129,.10);font-weight:900;line-height:1.9}
+  @media(max-width:720px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>ایجنت ساده (FAQ + دریافت لید)</h1>
+    <p>این نسخه برای شروع است: چند سؤال پرتکرار را جواب می‌دهد و اگر کافی نبود، اطلاعات تماس می‌گیرد.</p>
+  </div>
+
+  <div class="card">
+    <p><b>سؤال پرتکرار</b></p>
+    <select id="q" onchange="render()">
+      <option value="price">قیمت از کجا شروع می‌شود؟</option>
+      <option value="time">چقدر زمان می‌برد؟</option>
+      <option value="need">برای شروع چه چیزهایی لازم است؟</option>
+      <option value="custom">سؤال من متفاوت است</option>
+    </select>
+    <div style="height:10px"></div>
+    <div class="ans" id="a">—</div>
+  </div>
+
+  <div class="card">
+    <p><b>اگر می‌خوای پیگیری کنیم (لید)</b></p>
+    <div class="row">
+      <input id="name" placeholder="نام" />
+      <input id="phone" placeholder="شماره تماس" />
+    </div>
+    <div style="height:10px"></div>
+    <textarea id="msg" placeholder="پیام کوتاه: چی می‌خوای بسازی؟ هدف چیه؟"></textarea>
+    <div style="height:10px"></div>
+    <div class="row">
+      <button class="btn" onclick="save()">ثبت لید</button>
+      <button class="btn ghost" onclick="prefill()">نمونه</button>
+    </div>
+    <p id="s" style="margin-top:10px"></p>
+  </div>
+</div>
+
+<script>
+  const answers = {
+    price: 'از یک سطح پایه شروع می‌کنیم و با توجه به هدف شما نسخه دقیق پیشنهاد می‌شود. برای قیمت دقیق، یک پیام کوتاه از وضعیت فعلی لازم است.',
+    time: 'برای نتیجه اولیه، همین هفته خروجی می‌گیرید. طی ۳ جلسه، سیستم شما تثبیت می‌شود و نمونه ابزار/ایجنت هم ساخته می‌شود.',
+    need: 'فقط: هدف، مخاطب، نوع خروجی. باقی را قدم‌به‌قدم جلو می‌بریم.',
+    custom: 'لطفاً پیام کوتاه بنویس: «چه چیزی می‌خواهی بسازی؟ مخاطب کیست؟ هدف دقیق چیست؟»'
+  };
+
+  function render(){
+    const q = document.getElementById('q').value;
+    document.getElementById('a').textContent = answers[q] || '—';
+  }
+  render();
+
+  function prefill(){
+    document.getElementById('name').value = 'حامد';
+    document.getElementById('phone').value = '09xxxxxxxxx';
+    document.getElementById('msg').value = 'می‌خوام یک صفحه ساده بسازم که لید بگیره و یک پاسخ‌گو برای سوال‌های پرتکرار داشته باشم.';
+  }
+
+  function save(){
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const msg = document.getElementById('msg').value.trim();
+    const s = document.getElementById('s');
+
+    if(!name || !phone){ s.textContent = 'لطفاً نام و شماره را وارد کن.'; return; }
+
+    const lead = {name, phone, msg, at: new Date().toISOString()};
+    const key = 'leads';
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    arr.push(lead);
+    localStorage.setItem(key, JSON.stringify(arr));
+
+    s.textContent = 'ثبت شد (در مرورگر ذخیره شد).';
+  }
+</script>
+</body>
+</html>`;
+  }
+
+  // --- Init from hash ---
+  function restart(){
+    state.goal=null; state.problem=null;
+    go('s1');
+  }
   (function init(){
     const h=(location.hash||'').replace('#','');
-    if(h && document.getElementById(h)) go(h); else updateUI();
+    if(h && document.getElementById(h)) go(h);
+    else updateUI();
+    // pre-render slide 5 safely if opened directly
+    if(document.querySelector('.slide.active')?.id==='s5') renderPlan();
+    if(document.querySelector('.slide.active')?.id==='s7') fillDemoTemplate();
   })();
 </script>
 </body>
 </html>
-```0
