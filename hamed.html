@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>جلسه ۱ • سطح ۱ — آکادمی هوش مصنوعی ستائی (۹ اسلاید)</title>
+<style>
+  :root{
+    --bg1:#0b1020; --bg2:#071018;
+    --card:rgba(255,255,255,.06);
+    --stroke:rgba(255,255,255,.10);
+    --text:#ecf3ff; --muted:rgba(236,243,255,.75);
+    --accent:#10b981; --accent2:#34d399;
+    --r:20px; --shadow:0 18px 60px rgba(0,0,0,.55);
+    --maxw:980px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", Arial;
+    color:var(--text);
+    background:
+      radial-gradient(1100px 600px at 70% -10%, rgba(16,185,129,.20), transparent 60%),
+      radial-gradient(900px 520px at 20% 0%, rgba(14,165,164,.12), transparent 60%),
+      linear-gradient(180deg,var(--bg1),var(--bg2));
+    overflow:hidden;
+  }
+
+  /* Header compact */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; gap:10px; align-items:center; justify-content:space-between;
+    padding:10px 12px;
+    background:rgba(8,12,22,.75); backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .brand{display:flex; align-items:center; gap:10px}
+  .mark{width:34px; height:34px; border-radius:12px; display:grid; place-items:center;
+    color:#062018; font-weight:1000;
+    background:linear-gradient(135deg,var(--accent2),var(--accent));
+    box-shadow:0 12px 30px rgba(16,185,129,.18)}
+  .title{font-weight:1000; letter-spacing:-.2px}
+  .sub{font-size:11px; color:rgba(236,243,255,.72); font-weight:850}
+
+  .controls{display:flex; gap:8px; align-items:center}
+  .btn{
+    cursor:pointer; border-radius:14px; padding:10px 12px; border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04); color:var(--text); font-weight:900; white-space:nowrap;
+  }
+  .btn.primary{border:0; color:#062018; background:linear-gradient(135deg,var(--accent2),var(--accent))}
+  .btn.ghost{background:rgba(255,255,255,.03)}
+  .menu{position:relative}
+  .menu > .panel{display:none; position:absolute; top:44px; left:0; min-width:190px; padding:8px;
+    background:rgba(9,14,26,.92); border:1px solid rgba(255,255,255,.12); border-radius:14px; backdrop-filter:blur(10px)}
+  .menu.open > .panel{display:block}
+
+  /* Stage & slide */
+  .stage{height:calc(100% - 120px); display:grid; place-items:center; padding:14px}
+  .slide{
+    width:min(var(--maxw), calc(100vw - 28px));
+    max-height:calc(100vh - 165px); overflow:auto;
+    padding:22px; border-radius:var(--r); border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+    box-shadow:var(--shadow); display:none; position:relative;
+  }
+  .slide.active{display:block}
+  .slide::before{content:""; position:absolute; inset:-2px;
+    background:radial-gradient(900px 420px at 72% 8%, rgba(16,185,129,.15), transparent 55%);
+    pointer-events:none}
+  .eyebrow{display:inline-flex; gap:8px; padding:6px 10px; border-radius:999px;
+    border:1px solid rgba(52,211,153,.26); background:rgba(16,185,129,.12); font-size:12px; font-weight:950}
+  h1,h2{margin:12px 0 10px; letter-spacing:-.35px}
+  h1{font-size:clamp(26px,3.2vw,42px); line-height:1.15}
+  h2{font-size:clamp(22px,2.3vw,32px); line-height:1.18}
+  p{margin:0 0 10px; color:var(--muted); font-weight:850; font-size:17px}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
+  .box{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.04); border-radius:16px; padding:12px}
+  .box h3{margin:0 0 8px; font-size:16px; letter-spacing:-.2px}
+  ul{margin:8px 0 0; padding:0 18px 0 0; color:var(--muted); font-weight:850}
+  li{margin:6px 0}
+
+  .choices{display:grid; gap:10px; margin-top:12px}
+  .choice{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
+    border-radius:14px; padding:12px; cursor:pointer; font-weight:900}
+  .choice small{display:block; color:rgba(236,243,255,.66); margin-top:4px; font-weight:850}
+  .choice:hover{border-color:rgba(52,211,153,.45)}
+
+  /* Teacher script (toggle) */
+  .toolbar{display:flex; align-items:center; gap:8px; margin-top:10px}
+  .toggle{cursor:pointer; border:1px dashed rgba(255,255,255,.26); background:rgba(0,0,0,.14);
+    color:var(--text); padding:8px 10px; font-weight:900; border-radius:12px}
+  .script{margin-top:10px; border:1px dashed rgba(255,255,255,.20); background:rgba(0,0,0,.12);
+    border-radius:16px; padding:12px; display:none}
+  .script.on{display:block}
+  .script .label{font-size:12px; color:rgba(236,243,255,.78); font-weight:1000; margin-bottom:6px}
+  .script .line{color:rgba(236,243,255,.94); font-weight:900; line-height:1.9}
+
+  /* Icons */
+  .ico{width:26px; height:26px; margin-left:6px; vertical-align:-5px}
+
+  /* Footer */
+  footer{height:56px; display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px; border-top:1px solid rgba(255,255,255,.08); background:rgba(0,0,0,.10)}
+  .counter{font-size:13px; color:rgba(236,243,255,.72); font-weight:900; white-space:nowrap}
+  .progress{height:10px; width:min(560px,58vw); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10);
+    border-radius:999px; overflow:hidden}
+  .bar{height:100%; width:0%; background:linear-gradient(135deg,var(--accent2),var(--accent)); transition:width .2s}
+
+  /* Mobile */
+  @media (max-width:860px){
+    body{overflow:auto}
+    .stage{height:auto; place-items:stretch}
+    .slide{max-height:none; padding:18px}
+    .grid{grid-template-columns:1fr}
+    .progress{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="mark">S</div>
+    <div>
+      <div class="title">جلسه ۱ • سطح ۱ — ۹ اسلاید</div>
+      <div class="sub" id="miniSub">آکادمی هوش مصنوعی ستائی</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn primary" onclick="prev()">قبلی</button>
+    <button class="btn primary" onclick="next()">بعدی</button>
+    <div class="menu" id="menu">
+      <button class="btn ghost" onclick="toggleMenu()">⋯</button>
+      <div class="panel">
+        <button class="btn" style="width:100%" onclick="restart(); toggleMenu(false)">شروع از اول</button>
+        <button class="btn" style="width:100%" onclick="toggleAllScripts(true); toggleMenu(false)">نمایش توضیحات استاد</button>
+        <button class="btn" style="width:100%" onclick="toggleAllScripts(false); toggleMenu(false)">پنهان کردن توضیحات</button>
+        <button class="btn" style="width:100%" onclick="toggleFullscreen(); toggleMenu(false)">تمام‌صفحه</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="stage">
+
+  <!-- 1 -->
+  <section class="slide active" id="s1" data-title="خوش آمدید">
+    <div class="eyebrow">
+      <!-- flag icon -->
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M5 21V4h10l-1.5 3H19l-1.5 3H19v8H5Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      شروع جلسه • سطح ۱
+    </div>
+    <h1>به دوره هوش مصنوعی خوش آمدید</h1>
+    <p>امروز دنبال ابزارهای زیاد نیستیم. قرار است هوش مصنوعی برای شما تبدیل شود به یک «سیستم قابل اجرا» برای افزایش: درآمد، سرعت و نظم.</p>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s1')">راهنمای استاد</button></div>
+    <div class="script" id="script-s1">
+      <div class="label">هدف این اسلاید</div>
+      <div class="line">تنظیم توقع: «ابزار زیاد» هدف ما نیست؛ «سیستم ساده و قابل اجرا» هدف است.</div>
+      <div class="label">متن پیشنهادی</div>
+      <div class="line">«امروز با چند تصمیم کوچک، مسیری می‌سازیم که همین هفته خروجی بده. من حرف پیچیده نمی‌زنم؛ قدم‌به‌قدم جلو می‌رویم.»</div>
+      <div class="label">اگر گیج شد</div>
+      <div class="line">مثال بزن: «مثل برنامه غذا یا ورزش: ساده ولی ثابت؛ همین الگو را برای کار با هوش مصنوعی می‌سازیم.»</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s2')">ادامه</div></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide" id="s2" data-title="این دوره دقیقاً چیست؟">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 3c4.97 0 9 3.582 9 8 0 2.764-1.64 4.88-3.5 6.063L18 21l-4.5-2h-1C7.03 19 3 15.418 3 11s4.03-8 9-8Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      نگاه کلی
+    </div>
+    <h2>این دوره چه می‌کند؟</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>تعریف ساده</h3>
+        <ul>
+          <li>هوش مصنوعی = دستیار فکر و اجرا</li>
+          <li>خروجی منظم، نه پاسخ شانسی</li>
+          <li>روش ثابت برای کارهای تکراری</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>قواعد ما</h3>
+        <ul>
+          <li>هر جلسه یک خروجی واقعی</li>
+          <li>کم‌ابزار، پر‌نتیجه</li>
+          <li>مسیر شخصی برای هر نفر</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s2')">راهنمای استاد</button></div>
+    <div class="script" id="script-s2">
+      <div class="label">هدف</div><div class="line">ساخت تصویر ذهنی واحد از دوره.</div>
+      <div class="label">متن پیشنهادی</div><div class="line">«من هوش مصنوعی را موتور می‌دانم؛ ولی موتور بدون مسیر فقط انرژی می‌سوزاند. ما مسیر می‌سازیم.»</div>
+      <div class="label">سؤال‌ها</div><div class="line">«الان بیشتر دنبال چه تغییری هستی؟ پول؟ سرعت؟ نظم؟»</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s3')">ادامه</div></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide" id="s3" data-title="هدف تو چیست؟">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      تصمیم ۱
+    </div>
+    <h2>اگر این دوره موفق باشد، بعد از ۴ هفته چه چیزی باید تغییر کند؟</h2>
+    <div class="choices">
+      <div class="choice" onclick="select('goal','income'); go('s4')">درآمد <small>خروجی قابل فروش</small></div>
+      <div class="choice" onclick="select('goal','speed'); go('s4')">سرعت <small>زمان کمتر، خروجی بیشتر</small></div>
+      <div class="choice" onclick="select('goal','order'); go('s4')">نظم <small>روش ثابت و تکرارپذیر</small></div>
+      <div class="choice" onclick="select('goal','all'); go('s4')">هر سه <small>اولویت‌گذاری می‌کنیم</small></div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s3')">راهنمای استاد</button></div>
+    <div class="script" id="script-s3">
+      <div class="label">متن پیشنهادی</div>
+      <div class="line">«انتخاب تو مسیر جلسه را تعیین می‌کند. اگر گفتی هر سه، یک مورد را به‌عنوان اولویت می‌گیریم.»</div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide" id="s4" data-title="گره اصلی تو چیست؟">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M10 3h4l1 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l1-4Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      تصمیم ۲
+    </div>
+    <h2>الان بزرگ‌ترین گره‌ات کدام است؟</h2>
+    <div class="choices">
+      <div class="choice" onclick="select('problem','start'); go('s5')">شروع <small>شروع کردن سخت است</small></div>
+      <div class="choice" onclick="select('problem','order'); go('s5')">نظم <small>ریتم کار ندارم</small></div>
+      <div class="choice" onclick="select('problem','speed'); go('s5')">سرعت <small>زمان خیلی می‌برد</small></div>
+      <div class="choice" onclick="select('problem','quality'); go('s5')">کیفیت <small>خروجی حرفه‌ای نیست</small></div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s4')">راهنمای استاد</button></div>
+    <div class="script" id="script-s4">
+      <div class="label">بازتعریف</div>
+      <div class="line">«از این لحظه برنامه تو شخصی می‌شود؛ یک نسخه برای همه نداریم.»</div>
+    </div>
+  </section>
+
+  <!-- 5 (branch result) -->
+  <section class="slide" id="s5" data-title="نسخه پیشنهادی تو">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 18V6h16v12H4Z" stroke="currentColor" stroke-width="1.6"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      نسخه پیشنهادی
+    </div>
+    <h2 id="plan-title">نسخه مناسب تو</h2>
+    <div class="grid">
+      <div class="box">
+        <h3 id="plan-law">قوانین امروز</h3>
+        <ul id="plan-laws">
+          <!-- filled by JS -->
+        </ul>
+      </div>
+      <div class="box">
+        <h3>نتیجه‌ای که می‌خواهیم</h3>
+        <ul id="plan-result">
+          <!-- filled by JS -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s5')">راهنمای استاد</button></div>
+    <div class="script" id="script-s5">
+      <div class="label">متن پیشنهادی</div>
+      <div class="line" id="plan-coach">—</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s6')">ادامه</div></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide" id="s6" data-title="سه مرحله برای خروجی حرفه‌ای">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 18h5V6H4v12Zm6 0h5V10h-5v8Zm6 0h4V4h-4v14Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      الگوی ۳ مرحله‌ای
+    </div>
+    <h2>سه مرحله که کیفیت می‌دهد</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>۱) طرح کلی</h3>
+        <ul><li>تیترها و ترتیب بخش‌ها</li><li>قبل از نوشتن متن کامل</li></ul>
+      </div>
+      <div class="box">
+        <h3>۲) پیش‌نویس سریع + ۳) اصلاح حرفه‌ای</h3>
+        <ul><li>پیش‌نویس بدون وسواس</li><li>اصلاح با چک‌لیست</li></ul>
+      </div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s6')">راهنمای استاد</button></div>
+    <div class="script" id="script-s6">
+      <div class="label">توضیح ساده</div>
+      <div class="line">«اول نقشه، بعد ساخت، بعد پرداخت نهایی. همین الگو را برای هر خروجی تکرار می‌کنیم.»</div>
+      <div class="label">مثال آماده</div>
+      <div class="line">«برای یک پست: سه تیتر → پیش‌نویس کوتاه → اصلاح با مثال و دعوت به اقدام.»</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s7')">تمرین ۵ دقیقه‌ای</div></div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide" id="s7" data-title="تمرین کوتاه داخل کلاس">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M8 21v-7h8v7M7 8l5-5 5 5M12 3v11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      تمرین مشترک
+    </div>
+    <h2>الان یک خروجی واقعی می‌سازیم</h2>
+    <p>یک موضوع واقعی بگو: پست، صفحه سایت یا پیام فروش. با سه سؤال زیر «طرح کلی» را می‌سازیم:</p>
+    <div class="box">
+      <ul>
+        <li>هدف این خروجی چیست؟</li>
+        <li>مخاطب کیست؟</li>
+        <li>از مخاطب چه اقدامی می‌خواهی؟</li>
+      </ul>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s7')">راهنمای استاد</button></div>
+    <div class="script" id="script-s7">
+      <div class="label">روش اجرا</div>
+      <div class="line">سؤال‌ها را یکی‌یکی بپرس. سپس سه تیتر بده و سریع به پیش‌نویس برس؛ وسواس ممنوع.</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s8')">تکلیف هفته اول</div></div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide" id="s8" data-title="تکلیف هفته اول">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M7 3h10v4H7V3Zm-2 6h14v12H5V9Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      برنامه هفتگی
+    </div>
+    <h2>تمرین هفته اول (ساده و قابل انجام)</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>هر روز (۱۵ دقیقه)</h3>
+        <ul><li>یک «طرح کلی» کوتاه</li><li>ذخیره در یک سند ثابت</li></ul>
+      </div>
+      <div class="box">
+        <h3>سه‌بار در هفته</h3>
+        <ul><li>یک خروجی کامل: پیش‌نویس + اصلاح</li><li>نسخه ۱ و ۲ را نگه‌دار</li></ul>
+      </div>
+    </div>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s8')">راهنمای استاد</button></div>
+    <div class="script" id="script-s8">
+      <div class="label">تأکید</div>
+      <div class="line">«هدف عادت است، نه کمال. هر خروجی باید قابل نمایش باشد؛ حتی کوچک.»</div>
+    </div>
+
+    <div class="choices"><div class="choice" onclick="go('s9')">جمع‌بندی</div></div>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide" id="s9" data-title="پایان بخش اول جلسه">
+    <div class="eyebrow">
+      <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 20V6h8l2 3h6v11H4Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      پایان بخش اول
+    </div>
+    <h2>جمع‌بندی کوتاه</h2>
+    <ul>
+      <li>هدف و گره اصلی مشخص شد</li>
+      <li>نسخه مناسب تو تعیین شد</li>
+      <li>الگوی سه‌مرحله‌ای را شناختی</li>
+      <li>تمرین هفته اول را گرفتی</li>
+    </ul>
+
+    <div class="toolbar"><button class="toggle" onclick="toggleScript('s9')">راهنمای استاد</button></div>
+    <div class="script" id="script-s9">
+      <div class="label">متن پایانی</div>
+      <div class="line">«جلسه بعد با خروجی‌های واقعی برمی‌گردیم و سیستم تو را دقیق‌تر می‌کنیم.»</div>
+    </div>
+
+    <div class="choices">
+      <div class="choice" onclick="restart()">شروع دوباره</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="counter" id="counter">اسلاید 1 / 9 • خوش آمدید</div>
+  <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+  <div class="counter">کلیدها: ←/→ یا Space • F</div>
+</footer>
+
+<script>
+  const state = { goal:null, problem:null };
+  const slides = [...document.querySelectorAll('.slide')];
+  const counter = document.getElementById('counter');
+  const bar = document.getElementById('bar');
+  const miniSub = document.getElementById('miniSub');
+  const menu = document.getElementById('menu');
+
+  function go(id){
+    const el = document.getElementById(id); if(!el) return;
+    slides.forEach(s=>s.classList.remove('active')); el.classList.add('active');
+    history.replaceState(null,"",`#${id}`);
+    updateUI();
+  }
+  function next(){ const i = idx(); if(i<slides.length-1) go(slides[i+1].id); }
+  function prev(){ const i = idx(); if(i>0) go(slides[i-1].id); }
+  function idx(){ return Math.max(0, slides.findIndex(s=>s.classList.contains('active'))); }
+  function updateUI(){
+    const i = idx(); const t = slides[i].dataset.title || '';
+    counter.textContent = `اسلاید ${i+1} / ${slides.length} • ${t}`;
+    miniSub.textContent = t ? `اسلاید ${i+1}: ${t}` : 'آکادمی هوش مصنوعی ستائی';
+    bar.style.width = Math.round((i)/(slides.length-1)*100)+'%';
+  }
+
+  // Teacher script toggles
+  function toggleScript(k){
+    const el = document.getElementById(`script-${k}`); if(!el) return;
+    el.classList.toggle('on');
+  }
+  function toggleAllScripts(show){
+    document.querySelectorAll('.script').forEach(s=> s.classList[show?'add':'remove']('on'));
+  }
+
+  // Menu
+  function toggleMenu(force){
+    if(typeof force==='boolean'){ menu.classList.toggle('open', force); return; }
+    menu.classList.toggle('open');
+  }
+  document.addEventListener('click', (e)=>{
+    if(!menu.contains(e.target)) menu.classList.remove('open');
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); next(); }
+    if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); prev(); }
+    if(e.key.toLowerCase()==='f'){ toggleFullscreen(); }
+    if(e.key==='Escape'){ toggleMenu(false); toggleAllScripts(false); }
+  });
+
+  function toggleFullscreen(){
+    if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
+    else{ document.exitFullscreen?.(); }
+  }
+
+  // Branching content for slide 5 (based on chosen problem)
+  function select(key,val){
+    state[key]=val;
+  }
+  // Populate slide 5 when opening it
+  const planLaws = {
+    start: ['خروجی ۱۵ دقیقه‌ای','قالب ثابت برای «طرح کلی»','شروع روزانه، بدون وسواس'],
+    order: ['۱۵ دقیقه ثابت روزانه','یک سند مشترک برای همه خروجی‌ها','نسخه‌گذاری (۱ و ۲)'],
+    speed: ['«طرح کلی» قبل از نوشتن','کاهش رفت‌وبرگشت با پرسش دقیق','چک‌لیست اصلاح سریع'],
+    quality: ['چک‌لیست کیفیت ثابت','پیش‌نویس سریع سپس اصلاح','تعریف خط پایان روشن']
+  };
+  const planRes = {
+    start: ['شروع بدون مقاومت','انرژی و اعتمادبه‌نفس','جمع شدن خروجی‌های کوچک'],
+    order: ['ریتم پایدار کاری','قابلیت پیگیری پیشرفت','کاهش آشفتگی'],
+    speed: ['زمان کمتر تا نسخه ۱','تصمیم‌های کمتر','تولید سریع‌تر'],
+    quality: ['خروجی قابل ارائه','افزایش اعتماد و قیمت‌گذاری','استاندارد حرفه‌ای']
+  };
+  const planCoach = {
+    start:'«قرار نیست کامل شروع کنی؛ فقط شروع کوچک را استاندارد می‌کنیم.»',
+    order:'«نظم یعنی سیستم ساده‌ای که انجام‌دادنش از انجام‌ندادنش راحت‌تر باشد.»',
+    speed:'«سرعت از قالب و تصمیم‌های کمتر می‌آید؛ هر بار از صفر شروع نکن.»',
+    quality:'«کیفیت با احساس سنجیده نمی‌شود؛ با چک‌لیست سنجیده می‌شود.»'
+  };
+
+  // Intercept when entering s5 to render branch
+  const observer = new MutationObserver(()=>{
+    const active = document.querySelector('.slide.active');
+    if(active && active.id==='s5'){
+      const p = state.problem || 'start';
+      const laws = planLaws[p]; const res = planRes[p];
+      document.getElementById('plan-title').textContent = 'نسخه مناسب تو — ' + problemLabel(p);
+      document.getElementById('plan-laws').innerHTML = laws.map(i=>`<li>${i}</li>`).join('');
+      document.getElementById('plan-result').innerHTML = res.map(i=>`<li>${i}</li>`).join('');
+      document.getElementById('plan-coach').textContent = planCoach[p];
+    }
+  });
+  observer.observe(document.querySelector('main'), {attributes:true, subtree:true, attributeFilter:['class']});
+
+  function problemLabel(v){
+    return {start:'شروع',order:'نظم',speed:'سرعت',quality:'کیفیت'}[v] || '';
+  }
+
+  // Init from hash
+  (function init(){
+    const h=(location.hash||'').replace('#','');
+    if(h && document.getElementById(h)) go(h); else updateUI();
+  })();
+</script>
+</body>
+</html>
+```0
